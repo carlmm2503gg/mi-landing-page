@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TherapyHomeISJ | Tienda de Recursos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Berliana Lovely', 'cursive'],
+                    },
+                    colors: {
+                        primary: '#FDF7F8', 
+                        secondary: '#C04374', 
+                        text_dark: '#2C1B23', 
+                        text_light: '#FFFFFF',
+                        dark_footer: '#4A2A38',
+                        pink_light: '#FFE4E8', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Berliana Lovely';
+            src: url('https://www.aliciagonzalezpsicologia.com/wp-content/uploads/2024/06/Berliana-Lovely.ttf') format('truetype');
+        }
+        
+        .cta-button {
+            background-color: theme('colors.secondary');
+            color: theme('colors.text_light');
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700; 
+            font-size: 1.125rem;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .cta-button:hover { 
+            background-color: #880E4F;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        .blog-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-primary text-text_dark">
+
+ <header class="sticky top-0 z-50 bg-secondary shadow-md">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-3xl font-serif text-text_light hover:text-pink_light transition-colors duration-300">TherapyHomeISJ</a>
+        
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de Mí</a>
+            <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Equipo</a>
+            <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
+            <a href="tienda.html" class="text-text_light font-bold underline hover:text-pink_light font-medium">Tienda</a>
+            <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Agenda tu Cita</a>
+        </div>
+        
+        <button id="mobile-menu-button" class="md:hidden text-text_light focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </nav>
+</header>
+
+    <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
+        <ul class="flex flex-col items-center space-y-6 text-xl">
+            <li><a href="index.html#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de Mí</a></li>
+            <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
+            <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
+            <li><a href="blog.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Blog</a></li>
+            <li><a href="tienda.html" class="mobile-link text-secondary font-bold hover:text-secondary font-medium transition-colors">Tienda</a></li> 
+            <li><a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Agenda tu Cita</a></li>
+            <li><a href="agendar.html" class="mobile-link cta-button px-8 py-3 mt-4 rounded-lg">Agenda tu sesión</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="tienda" class="py-16 bg-primary min-h-screen">
+            <div class="container mx-auto px-6 text-center">
+                
+                <h2 class="text-4xl font-bold text-secondary mb-6">Nuestros Ebooks y Recursos</h2>
+                <p class="text-lg text-text_dark mb-12 max-w-3xl mx-auto">
+                    Guías prácticas y recursos descargables creados para apoyarte en tu camino hacia el bienestar.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-heridas.jpg" 
+                             alt="Portada del ebook Guía práctica para sanar una relación dañada" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Guía práctica para sanar una relación dañada</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Un camino claro y práctico para sanar heridas, fortalecer el vínculo y avanzar hacia una relación más sana y consciente.
+                        </p>
+                        
+                        <a href="https://mpago.la/28n1xKq" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-celos.jpg" 
+                             alt="Portada del Manual práctico para gestionar los celos" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Manual práctico para gestionar los celos y crecer juntos</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Herramientas prácticas y ejercicios para comprender los celos y convertirlos en una oportunidad de aprendizaje y crecimiento en pareja.
+                        </p>
+                        
+                        <a href="https://mpago.la/1ib5vy5" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-comunicacion.jpg" 
+                             alt="Portada del Manual práctico para resolver problemas en pareja" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Manual práctico para resolver problemas en pareja</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Supera las crisis y aprende a navegar los momentos difíciles con herramientas para fortalecer el vínculo y la comunicación.
+                        </p>
+                        
+                        <a href=" https://mpago.la/1f3iVWV" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-ruptura.jpg" 
+                             alt="Portada de la Guía práctica para superar una ruptura amorosa" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Guía práctica para superar una ruptura amorosa</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Un acompañamiento para sanar, fortalecer tu autoestima y aprovechar este momento de cambio como una oportunidad para crecer.
+                        </p>
+                        
+                        <a href=" https://mpago.la/1DpB4yz" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark_footer text-text_light py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+            <div class="md:col-span-2">
+                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
+                <p class="text-sm text-gray-300 mt-2">&copy; 2025 Psicóloga Isis San Juan. Todos los derechos reservados.</p>
+                <p class="text-sm text-gray-300">Hecho con 🤍</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="index.html#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
+                    <li><a href="index.html#especialidades" class="hover:text-white transition-colors duration-30S00">Terapia</a></li>
+                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
+                    <li><a href="blog.html" class="hover:text-white transition-colors duration-300">Blog</a></li>
+                    <li><a href="tienda.html" class="hover:text-white transition-colors duration-300">Tienda</a></li>
+                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-secondary mb-4">Información Legal</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
+                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('-translate-x-full');
+        });
+
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+        });
+    </script>
+</body>
+</html>

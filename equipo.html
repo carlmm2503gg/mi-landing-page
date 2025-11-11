@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TherapyHomeISJ | Nuestro Equipo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Berliana Lovely', 'cursive'],
+                    },
+                    colors: {
+                        // PALETA DE COLORES DE index.html
+                        primary: '#FDF7F8', 
+                        secondary: '#C04374', 
+                        text_dark: '#2C1B23', 
+                        text_light: '#FFFFFF',
+                        dark_footer: '#4A2A38',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Berliana Lovely';
+            src: url('https://www.aliciagonzalezpsicologia.com/wp-content/uploads/2024/06/Berliana-Lovely.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* Estilos de Botón adaptados de index.html */
+        .cta-button {
+            background-color: theme('colors.secondary'); /* #C04374 */
+            color: theme('colors.text_light'); /* #FFFFFF */
+            padding: 12px 28px; /* Del estilo personalizado en index.html */
+            text-decoration: none;
+            border-radius: 5px; /* Del estilo en index.html */
+            font-weight: 700; 
+            font-size: 1.125rem; /* Del estilo personalizado en index.html */
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Del estilo en index.html */
+            display: inline-block;
+        }
+        .cta-button:hover { 
+            background-color: #880E4F; /* Color de hover oscuro de index.html */
+            transform: translateY(-2px); /* Efecto de index.html */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        /* Estilo para un botón secundario (bordeado) - Se mantiene por si se usa */
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid theme('colors.secondary');
+            color: theme('colors.secondary');
+            padding: 12px 28px; 
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: none; 
+        }
+        .cta-button.secondary:hover {
+            background-color: theme('colors.secondary');
+            color: theme('colors.text_light');
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Estilos de Tarjeta de Miembro del Equipo */
+        .team-member-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .team-bio-toggle {
+            cursor: pointer;
+            color: theme('colors.secondary');
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .team-bio-toggle:hover {
+            color: theme('colors.dark_footer');
+        }
+        .team-bio {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0 1rem;
+        }
+        .team-bio.open {
+            max-height: 500px;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-primary text-text_dark">
+
+<header class="sticky top-0 z-50 bg-secondary shadow-md">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-3xl font-serif text-text_light hover:text-pink_light transition-colors duration-300">TherapyHomeISJ</a>
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de Mí</a>
+            <a href="equipo.html" class="text-text_light font-bold underline hover:text-pink_light font-medium">Equipo</a>
+            <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
+            <a href="tienda.html" class="text-text_light hover:text-pink_light font-medium">Tienda</a> 
+            <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Agenda tu Cita</a>
+        <button id="mobile-menu-button" class="md:hidden text-text_light focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </nav>
+</header>
+
+    <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
+        <ul class="flex flex-col items-center space-y-6 text-xl">
+            <li><a href="index.html#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de Mí</a></li>
+            <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
+            <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
+            <li><a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Agenda tu Cita</a></li>
+             <li><a href="agendar.html" class="mobile-link cta-button px-8 py-3 mt-4 rounded-lg">Agenda tu sesión</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="equipo" class="py-16 bg-primary">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold text-secondary mb-6">Nuestro Equipo de Especialistas</h2>
+                <p class="text-lg text-text_dark mb-12 max-w-3xl mx-auto">
+                    En TherapyHomeISJ, nuestro equipo está formado por profesionales apasionados y comprometidos, dedicados a ofrecerte el mejor acompañamiento en tu camino hacia el bienestar. Nos especializamos en proporcionar un espacio seguro y empático, adaptando nuestras herramientas a tus necesidades específicas.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                      <img src="Addi.jpeg" alt="Foto de Addi Eunice Arvizu Flores="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Addi Eunice Arvizu Flores</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 14472891</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Psicóloga con Maestría en psicología clínica y formación especializada en TCC</p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Acompaño a personas en crisis de relación, como problemas de comunicación, celos, infidelidad o distanciamiento emocional, y en procesos de duelo por separación. Cuento con experiencia clínica en el tratamiento de trastornos de ansiedad, utilizo la terapia Cognitivo-Conductual para procesos claros y estructurados, que permiten comprender la historia relacional, fortalecer recursos personales y tomar desiciones desde un lugar más consciente.</p>
+                        </div>
+                           <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/addi" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Addi
+                            </a>
+                        </div>
+                        </div>
+
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                        <img src="liz.jpeg" alt="Foto de Sara Ramos Acevedo="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Lizbeth Ortiz Ramírez</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 14138551</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología,Maestra en terapia familiar.</p>
+                        <div class="team-bio">
+                        <p class="text-text_dark text-sm">Me especializo en el acompañamiento individual, de pareja y familiar, integrando los enfoques Cognitivo-Conductual y Breve Sistémico para ofrecer intervenciones claras y efectivas. Abordo temas como crisis de pareja; rupturas, dependencia emocional, comunicación e infidelidad, así como el fortalecimiento de vínculos sanos. También brindo acompañamiento en procesos individuales de autoestima, ansiedad, depresión y duelos. Mi práctica se centra en crear un espacio seguro y empático, para quienes atraviesan crisis relacionales y buscan desarrollar herramientas para su bienestar emocional y su calidad de vida.</p>
+                        </div>
+                    <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/lizbeth" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Lizbeth
+                            </a>
+                        </div>
+                        </div>
+
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                       <img src="Mikaela.jpeg" alt="Foto de Mikaela Ivanova Martínez Román="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Mikaela Ivanova Martínez Román</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 14892156</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciada en Psicología Clínica con enfoque en terapia Cognitivo-Conductual</p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Como psicóloga clínica, me especializo en el acompañamiento Cognitivo-Conductual de adultos, con énfasis en el trabajo con parejas. Abordo temas como dinámicas de pareja, comunicación, rupturas, infidelidad, celos, codependencia y vínculos sanos. También brindo acompañamiento individual en autoestima, dependencia emocional, ansiedad y depresión, ofreciendo un espacio seguro para comprender el malestar, fortalecer el autoconocimiento y desarrollar herramientas emocionales. Trabajo con un enfoque biopsicosocial, empático y respetuoso, centrado en la historia de cada persona.</p>
+                        </div>
+                       <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/mikaela" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Mikaela
+                            </a>
+                        </div>
+                        </div>
+
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                        <img src="Paola.jpeg" alt="Foto de María Paola Delgado Arevalo="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">María Paola Delgado Arevalo</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 14227118</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciada en Psicología, Máster en Teapias Conductuales Contextuales </p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Me especializo en Terapia Cognitivo Conductual y Terapia de Aceptación y Compromiso. Acompaño a personas que quieran mejorar su relación de pareja, fortalecer vínculos, sanar después de una ruptura o construir una relación sana. Te puedo ayudar también en temas de ansiedad, autoestima, depresión, duelo, asertividad, procrastinación. Mi enfoque es basado en una atención consciente y valores personales, te brindaré herramientas para lograr tus objetivos y construir una vida con sentido, me encantará ofrecerte un espacio seguro y de confianza.</p>
+                        </div>
+                       <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/paola" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Paola
+                            </a>
+                        </div>
+                        </div>
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                        <img src="Janeth.jpeg" alt="Foto de Janeth Monterroza Gordillo="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Janeth Monterroza Gordillo</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 14690058</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciatura,Especialidad y Maestría en Psicología Clínica.</p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Me especializo en la atención a adultos con ansiedad y depresión para superar dificultades y mejorar su calidad de vida. He trabajado con grupos de mujeres y niñas que vivieron situaciones de violencia. También he apoyado a personas de la comunidad LGBT+ que requieren de un espacio de escucha y aceptación. Me encanta mi profesión y me dedico con pasión y compromiso al bienestar de mis consultantes.</p>
+                        </div>
+                        
+                        <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/janeth" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Janeth
+                            </a>
+                        </div>
+                        </div>
+
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="pareja">
+                         <img src="Claudia.jpeg" alt="Foto de Claudia Pineda Flores="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Claudia Pineda Flores</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 11645583</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Psicóloga con Maestría y Doctorado, y estudios avanzados en Psicoterapia Breve, intervención en crisis (TCC) y terapias contextuales</p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Cuento con 14 años de experiencia como psicoterapeuta; en mi práctica clínica he trabajado problemas en el estado del ánimo, pacientes con enfermedades crónicas y específicamente problemas de pareja como: manejo de conflictos, habilidades de comunicación, fortalecimiento del vínculo, confianza e infidelidad, entre otros. Mi objetivo es que juntos podamos construir un camino de bienestar emocional y relaciones saludables.</p>
+                        </div>
+                          <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/claudia" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Claudia
+                            </a>
+                        </div>
+                        </div>
+
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                        <img src="Anarely.jpeg" alt="Foto de Anarely de la TRinidad Méndez="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Anarely de la Trinidad Méndez</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 12451642</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciatura y Maestría en psicología clínica</p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Soy psicoterapeuta cognitivo conductual. Me especializo en trabajar con población adulta en temas de resolución de conflictos individuales e interpersonales, comunicación asertiva, rupturas amorosas, autoconcepto, gestión emocional y control del enojo, así como ansiedad y depresión. Durante los procesos me gusta brindar herramientas que permitan mejorar el cómo te sientes contigo y con tu entorno, en un espacio de escucha y empatía hacia tu persona.</p>
+                        </div>
+                        <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/trinidad" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Anarely
+                            </a>
+                        </div>
+                        </div>
+                    
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                       <img src="Miranda.jpeg" alt="Foto de Miranda Catalina Salazar Villanueva="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Miranda Catalina Salazar Villanueva</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 12169571</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología y Maestría en psicoterapia Cognitivo-Conductual y formación en psicología positiva</p>
+                        <div class="team-bio">
+                            <p class="text-text_dark text-sm">Acompaño adultos que se sienten estancados, con dificultades para gestionar sus emociones o con el deseo de conocerse mejor y transformar su historia. Trabajo con casos de ansiedad, depresión, autoestima, crisis de identidad, duelos emocionales y relaciones de pareja, integrando la TCC con enfoques de Psicología Positiva. Mi objetivo es ayudarte a comprender tus pensamientos, reconectar con tus fortalezas y establecer límites saludables, acompañando tu proceso de crecimiento.</p>
+                        </div>
+                   <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/miranda" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Miranda
+                            </a>
+                        </div>
+                        </div>
+                    
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                        <img src="Monserrat.jpeg" alt="Foto de Guadalupe Monserrat Coyote Damián="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Guadalupe Monserrat Coyote Damián</h3> 
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 13816731</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología, especializada en terapias contextuales</p>
+                        <div class="team-bio">
+                        <p class="text-text_dark text-sm">Atención a jóvenes y adultos abordando dificultades en la regulación emocional, depresión, ansiedad, autoconcepto, problemas de pareja (atención individual), estrés y toma de decisiones.</p>
+                        </div>
+                       <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/montserrat" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Monserrat
+                            </a>
+                        </div>
+                        </div>
+                    
+                    
+                    <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
+                        <img src="sara.jpeg" alt="Foto de Sara Ramos Acevedo="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                        <h3 class="text-xl font-bold text-text_dark mb-2">Sara Ramos Acevedo</h3>
+                        <h3 class="text-sm font-light text-text_dark mb-3">Céd. Porf. 14138551</h3>
+                        <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología, especializada en terapias contextuales</p>
+                        <div class="team-bio">
+                        <p class="text-text_dark text-sm">Acompaña a adultos que buscan **gestionar sus emociones, fortalecer su autoestima y transformar su historia personal**. Integra la Terapia Cognitivo-Conductual con enfoques de **Psicología Positiva** para ayudarte a reconectar con tus fortalezas y establecer límites saludables. Su objetivo es guiarte en tu proceso de crecimiento.</p>
+                        </div>
+                       <div class="mt-auto pt-4 w-full"> <button class="team-bio-toggle text-secondary hover:underline text-sm mb-3">Ver perfil completo</button>
+                            <a href="https://therapyhome.as.me/sara" target="_blank" 
+                               class="cta-button rounded-lg w-full text-sm py-2 px-4"> Agendar con Sara
+                            </a>
+                        </div>
+                        </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark_footer text-text_light py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+            <div class="md:col-span-2">
+                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
+                <p class="text-sm text-gray-300 mt-2">&copy; 2025 Psicóloga Isis San Juan. Todos los derechos reservados.</p>
+                <p class="text-sm text-gray-300">Hecho con 🤍</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="index.html#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
+                    <li><a href="index.html#especialidades" class="hover:text-white transition-colors duration-30Click">Terapia</a></li>
+                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
+                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-secondary mb-4">Información Legal</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
+                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('-translate-x-full');
+        });
+
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+        });
+
+        // Script para expandir biografías
+        document.querySelectorAll('.team-member-card').forEach(card => {
+            const toggleButton = card.querySelector('.team-bio-toggle');
+            const bio = card.querySelector('.team-bio');
+            
+            toggleButton.addEventListener('click', (e) => {
+                e.stopPropagation(); // Evita que el clic se propague si la tarjeta es un enlace
+                bio.classList.toggle('open');
+                if (bio.classList.contains('open')) {
+                    toggleButton.textContent = 'Ocultar perfil';
+                    toggleButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    toggleButton.textContent = 'Ver perfil completo';
+                }
+            });
+        });
+
+        // SCRIPT PARA FILTRAR EQUIPO
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const filtro = params.get('tipo'); 
+
+            if (!filtro) {
+                return; 
+            }
+
+            const teamMembers = document.querySelectorAll('.team-member-card');
+            
+            teamMembers.forEach(member => {
+                const terapias = member.dataset.terapia;
+
+                if (terapias && terapias.includes(filtro)) {
+                    member.style.display = 'flex'; 
+                } else {
+                    member.style.display = 'none'; 
+                }
+            });
+
+            // Cambiar el título para reflejar el filtro
+            const titulo = document.querySelector('#equipo h2');
+            if (titulo) {
+                if (filtro === 'individual') {
+                    titulo.textContent = 'Especialistas en Terapia Individual';
+                } else if (filtro === 'pareja') {
+                    titulo.textContent = 'Especialistas en Terapia de Pareja';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

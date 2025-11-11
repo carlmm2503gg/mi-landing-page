@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>TherapyHomeISJ | Terapia Psicológica Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Berliana Lovely', 'cursive'],
+                    },
+                    colors: {
+                        primary: '#FDF7F8', /* Blanco rosado muy claro, para fondos principales */
+                        secondary: '#C04374', /* Rosa oscuro / Bordo, para acentos y textos principales */
+                        text_dark: '#2C1B23', /* Marrón oscuro / Negro, para texto estándar */
+                        text_light: '#FFFFFF', /* Blanco puro, para texto sobre fondos oscuros */
+                        dark_footer: '#4A2A38', /* Un tono más oscuro, para el footer */
+                        
+                        /* Nuevo color para alternar secciones */
+                        pink_light: '#FFE4E8', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Berliana Lovely';
+            src: url('https://www.aliciagonzalezpsicologia.com/wp-content/uploads/2024/06/Berliana-Lovely.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        * { transition: all 0.3s ease-in-out; }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-text { animation: fadeInDown 1s ease-out forwards; }
+        .hero-title { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); }
+        .hero-subtitle { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
+        .cta-button {
+            background-color: theme('colors.secondary'); /* Usar el rosa principal */
+            color: theme('colors.text_light');
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .cta-button:hover { background-color: #880E4F; transform: translateY(-2px); }
+        .service-card:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); }
+        .faq-item input[type="checkbox"] { display: none; }
+        .faq-item label {
+            display: block;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 1px solid #E0E0E0;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            color: theme('colors.secondary');
+            position: relative;
+        }
+        .faq-item label::after {
+            content: '+';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            color: theme('colors.secondary');
+        }
+        .faq-item input[type="checkbox"]:checked + label::after { content: '-'; transform: translateY(-50%) rotate(0deg); }
+        .faq-item input[type="checkbox"]:checked ~ .faq-content { max-height: 500px; padding: 1rem 1.5rem; border-bottom: 1px solid #E0E0E0; }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; }
+        @keyframes scroll-infinite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .logos-container { overflow: hidden; white-space: nowrap; }
+        .logos { animation: scroll-infinite 30s linear infinite; display: inline-flex; }
+        .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; animation: pulse 2s infinite; }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .hero-section-with-image { transition: opacity 0.3s ease-out; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        /* 1. Título del Hero Section */
+        #hero h1 { font-size: 2.75rem; }
+        @media (min-width: 768px) { #hero h1 { font-size: 4.5rem; } }
+        /* 2. Subtítulo del Hero Section */
+        #hero p { font-size: 1.125rem; }
+        @media (min-width: 768px) { #hero p { font-size: 1.25rem; } }
+        /* 3. Espaciado vertical de las secciones */
+        section { padding-top: 4rem; padding-bottom: 4rem; }
+        #hero { padding-top: 6rem; padding-bottom: 6rem; }
+        /* 4. Títulos de las secciones (H2) */
+        h2 { font-size: 1.875rem; }
+        @media (min-width: 768px) { h2 { font-size: 2.25rem; } }
+        /* 5. Títulos de las tarjetas (H3) */
+        h3 { font-size: 1.125rem; }
+        /* 6. Botones principales (un poco más finos) */
+        .cta-button { padding: 12px 28px; font-size: 1.125rem; }
+        /* 7. Estilos para el carrusel de testimonios */
+        .testimonials-track {
+            animation: scroll-infinite 20s linear infinite; /* Animación más rápida: 20s */
+            display: inline-flex;
+        }
+        .testimonials-container:hover .testimonials-track {
+            animation-play-state: paused;
+        }
+        /* Clase para pausar animación con JS */
+        .animation-paused {
+            animation-play-state: paused !important;
+        }
+    </style>
+</head>
+<body class="bg-primary text-text_dark">
+
+  <header class="sticky top-0 z-50 bg-secondary shadow-md">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-3xl font-serif text-text_light hover:text-pink_light transition-colors duration-300">TherapyHomeISJ</a>
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de Mí</a>
+            <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Equipo</a>
+            <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
+            <a href="tienda.html" class="text-text_light hover:text-pink_light font-medium">Tienda</a> 
+            <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Agenda tu Cita</a>
+        <button id="mobile-menu-button" class="md:hidden text-text_light focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </nav>
+</header>
+    <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
+        <ul class="flex flex-col items-center space-y-6 text-xl">
+            <li><a href="#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de Mí</a></li>
+            <li><a href="#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
+            <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
+            <li><a href="#faq" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Preguntas</a></li>
+            <li><a href="agendar.html" class="mobile-link cta-button px-8 py-3 mt-4">Agenda tu Cita</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <section id="hero" class="relative overflow-hidden flex flex-col items-center justify-center text-center hero-section-with-image bg-secondary">
+            <img src="psi.jpg" alt="Símbolo de psicología (Psi)" class="absolute top-0 left-0 w-full h-full object-cover object-position: center z-0 opacity-70">
+            <div class="relative container mx-auto px-6 text-text_light z-20 hero-text">
+                <h1 class="font-serif leading-tight hero-title">
+                Encuentra la claridad que necesitas en tu vida y en tu relación
+                </h1>
+                <p class="mt-4 font-light hero-subtitle">
+                    Un espacio para manejar la ansiedad, la depresión, los desafíos de comunicación, la regulación emocional, los acuerdos y otros conflictos de pareja.
+                </p>
+                <div class="mt-10 flex justify-center">
+                    <a href="agendar.html" class="cta-button rounded-lg bg-pink-500 hover:bg-pink-700">Agenda tu Cita</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="paises" class="bg-white overflow-hidden">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-bold text-text_dark mb-2">Apoyo profesional sin importar dónde vivas</h2>
+                <h3 class="font-medium text-text_dark opacity-75 mb-6">Países a los que hemos llegado</h3>
+            </div>
+            <div class="logos-container overflow-hidden whitespace-nowrap py-12">
+                <div class="logos flex space-x-8">
+                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0">
+                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0">
+                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0">
+                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0">
+                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
+
+                    
+                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0">
+                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0">
+                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0">
+                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0">
+                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
+                </div>
+            </div>
+        </section>
+ <section id="intro-valor" class="bg-pink_light">
+    <div class="container mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <div class="text-left">
+                <h2 class="text-4xl md:text-5xl font-bold text-secondary leading-tight mb-6">
+                    Tu terapia online.
+                    <span class="block text-text_dark font-normal">Segura, profesional y humana.</span>
+                </h2>
+                
+                <ul class="space-y-4 mb-10">
+                    <li class="flex items-start text-lg text-text_dark">
+                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                        <span><strong>Psicólogas certificadas</strong> y con sólida formación.</span>
+                    </li>
+                    <li class="flex items-start text-lg text-text_dark">
+                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                        <span>Enfoques clínicos comprobados y <strong>basados en evidencia</strong>.</span>
+                    </li>
+                    <li class="flex items-start text-lg text-text_dark">
+                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                        <span>Proceso <strong>100% confidencial</strong> y resguardado.</span>
+                    </li>
+                    <li class="flex items-start text-lg text-text_dark">
+                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                        <span>Calidez humana y una <strong>conexión auténtica</strong>.</span>
+                    </li>
+                </ul>
+
+                <a href="#about" class="group flex items-center text-secondary font-semibold no-underline">
+                    <div class="w-14 h-14 rounded-full border-2 border-secondary flex items-center justify-center mr-4 group-hover:bg-secondary transition-all duration-300">
+                        <i class="fas fa-user text-secondary text-xl group-hover:text-white transition-all duration-300"></i>
+                    </div>
+                    <div>
+                        <span class="block text-lg">CONOCE EL PROYECTO</span>
+                        <span class="block text-sm text-text_dark font-normal">Descubre nuestra filosofía</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="relative mt-8 md:mt-0">
+                <img src="online.jpg" alt="Fundadora Psic. Isis San Juan" class="rounded-lg shadow-xl w-full h-full object-cover">
+                
+                <div class="absolute -bottom-6 -left-6 bg-white p-5 rounded-lg shadow-lg border-t-4 border-secondary">
+                    <span classs="block text-4xl font-bold text-secondary">+15</span>
+                    <span class="block text-text_dark font-medium">Países alcanzados</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+      <section id="tipos-terapia" class="bg-white">
+    <div class="container mx-auto px-6 text-center max-w-4xl">
+        <h2 class="font-bold text-text_dark mb-8">¿Qué tipo de apoyo necesitas?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <a href="equipo.html?tipo=individual" class="block text-current no-underline">
+                <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
+                    
+                    <img src="terapia ind.jpg" alt="Mujer en terapia individual online" class="w-full h-56 object-cover">
+
+                    <div class="p-6 flex flex-col flex-1 items-center text-center">
+                        <h3 class="font-semibold text-secondary mb-2 text-lg">Terapia individual</h3>
+                        <p class="text-text_dark text-sm">Esta opción es para ti si quieres trabajar en temas personales como la ansiedad, depresión, autoestima, regulación de emociones, ruptura, entre otros.</p>
+                        
+                        <div class="mt-auto pt-6">
+                            <span class="cta-button">Iniciar Terapia Individual</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="equipo.html?tipo=pareja" class="block text-current no-underline">
+                <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
+                    
+                    <img src="terapia pareja.jpg" alt="Pareja en terapia online" class="w-full h-56 object-cover">
+
+                    <div class="p-6 flex flex-col flex-1 items-center text-center">
+                        <h3 class="font-semibold text-secondary mb-2 text-lg">Terapia de pareja</h3>
+                        <p class="text-text_dark text-sm">Esta opción es para ustedes si quieren resolver juntos desafíos como la falta de comunicación o los conflictos constantes.</p>
+                        
+                        <div class="mt-auto pt-6">
+                            <span class="cta-button">Iniciar Terapia de Pareja</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            </div>
+    </div>
+</section>
+
+
+        <section id="about" class="bg-pink_light"> <div class="container mx-auto px-6 text-center">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2">
+                        <img src="Isis.jpeg" alt="Foto de la Psicóloga Isis San Juan" class="rounded-full shadow-lg w-full md:w-full mx-auto border-4 border-secondary">
+                    </div>
+                    <div class="md:order-1 text-left">
+                        <h2 class="font-bold text-secondary mb-4">Conoce el proyecto que creamos para ti</h2>
+                        <h3 class="font-serif text-text_dark mb-6" style="font-size: 1.75rem;">Fundadora Psic. Isis San Juan.</h3>
+                        <p class="text-text_dark leading-relaxed mb-4">
+                            Mi trayectoria en la UNAM, en el área de la psicobiología y las neurociencias, me enseñó que la evidencia debe ser la base de cualquier intervención. Con el tiempo, mi enfoque se centró en el ámbito emocional, donde confirmé que la terapia no es solo ir a hablar, sino un proceso serio respaldado por enfoques clínicos de eficacia comprobada a largo plazo. De esa convicción nació este proyecto, con la misión de brindar resultados duraderos y expectativas realistas.
+                        </f>
+                        <p class="text-text_dark leading-relaxed">
+                            Nos diferenciamos por nuestro compromiso real con la calidad, alejado de estrategias de marketing. Cada psicóloga de nuestro equipo comparte una sólida formación y una calidez humana que genera una conexión auténtica. Nos hemos especializado en los temas que más te preocupan, lo que nos permite ofrecerte intervenciones más acertadas, en el menor tiempo posible y con la calidez que necesitas para sanar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="bg-white>
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-bold text-text_dark mb-12">Lo que dicen nuestros pacientes</h2>
+            </div>
+            <div class="testimonials-container overflow-hidden whitespace-nowrap relative py-4">
+                <div class="testimonials-track flex space-x-6 px-3">
+                    <img src="reseña 1.jpeg" alt="Reseña de paciente para Psicóloga Janeth" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 2.jpeg" alt="Reseña de paciente para Psicóloga Isis" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 3.jpeg" alt="Reseña de paciente para Psicóloga Janeth" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 4.jpeg" alt="Reseña de paciente para Psicóloga Paola" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 5.jpeg" alt="Reseña de paciente para Psicóloga Miranda" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 6.jpeg" alt="Reseña de paciente para Psicóloga Paola" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 7.jpeg" alt="Reseña de paciente para Psicóloga Montserrat" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 8.jpeg" alt="Reseña de paciente para Psicóloga Mikaela" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 9.jpeg" alt="Reseña de paciente para Psicóloga Addi" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 10.jpeg" alt="Reseña de paciente para Psicóloga Karina" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 1.jpeg" alt="Reseña de paciente para Psicóloga Janeth" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 2.jpeg" alt="Reseña de paciente para Psicóloga Isis" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 3.jpeg" alt="Reseña de paciente para Psicóloga Janeth" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 4.jpeg" alt="Reseña de paciente para Psicóloga Paola" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 5.jpeg" alt="Reseña de paciente para Psicóloga Miranda" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 6.jpeg" alt="Reseña de paciente para Psicóloga Paola" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 7.jpeg" alt="Reseña de paciente para Psicóloga Montserrat" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 8.jpeg" alt="Reseña de paciente para Psicóloga Mikaela" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 9.jpeg" alt="Reseña de paciente para Psicóloga Addi" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                    <img src="reseña 10.jpeg" alt="Reseña de paciente para Psicóloga Karina" class="h-64 w-auto rounded-lg shadow-md flex-shrink-0 cursor-pointer">
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="bg-pink_light">
+            <div class="container mx-auto px-6 text-center max-w-4xl">
+                <h2 class="font-bold text-secondary mb-12">Preguntas frecuentes (FAQ)</h2>
+                <div class="bg-white rounded-xl shadow-lg">
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq1">
+                        <label for="faq1">¿Cuánto dura el proceso de terapia?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">La duración puede variar, pero nuestra experiencia muestra que los mejores resultados se logran en un promedio de 16 sesiones. Al inicio del proceso, recomendamos sesiones semanales o quincenales, y con el tiempo, la frecuencia se va espaciando.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq2">
+                        <label for="faq2">¿Las psicólogas están realmente bien formadas?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">Absolutamente. Nuestro equipo es experto en los temas que abordamos y ha pasado por un riguroso proceso de selección que evalúa su capacidad técnica y habilidades prácticas. Además, cada una participa en procesos de supervisión y capacitación interna para asegurar una calidad constante.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq3">
+                        <label for="faq3">¿Qué pasa si no me gusta la psicóloga que me asignan?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">Entendemos que esto puede pasar. Si no te sientes cómodo/a con la profesional asignada, tenemos un protocolo para reasignarte a otra psicóloga del equipo. Trabajamos con notas clínicas que, con tu consentimiento, se comparten con la nueva psicóloga para que no tengas que repetir todo el proceso desde cero.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq4">
+                        <label for="faq4">¿Se pueden mandar mensajes a la psicóloga entre sesiones?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">El acompañamiento psicológico se realiza durante las sesiones. Entendemos que pueden surgir dudas, por lo que puedes escribir para resolverlas, pero no damos atención en crisis por mensaje. Las sesiones son el espacio para trabajar tus emociones y procesos.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq5">
+                        <label for="faq5">¿Qué pasa con mi confidencialidad?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">Tu privacidad es nuestra prioridad. Firmamos una carta de consentimiento al inicio del proceso para garantizar que tu información personal está resguardada con total confidencialidad, cumpliendo con las regulaciones de México.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq6">
+                        <label for="faq6">¿Qué pasa si necesito cancelar o cambiar mi cita?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">Entendemos que los imprevistos suceden. Puedes cambiar o cancelar tu sesión con un aviso de al menos 24 horas para acceder a un reembolso o reprogramación. Los cambios solo se permiten una vez por sesión.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <input type="checkbox" id="faq7">
+                        <label for="faq7">¿El pago es antes de la sesión?</label>
+                        <div class="faq-content">
+                            <p class="text-text_dark">Sí. Aseguramos el tiempo y esfuerzo de nuestras psicólogas, ya que cada sesión conlleva horas de preparación, supervisión e investigación. También ofrecemos un paquete de 4 sesiones con un 10% de descuento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark_footer text-text_light py-12">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+            <div class="md:col-span-2">
+                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
+                <p class="text-sm text-gray-300 mt-2">&copy; 2025 TherapyHomeISJ. Todos los derechos reservados.</p>
+                <p class="text-sm text-gray-300">Hecho con 🤍</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
+                    <li><a href="#tipos-terapia" class="hover:text-white transition-colors duration-300">Terapia</a></li>
+                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
+                    <li><a href="#faq" class="hover:text-white transition-colors duration-300">Preguntas Frecuentes</a></li>
+                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold text-secondary mb-4">Información Legal</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
+                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de Cookies</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.link/lefkj3" target="_blank" class="whatsapp-float">
+        <img src="whats.png" alt="Logo de WhatsApp" class="w-16 h-16 transition-transform duration-300">
+    </a>
+
+    <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <span id="close-lightbox" class="absolute top-4 right-6 text-white text-5xl font-bold cursor-pointer">&times;</span>
+        <img id="lightbox-image" src="" alt="Reseña ampliada" class="max-w-full max-h-[90vh] rounded-lg">
+    </div>
+
+    <script>
+        // --- Menú Móvil ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('-translate-x-full');
+        });
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+        });
+        
+        // --- Efecto Fade en Hero ---
+        window.addEventListener('scroll', () => {
+            const heroSection = document.getElementById('hero');
+            const scrollPosition = window.scrollY;
+            const fadeDistance = 400; 
+            const newOpacity = 1 - (scrollPosition / fadeDistance);
+            heroSection.style.opacity = Math.max(0, newOpacity);
+        });
+
+        // --- Lógica del Lightbox (Zoom para Reseñas) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const closeLightbox = document.getElementById('close-lightbox');
+            const testimonialImages = document.querySelectorAll('.testimonials-track img');
+            const testimonialsTrack = document.querySelector('.testimonials-track');
+
+            testimonialImages.forEach(image => {
+                image.addEventListener('click', () => {
+                    // Abrir el lightbox
+                    lightboxImage.src = image.src;
+                    lightbox.classList.remove('hidden');
+                    // Pausar animación
+                    testimonialsTrack.classList.add('animation-paused');
+                });
+            });
+
+            // Función para cerrar el lightbox
+            function close() {
+                lightbox.classList.add('hidden');
+                // Reanudar animación
+                testimonialsTrack.classList.remove('animation-paused');
+            }
+
+            closeLightbox.addEventListener('click', close);
+            lightbox.addEventListener('click', (e) => {
+                // Cerrar si se hace clic en el fondo oscuro
+                if (e.target === lightbox) {
+                    close();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
