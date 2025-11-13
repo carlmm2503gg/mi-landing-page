@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TherapyHomeISJ | Terapia Psicológica Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -86,6 +86,7 @@
             100% { transform: translateX(-50%); }
         }
         .logos-container { overflow: hidden; white-space: nowrap; }
+        /* Esta es la velocidad que pediste (15s) */
         .logos { animation: scroll-infinite 15s linear infinite; display: inline-flex; }
         .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; animation: pulse 2s infinite; }
         .whatsapp-float:hover { transform: scale(1.1); }
@@ -145,7 +146,7 @@
         </div>
         
         <button id="mobile-menu-button" class="md:hidden text-text_light focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0.0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
         </button>
@@ -190,140 +191,144 @@
                 <h2 class="font-bold text-text_dark mb-2">Apoyo profesional sin importar dónde vivas</h2>
                 <h3 class="font-medium text-text_dark opacity-75 mb-6">Países a los que hemos llegado</h3>
             </div>
+            
             <div class="logos-container overflow-hidden whitespace-nowrap py-4">
-                <div class="logos flex space-x-8">
-                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0">
-                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0">
-                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0">
-                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0">
-                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
+                
+                <div class="logos flex">
+                    
+                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Qatar" class="h-12 w-auto flex-shrink-0 mr-8">
 
                     
-                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0">
-                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0">
-                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0">
-                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0">
-                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil " class="h-12 w-auto flex-shrink-0">
-                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Qatar" class="h-12 w-auto flex-shrink-0">
+                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil" class="h-12 w-auto flex-shrink-0 mr-8">
+                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Qatar" class="h-12 w-auto flex-shrink-0 mr-8">
                 </div>
             </div>
         </section>
- <section id="intro-valor" class="bg-pink_light">
-    <div class="container mx-auto px-6 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            
-            <div class="text-left">
-                <h2 class="text-4xl md:text-5xl font-bold text-secondary leading-tight mb-6">
-                    Tu terapia online.
-                    <span class="block text-text_dark font-normal">Segura, profesional y humana.</span>
-                </h2>
-                
-                <ul class="space-y-4 mb-10">
-                    <li class="flex items-start text-lg text-text_dark">
-                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
-                        <span><strong>Psicólogas certificadas</strong> y con sólida formación.</span>
-                    </li>
-                    <li class="flex items-start text-lg text-text_dark">
-                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
-                        <span>Enfoques clínicos comprobados y <strong>basados en evidencia</strong>.</span>
-                    </li>
-                    <li class="flex items-start text-lg text-text_dark">
-                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
-                        <span>Proceso <strong>100% confidencial</strong> y resguardado.</span>
-                    </li>
-                    <li class="flex items-start text-lg text-text_dark">
-                        <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
-                        <span>Calidez humana y una <strong>conexión auténtica</strong>.</span>
-                    </li>
-                </ul>
-
-                <a href="#about" class="group flex items-center text-secondary font-semibold no-underline">
-                    <div class="w-14 h-14 rounded-full border-2 border-secondary flex items-center justify-center mr-4 group-hover:bg-secondary transition-all duration-300">
-                        <i class="fas fa-user text-secondary text-xl group-hover:text-white transition-all duration-300"></i>
-                    </div>
-                    <div>
-                        <span class="block text-lg">CONOCE EL PROYECTO</span>
-                        <span class="block text-sm text-text_dark font-normal">Descubre nuestra filosofía</span>
-                    </div>
-                </a>
-            </div>
-
-            <div class="relative mt-8 md:mt-0">
-                <img src="online.jpg" alt="Fundadora Psic. Isis San Juan" class="rounded-lg shadow-xl w-full h-full object-cover">
-                
-                <div class="absolute -bottom-6 -left-6 bg-white p-5 rounded-lg shadow-lg border-t-4 border-secondary">
-                    <span classs="block text-4xl font-bold text-secondary">+15</span>
-                    <span class="block text-text_dark font-medium">Países alcanzados</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-      <section id="tipos-terapia" class="bg-white">
-    <div class="container mx-auto px-6 text-center max-w-4xl">
-        <h2 class="font-bold text-text_dark mb-8">¿Qué tipo de apoyo necesitas?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-            <a href="equipo.html?tipo=individual" class="block text-current no-underline">
-                <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
+        
+        <section id="intro-valor" class="bg-pink_light">
+            <div class="container mx-auto px-6 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     
-                    <img src="terapia ind.jpg" alt="Mujer en terapia individual online" class="w-full h-56 object-cover">
-
-                    <div class="p-6 flex flex-col flex-1 items-center text-center">
-                        <h3 class="font-semibold text-secondary mb-2 text-lg">Terapia individual</h3>
-                        <p class="text-text_dark text-sm">Esta opción es para ti si quieres trabajar en temas personales como la ansiedad, depresión, autoestima, regulación de emociones, ruptura, entre otros.</p>
+                    <div class="text-left">
+                        <h2 class="text-4xl md:text-5xl font-bold text-secondary leading-tight mb-6">
+                            Tu terapia online.
+                            <span class="block text-text_dark font-normal">Segura, profesional y humana.</span>
+                        </h2>
                         
-                        <div class="mt-auto pt-6">
-                            <span class="cta-button">Iniciar Terapia Individual</span>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-start text-lg text-text_dark">
+                                <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                                <span><strong>Psicólogas certificadas</strong> y con sólida formación.</span>
+                            </li>
+                            <li class="flex items-start text-lg text-text_dark">
+                                <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                                <span>Enfoques clínicos comprobados y <strong>basados en evidencia</strong>.</span>
+                            </li>
+                            <li class="flex items-start text-lg text-text_dark">
+                                <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                                <span>Proceso <strong>100% confidencial</strong> y resguardado.</span>
+                            </li>
+                            <li class="flex items-start text-lg text-text_dark">
+                                <i class="fas fa-check text-secondary mr-3 w-6 text-center mt-1"></i>
+                                <span>Calidez humana y una <strong>conexión auténtica</strong>.</span>
+                            </li>
+                        </ul>
+
+                        <a href="#about" class="group flex items-center text-secondary font-semibold no-underline">
+                            <div class="w-14 h-14 rounded-full border-2 border-secondary flex items-center justify-center mr-4 group-hover:bg-secondary transition-all duration-300">
+                                <i class="fas fa-user text-secondary text-xl group-hover:text-white transition-all duration-300"></i>
+                            </div>
+                            <div>
+                                <span class="block text-lg">CONOCE EL PROYECTO</span>
+                                <span class="block text-sm text-text_dark font-normal">Descubre nuestra filosofía</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="relative mt-8 md:mt-0">
+                        <img src="online.jpg" alt="Fundadora Psic. Isis San Juan" class="rounded-lg shadow-xl w-full h-full object-cover">
+                        
+                        <div class="absolute -bottom-6 -left-6 bg-white p-5 rounded-lg shadow-lg border-t-4 border-secondary">
+                            <span classs="block text-4xl font-bold text-secondary">+15</span>
+                            <span class="block text-text_dark font-medium">Países alcanzados</span>
                         </div>
                     </div>
-                </div>
-            </a>
-            <a href="equipo.html?tipo=pareja" class="block text-current no-underline">
-                <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
-                    
-                    <img src="terapia pareja.jpg" alt="Pareja en terapia online" class="w-full h-56 object-cover">
 
-                    <div class="p-6 flex flex-col flex-1 items-center text-center">
-                        <h3 class="font-semibold text-secondary mb-2 text-lg">Terapia de pareja</h3>
-                        <p class="text-text_dark text-sm">Esta opción es para ustedes si quieren resolver juntos desafíos como la falta de comunicación o los conflictos constantes.</p>
-                        
-                        <div class="mt-auto pt-6">
-                            <span class="cta-button">Iniciar Terapia de Pareja</span>
-                        </div>
-                    </div>
                 </div>
-            </a>
             </div>
-    </div>
-</section>
+        </section>
+
+        <section id="tipos-terapia" class="bg-white">
+            <div class="container mx-auto px-6 text-center max-w-4xl">
+                <h2 class="font-bold text-text_dark mb-8">¿Qué tipo de apoyo necesitas?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <a href="equipo.html?tipo=individual" class="block text-current no-underline">
+                        <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
+                            
+                            <img src="terapia ind.jpg" alt="Mujer en terapia individual online" class="w-full h-56 object-cover">
+
+                            <div class="p-6 flex flex-col flex-1 items-center text-center">
+                                <h3 class="font-semibold text-secondary mb-2 text-lg">Terapia individual</h3>
+                                <p class="text-text_dark text-sm">Esta opción es para ti si quieres trabajar en temas personales como la ansiedad, depresión, autoestima, regulación de emociones, ruptura, entre otros.</p>
+                                
+                                <div class="mt-auto pt-6">
+                                    <span class="cta-button">Iniciar Terapia Individual</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="equipo.html?tipo=pareja" class="block text-current no-underline">
+                        <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
+                            
+                            <img src="terapia pareja.jpg" alt="Pareja en terapia online" class="w-full h-56 object-cover">
+
+                            <div class="p-6 flex flex-col flex-1 items-center text-center">
+                                <h3 class="font-semibold text-secondary mb-2 text-lg">Terapia de pareja</h3>
+                                <p class="text-text_dark text-sm">Esta opción es para ustedes si quieren resolver juntos desafíos como la falta de comunicación o los conflictos constantes.</p>
+                                
+                                <div class="mt-auto pt-6">
+                                    <span class="cta-button">Iniciar Terapia de Pareja</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
 
 
         <section id="about" class="bg-pink_light"> <div class="container mx-auto px-6 text-center">
