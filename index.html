@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <title>TherapyHomeISJ | Terapia psicológica online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,7 +14,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        serif: ['Berliana Lovely', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
                         primary: '#FDF7F8', /* Blanco rosado muy claro, para fondos principales */
@@ -132,25 +135,37 @@
 </head>
 <body class="bg-primary text-text_dark">
 
-<header class="sticky top-0 z-50 bg-secondary shadow-md">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="text-3xl font-serif text-text_light hover:text-pink_light transition-colors duration-300">TherapyHomeISJ</a>
+<header class="bg-secondary text-text_light fixed w-full top-0 z-50 shadow-md">
+    <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
         
-        <div class="hidden lg:flex items-center space-x-8">
-            <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de mí</a>
-            <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Equipo</a>
-            <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
-            <a href="tienda.html" class="text-text_light hover:text-pink_light font-medium">Tienda</a>
-           <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Agenda tu cita</a>
-            <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Contacto</a>
+        <a href="index.html" class="flex items-center gap-2 group">
+            <div class="bg-white p-1 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
+                <img src="logo.jpeg" alt="Logo" class="h-8 w-auto"> </div>
+            <div class="flex flex-col">
+                <span class="text-lg font-bold tracking-tight leading-none">TherapyHomeISJ</span>
+                <span class="text-[10px] font-light text-pink-100 tracking-wider">Psicología Clínica</span>
+            </div>
+        </a>
+
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="index.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Inicio</a>
+            <a href="equipo.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Equipo</a>
+            <a href="blog.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Blog</a>
+            <a href="tienda.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Tienda</a>
+            <a href="agendar.html" class="mobile-link text-text_light hover:text-pink_light font-medium transition-colors">Contacto</a>
+            <a href="equipo.html" class="cta-button bg-white text-secondary px-4 py-1.5 rounded-full font-bold text-sm hover:bg-pink_light transition-all transform hover:scale-105 shadow-sm">
+                Agenda tu cita
+            </a>
         </div>
-        
-        <button id="mobile-menu-button" class="lg:hidden text-text_light focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0.0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+        <button id="mobile-menu-button" class="md:hidden text-text_light focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
         </button>
     </nav>
+    <div id="mobile-menu" class="hidden fixed inset-y-0 left-0 w-64 bg-secondary shadow-2xl z-50 flex flex-col h-full">
+         </div>
 </header>
 
 <div id="mobile-menu" class="lg:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
@@ -170,19 +185,22 @@
     </ul>
 </div>
 
-<section id="hero" class="relative overflow-hidden flex flex-col items-center justify-center text-center bg-secondary">
+<section id="hero" class="relative flex flex-col items-center pt-20 pb-8 text-center bg-secondary">
     
-    <div class="relative container mx-auto px-6 text-text_light z-20 hero-text">
+    <div class="relative container mx-auto px-4 text-text_light z-20 hero-text">
         
-        <h1 class="font-serif leading-tight">
-        Encuentra la claridad que necesitas en tu vida y en tu relación
+        <h1 class="font-serif font-bold leading-none text-4xl md:text-6xl max-w-5xl mx-auto mb-4 mt-2">
+            Encuentra la claridad que necesitas en tu vida y en tu relación
         </h1>
         
-        <p class="mt-4">
-            Un espacio para manejar la ansiedad, la depresión, los desafíos de comunicación, la regulación emocional, los acuerdos y otros conflictos de pareja.
+        <p class="font-sans text-base font-light leading-normal max-w-xl mx-auto mb-6 opacity-90">
+            Un espacio para manejar la ansiedad, la depresión, los desafíos de comunicación y los conflictos de pareja.
         </p>
-        <div class="mt-10 flex justify-center">
-           <a href="equipo.html" class="cta-button rounded-lg bg-pink-500 hover:bg-pink-700">Agenda tu cita</a>
+        
+        <div class="flex justify-center">
+            <a href="equipo.html" 
+               class="cta-button rounded-lg bg-white text-secondary hover:bg-pink_light font-medium py-2.5 px-8 text-base shadow-md transition-all transform hover:scale-105">
+               Agenda tu cita
             </a>
         </div>
     </div>
@@ -558,17 +576,7 @@
                 mobileMenu.classList.add('-translate-x-full');
             });
         });
-        
-        // --- Efecto Fade en Hero ---
-        window.addEventListener('scroll', () => {
-            const heroSection = document.getElementById('hero');
-            if (heroSection) {
-                const scrollPosition = window.scrollY;
-                const fadeDistance = 400; 
-                const newOpacity = 1 - (scrollPosition / fadeDistance);
-                heroSection.style.opacity = Math.max(0, newOpacity);
-            }
-        });
+    
 
         // --- Carrusel de Testimonios ---
         const carousel = document.getElementById('carousel');
