@@ -14,46 +14,55 @@
     <div class="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-lg mx-4 border border-pink-100">
         <div class="text-6xl mb-6">✨</div>
         <h1 class="text-3xl font-extrabold text-gray-800 mb-3">¡Gracias por tu compra!</h1>
-        <p id="mensaje-guia" class="text-gray-600 mb-8 text-lg">Tu proceso de bienestar comienza aquí. Haz clic abajo para obtener tu material.</p>
+        <p id="mensaje-guia" class="text-gray-600 mb-8 text-lg">Tu material está listo para descargar. Haz clic en el botón de abajo.</p>
         
         <a id="btn-descarga" href="#" target="_blank" 
-           class="inline-block bg-[#E32367] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-pink-700 transition-all transform hover:scale-105 shadow-xl">
-            ⬇️ DESCARGAR MANUAL
+           class="inline-block bg-[#C04374] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-pink-700 transition-all transform hover:scale-105 shadow-xl">
+            ⬇️ DESCARGAR EBOOK
         </a>
 
         <div class="mt-10 pt-6 border-t border-gray-100">
             <p class="text-sm text-gray-400 mb-2">¿Tienes algún problema con la descarga?</p>
-            <a href="https://wa.me/tu_numero_aqui" class="text-[#E32367] font-semibold hover:underline">
+            <a href="https://wa.link/lefkj3" class="text-[#C04374] font-semibold hover:underline">
                 Escríbenos por WhatsApp
             </a>
         </div>
         
-        <a href="index.html" class="block mt-6 text-gray-400 hover:text-gray-600 text-sm transition-colors">Volver al inicio</a>
+        <a href="index.html" class="block mt-6 text-gray-400 hover:text-gray-600 text-sm">Volver al inicio</a>
     </div>
 
     <script>
-        // 1. Diccionario de links (Configura tus links de Drive aquí)
+        // 1. Diccionario Final con tus enlaces actualizados de Drive
         const enlacesDrive = {
-            'manual1': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
-            'manual2': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
-            'manual3': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
-            'manual4': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
-            'manual5': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ'
+            'superar_relacion': 'https://drive.google.com/file/d/1n5iy36WOb8V5B3dxL05N2gTWo4z6Hbjk/view?usp=drive_link',
+            'limites': 'https://drive.google.com/file/d/1a0YkemD75Z2Y87WPCy0L8qYRXtqMgG8C/view?usp=drive_link',
+            'heridas': 'https://drive.google.com/file/d/19zOUJkJ14SPDNiUnL0i_FPo_fLLR7Qr7/view?usp=drive_link',
+            'comunicacion': 'https://drive.google.com/file/d/1QWZcgXK4Xf_I-hL5uQ9mc4Er9DBSxeBL/view?usp=drive_link',
+            'celos': 'https://drive.google.com/file/d/1WiWcBYDFTlL4-4GZjDzZgCcE_V0pNS2v/view?usp=drive_link'
         };
 
-        // 2. Lógica para detectar el ebook en la URL
+        // 2. Nombres para personalizar el mensaje
+        const nombresEbooks = {
+            'superar_relacion': 'Guía práctica para superar una relación amorosa',
+            'limites': 'Ebook de Límites',
+            'heridas': 'Ebook de Heridas',
+            'comunicacion': 'Ebook de Comunicación',
+            'celos': 'Ebook de Celos'
+        };
+
         const urlParams = new URLSearchParams(window.location.search);
         const ebookId = urlParams.get('ebook');
         const boton = document.getElementById('btn-descarga');
+        const mensaje = document.getElementById('mensaje-guia');
 
         if (ebookId && enlacesDrive[ebookId]) {
-            // Si el ID existe en nuestro diccionario, asignamos el link
             boton.href = enlacesDrive[ebookId];
+            mensaje.innerText = `Tu "${nombresEbooks[ebookId]}" ya está disponible para descargar.`;
         } else {
-            // Si no hay ID o es incorrecto, el botón lleva a soporte
-            boton.innerHTML = "⚠️ Contactar Soporte";
-            boton.href = "https://wa.me/tu_numero_aqui";
-            document.getElementById('mensaje-guia').innerText = "No pudimos localizar tu enlace automáticamente, pero no te preocupes, contáctanos y te lo enviamos.";
+            // Caso por defecto: Si el link no tiene el parámetro correcto
+            boton.innerHTML = "💬 Contactar Soporte";
+            boton.href = "https://wa.link/lefkj3";
+            mensaje.innerText = "No pudimos identificar el recurso, pero contáctanos por WhatsApp y te daremos el acceso de inmediato.";
         }
     </script>
 </body>
