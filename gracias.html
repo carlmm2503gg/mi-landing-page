@@ -14,40 +14,35 @@
     <div class="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-lg mx-4 border border-pink-100">
         <div class="text-6xl mb-6">✨</div>
         <h1 class="text-3xl font-extrabold text-gray-800 mb-3">¡Gracias por tu compra!</h1>
-        <p id="mensaje-guia" class="text-gray-600 mb-8 text-lg">Tu material está listo para descargar. Haz clic en el botón de abajo.</p>
+        <p id="mensaje-guia" class="text-gray-600 mb-8 text-lg">Tu material está listo para descargar.</p>
         
         <a id="btn-descarga" href="#" target="_blank" 
            class="inline-block bg-[#C04374] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-pink-700 transition-all transform hover:scale-105 shadow-xl">
-            ⬇️ DESCARGAR EBOOK
+            ⬇️ DESCARGAR AHORA
         </a>
 
         <div class="mt-10 pt-6 border-t border-gray-100">
-            <p class="text-sm text-gray-400 mb-2">¿Tienes algún problema con la descarga?</p>
-            <a href="https://wa.link/lefkj3" class="text-[#C04374] font-semibold hover:underline">
-                Escríbenos por WhatsApp
-            </a>
+            <p class="text-sm text-gray-400 mb-2">¿Problemas con la descarga?</p>
+            <a href="https://wa.link/lefkj3" class="text-[#C04374] font-semibold hover:underline">WhatsApp de Soporte</a>
         </div>
-        
-        <a href="index.html" class="block mt-6 text-gray-400 hover:text-gray-600 text-sm">Volver al inicio</a>
     </div>
 
     <script>
-        // 1. Diccionario Final con tus enlaces actualizados de Drive
+        // ESTO ES LO QUE TIENE QUE COINCIDIR CON STRIPE
         const enlacesDrive = {
-            'superar_relacion': 'https://drive.google.com/file/d/1n5iy36WOb8V5B3dxL05N2gTWo4z6Hbjk/view?usp=drive_link',
-            'limites': 'https://drive.google.com/file/d/1a0YkemD75Z2Y87WPCy0L8qYRXtqMgG8C/view?usp=drive_link',
-            'heridas': 'https://drive.google.com/file/d/19zOUJkJ14SPDNiUnL0i_FPo_fLLR7Qr7/view?usp=drive_link',
-            'comunicacion': 'https://drive.google.com/file/d/1QWZcgXK4Xf_I-hL5uQ9mc4Er9DBSxeBL/view?usp=drive_link',
-            'celos': 'https://drive.google.com/file/d/1WiWcBYDFTlL4-4GZjDzZgCcE_V0pNS2v/view?usp=drive_link'
+            'sanar_relacion': 'https://drive.google.com/file/d/19zOUJkJ14SPDNiUnL0i_FPo_fLLR7Qr7/view?usp=drive_link',
+            'celos': 'https://drive.google.com/file/d/1WiWcBYDFTlL4-4GZjDzZgCcE_V0pNS2v/view?usp=drive_link',
+            'resolver_problemas': 'https://drive.google.com/file/d/1QWZcgXK4Xf_I-hL5uQ9mc4Er9DBSxeBL/view?usp=drive_link',
+            'limites_asertivos': 'https://drive.google.com/file/d/1a0YkemD75Z2Y87WPCy0L8qYRXtqMgG8C/view?usp=drive_link',
+            'superar_ruptura': 'https://drive.google.com/file/d/1n5iy36WOb8V5B3dxL05N2gTWo4z6Hbjk/view?usp=drive_link'
         };
 
-        // 2. Nombres para personalizar el mensaje
         const nombresEbooks = {
-            'superar_relacion': 'Guía práctica para superar una relación amorosa',
-            'limites': 'Ebook de Límites',
-            'heridas': 'Ebook de Heridas',
-            'comunicacion': 'Ebook de Comunicación',
-            'celos': 'Ebook de Celos'
+            'sanar_relacion': 'Guía para sanar una relación dañada',
+            'celos': 'Manual para gestionar los celos',
+            'resolver_problemas': 'Manual para resolver problemas en pareja',
+            'limites_asertivos': 'Manual de límites asertivos',
+            'superar_ruptura': 'Guía para superar una ruptura amorosa'
         };
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -57,12 +52,12 @@
 
         if (ebookId && enlacesDrive[ebookId]) {
             boton.href = enlacesDrive[ebookId];
-            mensaje.innerText = `Tu "${nombresEbooks[ebookId]}" ya está disponible para descargar.`;
+            mensaje.innerText = `Tu "${nombresEbooks[ebookId]}" ya está disponible.`;
         } else {
-            // Caso por defecto: Si el link no tiene el parámetro correcto
+            // Si el ID no coincide, mostramos botón de soporte
             boton.innerHTML = "💬 Contactar Soporte";
             boton.href = "https://wa.link/lefkj3";
-            mensaje.innerText = "No pudimos identificar el recurso, pero contáctanos por WhatsApp y te daremos el acceso de inmediato.";
+            mensaje.innerText = "No pudimos identificar el ebook automáticamente. Por favor, escríbenos.";
         }
     </script>
 </body>
