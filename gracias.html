@@ -27,38 +27,39 @@
         </div>
     </div>
 
-    <script>
-        // ESTO ES LO QUE TIENE QUE COINCIDIR CON STRIPE
-        const enlacesDrive = {
-            'sanar_relacion': 'https://drive.google.com/file/d/19zOUJkJ14SPDNiUnL0i_FPo_fLLR7Qr7/view?usp=drive_link',
-            'celos': 'https://drive.google.com/file/d/1WiWcBYDFTlL4-4GZjDzZgCcE_V0pNS2v/view?usp=drive_link',
-            'resolver_problemas': 'https://drive.google.com/file/d/1QWZcgXK4Xf_I-hL5uQ9mc4Er9DBSxeBL/view?usp=drive_link',
-            'limites_asertivos': 'https://drive.google.com/file/d/1a0YkemD75Z2Y87WPCy0L8qYRXtqMgG8C/view?usp=drive_link',
-            'superar_ruptura': 'https://drive.google.com/file/d/1n5iy36WOb8V5B3dxL05N2gTWo4z6Hbjk/view?usp=drive_link'
-        };
+ <script>
+    // 1. Diccionario con los IDs EXACTOS que usarás en tus links de Stripe
+    const enlacesDrive = {
+        'sanar_relacion': 'https://drive.google.com/file/d/19zOUJkJ14SPDNiUnL0i_FPo_fLLR7Qr7/view?usp=drive_link',
+        'celos': 'https://drive.google.com/file/d/1WiWcBYDFTlL4-4GZjDzZgCcE_V0pNS2v/view?usp=drive_link',
+        'resolver_problemas': 'https://drive.google.com/file/d/1QWZcgXK4Xf_I-hL5uQ9mc4Er9DBSxeBL/view?usp=drive_link',
+        'limites_asertivos': 'https://drive.google.com/file/d/1a0YkemD75Z2Y87WPCy0L8qYRXtqMgG8C/view?usp=drive_link',
+        'superar_ruptura': 'https://drive.google.com/file/d/1n5iy36WOb8V5B3dxL05N2gTWo4z6Hbjk/view?usp=drive_link'
+    };
 
-        const nombresEbooks = {
-            'sanar_relacion': 'Guía para sanar una relación dañada',
-            'celos': 'Manual para gestionar los celos',
-            'resolver_problemas': 'Manual para resolver problemas en pareja',
-            'limites_asertivos': 'Manual de límites asertivos',
-            'superar_ruptura': 'Guía para superar una ruptura amorosa'
-        };
+    // 2. Nombres exactos para el mensaje personalizado
+    const nombresEbooks = {
+        'sanar_relacion': 'Guía para sanar una relación dañada',
+        'celos': 'Manual para gestionar los celos',
+        'resolver_problemas': 'Manual para resolver problemas en pareja',
+        'limites_asertivos': 'Manual de límites asertivos',
+        'superar_ruptura': 'Guía para superar una ruptura amorosa'
+    };
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const ebookId = urlParams.get('ebook');
-        const boton = document.getElementById('btn-descarga');
-        const mensaje = document.getElementById('mensaje-guia');
+    const urlParams = new URLSearchParams(window.location.search);
+    const ebookId = urlParams.get('ebook');
+    const boton = document.getElementById('btn-descarga');
+    const mensaje = document.getElementById('mensaje-guia');
 
-        if (ebookId && enlacesDrive[ebookId]) {
-            boton.href = enlacesDrive[ebookId];
-            mensaje.innerText = `Tu "${nombresEbooks[ebookId]}" ya está disponible.`;
-        } else {
-            // Si el ID no coincide, mostramos botón de soporte
-            boton.innerHTML = "💬 Contactar Soporte";
-            boton.href = "https://wa.link/lefkj3";
-            mensaje.innerText = "No pudimos identificar el ebook automáticamente. Por favor, escríbenos.";
-        }
-    </script>
+    if (ebookId && enlacesDrive[ebookId]) {
+        boton.href = enlacesDrive[ebookId];
+        mensaje.innerText = `Tu "${nombresEbooks[ebookId]}" está listo.`;
+    } else {
+        // Esto se muestra si el link de Stripe está mal escrito o no trae el ?ebook=
+        boton.innerHTML = "💬 Contactar Soporte";
+        boton.href = "https://wa.link/lefkj3";
+        mensaje.innerText = "No pudimos identificar tu compra. Por favor, escríbenos por WhatsApp.";
+    }
+</script>
 </body>
 </html>
