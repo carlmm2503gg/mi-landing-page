@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por tu compra! | TherapyHomeISJ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%); }
+    </style>
+</head>
+<body class="gradient-bg flex items-center justify-center min-h-screen font-sans">
+
+    <div class="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-lg mx-4 border border-pink-100">
+        <div class="text-6xl mb-6">✨</div>
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-3">¡Gracias por tu compra!</h1>
+        <p id="mensaje-guia" class="text-gray-600 mb-8 text-lg">Tu proceso de bienestar comienza aquí. Haz clic abajo para obtener tu material.</p>
+        
+        <a id="btn-descarga" href="#" target="_blank" 
+           class="inline-block bg-[#E32367] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-pink-700 transition-all transform hover:scale-105 shadow-xl">
+            ⬇️ DESCARGAR MANUAL
+        </a>
+
+        <div class="mt-10 pt-6 border-t border-gray-100">
+            <p class="text-sm text-gray-400 mb-2">¿Tienes algún problema con la descarga?</p>
+            <a href="https://wa.me/tu_numero_aqui" class="text-[#E32367] font-semibold hover:underline">
+                Escríbenos por WhatsApp
+            </a>
+        </div>
+        
+        <a href="index.html" class="block mt-6 text-gray-400 hover:text-gray-600 text-sm transition-colors">Volver al inicio</a>
+    </div>
+
+    <script>
+        // 1. Diccionario de links (Configura tus links de Drive aquí)
+        const enlacesDrive = {
+            'manual1': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
+            'manual2': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
+            'manual3': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
+            'manual4': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ',
+            'manual5': 'https://drive.google.com/LINK_DE_DRIVE_AQUÍ'
+        };
+
+        // 2. Lógica para detectar el ebook en la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const ebookId = urlParams.get('ebook');
+        const boton = document.getElementById('btn-descarga');
+
+        if (ebookId && enlacesDrive[ebookId]) {
+            // Si el ID existe en nuestro diccionario, asignamos el link
+            boton.href = enlacesDrive[ebookId];
+        } else {
+            // Si no hay ID o es incorrecto, el botón lleva a soporte
+            boton.innerHTML = "⚠️ Contactar Soporte";
+            boton.href = "https://wa.me/tu_numero_aqui";
+            document.getElementById('mensaje-guia').innerText = "No pudimos localizar tu enlace automáticamente, pero no te preocupes, contáctanos y te lo enviamos.";
+        }
+    </script>
+</body>
+</html>
