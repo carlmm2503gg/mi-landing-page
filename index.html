@@ -140,7 +140,8 @@
         
         <a href="index.html" class="flex items-center gap-2 group">
             <div class="bg-white p-1 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
-                <img src="logo.jpeg" alt="Logo" class="h-8 w-auto"> </div>
+                <img src="logo.jpeg" alt="Logo" class="h-8 w-auto"> 
+            </div>
             <div class="flex flex-col">
                 <span class="text-lg font-bold tracking-tight leading-none">TherapyHomeISJ</span>
                 <span class="text-[10px] font-light text-pink-100 tracking-wider">Psicología Clínica</span>
@@ -152,7 +153,7 @@
             <a href="equipo.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Equipo</a>
             <a href="blog.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Blog</a>
             <a href="tienda.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Tienda</a>
-            <a href="agendar.html" class="mobile-link text-text_light hover:text-pink_light font-medium transition-colors">Contacto</a>
+            <a href="agendar.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Contacto</a>
             <a href="equipo.html" class="cta-button bg-white text-secondary px-4 py-1.5 rounded-full font-bold text-sm hover:bg-pink_light transition-all transform hover:scale-105 shadow-sm">
                 Agenda tu cita
             </a>
@@ -164,27 +165,20 @@
             </svg>
         </button>
     </nav>
-    <div id="mobile-menu" class="hidden fixed inset-y-0 left-0 w-64 bg-secondary shadow-2xl z-50 flex flex-col h-full">
-         </div>
 </header>
 
-<div id="mobile-menu" class="lg:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
+<div id="mobile-menu" class="md:hidden fixed inset-0 bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
     <ul class="flex flex-col items-center space-y-6 text-xl">
-        <li><a href="index.html#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de mí</a></li>
-        <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
+        <li><a href="index.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Inicio</a></li>
         <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
         <li><a href="blog.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Blog</a></li>
         <li><a href="tienda.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Tienda</a></li>
-        <li><a href="index.html#faq" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Preguntas</a></li>
-        <li>
-            <a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Contacto</a>
-        </li>
+        <li><a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Contacto</a></li>
         <li class="pt-4">
-           <a href="equipo.html" class="cta-button rounded-lg bg-pink-500 hover:bg-pink-700">Agenda tu cita</a>
+           <a href="equipo.html" class="cta-button rounded-lg bg-secondary text-white">Agenda tu cita</a>
         </li>
     </ul>
 </div>
-
 <section id="hero" class="relative flex flex-col items-center pt-20 pb-8 text-center bg-secondary">
     
     <div class="relative container mx-auto px-4 text-text_light z-20 hero-text">
