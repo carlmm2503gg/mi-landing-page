@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TherapyHomeISJ | Blog de Psicología</title>
+    <title>TherapyHomeISJ | Tienda de Recursos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
@@ -31,10 +31,9 @@
     <style>
         @font-face {
             font-family: 'Berliana Lovely';
-            src: url('Berliana-Lovely.ttf') format('truetype');
+           src: url('Berliana-Lovely.ttf') format('truetype');
         }
         
-        /* Estilos de Botón adaptados de index.html */
         .cta-button {
             background-color: theme('colors.secondary');
             color: theme('colors.text_light');
@@ -52,8 +51,6 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
-
-        /* Estilo para Tarjeta de Artículo (Basado en service-card de index) */
         .blog-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -73,7 +70,7 @@
             <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de Mí</a>
             <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Equipo</a>
             <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
-            <a href="recursos.html" class="text-text_light hover:text-pink_light font-medium">Tienda</a>
+            <a href="tienda.html" class="text-text_light hover:text-pink_light font-medium">Tienda</a>
             <a href="https://therapyhome.as.me/" target="_blank" class="text-text_light hover:text-pink_light font-medium">Agenda tu Cita</a>
             <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Contacto</a>
         </div>
@@ -92,7 +89,7 @@
         <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
         <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
         <li><a href="blog.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Blog</a></li>
-        <li><a href="recursos.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Tienda</a></li>
+        <li><a href="tienda.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Tienda</a></li>
         <li><a href="index.html#faq" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Preguntas</a></li>
         <li>
             <a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Contacto</a>
@@ -102,24 +99,99 @@
         </li>
     </ul>
 </div>
-
     <main>
-        <section id="blog-list" class="py-16 bg-primary min-h-screen"> <div class="container mx-auto px-6 text-center">
+        <section id="tienda" class="py-16 bg-primary min-h-screen">
+            <div class="container mx-auto px-6 text-center">
                 
-                <h2 class="text-4xl font-bold text-secondary mb-6">Nuestro Blog</h2>
+                <h2 class="text-4xl font-bold text-secondary mb-6">Recursos para entender y atravesar procesos difíciles</h2>
                 <p class="text-lg text-text_dark mb-12 max-w-3xl mx-auto">
-                    Encuentra herramientas, reflexiones y consejos para tu bienestar emocional y el de tu relación.
+                    De la teoría a la práctica: manuales desarrollados por el equipo para ayudarte a obtener claridad y aplicar estrategias funcionales en tu vida.
                 </p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                     
-                    <p class="text-lg text-text_dark col-span-full">
-                        Próximamente encontrarás nuevos artículos aquí.
-                    </p>
-
-                    </div> 
-                
-                </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-heridas.jpeg" 
+                             alt="Portada del ebook Guía práctica para sanar una relación dañada" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Guía práctica para sanar una relación dañada</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Un camino claro y práctico para sanar heridas, fortalecer el vínculo y avanzar hacia una relación más sana y consciente.
+                        </p>
+                        
+                        <a href="https://mpago.la/28n1xKq" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-celos.jpg" 
+                             alt="Portada del Manual práctico para gestionar los celos" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Manual práctico para gestionar los celos y crecer juntos</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Herramientas prácticas y ejercicios para comprender los celos y convertirlos en una oportunidad de aprendizaje y crecimiento en pareja.
+                        </p>
+                        
+                        <a href="https://mpago.la/1ib5vy5" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-comunicacion.jpg" 
+                             alt="Portada del Manual práctico para resolver problemas en pareja" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Manual práctico para resolver problemas en pareja</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Supera las crisis y aprende a navegar los momentos difíciles con herramientas para fortalecer el vínculo y la comunicación.
+                        </p>
+                        
+                        <a href=" https://mpago.la/1f3iVWV" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                       <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="Ebook-limites.webp" 
+                             alt="Portada del Manual práctico para resolver problemas en pareja" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Manual práctico para establecer límites de forma asertiva</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                           Una guía clara y sencilla para aprender a poner límites sin culpa, comunicar tus necesidades con seguridad y construir relaciones más equilibradas, respetuosas y conscientes.
+                        </p>
+                        
+                        <a href="https://mpago.la/2TWrhr3" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    <div class="blog-card bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left flex flex-col h-full">
+                        
+                        <img src="ebook-ruptura.jpeg" 
+                             alt="Portada de la Guía práctica para superar una ruptura amorosa" 
+                             class="rounded-lg mb-6 w-full h-auto object-cover shadow-md">
+                        
+                        <h3 class="font-semibold text-text_dark mb-2 text-lg">Guía práctica para superar una ruptura amorosa</h3>
+                        
+                        <p class="text-text_dark text-sm mb-6 flex-grow">
+                            Un acompañamiento para sanar, fortalecer tu autoestima y aprovechar este momento de cambio como una oportunidad para crecer.
+                        </p>
+                        
+                        <a href=" https://mpago.la/1DpB4yz" target="_blank" class="cta-button text-sm py-2 px-6 mt-auto self-start w-full text-center">
+                            Comprar Ahora ($350 MXN)
+                        </a>
+                    </div>
+                    </div>
+            </div>
         </section>
     </main>
 
@@ -134,10 +206,10 @@
                 <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
                 <ul class="space-y-2 text-gray-300">
                     <li><a href="index.html#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
-                    <li><a href="index.html#especialidades" class="hover:text-white transition-colors duration-300">Terapia</a></li>
+                    <li><a href="index.html#especialidades" class="hover:text-white transition-colors duration-30S00">Terapia</a></li>
                     <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
-                    <a href="recursos.html" class="text-text_light hover:text-pink_light font-medium">Tienda</a> <a href="agendar.html" ...>Agenda tu Cita</a>
                     <li><a href="blog.html" class="hover:text-white transition-colors duration-300">Blog</a></li>
+                    <li><a href="tienda.html" class="hover:text-white transition-colors duration-300">Tienda</a></li>
                     <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
                 </ul>
             </div>
