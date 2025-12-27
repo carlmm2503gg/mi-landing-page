@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addi Eunice Arvizu Flores | TherapyHomeISJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: '#FDF7F8', 
+                        secondary: '#C04374', 
+                        text_dark: '#2C1B23', 
+                        text_light: '#FFFFFF',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .cta-button {
+            background-color: #C04374;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button:hover { 
+            background-color: #880E4F; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-primary text-text_dark font-sans">
+
+    <header class="bg-secondary py-4 shadow-md">
+        <nav class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif text-text_light">TherapyHomeISJ</a>
+            <a href="equipo.html" class="text-text_light hover:underline font-medium">← Volver al Equipo</a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 max-w-6xl">
+        
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20 items-center">
+            <div class="order-2 lg:order-1">
+                <h1 class="text-4xl md:text-5xl font-serif font-bold text-text_dark mb-2">Addi Eunice Arvizu Flores</h1>
+                <p class="text-secondary font-medium mb-4">Céd. Prof. 14472891</p>
+                
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Psicóloga con Maestría en psicología clínica y formación especializada en Terapia Cognitivo-Conductual (TCC). 
+                    Acompaño a personas en crisis de relación, problemas de comunicación, celos, infidelidad o distanciamiento emocional.
+                </p>
+
+                <div class="space-y-4 mb-8">
+                    <p class="font-bold text-text_dark">Calendario y disponibilidad de fechas:</p>
+                    <a href="https://therapyhome.as.me/schedule/531254e8/appointment/86138512/calendar/13001579?calendarIds=13001579" 
+                       target="_blank" class="cta-button w-full md:w-auto">
+                        Reserva tu sesión (Individual) <span class="ml-2">→</span>
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <p class="text-sm text-gray-500 uppercase font-semibold">Inversión por sesión:</p>
+                    <p class="text-3xl font-bold text-secondary">$650 MXN <span class="text-lg text-gray-400 font-normal">/ $36 USD</span></p>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 flex justify-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-secondary/10 rounded-full blur-2xl"></div>
+                    <img src="Addi.webp" alt="Addi Eunice Arvizu Flores" 
+                         class="relative w-72 h-72 md:w-96 md:h-96 rounded-full object-cover border-8 border-white shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                
+                <div class="p-8 lg:p-12 bg-gray-50 flex flex-col justify-center">
+                    <h2 class="text-2xl font-serif font-bold mb-6 text-center">Conoce a Addi</h2>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/ID_DEL_VIDEO" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div class="p-8 lg:p-12">
+                    <h3 class="text-2xl font-serif font-bold text-secondary mb-6">Mi enfoque terapéutico</h3>
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            Cuento con experiencia clínica en el tratamiento de trastornos de ansiedad, utilizando la **Terapia Cognitivo-Conductual** para procesos claros y estructurados.
+                        </p>
+                        <p>
+                            Mi objetivo es permitirte comprender tu historia relacional, fortalecer tus recursos personales y que logres tomar decisiones desde un lugar más consciente.
+                        </p>
+                        <p>
+                            También acompaño procesos de duelo por separación, ofreciendo un espacio seguro para transitar estos momentos difíciles con las herramientas adecuadas.
+                        </p>
+                    </div>
+
+                    <div class="mt-10 pt-8 border-t border-gray-100">
+                        <h4 class="font-bold text-text_dark mb-4">Especialidades:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-primary px-3 py-1 rounded-full text-secondary text-sm font-medium border border-secondary/20 italic">Terapia de Pareja</span>
+                            <span class="bg-primary px-3 py-1 rounded-full text-secondary text-sm font-medium border border-secondary/20 italic">Ansiedad</span>
+                            <span class="bg-primary px-3 py-1 rounded-full text-secondary text-sm font-medium border border-secondary/20 italic">Duelo y Rupturas</span>
+                            <span class="bg-primary px-3 py-1 rounded-full text-secondary text-sm font-medium border border-secondary/20 italic">TCC</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-text_dark text-gray-400 py-12 mt-20 text-center">
+        <div class="container mx-auto px-6">
+            <p class="font-serif text-white text-xl mb-4">TherapyHomeISJ</p>
+            <p class="text-sm">© 2025 Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
