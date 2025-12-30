@@ -1,76 +1,114 @@
-<main>
-    <section id="blog-list" class="py-16 bg-primary min-h-screen">
-        <div class="container mx-auto px-6">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿El amor debe fluir? | Blog TherapyHomeISJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { primary: '#FDF7F8', secondary: '#C04374', text_dark: '#2C1B23', text_light: '#FFFFFF', dark_footer: '#4A2A38', pink_light: '#FFE4E8' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary text-text_dark font-sans selection:bg-secondary selection:text-white">
+
+    <header class="fixed w-full z-50 bg-primary/80 backdrop-blur-md border-b border-pink_light">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif text-secondary font-bold italic">TherapyHomeISJ</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="text-text_dark hover:text-secondary transition-colors font-medium">Inicio</a>
+                <a href="blog.html" class="text-secondary font-medium border-b-2 border-secondary">Blog</a>
+                <a href="https://therapyhome.as.me/" target="_blank" class="bg-secondary text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all shadow-md font-bold text-sm">Agendar</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-28 pb-20">
+        <article class="container mx-auto px-6 max-w-4xl">
             
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-serif text-secondary mb-4">Nuestro Blog</h2>
-                <p class="text-lg text-text_dark max-w-2xl mx-auto">
-                    Herramientas y reflexiones para cultivar tu bienestar emocional y fortalecer tus vínculos[cite: 47, 51].
-                </p>
+            <header class="text-center mb-12">
+                <span class="inline-block text-secondary font-bold tracking-[0.2em] uppercase text-xs mb-4">Mitos del Amor & Psicología</span>
+                <h1 class="text-4xl md:text-6xl font-serif text-text_dark leading-tight mb-6">
+                    ¿Por qué dicen que “si hay que trabajarlo, no es ahí”?
+                </h1>
+                <p class="text-lg text-gray-500 italic">El peligro de las falsas expectativas en el amor</p>
+            </header>
+
+            <div class="rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 h-96">
+                <img src="https://images.unsplash.com/photo-1518104593124-ac2e82a5eb9d?q=80&w=1470&auto=format&fit=crop" alt="Reflexión sobre relaciones" class="w-full h-full object-cover">
             </div>
 
-            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-pink_light overflow-hidden">
-                <div class="h-64 bg-pink_light flex items-center justify-center">
-                    <span class="text-secondary font-serif text-4xl opacity-50">Navidad en Pareja 🤍</span>
+            <div class="prose prose-lg prose-pink max-w-none text-text_dark">
+                <p class="text-xl leading-relaxed mb-8 text-gray-700">
+                    Es común deslizar el dedo por redes sociales y encontrarse con frases que invitan a soltar todo aquello que “no fluya”. Bajo la idea de que el amor debe ser automático, muchas personas terminan abandonando relaciones valiosas sin entender por qué.
+                </p>
+
+                <div class="bg-secondary/5 border-l-4 border-secondary p-8 rounded-r-3xl my-10 italic text-xl text-secondary">
+                    "Esta narrativa confunde incomodidad con incompatibilidad."
                 </div>
 
-                <div class="p-8 md:p-12">
-                    <span class="text-secondary font-semibold uppercase tracking-widest text-sm">Terapia de Pareja</span>
-                    <h1 class="text-3xl md:text-4xl font-serif text-text_dark mt-4 mb-6 leading-tight">
-                        Navidad en pareja: por qué estas fechas suelen activar conflictos [cite: 1]
-                    </h1>
+                <h2 class="text-3xl font-serif text-secondary mt-16 mb-8">El mito del “fluir”</h2>
+                <p>
+                    La creencia de que una relación “es o no es” responde a lo que la psicología denomina <strong>creencias de destino</strong>. Pensar que si aparece un conflicto, la persona no es la correcta, es un error frecuente. 
+                </p>
+                <p>La investigación muestra que el éxito relacional no depende de la ausencia de conflictos, sino de la capacidad para manejarlos:</p>
+                
+                <ul class="space-y-4 my-8 list-none pl-0">
+                    <li class="flex gap-4 p-4 bg-white rounded-2xl border border-pink_light">
+                        <span class="text-secondary text-xl font-bold">1.</span>
+                        <span><strong>El conflicto es inevitable:</strong> Aproximadamente el 70% de los problemas en una pareja son recurrentes. La clave es cómo se abordan.</span>
+                    </li>
+                    <li class="flex gap-4 p-4 bg-white rounded-2xl border border-pink_light">
+                        <span class="text-secondary text-xl font-bold">2.</span>
+                        <span><strong>El amor se aprende:</strong> Cuidar un vínculo implica aceptar momentos de desconexión y revisar conductas propias.</span>
+                    </li>
+                </ul>
 
-                    <div class="prose prose-lg text-text_dark leading-relaxed">
-                        <p class="mb-6">
-                            La Navidad suele traer más que reuniones familiares; para muchas personas, también activa discusiones, cansancio emocional y desconexión[cite: 2]. Desde la <strong>Terapia Integral Conductual de Pareja (IBCT)</strong>, sabemos que las fiestas no crean los problemas, sino que los amplifican[cite: 3].
-                        </p>
+                <h2 class="text-3xl font-serif text-secondary mt-20 mb-8">¿Cómo ayuda la terapia individual?</h2>
+                <p class="mb-8">No siempre es necesario que ambos asistan a consulta. Trabajar en tu terapia individual te permite:</p>
 
-                        <h3 class="text-2xl font-serif text-secondary mt-10 mb-4">Dinámicas comunes en estas fechas</h3>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                            <div class="p-6 bg-primary rounded-xl border-l-4 border-secondary">
-                                <h4 class="font-bold mb-2">La pareja "en deuda"</h4>
-                                <p class="text-sm italic text-gray-700">Sienten que deben estar en todos lados, olvidando poner límites por culpa aprendida[cite: 6, 8, 9].</p>
-                            </div>
-                            <div class="p-6 bg-primary rounded-xl border-l-4 border-secondary">
-                                <h4 class="font-bold mb-2">La pareja "perfeccionista"</h4>
-                                <p class="text-sm italic text-gray-700">Viven la Navidad como un examen donde todo debe ser perfecto, generando rigidez y malestar[cite: 11, 12, 14].</p>
-                            </div>
-                            <div class="p-6 bg-primary rounded-xl border-l-4 border-secondary">
-                                <h4 class="font-bold mb-2">La pareja "a la defensiva"</h4>
-                                <p class="text-sm italic text-gray-700">Los roces familiares se convierten en reproches internos, perdiendo el sentido de equipo[cite: 17, 18, 19].</p>
-                            </div>
-                            <div class="p-6 bg-primary rounded-xl border-l-4 border-secondary">
-                                <h4 class="font-bold mb-2">La pareja que acuerda</h4>
-                                <p class="text-sm italic text-gray-700">Hablan antes sobre límites y presupuesto, cuidando el vínculo sobre la perfección[cite: 20, 21, 22].</p>
-                            </div>
-                        </div>
-
-                        <blockquote class="italic border-l-4 border-pink-300 pl-4 py-2 my-8 text-gray-600">
-                            "Lo que no se habla, se acumula. Y lo que se acumula, tarde o temprano, pesa".
-                        </blockquote>
-
-                        <h3 class="text-2xl font-serif text-secondary mt-10 mb-4">¿Cuándo buscar apoyo?</h3>
-                        <p class="mb-4">Es momento de considerar terapia si notas[cite: 24, 25]:</p>
-                        <ul class="list-disc pl-6 space-y-2 mb-8">
-                            <li>Discusiones repetitivas y agotamiento constante[cite: 26, 27].</li>
-                            <li>Sensación de "funcionar" pero no conectar[cite: 28].</li>
-                            <li>Dificultad individual para poner límites o exceso de ansiedad[cite: 32, 34].</li>
-                        </ul>
-
-                        <div class="bg-dark_footer text-white p-8 rounded-xl text-center">
-                            <h4 class="text-xl font-serif mb-4">No postergues lo importante</h4>
-                            <p class="mb-6 text-gray-300">Aprender a relacionarse distinto es el mejor regalo para tu salud emocional[cite: 45, 46].</p>
-                            <a href="https://therapyhome.as.me/" target="_blank" class="cta-button">Agenda una sesión informativa</a>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 not-prose mb-12">
+                    <div class="p-6 bg-primary rounded-3xl border border-pink_light text-center">
+                        <div class="text-2xl mb-2">🔍</div>
+                        <h4 class="font-bold text-secondary mb-2">Identificar saboteadores</h4>
+                        <p class="text-xs text-gray-600">Entender qué se activa en ti cuando la relación se mueve.</p>
+                    </div>
+                    <div class="p-6 bg-primary rounded-3xl border border-pink_light text-center">
+                        <div class="text-2xl mb-2">⚖️</div>
+                        <h4 class="font-bold text-secondary mb-2">Claridad mental</h4>
+                        <p class="text-xs text-gray-600">Dejar de reaccionar por impulso y tomar decisiones coherentes.</p>
+                    </div>
+                    <div class="p-6 bg-primary rounded-3xl border border-pink_light text-center">
+                        <div class="text-2xl mb-2">🌱</div>
+                        <h4 class="font-bold text-secondary mb-2">Regulación</h4>
+                        <p class="text-xs text-gray-600">Comunicarte sin atacar ni cerrarte ante la incomodidad.</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-20 text-center">
-                <hr class="border-pink_light mb-12">
-                <p class="text-secondary font-medium italic">Próximamente compartiremos más herramientas para tu bienestar[cite: 47].</p>
+                <div class="bg-dark_footer text-white p-12 rounded-[3rem] text-center shadow-xl my-16">
+                    <h3 class="text-3xl font-serif mb-6 text-secondary italic">Dejar de esperar señales y empezar a construir</h3>
+                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                        El bienestar emocional no aparece por arte de magia; se construye cuando dejas de ser espectador/a de tus emociones y te responsabilizas de cómo las gestionas.
+                    </p>
+                    <p class="text-xl font-serif mb-10">"No se trata de que 'fluya'. Se trata de entender qué haces tú cuando deja de fluir."</p>
+                    <a href="https://therapyhome.as.me/" target="_blank" class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold hover:scale-105 transition-transform">Agenda tu sesión individual 🤍</a>
+                </div>
+
+                <footer class="mt-16 pt-8 border-t border-pink_light text-center">
+                    <p class="text-gray-400 text-sm">Escrito por Psicóloga Isis San Juan | Especialista en Psicología Clínica</p>
+                </footer>
             </div>
-        </div>
-    </section>
-</main>
+        </article>
+    </main>
+
+    </body>
+</html>

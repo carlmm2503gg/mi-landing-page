@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navidad en Pareja | TherapyHomeISJ Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { primary: '#FDF7F8', secondary: '#C04374', text_dark: '#2C1B23', text_light: '#FFFFFF', dark_footer: '#4A2A38', pink_light: '#FFE4E8' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary text-text_dark font-sans selection:bg-secondary selection:text-white">
+<header class="bg-secondary text-text_light fixed w-full top-0 z-50 shadow-md">
+    <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
+        
+        <a href="index.html" class="flex items-center gap-2 group">
+            <div class="bg-white p-1 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
+                <img src="logo.jpeg" alt="Logo" class="h-8 w-auto"> 
+            </div>
+            <div class="flex flex-col">
+                <span class="text-lg font-bold tracking-tight leading-none">TherapyHomeISJ</span>
+                <span class="text-[10px] font-light text-pink-100 tracking-wider">Psicología Clínica</span>
+            </div>
+        </a>
+
+        <div class="hidden md:flex space-x-6 items-center">
+            <a href="index.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Inicio</a>
+            <a href="equipo.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Equipo</a>
+            <a href="blog.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Blog</a>
+            <a href="recursos.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Recursos</a>
+            <a href="agendar.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Contacto</a>
+            <a href="equipo.html" class="cta-button bg-white text-secondary px-4 py-1.5 rounded-full font-bold text-sm hover:bg-pink_light transition-all transform hover:scale-105 shadow-sm">
+                Agenda tu cita
+            </a>
+        </div>
+            <button id="mobile-menu-button" class="md:hidden text-secondary">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-primary z-40 transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center space-y-8 text-2xl font-serif">
+        <a href="index.html" class="mobile-link text-text_dark">Inicio</a>
+        <a href="blog.html" class="mobile-link text-secondary">Blog</a>
+        <a href="equipo.html" class="bg-secondary text-white px-8 py-3 rounded-full shadow-lg">Agendar Cita</a>
+    </div>
+
+
+    <main class="pt-28 pb-20">
+        <article class="container mx-auto px-6 max-w-4xl">
+            
+            <header class="text-center mb-12">
+                <span class="inline-block text-secondary font-bold tracking-[0.2em] uppercase text-xs mb-4">Relaciones Conscientes</span>
+                <h1 class="text-4xl md:text-5xl font-serif text-text_dark leading-tight mb-6">
+                    ¿Por qué dicen que “si hay que trabajarlo, no es ahí”?
+                </h1>
+                <p class="text-xl text-gray-500 italic">El peligro de las falsas expectativas en el amor</p>
+            </header>
+
+            <div class="rounded-[2.5rem] overflow-hidden shadow-2xl mb-16 h-80 md:h-[450px]">
+                <img src="bunny.webp" alt="Pareja conversando" class="w-full h-full object-cover">
+            </div>
+
+            <div class="prose prose-lg prose-pink max-w-none text-text_dark leading-relaxed">
+                <p class="text-xl mb-8">
+                    Es común deslizar el dedo por redes sociales y encontrarse con frases que invitan a soltar todo aquello que “no fluya”. Bajo la idea de que el amor debe ser automático, muchas personas terminan abandonando relaciones valiosas, confundiendo <strong>incomodidad con incompatibilidad</strong>.
+                </p>
+
+                <h2 class="text-3xl font-serif text-secondary mt-12 mb-6">El mito del “fluir”</h2>
+                <p>La psicología denomina a esto <strong>creencias de destino</strong>: la idea de que si aparece un conflicto, la relación está equivocada. Sin embargo, la investigación muestra que el éxito no depende de la ausencia de problemas, sino de cómo se manejan.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-10 not-prose">
+                    <div class="bg-white p-6 rounded-2xl border border-pink_light shadow-sm">
+                        <span class="text-secondary font-bold text-2xl block mb-2">70%</span>
+                        <p class="text-sm">De los problemas en pareja son recurrentes. La clave es el abordaje, no la eliminación.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-pink_light shadow-sm">
+                        <span class="text-secondary font-bold text-2xl block mb-2">Habilidad</span>
+                        <p class="text-sm">El amor se aprende. Cuidar el vínculo implica aceptar momentos de desconexión.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border border-pink_light shadow-sm">
+                        <span class="text-secondary font-bold text-2xl block mb-2">Cimientos</span>
+                        <p class="text-sm">La química es biológica; la estabilidad se construye con herramientas psicológicas.</p>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl font-serif text-secondary mt-16 mb-6">¿Problema de la relación o de tus patrones?</h2>
+                <p>A veces, la relación se siente forzada por una <strong>baja flexibilidad psicológica</strong>. Esperar que adivinen tus necesidades o evitar conversaciones difíciles son respuestas aprendidas que se activan ante el miedo.</p>
+
+                <div class="my-12 overflow-hidden rounded-3xl border border-pink_light not-prose">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="bg-white p-8">
+                            <h3 class="text-green-600 font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
+                                <span class="text-xl">✓</span> Lo que sí trabaja la terapia
+                            </h3>
+                            <ul class="space-y-4 text-sm text-gray-700">
+                                <li>• Identificar patrones emocionales repetitivos.</li>
+                                <li>• Regular emociones intensas sin explotar.</li>
+                                <li>• Tomar decisiones desde valores, no heridas.</li>
+                                <li>• Comunicar sin vivir el conflicto como amenaza.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-pink_light/20 p-8">
+                            <h3 class="text-secondary font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
+                                <span class="text-xl">✕</span> Lo que NO es la terapia
+                            </h3>
+                            <ul class="space-y-4 text-sm text-gray-700">
+                                <li>• No busca que "aguantes" una relación dañina.</li>
+                                <li>• No promete relaciones perfectas.</li>
+                                <li>• No se enfoca en cambiar al otro.</li>
+                                <li>• No se basa en esperar señales mágicas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl font-serif text-secondary mt-16 mb-6 text-center">Terapia Individual: cambias tú, cambia la dinámica</h2>
+                <p class="text-center max-w-2xl mx-auto mb-10 text-gray-600">No siempre es necesario que ambos asistan a consulta. Trabajar en ti te permite identificar <strong>saboteadores internos</strong> y dejar de reaccionar por impulso.</p>
+
+                <div class="bg-dark_footer text-white p-10 md:p-16 rounded-[3rem] text-center relative overflow-hidden shadow-2xl">
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-serif mb-6 text-secondary italic">No se trata de que “fluya”.</h3>
+                        <p class="text-2xl font-serif mb-8 text-pink_light">Se trata de entender qué haces tú cuando deja de fluir.</p>
+                        <p class="mb-10 text-gray-300">¿Listo/a para identificar qué te está deteniendo? No dejes tu estabilidad emocional en manos del destino.</p>
+                        <a href="https://therapyhome.as.me/" target="_blank" class="inline-block bg-secondary text-white px-10 py-4 rounded-full font-bold hover:scale-110 transition-transform">Agenda tu sesión individual 🤍</a>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    </body>
+</html>
