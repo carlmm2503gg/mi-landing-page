@@ -268,8 +268,8 @@
             </div>
          </div>
 
-                             <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Claudia.webp" alt="Foto de Addi Eunice Arvizu Flores="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
+                             <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="pareja">
+                    <img src="Claudia.webp" alt="Foto de Claudia Pineda Flores="w-36 h-36 rounded-full object-cover mb-4 border-4 border-secondary">
                     <h3 class="text-xl font-bold text-text_dark mb-2">Claudia Pineda Flores</h3>
                     <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 11645583</h3>
                     <p class="text-sm font-light text-secondary mb-3">Psicóloga con Maestría y Doctorado, y estudios avanzados en Psicoterapia Breve, intervención en crisis (TCC) y terapias contextuales.</p>
@@ -504,70 +504,96 @@ Analizamos cómo los roles y mandatos de género afectan a la dinámica de la pa
         </div>
     </footer>
 
-    <script>
-        // Script para menú móvil
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('-translate-x-full');
-        });
-
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('-translate-x-full');
-            });
-        });
-
-        // Script para expandir biografías
-        document.querySelectorAll('.team-member-card').forEach(card => {
-            const toggleButton = card.querySelector('.team-bio-toggle');
+<script>
+    // 1. LÓGICA DE DESPLEGAR/OCULTAR PERFIL (BIO)
+    document.querySelectorAll('.team-bio-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const card = button.closest('.team-member-card');
             const bio = card.querySelector('.team-bio');
             
-            toggleButton.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evita que el clic se propague si la tarjeta es un enlace
-                bio.classList.toggle('open');
-                if (bio.classList.contains('open')) {
-                    toggleButton.textContent = 'Ocultar perfil';
-                    toggleButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    toggleButton.textContent = 'Ver perfil completo';
-                }
-            });
-        });
-
-        // SCRIPT PARA FILTRAR EQUIPO
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const filtro = params.get('tipo'); 
-
-            if (!filtro) {
-                return; 
-            }
-
-            const teamMembers = document.querySelectorAll('.team-member-card');
+            bio.classList.toggle('active');
             
-            teamMembers.forEach(member => {
-                const terapias = member.dataset.terapia;
-
-                if (terapias && terapias.includes(filtro)) {
-                    member.style.display = 'flex'; 
-                } else {
-                    member.style.display = 'none'; 
-                }
-            });
-
-            // Cambiar el título para reflejar el filtro
-            const titulo = document.querySelector('#equipo h2');
-            if (titulo) {
-                if (filtro === 'individual') {
-                    titulo.textContent = 'Especialistas en Terapia Individual';
-                } else if (filtro === 'pareja') {
-                    titulo.textContent = 'Especialistas en Terapia de Pareja';
-                }
+            if (bio.classList.contains('active')) {
+                button.textContent = 'Ocultar perfil';
+                button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                button.textContent = 'Ver perfil completo';
             }
         });
-    </script>
+    });
+
+    // 2. FUNCIÓN DE FILTRADO DINÁMICO (CORREGIDA)
+    function aplicarFiltro() {
+        const params = new URLSearchParams(window.location.search);
+        const filtro = params.get('tipo'); 
+        const teamMembers = document.querySelectorAll('.team-member-card');
+        const titulo = document.querySelector('#equipo h2');
+
+        // Si no hay filtro o es "todos", mostrar todos y poner título general
+        if (!filtro || filtro === 'todos') {
+            teamMembers.forEach(member => member.style.display = 'flex');
+            if (titulo) titulo.textContent = 'Nuestro Equipo de Especialistas';
+            return; 
+        }
+
+        teamMembers.forEach(member => {
+            // Leemos el atributo data-terapia y lo pasamos a minúsculas
+            const terapias = member.getAttribute('data-terapia') ? member.getAttribute('data-terapia').toLowerCase() : "";
+
+            // USAMOS .includes() para que detecte la palabra aunque haya varias
+            if (terapias.includes(filtro.toLowerCase())) {
+                member.style.display = 'flex'; 
+            } else {
+                member.style.display = 'none'; 
+            }
+        });
+
+        // Actualizar el título según el filtro
+        if (titulo) {
+            if (filtro === 'individual') {
+                titulo.textContent = 'Especialistas en Terapia Individual';
+            } else if (filtro === 'pareja') {
+                titulo.textContent = 'Especialistas en Terapia de Pareja';
+            }
+        }
+    }
+
+    // 3. LÓGICA DEL MENÚ DE NAVEGACIÓN (HEADER)
+    const navBtn = document.getElementById('nav-btn-agendar');
+    const navMenu = document.getElementById('nav-menu');
+    const navArrow = document.getElementById('nav-arrow');
+
+    if (navBtn) {
+        navBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('hidden');
+            navArrow.classList.toggle('rotate-180');
+        });
+    }
+
+    window.addEventListener('click', () => {
+        if (navMenu) {
+            navMenu.classList.add('hidden');
+            navArrow.classList.remove('rotate-180');
+        }
+    });
+
+    // Detectar clics en el menú para filtrar sin recargar si ya estamos aquí
+    document.querySelectorAll('#nav-menu a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href.includes('equipo.html')) {
+                // No prevenimos el default para que cambie la URL, 
+                // pero aplicamos el filtro tras un breve delay
+                setTimeout(aplicarFiltro, 50);
+            }
+        });
+    });
+
+    // Ejecutar al cargar la página
+    document.addEventListener('DOMContentLoaded', aplicarFiltro);
+    // Escuchar cuando el usuario retrocede o avanza en el historial
+    window.addEventListener('popstate', aplicarFiltro);
+</script>
 </body>
 </html>
