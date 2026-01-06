@@ -570,6 +570,24 @@ Analizamos cómo los roles y mandatos de género afectan a la dinámica de la pa
     document.addEventListener('DOMContentLoaded', aplicarFiltro);
     // Escuchar cuando el usuario retrocede o avanza en el historial
     window.addEventListener('popstate', aplicarFiltro);
+ // LÓGICA DEL MENÚ MÓVIL (BOTÓN HAMBURGUESA)
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileLinks = document.querySelectorAll('.mobile-link');
+
+if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+        // Alterna entre mostrar y esconder el menú
+        mobileMenu.classList.toggle('-translate-x-full');
+    });
+
+    // Cerrar el menú automáticamente al hacer clic en cualquier enlace
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-x-full');
+        });
+    });
+}   
 </script>
 </body>
 </html>
