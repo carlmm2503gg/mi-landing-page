@@ -18,60 +18,35 @@
             --danger: #d32f2f;
             --stripe-blue: #635bff;
             --gold: #ffd700;
+            --whatsapp-green: #25d366;
         }
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
-        
         nav { background: var(--primary-purple); padding: 1.2rem 5%; color: white; font-weight: 700; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; letter-spacing: 1px; }
-
-        .hero { background: linear-gradient(135deg, #4a148c 0%, #1a237e 100%); padding: 70px 20px; text-align: center; color: var(--white); clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-
-        .container { max-width: 850px; margin: -60px auto 40px; padding: 0 20px; }
-
-        .card { background: var(--white); border-radius: 20px; padding: 30px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: none; transition: 0.3s; }
+        .hero { background: linear-gradient(135deg, #4a148c 0%, #1a237e 100%); padding: 60px 20px; text-align: center; color: var(--white); clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
+        .container { max-width: 850px; margin: -50px auto 40px; padding: 0 20px; }
+        .card { background: var(--white); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .section-header { background: #eee; color: var(--primary-purple); padding: 8px 18px; border-radius: 50px; margin: 30px 0 15px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; display: inline-block; }
+        .question { font-weight: 600; color: var(--unam-blue); display: block; margin-bottom: 15px; font-size: 1.1rem; }
+        .option { display: flex; align-items: center; padding: 12px; border: 2px solid #edf2f7; border-radius: 12px; margin-bottom: 8px; cursor: pointer; transition: 0.3s; }
+        .option:hover { background: #f3e5f5; border-color: var(--accent-purple); }
+        .option input { margin-right: 12px; transform: scale(1.2); }
         
-        .section-header { background: #eee; color: var(--primary-purple); padding: 10px 20px; border-radius: 50px; margin: 40px 0 20px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; border: 1px solid var(--primary-purple); }
+        #lead-form-section { background: var(--white); padding: 35px; border-radius: 25px; border: 3px solid var(--accent-purple); margin-top: 30px; text-align: center; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--primary-purple); }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
 
-        .question { font-weight: 600; color: var(--unam-blue); display: block; margin-bottom: 18px; font-size: 1.15rem; }
-        .option { display: flex; align-items: center; padding: 15px; border: 2px solid #edf2f7; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: all 0.3s ease; }
-        .option:hover { background: #f3e5f5; border-color: var(--accent-purple); transform: translateY(-2px); }
-        .option input { margin-right: 15px; transform: scale(1.3); accent-color: var(--primary-purple); }
+        .result-box { display: none; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Formulario de Captura */
-        #lead-form-section { background: var(--white); padding: 40px; border-radius: 25px; border: 4px solid var(--accent-purple); margin-top: 30px; text-align: center; box-shadow: 0 20px 40px rgba(74, 20, 140, 0.1); }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--primary-purple); font-size: 0.9rem; }
-        .form-group input, .form-group select { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; font-family: inherit; font-size: 1rem; box-sizing: border-box; transition: 0.3s; }
-        .form-group input:focus { border-color: var(--accent-purple); outline: none; background: #fdfaff; }
-
-        /* Resultados y Venta */
-        .result-box { display: none; animation: fadeIn 0.8s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .offer-card { background: linear-gradient(135deg, #ffffff 0%, #f3e5f5 100%); border: 3px solid var(--gold); padding: 40px; border-radius: 30px; margin: 40px 0; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); text-align: center; }
-        .offer-card::before { content: "OFERTA DE LANZAMIENTO"; position: absolute; top: 20px; right: -40px; background: var(--gold); color: #000; padding: 8px 45px; transform: rotate(45deg); font-weight: 800; font-size: 0.7rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-
-        .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--primary-purple); margin: 15px 0; letter-spacing: -1px; }
-        .price-tag span { font-size: 1.2rem; text-decoration: line-through; color: #a0aec0; font-weight: 400; margin-right: 10px; }
-
-        .area-pill { padding: 18px; border-radius: 15px; margin-bottom: 15px; color: white; display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .bg-success { background: #43a047; }
-        .bg-warning { background: #ffb300; color: #333; }
-        .bg-danger { background: #e53935; }
-
-        .revision-container { margin: 30px 0; text-align: left; max-height: 400px; overflow-y: auto; border: 2px solid #edf2f7; padding: 20px; border-radius: 20px; background: #fff; }
-        
-        .btn-cta { display: block; width: 100%; padding: 22px; border-radius: 50px; font-size: 1.4rem; font-weight: 800; text-decoration: none; border: none; cursor: pointer; transition: 0.4s; text-align: center; box-sizing: border-box; margin-bottom: 15px; }
-        .btn-stripe { background: var(--stripe-blue); color: white !important; box-shadow: 0 8px 25px rgba(99, 91, 255, 0.4); text-transform: uppercase; }
-        .btn-stripe:hover { background: #544dc9; transform: scale(1.03); box-shadow: 0 12px 30px rgba(99, 91, 255, 0.5); }
+        .btn-cta { display: block; width: 100%; padding: 18px; border-radius: 50px; font-size: 1.2rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; text-align: center; margin-bottom: 10px; box-sizing: border-box; }
         .btn-primary { background: var(--primary-purple); color: white; }
+        .btn-stripe { background: var(--stripe-blue); color: white; }
+        .btn-wa { background: var(--whatsapp-green); color: white; margin-top: 15px; }
 
-        .progress-container { position: sticky; top: 85px; z-index: 90; background: var(--bg-light); padding: 15px 0; }
-        .progress-bar { width: 100%; height: 12px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
-        #bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-purple), var(--accent-purple)); width: 0%; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-
-        footer { text-align: center; padding: 60px 20px; color: #718096; font-size: 0.85rem; background: #edf2f7; margin-top: 50px; }
+        .area-pill { padding: 15px; border-radius: 12px; margin-bottom: 10px; color: white; display: flex; justify-content: space-between; font-weight: 700; }
+        .revision-container { margin: 20px 0; text-align: left; max-height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; border-radius: 15px; background: #fff; }
     </style>
 </head>
 <body>
@@ -79,349 +54,332 @@
 <nav>RUTA AL POSGRADO UNAM | DRA. DULCE MONROY</nav>
 
 <section class="hero">
-    <h1>¿Tu perfil es apto para la UNAM?</h1>
-    <p>Mide tu nivel real en Metodología, Medición y Estadística con este simulador profesional.</p>
+    <h1>Simulador de Conocimientos Técnicos</h1>
+    <p>Responde las 22 preguntas para medir tu nivel académico.</p>
 </section>
 
 <div class="container">
     <div id="quiz-container">
-        <div class="progress-container">
-            <p style="margin:0 0 8px 0; font-size: 0.75rem; font-weight: 800; color: var(--primary-purple); text-transform: uppercase;">Progreso del Diagnóstico</p>
-            <div class="progress-bar"><div id="bar-fill"></div></div>
-        </div>
-        
-        <form id="quiz-form">
-            <div class="section-header">I. METODOLOGÍA (8 Preguntas)</div>
+        <form id="quiz-form" data-netlify="true" name="diagnostico-posgrado">
             
+            <div class="section-header">METODOLOGÍA DE LA INVESTIGACIÓN</div>
             <div class="card">
-                <span class="question">1. Un estudio evalúa si estrategias de afrontamiento y satisfacción con la vida predicen síntomas de ansiedad y depresión. ¿Diseño adecuado?</span>
-                <label class="option"><input type="radio" name="m1" value="0"> A. Diseño Experimental</label>
-                <label class="option"><input type="radio" name="m1" value="1"> B. Diseño Correlacional/Predictivo</label>
-                <label class="option"><input type="radio" name="m1" value="0"> C. Diseño de Caso Único</label>
-                <label class="option"><input type="radio" name="m1" value="0"> D. Diseño Cuasi-experimental</label>
+                <span class="question">1. Un investigador desea evaluar si las estrategias de afrontamiento predicen los síntomas de ansiedad en adultos. ¿Cuál es el diseño más adecuado?</span>
+                <label class="option"><input type="radio" name="p1" value="0"> A. Experimental</label>
+                <label class="option"><input type="radio" name="p1" value="1"> B. Correlacional-predictivo</label>
+                <label class="option"><input type="radio" name="p1" value="0"> C. Cualitativo etnógrafico</label>
+                <label class="option"><input type="radio" name="p1" value="0"> D. Descriptivo simple</label>
             </div>
 
             <div class="card">
-                <span class="question">2. Aplicación de un cuestionario en un único momento a 47 participantes para analizar la relación entre variables. Este diseño es:</span>
-                <label class="option"><input type="radio" name="m2" value="1"> A. Transversal</label>
-                <label class="option"><input type="radio" name="m2" value="0"> B. Longitudinal de Cohorte</label>
-                <label class="option"><input type="radio" name="m2" value="0"> C. Mixto-secuencial</label>
-                <label class="option"><input type="radio" name="m2" value="0"> D. Longitudinal de Panel</label>
+                <span class="question">2. Se realiza una medición de clima organizacional en una empresa en un único momento del tiempo. Este estudio se clasifica como:</span>
+                <label class="option"><input type="radio" name="p2" value="0"> A. Longitudinal</label>
+                <label class="option"><input type="radio" name="p2" value="1"> B. Transversal</label>
+                <label class="option"><input type="radio" name="p2" value="0"> C. Cuasi-experimental</label>
+                <label class="option"><input type="radio" name="p2" value="0"> D. Pre-experimental</label>
             </div>
 
             <div class="card">
-                <span class="question">3. Si el Neuroticismo y la Depresión son las variables que influyen o predicen el resultado, se clasifican como:</span>
-                <label class="option"><input type="radio" name="m3" value="1"> A. Variables Independientes</label>
-                <label class="option"><input type="radio" name="m3" value="0"> B. Variables Moderadoras</label>
-                <label class="option"><input type="radio" name="m3" value="0"> C. Variables Extrañas</label>
-                <label class="option"><input type="radio" name="m3" value="0"> D. Variable Dependiente</label>
+                <span class="question">3. Si en un estudio se plantea que el "Nivel de Resiliencia" influye en el "Bienestar Subjetivo", la resiliencia es:</span>
+                <label class="option"><input type="radio" name="p3" value="1"> A. Variable Independiente</label>
+                <label class="option"><input type="radio" name="p3" value="0"> B. Variable Dependiente</label>
+                <label class="option"><input type="radio" name="p3" value="0"> C. Variable Extraña</label>
+                <label class="option"><input type="radio" name="p3" value="0"> D. Variable de Control</label>
             </div>
 
             <div class="card">
-                <span class="question">4. Uso de la técnica "bola de nieve" para seleccionar participantes. ¿Qué tipo de muestreo es?</span>
-                <label class="option"><input type="radio" name="m4" value="0"> A. Muestreo Aleatorio Simple</label>
-                <label class="option"><input type="radio" name="m4" value="1"> B. Muestreo No Probabilístico</label>
-                <label class="option"><input type="radio" name="m4" value="0"> C. Muestreo Estratificado</label>
-                <label class="option"><input type="radio" name="m4" value="0"> D. Muestreo Por Conglomerados</label>
+                <span class="question">4. Un muestreo donde se seleccionan participantes que están disponibles y aceptan participar voluntariamente es:</span>
+                <label class="option"><input type="radio" name="p4" value="0"> A. Aleatorio Simple</label>
+                <label class="option"><input type="radio" name="p4" value="0"> B. Estratificado</label>
+                <label class="option"><input type="radio" name="p4" value="1"> C. No probabilístico por conveniencia</label>
+                <label class="option"><input type="radio" name="p4" value="0"> D. Sistemático</label>
             </div>
 
             <div class="card">
-                <span class="question">5. ¿Qué pregunta corresponde a un alcance Explicativo?</span>
-                <label class="option"><input type="radio" name="m5" value="0"> A. ¿Cómo se relacionan X y Y?</label>
-                <label class="option"><input type="radio" name="m5" value="0"> B. ¿Cuál es el nivel de agotamiento en la muestra?</label>
-                <label class="option"><input type="radio" name="m5" value="1"> C. ¿Qué factores psicosociales y sociodemográficos causan el desgaste profesional?</label>
-                <label class="option"><input type="radio" name="m5" value="0"> D. ¿Existen diferencias según el sexo?</label>
+                <span class="question">5. El alcance de una investigación que busca establecer las causas de un fenómeno se denomina:</span>
+                <label class="option"><input type="radio" name="p5" value="0"> A. Exploratorio</label>
+                <label class="option"><input type="radio" name="p5" value="0"> B. Descriptivo</label>
+                <label class="option"><input type="radio" name="p5" value="0"> C. Correlacional</label>
+                <label class="option"><input type="radio" name="p5" value="1"> D. Explicativo</label>
             </div>
 
             <div class="card">
-                <span class="question">6. ¿Qué distingue principalmente al experimento puro del cuasi-experimento?</span>
-                <label class="option"><input type="radio" name="m6" value="0"> A. Manipulación de la VI</label>
-                <label class="option"><input type="radio" name="m6" value="0"> B. Uso de grupo de control</label>
-                <label class="option"><input type="radio" name="m6" value="1"> C. Asignación aleatoria de los participantes</label>
-                <label class="option"><input type="radio" name="m6" value="0"> D. Uso de mediciones pre y post</label>
+                <span class="question">6. ¿Cuál es el requisito indispensable para que un diseño sea considerado "Experimento Puro"?</span>
+                <label class="option"><input type="radio" name="p6" value="1"> A. Asignación aleatoria de los participantes</label>
+                <label class="option"><input type="radio" name="p6" value="0"> B. Que se realice en un laboratorio</label>
+                <label class="option"><input type="radio" name="p6" value="0"> C. Tener más de 100 participantes</label>
+                <label class="option"><input type="radio" name="p6" value="0"> D. Usar instrumentos psicométricos</label>
             </div>
 
             <div class="card">
-                <span class="question">7. Comparar grupos preexistentes (ej. Hospital 1 vs Hospital 2) sin control de asignación es un diseño:</span>
-                <label class="option"><input type="radio" name="m7" value="0"> A. Experimental</label>
-                <label class="option"><input type="radio" name="m7" value="1"> B. Cuasi-experimental</label>
-                <label class="option"><input type="radio" name="m7" value="0"> C. Correlacional</label>
-                <label class="option"><input type="radio" name="m7" value="0"> D. Descriptivo</label>
+                <span class="question">7. Los diseños que manipulan una variable independiente pero no tienen asignación al azar se llaman:</span>
+                <label class="option"><input type="radio" name="p7" value="0"> A. Experimentos puros</label>
+                <label class="option"><input type="radio" name="p7" value="1"> B. Cuasi-experimentos</label>
+                <label class="option"><input type="radio" name="p7" value="0"> C. Estudios de caso</label>
+                <label class="option"><input type="radio" name="p7" value="0"> D. Transversales</label>
+            </div>
+
+            <div class="section-header">MEDICIÓN Y PSICOMETRÍA</div>
+            <div class="card">
+                <span class="question">8. El grado en que un instrumento realmente mide la variable que pretende medir se conoce como:</span>
+                <label class="option"><input type="radio" name="p8" value="0"> A. Confiabilidad</label>
+                <label class="option"><input type="radio" name="p8" value="1"> B. Validez</label>
+                <label class="option"><input type="radio" name="p8" value="0"> C. Estandarización</label>
+                <label class="option"><input type="radio" name="p8" value="0"> D. Sensibilidad</label>
             </div>
 
             <div class="card">
-                <span class="question">8. El principal requisito de la Validez Interna es:</span>
-                <label class="option"><input type="radio" name="m8" value="0"> A. La posibilidad de generalizar</label>
-                <label class="option"><input type="radio" name="m8" value="1"> B. La certeza de que los cambios en la VD se deben únicamente a la VI</label>
-                <label class="option"><input type="radio" name="m8" value="0"> C. El uso de instrumentos con alto Alpha</label>
-                <label class="option"><input type="radio" name="m8" value="0"> D. Que la muestra sea representativa</label>
-            </div>
-
-            <div class="section-header">II. MEDICIÓN (5 Preguntas)</div>
-
-            <div class="card">
-                <span class="question">9. La Validez de Criterio Predictiva se ejemplifica cuando:</span>
-                <label class="option"><input type="radio" name="me1" value="0"> A. Se correlaciona simultáneamente con otra escala</label>
-                <label class="option"><input type="radio" name="me1" value="1"> B. El instrumento predice calificaciones futuras (ej. 6 meses después)</label>
+                <span class="question">9. Si un test de aptitud académica predice con éxito el promedio de los alumnos un año después, tiene:</span>
+                <label class="option"><input type="radio" name="p9" value="1"> A. Validez Predictiva</label>
+                <label class="option"><input type="radio" name="p9" value="0"> B. Validez Concurrente</label>
+                <label class="option"><input type="radio" name="p9" value="0"> C. Confiabilidad Test-Retest</label>
+                <label class="option"><input type="radio" name="p9" value="0"> D. Validez de Faz</label>
             </div>
 
             <div class="card">
-                <span class="question">10. Correlacionar el instrumento con un estándar similar aplicado simultáneamente es evidencia de:</span>
-                <label class="option"><input type="radio" name="me2" value="0"> A. Validez de Contenido</label>
-                <label class="option"><input type="radio" name="me2" value="1"> B. Validez Concurrente</label>
-                <label class="option"><input type="radio" name="me2" value="0"> C. Validez Predictiva</label>
+                <span class="question">10. El coeficiente Alpha de Cronbach se utiliza primordialmente para medir:</span>
+                <label class="option"><input type="radio" name="p10" value="0"> A. Estabilidad temporal</label>
+                <label class="option"><input type="radio" name="p10" value="1"> B. Consistencia interna</label>
+                <label class="option"><input type="radio" name="p10" value="0"> C. Validez de constructo</label>
+                <label class="option"><input type="radio" name="p10" value="0"> D. Acuerdo entre jueces</label>
             </div>
 
             <div class="card">
-                <span class="question">11. Los puntajes totales de escalas Likert (suma de ítems) se analizan como nivel de:</span>
-                <label class="option"><input type="radio" name="me3" value="0"> A. Nominal</label>
-                <label class="option"><input type="radio" name="me3" value="0"> B. Ordinal</label>
-                <label class="option"><input type="radio" name="me3" value="1"> C. Intervalo</label>
-                <label class="option"><input type="radio" name="me3" value="0"> D. Razón</label>
+                <span class="question">11. Un nivel de medición que permite clasificar y ordenar, pero no establecer distancias numéricas exactas entre puntos es:</span>
+                <label class="option"><input type="radio" name="p11" value="0"> A. Nominal</label>
+                <label class="option"><input type="radio" name="p11" value="1"> B. Ordinal</label>
+                <label class="option"><input type="radio" name="p11" value="0"> C. Intervalo</label>
+                <label class="option"><input type="radio" name="p11" value="0"> D. Razón</label>
             </div>
 
             <div class="card">
-                <span class="question">12. Un valor de Alpha de Cronbach de .928 indica:</span>
-                <label class="option"><input type="radio" name="me4" value="1"> A. Alta consistencia interna</label>
-                <label class="option"><input type="radio" name="me4" value="0"> B. Alta estabilidad temporal</label>
-                <label class="option"><input type="radio" name="me4" value="0"> C. Alta validez factorial</label>
+                <span class="question">12. Al proceso de asignar números a propiedades de objetos o eventos según reglas se le llama:</span>
+                <label class="option"><input type="radio" name="p12" value="1"> A. Medición</label>
+                <label class="option"><input type="radio" name="p12" value="0"> B. Evaluación</label>
+                <label class="option"><input type="radio" name="p12" value="0"> C. Diagnóstico</label>
+                <label class="option"><input type="radio" name="p12" value="0"> D. Escalamiento</label>
+            </div>
+
+            <div class="section-header">ESTADÍSTICA PARA LA INVESTIGACIÓN</div>
+            <div class="card">
+                <span class="question">13. La estadística que permite realizar generalizaciones de una muestra a la población es la:</span>
+                <label class="option"><input type="radio" name="p13" value="0"> A. Descriptiva</label>
+                <label class="option"><input type="radio" name="p13" value="1"> B. Inferencial</label>
+                <label class="option"><input type="radio" name="p13" value="0"> C. Multivariada</label>
+                <label class="option"><input type="radio" name="p13" value="0"> D. Paramétrica</label>
             </div>
 
             <div class="card">
-                <span class="question">13. Medir en Psicología implica principalmente:</span>
-                <label class="option"><input type="radio" name="me5" value="1"> A. Asignar números según reglas para aplicar estadística</label>
-                <label class="option"><input type="radio" name="me5" value="0"> B. Medir solo variables observables directamente</label>
-            </div>
-
-            <div class="section-header">III. ESTADÍSTICA (9 Preguntas)</div>
-
-            <div class="card">
-                <span class="question">14. El cálculo y reporte de una tasa o frecuencia de casos se realiza mediante:</span>
-                <label class="option"><input type="radio" name="e1" value="0"> A. Estadística Inferencial</label>
-                <label class="option"><input type="radio" name="e1" value="1"> B. Estadística Descriptiva</label>
+                <span class="question">14. Para comparar las medias de dos grupos independientes con distribución normal se utiliza:</span>
+                <label class="option"><input type="radio" name="p14" value="1"> A. t de Student</label>
+                <label class="option"><input type="radio" name="p14" value="0"> B. ANOVA de un factor</label>
+                <label class="option"><input type="radio" name="p14" value="0"> C. Chi Cuadrada</label>
+                <label class="option"><input type="radio" name="p14" value="0"> D. r de Pearson</label>
             </div>
 
             <div class="card">
-                <span class="question">15. Prueba para determinar cuánto de la varianza de una VD es explicado por múltiples VI:</span>
-                <label class="option"><input type="radio" name="e2" value="1"> A. Regresión Lineal Múltiple</label>
-                <label class="option"><input type="radio" name="e2" value="0"> B. ANOVA</label>
-                <label class="option"><input type="radio" name="e2" value="0"> C. Chi Cuadrada</label>
+                <span class="question">15. Si obtenemos un valor p = 0.002 en una prueba estadística con un alpha de 0.05, nosotros:</span>
+                <label class="option"><input type="radio" name="p15" value="1"> A. Rechazamos la Hipótesis Nula (es significativo)</label>
+                <label class="option"><input type="radio" name="p15" value="0"> B. Aceptamos la Hipótesis Nula</label>
+                <label class="option"><input type="radio" name="p15" value="0"> C. Los datos no son concluyentes</label>
+                <label class="option"><input type="radio" name="p15" value="0"> D. El error es demasiado alto</label>
             </div>
 
             <div class="card">
-                <span class="question">16. Si p=0.001 con un alpha de 0.05, la decisión es:</span>
-                <label class="option"><input type="radio" name="e3" value="1"> A. Rechazar H0 (Es significativo)</label>
-                <label class="option"><input type="radio" name="e3" value="0"> B. Aceptar H0 (No es significativo)</label>
+                <span class="question">16. ¿Cuál es la prueba para comparar las medias de 3 o más grupos independientes?</span>
+                <label class="option"><input type="radio" name="p16" value="0"> A. t de Student</label>
+                <label class="option"><input type="radio" name="p16" value="1"> B. ANOVA de un factor</label>
+                <label class="option"><input type="radio" name="p16" value="0"> C. Regresión Lineal</label>
+                <label class="option"><input type="radio" name="p16" value="0"> D. Correlación de Spearman</label>
             </div>
 
             <div class="card">
-                <span class="question">17. Un coeficiente de correlación r= 0.645 se interpreta como:</span>
-                <label class="option"><input type="radio" name="e4" value="0"> A. Relación inversa</label>
-                <label class="option"><input type="radio" name="e4" value="1"> B. Relación positiva (directa)</label>
+                <span class="question">17. Una correlación de r = -0.85 indica:</span>
+                <label class="option"><input type="radio" name="p17" value="0"> A. Relación positiva fuerte</label>
+                <label class="option"><input type="radio" name="p17" value="1"> B. Relación negativa fuerte</label>
+                <label class="option"><input type="radio" name="p17" value="0"> C. Relación inexistente</label>
+                <label class="option"><input type="radio" name="p17" value="0"> D. Error en el cálculo</label>
             </div>
 
             <div class="card">
-                <span class="question">18. Prueba paramétrica para comparar la media en 3 o más grupos independientes:</span>
-                <label class="option"><input type="radio" name="e5" value="0"> A. t de Student</label>
-                <label class="option"><input type="radio" name="e5" value="1"> B. Análisis de Varianza (ANOVA)</label>
-                <label class="option"><input type="radio" name="e5" value="0"> C. U de Mann-Whitney</label>
+                <span class="question">18. La prueba no paramétrica equivalente a la t de Student para muestras independientes es:</span>
+                <label class="option"><input type="radio" name="p18" value="1"> A. U de Mann-Whitney</label>
+                <label class="option"><input type="radio" name="p18" value="0"> B. Wilcoxon</label>
+                <label class="option"><input type="radio" name="p18" value="0"> C. Kruskal-Wallis</label>
+                <label class="option"><input type="radio" name="p18" value="0"> D. Friedman</label>
             </div>
 
             <div class="card">
-                <span class="question">19. Si p < 0.001 en la prueba de Kolmogorov-Smirnov, implica:</span>
-                <label class="option"><input type="radio" name="e6" value="1"> A. Incumplimiento de normalidad / Usar No Paramétricas</label>
-                <label class="option"><input type="radio" name="e6" value="0"> B. Supuesto de normalidad cumplido</label>
+                <span class="question">19. ¿Qué prueba se usa para medir la asociación entre dos variables cualitativas (nominales)?</span>
+                <label class="option"><input type="radio" name="p19" value="1"> A. Chi Cuadrada de Pearson</label>
+                <label class="option"><input type="radio" name="p19" value="0"> B. ANOVA</label>
+                <label class="option"><input type="radio" name="p19" value="0"> C. Regresión Múltiple</label>
+                <label class="option"><input type="radio" name="p19" value="0"> D. d de Cohen</label>
             </div>
 
             <div class="card">
-                <span class="question">20. Comparar la media de Burnout en dos grupos independientes (Hombres vs Mujeres):</span>
-                <label class="option"><input type="radio" name="e7" value="1"> A. t de Student para muestras independientes</label>
-                <label class="option"><input type="radio" name="e7" value="0"> B. ANOVA</label>
-                <label class="option"><input type="radio" name="e7" value="0"> C. Regresión Logística</label>
+                <span class="question">20. El Error Tipo I consiste en:</span>
+                <label class="option"><input type="radio" name="p20" value="1"> A. Rechazar H0 siendo que es verdadera (Falso Positivo)</label>
+                <label class="option"><input type="radio" name="p20" value="0"> B. Aceptar H0 siendo que es falsa (Falso Negativo)</label>
+                <label class="option"><input type="radio" name="p20" value="0"> C. No elegir bien la muestra</label>
+                <label class="option"><input type="radio" name="p20" value="0"> D. Sesgar los resultados</label>
             </div>
 
             <div class="card">
-                <span class="question">21. Asociación entre género (Nominal) y presencia de ideación suicida (Nominal):</span>
-                <label class="option"><input type="radio" name="e8" value="0"> A. ANOVA</label>
-                <label class="option"><input type="radio" name="e8" value="1"> B. Chi Cuadrada (χ2)</label>
+                <span class="question">21. Para comprobar si una muestra tiene una distribución normal, solemos usar:</span>
+                <label class="option"><input type="radio" name="p21" value="1"> A. Kolmogorov-Smirnov / Shapiro-Wilk</label>
+                <label class="option"><input type="radio" name="p21" value="0"> B. t de Student</label>
+                <label class="option"><input type="radio" name="p21" value="0"> C. ANOVA</label>
+                <label class="option"><input type="radio" name="p21" value="0"> D. Chi Cuadrada</label>
             </div>
 
             <div class="card">
-                <span class="question">22. ¿Qué implica un Error Tipo I?</span>
-                <label class="option"><input type="radio" name="e9" value="1"> A. Rechazar H0 cuando es verdadera (Falso positivo)</label>
-                <label class="option"><input type="radio" name="e9" value="0"> B. No rechazar H0 cuando es falsa (Falso negativo)</label>
+                <span class="question">22. La medida de tendencia central que representa el valor con mayor frecuencia es:</span>
+                <label class="option"><input type="radio" name="p22" value="0"> A. Media</label>
+                <label class="option"><input type="radio" name="p22" value="0"> B. Mediana</label>
+                <label class="option"><input type="radio" name="p22" value="1"> C. Moda</label>
+                <label class="option"><input type="radio" name="p22" value="0"> D. Desviación Estándar</label>
             </div>
 
             <div id="lead-form-section">
-                <h2 style="color: var(--primary-purple); margin-top: 0; font-size: 1.8rem;">¡Diagnóstico Completo!</h2>
-                <p style="color: #64748b; margin-bottom: 30px;">Recibe tu interpretación técnica y el plan de acción de la Dra. Dulce Monroy.</p>
-                
+                <h2>¡Diagnóstico Finalizado!</h2>
+                <p>Completa tus datos para procesar tus resultados y recibir tu interpretación.</p>
+                <div class="form-group"><label>Nombre Completo:</label><input type="text" name="nombre" id="user-name" required></div>
+                <div class="form-group"><label>WhatsApp:</label><input type="tel" name="whatsapp" id="user-phone" placeholder="Ej. 5512345678" required></div>
+                <div class="form-group"><label>Correo Electrónico:</label><input type="email" name="email" id="user-email" required></div>
                 <div class="form-group">
-                    <label>Nombre Completo:</label>
-                    <input type="text" id="user-name" required placeholder="Ej. Juan Pérez">
-                </div>
-                
-                <div class="form-group">
-                    <label>WhatsApp:</label>
-                    <input type="tel" id="user-phone" required placeholder="Ej. 55 1234 5678">
-                </div>
-
-                <div class="form-group">
-                    <label>Correo Electrónico:</label>
-                    <input type="email" id="user-email" required placeholder="tu@correo.com">
-                </div>
-
-                <div class="form-group">
-                    <label>¿A qué posgrado aspiras?</label>
-                    <select id="user-target">
+                    <label>Posgrado de Interés:</label>
+                    <select name="posgrado" id="user-target">
                         <option>Maestría en Psicología (UNAM)</option>
                         <option>Doctorado en Psicología (UNAM)</option>
-                        <option>Residencia / Especialidad</option>
-                        <option>Otro Posgrado</option>
+                        <option>Especialidad</option>
                     </select>
                 </div>
-
-                <button type="button" onclick="evaluar()" class="btn-cta btn-primary">VER MIS RESULTADOS AHORA</button>
+                <button type="submit" class="btn-cta btn-primary">VER MI PUNTAJE AHORA</button>
             </div>
         </form>
     </div>
 
     <div id="quiz-result" class="result-box">
         <div class="card" style="text-align: center;">
-            <h2 style="color: var(--unam-blue); margin-bottom: 5px;">Diagnóstico de <span id="display-name" style="color: var(--accent-purple);"></span></h2>
-            <div style="font-size: 3rem; font-weight: 800; color: var(--primary-purple); margin: 20px 0;">
-                <span id="global-score">0</span><small style="font-size: 1.2rem; color: #94a3b8;"> / 22 ACIERTOS</small>
+            <h2>Resultados para: <span id="display-name"></span></h2>
+            <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary-purple); margin: 10px 0;">
+                <span id="global-score">0</span>/22
             </div>
             
-            <div style="margin-top: 30px;">
-                <div id="res-meto" class="area-pill"><span>Metodología</span><span id="score-meto">0/8</span></div>
-                <div id="res-med" class="area-pill"><span>Medición</span><span id="score-med">0/5</span></div>
-                <div id="res-est" class="area-pill"><span>Estadística</span><span id="score-est">0/9</span></div>
+            <div id="res-areas">
+                <div class="area-pill" id="pill-meto" style="background: #666;"><span>Metodología</span><span id="score-meto">0/7</span></div>
+                <div class="area-pill" id="pill-med" style="background: #666;"><span>Medición</span><span id="score-med">0/5</span></div>
+                <div class="area-pill" id="pill-est" style="background: #666;"><span>Estadística</span><span id="score-est">0/10</span></div>
             </div>
 
-            <div id="global-msg" style="font-weight: 700; padding: 25px; border-radius: 20px; margin: 30px 0; font-size: 1.1rem; border: 2px solid transparent;"></div>
+            <div id="global-msg" style="padding: 15px; border-radius: 12px; font-weight: 700; margin: 20px 0; border: 2px solid #ddd;"></div>
+            
+            <div id="wa-container"></div>
         </div>
 
-        <div class="offer-card">
-            <h2 style="color: var(--primary-purple); margin-top: 0; font-size: 2rem;">🚀 Asegura tu Ingreso al Posgrado</h2>
-            <p style="font-size: 1.1rem; color: #4a5568;">No dejes tu futuro al azar. Domina los temas exactos que filtran al 90% de los aspirantes en la UNAM.</p>
-            
-            <div class="price-tag">
-                <span>$1,200</span> $490 <small style="font-size: 1rem; color: #718096;">MXN</small>
-            </div>
-            
-            <div style="text-align: left; display: inline-block; margin: 20px 0; background: rgba(255,255,255,0.5); padding: 20px; border-radius: 15px;">
-                <p style="margin: 5px 0;">✅ <strong>Acceso Inmediato</strong> a la Plataforma 24/7</p>
-                <p style="margin: 5px 0;">✅ <strong>Módulos Técnicos</strong>: Metodología, Medición y Estadística</p>
-                <p style="margin: 5px 0;">✅ <strong>Simuladores</strong> de Examen Reales</p>
-                <p style="margin: 5px 0;">✅ <strong>Asesoría</strong> para tu Proyecto de Investigación</p>
-            </div>
-
-            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL3Je0i" class="btn-cta btn-stripe">OBTENER CURSO Y ACCESOS AHORA 💳</a>
-            
-            <p style="font-size: 0.85rem; color: #718096; margin-top: 15px;">🔒 Pago seguro procesado por Stripe. Recibirás tus accesos automáticamente tras el pago.</p>
+        <div style="background: #fff; padding: 30px; border-radius: 20px; border: 3px solid var(--gold); text-align: center; margin-top: 30px;">
+            <h3>🚀 ¿Quieres asegurar tu lugar en la UNAM?</h3>
+            <p>Obtén el curso intensivo de preparación y domina estos temas al 100%.</p>
+            <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-purple);">$490 MXN</div>
+            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL3Je0i" class="btn-cta btn-stripe" style="background: #635bff;">INSCRIBIRME AL CURSO</a>
         </div>
 
-        <h3 style="color: var(--unam-blue); margin-top: 50px;">Revisión Técnica Paso a Paso:</h3>
+        <h3 style="margin-top: 40px;">Revisión de respuestas:</h3>
         <div id="revision-container" class="revision-container"></div>
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2026 Ruta al Posgrado UNAM | Contenido Académico: Dra. Dulce Monroy<br>
-    Este sitio es una herramienta de preparación independiente y no tiene afiliación oficial con la UNAM.</p>
-</footer>
-
 <script>
     const justificaciones = {
-        m1: "Correcta: B. Predecir variables define un diseño Correlacional/Predictivo.",
-        m2: "Correcta: A. Recolección en un único momento define estudio Transversal.",
-        m3: "Correcta: A. Variables que predicen o influyen son Independientes.",
-        m4: "Correcta: B. 'Bola de nieve' es No Probabilístico (basado en referencias).",
-        m5: "Correcta: C. El alcance explicativo busca demostrar causas (Causa-Efecto).",
-        m6: "Correcta: C. La asignación aleatoria distingue experimento de cuasi-experimento.",
-        m7: "Correcta: B. Comparar grupos preexistentes sin aleatorización es Cuasi-experimental.",
-        m8: "Correcta: B. Validez interna es la certeza de que la VI causó el cambio en la VD.",
-        me1: "Correcta: B. Predictiva implica que el instrumento predice desempeño futuro.",
-        me2: "Correcta: B. Concurrente es correlación con estándar aplicado simultáneamente.",
-        me3: "Correcta: C. Los puntajes totales de Likert se analizan como de Intervalo.",
-        me4: "Correcta: A. Alpha de .928 es excelente consistencia interna.",
-        me5: "Correcta: A. Medir es asignar números según reglas para análisis estadístico.",
-        e1: "Correcta: B. Tasas y frecuencias son funciones de la Estadística Descriptiva.",
-        e2: "Correcta: A. Regresión Lineal Múltiple modela varianza explicada por múltiples VI.",
-        e3: "Correcta: A. Si p < alpha, se rechaza H0 (resultado significativo).",
-        e4: "Correcta: B. Correlación positiva indica que ambas variables aumentan juntas.",
-        e5: "Correcta: B. ANOVA es la prueba paramétrica para 3 o más grupos.",
-        e6: "Correcta: A. p < 0.001 en K-S indica falta de normalidad.",
-        e7: "Correcta: A. t de Student para comparar medias de dos grupos independientes.",
-        e8: "Correcta: B. Chi Cuadrada evalúa asociación entre variables nominales.",
-        e9: "Correcta: A. Error Tipo I es el falso positivo (Rechazar H0 siendo verdadera)."
+        p1: "Correcta: B. Predecir variables define un diseño Correlacional.",
+        p2: "Correcta: B. Recolección única = Transversal.",
+        p3: "Correcta: A. La variable que influye es la Independiente.",
+        p4: "Correcta: C. Participación voluntaria = No probabilístico.",
+        p5: "Correcta: D. Alcance explicativo busca la causalidad.",
+        p6: "Correcta: A. La asignación al azar es requisito del experimento puro.",
+        p7: "Correcta: B. Manipulación sin azar = Cuasi-experimento.",
+        p8: "Correcta: B. Validez es medir lo que se pretende medir.",
+        p9: "Correcta: A. Predecir éxito futuro = Validez predictiva.",
+        p10: "Correcta: B. Cronbach mide la consistencia interna.",
+        p11: "Correcta: B. Ordinal clasifica y ordena.",
+        p12: "Correcta: A. Asignar números bajo reglas = Medición.",
+        p13: "Correcta: B. Inferencial permite generalizar a la población.",
+        p14: "Correcta: A. t de Student para comparar 2 medias normales.",
+        p15: "Correcta: A. p < alpha significa que hay significancia.",
+        p16: "Correcta: B. ANOVA compara 3 o más grupos.",
+        p17: "Correcta: B. r cercana a -1 es relación negativa fuerte.",
+        p18: "Correcta: A. Mann-Whitney es la versión no paramétrica de t.",
+        p19: "Correcta: A. Chi Cuadrada asocia variables nominales.",
+        p20: "Correcta: A. Error Tipo I es un Falso Positivo.",
+        p21: "Correcta: A. K-S y Shapiro son pruebas de normalidad.",
+        p22: "Correcta: C. El valor más frecuente es la moda."
     };
 
-    // Barra de progreso dinámica
-    document.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radio.addEventListener('change', () => {
-            const contestadas = document.querySelectorAll('input[type="radio"]:checked').length;
-            document.getElementById('bar-fill').style.width = (contestadas / 22 * 100) + '%';
-        });
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Envío a Netlify
+        const formData = new FormData(this);
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        }).catch(err => console.log("Error Netlify:", err));
+
+        evaluar();
     });
 
     function evaluar() {
         const nombre = document.getElementById('user-name').value;
-        const email = document.getElementById('user-email').value;
-        const tel = document.getElementById('user-phone').value;
-
-        if(!nombre || !email || !tel) {
-            alert("Por favor, completa tus datos para generar tu perfil de resultados.");
-            return;
-        }
-
-        const ids = ['m1','m2','m3','m4','m5','m6','m7','m8','me1','me2','me3','me4','me5','e1','e2','e3','e4','e5','e6','e7','e8','e9'];
+        const posgrado = document.getElementById('user-target').value;
         let sMeto = 0, sMed = 0, sEst = 0;
         let revHTML = "";
 
-        ids.forEach((id, index) => {
-            const sel = document.querySelector(`input[name="${id}"]:checked`);
-            const esCorrecta = sel && sel.value === "1";
-            
-            if (esCorrecta) {
-                if (index < 8) sMeto++; else if (index < 13) sMed++; else sEst++;
+        for(let i=1; i<=22; i++) {
+            const sel = document.querySelector(`input[name="p${i}"]:checked`);
+            const ok = sel && sel.value === "1";
+            if(ok) {
+                if(i <= 7) sMeto++;
+                else if(i <= 12) sMed++;
+                else sEst++;
             }
-            
-            revHTML += `<div style="padding:15px; margin-bottom:10px; border-radius:12px; border-left:5px solid ${esCorrecta ? '#43a047' : '#e53935'}; background:${esCorrecta ? '#f1f8e9' : '#fff5f5'};">
-                <strong style="color:var(--unam-blue)">Pregunta ${index+1}:</strong> ${esCorrecta ? '✅ Correcta' : '❌ Incorrecta'}<br>
-                <small style="color:#4a5568">${justificaciones[id]}</small>
-            </div>`;
-        });
+            revHTML += `<div style="padding:10px; margin-bottom:5px; border-left:5px solid ${ok?'#2e7d32':'#d32f2f'}; background:#f9f9f9;">
+                <strong>${i}:</strong> ${ok?'Correcta ✅':'Incorrecta ❌'} <br> <small>${justificaciones['p'+i]}</small></div>`;
+        }
 
         const total = sMeto + sMed + sEst;
-        
         document.getElementById('quiz-container').style.display = 'none';
         document.getElementById('quiz-result').style.display = 'block';
         document.getElementById('display-name').innerText = nombre;
         document.getElementById('global-score').innerText = total;
         document.getElementById('revision-container').innerHTML = revHTML;
 
-        // Actualizar UI de Áreas con colores dinámicos
-        const updateArea = (id, s, m) => {
-            const el = document.getElementById(id);
-            el.innerText = `${s}/${m}`;
-            const pct = s/m;
-            el.parentElement.className = "area-pill " + (pct >= 0.8 ? 'bg-success' : (pct >= 0.5 ? 'bg-warning' : 'bg-danger'));
+        // UI de Áreas
+        const upd = (id, s, m, pillId) => {
+            document.getElementById(id).innerText = `${s}/${m}`;
+            document.getElementById(pillId).style.background = (s/m >= 0.8 ? '#2e7d32' : (s/m >= 0.5 ? '#ffa000' : '#d32f2f'));
         };
-        updateArea('score-meto', sMeto, 8);
-        updateArea('score-med', sMed, 5);
-        updateArea('score-est', sEst, 9);
+        upd('score-meto', sMeto, 7, 'pill-meto');
+        upd('score-med', sMed, 5, 'pill-med');
+        upd('score-est', sEst, 10, 'pill-est');
 
-        // Mensaje de Diagnóstico
         const msg = document.getElementById('global-msg');
         if(total < 15) {
-            msg.innerText = "NIVEL DE RIESGO: Tus conocimientos actuales están por debajo del mínimo requerido para el posgrado. Necesitas reforzar urgentemente las bases técnicas.";
-            msg.style.borderColor = "#e53935"; msg.style.color = "#c62828"; msg.style.background = "#ffebee";
+            msg.innerText = "NIVEL DE RIESGO: Tus bases técnicas son insuficientes para el posgrado UNAM. Reforzamiento urgente necesario.";
+            msg.style.background = "#ffebee"; msg.style.color = "#c62828";
         } else {
-            msg.innerText = "NIVEL COMPETITIVO: Tienes buenas bases, sin embargo, el examen de la UNAM exige precisión absoluta. Pulir los detalles técnicos te dará la ventaja definitiva.";
-            msg.style.borderColor = "#43a047"; msg.style.color = "#2e7d32"; msg.style.background = "#e8f5e9";
+            msg.innerText = "NIVEL COMPETITIVO: Tienes buenas bases, pero la precisión técnica es lo que asegura el lugar. ¡Asegura tu ingreso!";
+            msg.style.background = "#e8f5e9"; msg.style.color = "#2e7d32";
         }
+
+        // WhatsApp
+        const texto = `Hola Dra. Dulce! Soy ${nombre}. Mi diagnóstico para ${posgrado} fue de ${total}/22. Me interesa inscribirme al curso.`;
+        const btnWA = document.createElement('a');
+        btnWA.href = `https://wa.me/525513362585?text=${encodeURIComponent(texto)}`;
+        btnWA.className = "btn-cta btn-wa";
+        btnWA.innerText = "ENVIAR RESULTADOS POR WHATSAPP ✅";
+        document.getElementById('wa-container').appendChild(btnWA);
         
         window.scrollTo(0, 0);
     }
