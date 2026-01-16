@@ -18,11 +18,10 @@
             --danger: #d32f2f;
             --stripe-blue: #635bff;
             --gold: #ffd700;
-            --whatsapp-green: #25d366;
         }
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
-        nav { background: var(--primary-purple); padding: 1.2rem 5%; color: white; font-weight: 700; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; letter-spacing: 1px; }
+        nav { background: var(--primary-purple); padding: 1.2rem 5%; color: white; font-weight: 700; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
         .hero { background: linear-gradient(135deg, #4a148c 0%, #1a237e 100%); padding: 60px 20px; text-align: center; color: var(--white); clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%); }
         .container { max-width: 850px; margin: -50px auto 40px; padding: 0 20px; }
         .card { background: var(--white); border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
@@ -36,7 +35,7 @@
         #lead-form-section { background: var(--white); padding: 35px; border-radius: 25px; border: 3px solid var(--accent-purple); margin-top: 30px; text-align: center; }
         .form-group { margin-bottom: 15px; text-align: left; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 5px; color: var(--primary-purple); }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
+        .form-group input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; }
 
         .result-box { display: none; animation: fadeIn 0.6s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -44,16 +43,20 @@
         .btn-cta { display: block; width: 100%; padding: 18px; border-radius: 50px; font-size: 1.2rem; font-weight: 700; text-decoration: none; border: none; cursor: pointer; text-align: center; margin-bottom: 10px; box-sizing: border-box; }
         .btn-primary { background: var(--primary-purple); color: white; }
         .btn-stripe { background: var(--stripe-blue); color: white; }
-        .btn-wa { background: var(--whatsapp-green); color: white; margin-top: 15px; }
 
-        .area-pill { padding: 15px; border-radius: 12px; margin-bottom: 10px; color: white; display: flex; justify-content: space-between; font-weight: 700; }
+        .area-pill { padding: 15px; border-radius: 12px; margin-bottom: 10px; color: white; display: flex; justify-content: space-between; font-weight: 700; background: var(--unam-blue); }
         .revision-container { margin: 20px 0; text-align: left; max-height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 15px; border-radius: 15px; background: #fff; }
 
-        /* Estilos Dra. Dulce y Vídeo */
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; background: #000; margin-bottom: 20px; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .dra-bio { display: flex; align-items: center; gap: 20px; background: #f9f4ff; padding: 20px; border-radius: 15px; border-left: 5px solid var(--gold); text-align: left; margin-bottom: 30px; }
-        .dra-bio img { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-purple); }
+        .dra-bio { display: flex; align-items: center; gap: 20px; background: #f9f4ff; padding: 25px; border-radius: 15px; border-left: 5px solid var(--gold); text-align: left; margin: 30px 0; }
+        .dra-bio img { 
+    width: 220px;              /* Tamaño mucho más grande */
+    height: 220px;             /* Mantiene la proporción 1:1 */
+    border-radius: 15px;       /* Cambiado de 50% a 15px para que sea cuadrada con puntas suaves */
+    border: 4px solid var(--primary-purple); 
+    object-fit: cover;         /* Evita que la foto se estire */
+    flex-shrink: 0;            /* Evita que se haga pequeña en móviles */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Le da un toque de profundidad */
+}
     </style>
 </head>
 <body>
@@ -61,15 +64,16 @@
 <nav>RUTA AL POSGRADO UNAM | DRA. DULCE MONROY</nav>
 
 <section class="hero">
-    <h1>Simulador de Conocimientos Técnicos</h1>
-    <p>Responde las 22 preguntas para medir tu nivel académico.</p>
+    <h1>Simulador de Examen General de Conocimientos</h1>
+    <p>Contesta las 22 preguntas para valorar tu nivel de conocimientos generales en Psicología.</p>
 </section>
 
 <div class="container">
     <div id="quiz-container">
-        <form id="quiz-form" data-netlify="true" name="diagnostico-posgrado">
+        <form id="quiz-form" data-netlify="true" name="diagnostico-final-completo">
             
             <div class="section-header">METODOLOGÍA DE LA INVESTIGACIÓN</div>
+            
             <div class="card">
                 <span class="question">1. Un investigador desea evaluar si las estrategias de afrontamiento predicen los síntomas de ansiedad en adultos. ¿Cuál es el diseño más adecuado?</span>
                 <label class="option"><input type="radio" name="p1" value="0"> A. Experimental</label>
@@ -127,6 +131,7 @@
             </div>
 
             <div class="section-header">MEDICIÓN Y PSICOMETRÍA</div>
+
             <div class="card">
                 <span class="question">8. El grado en que un instrumento realmente mide la variable que pretende medir se conoce como:</span>
                 <label class="option"><input type="radio" name="p8" value="0"> A. Confiabilidad</label>
@@ -168,6 +173,7 @@
             </div>
 
             <div class="section-header">ESTADÍSTICA PARA LA INVESTIGACIÓN</div>
+
             <div class="card">
                 <span class="question">13. La estadística que permite realizar generalizaciones de una muestra a la población es la:</span>
                 <label class="option"><input type="radio" name="p13" value="0"> A. Descriptiva</label>
@@ -252,16 +258,8 @@
                 <h2>¡Diagnóstico Finalizado!</h2>
                 <p>Completa tus datos para recibir tu interpretación técnica y el plan de acción.</p>
                 <div class="form-group"><label>Nombre Completo:</label><input type="text" name="nombre" id="user-name" required></div>
-                <div class="form-group"><label>WhatsApp:</label><input type="tel" name="whatsapp" id="user-phone" placeholder="Ej. 5512345678" required></div>
+                <div class="form-group"><label>WhatsApp:</label><input type="tel" name="whatsapp" id="user-phone" required></div>
                 <div class="form-group"><label>Correo Electrónico:</label><input type="email" name="email" id="user-email" required></div>
-                <div class="form-group">
-                    <label>Posgrado de Interés:</label>
-                    <select name="posgrado" id="user-target">
-                        <option>Maestría en Psicología (UNAM)</option>
-                        <option>Doctorado en Psicología (UNAM)</option>
-                        <option>Especialidad</option>
-                    </select>
-                </div>
                 <button type="submit" class="btn-cta btn-primary">VER MI PUNTAJE Y REVISIÓN</button>
             </div>
         </form>
@@ -275,72 +273,67 @@
             </div>
             
             <div id="res-areas">
-                <div class="area-pill" id="pill-meto" style="background: #666;"><span>Metodología</span><span id="score-meto">0/7</span></div>
-                <div class="area-pill" id="pill-med" style="background: #666;"><span>Medición</span><span id="score-med">0/5</span></div>
-                <div class="area-pill" id="pill-est" style="background: #666;"><span>Estadística</span><span id="score-est">0/10</span></div>
+                <div class="area-pill"><span>Metodología</span><span id="score-meto">0/7</span></div>
+                <div class="area-pill"><span>Medición</span><span id="score-med">0/5</span></div>
+                <div class="area-pill"><span>Estadística</span><span id="score-est">0/10</span></div>
             </div>
 
-            <div id="global-msg" style="padding: 15px; border-radius: 12px; font-weight: 700; margin: 20px 0; border: 2px solid #ddd;"></div>
-            
-            <div id="wa-container"></div>
+            <div id="global-msg" style="padding: 20px; border-radius: 12px; margin: 25px 0; text-align: left; background: #fff; border: 1px solid #ddd;"></div>
         </div>
 
-        <h3 style="margin-top: 40px;">Revisión detallada:</h3>
-        <div id="revision-container" class="revision-container"></div>
-
-        <div class="card" style="text-align: center; margin-top: 30px;">
-            <h3 style="color: var(--primary-purple);">¿Cómo interpretar estos resultados?</h3>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/TU_ID_DE_VIDEO" allowfullscreen></iframe>
-            </div>
-            <div class="dra-bio">
-                <img src="dulce.webp" alt="Dra. Dulce Monroy">
-                <div>
-                    <strong>Dra. Dulce Monroy</strong>
-                    <p style="margin: 5px 0 0 0; font-size: 0.9rem;">Doctora en Psicología por la <b>UNAM</b>. Experta en metodología y estadística. He diseñado este simulador para identificar tus brechas técnicas y ayudarte a asegurar tu lugar en el posgrado.</p>
-                </div>
+        <div class="dra-bio">
+            <img src="dulce.webp" alt="Dra. Dulce Monroy">
+            <div class="dra-info">
+                <h4 style="margin:0; color:var(--primary-purple);">Diagnóstico diseñado por la Dra. Dulce María Monroy Robles</h4>
+                <p style="margin-top:10px; font-size: 0.9rem; color:#555;">Doctora en Psicología y Maestra en Medicina Conductual por la <b>UNAM</b>.Cuenta con experiencia clínica e institucional en el Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán, el Hospital General Dr. Manuel Gea González y la FES Zaragoza-UNAM.
+Realizó estancia de investigación doctoral en España y cuenta con publicaciones científicas en intervención cognitivo-conductual.</p>
             </div>
         </div>
 
-        <div style="background: #fff; padding: 30px; border-radius: 20px; border: 3px solid var(--gold); text-align: center; margin-top: 30px;">
-            <h3 style="margin-top:0;">🚀 Asegura tu ingreso a la UNAM</h3>
-            <p>Este diagnóstico revela que necesitas fortalecer tus bases técnicas. Mi curso intensivo incluye:</p>
-            <ul style="text-align: left; display: inline-block; margin-bottom: 20px;">
-                <li>✅ <b>40 horas prácticas</b> de contenido técnico especializado.</li>
-                <li>✅ Resolución guiada de exámenes de años anteriores.</li>
-                <li>✅ Sesiones en vivo de estadística y metodología.</li>
-                <li>✅ Acceso a la plataforma 24/7.</li>
+        <div class="card" style="border: 3px solid var(--gold); text-align: center;">
+            <h3 style="margin-top:0;">🚀 Fortalece tu preparación para el examen de ingreso a la UNAM</h3>
+            <p>Este diagnóstico indica que es necesario reforzar tus bases técnicas.
+El curso intensivo está diseñado para orientar y estructurar tu estudio, e incluye:</p>
+            <ul style="text-align: left; display: inline-block; margin: 0 auto 20px; font-size: 0.95rem;">
+                <li>✅ <b>Guías por módulo.</li>
+                <li>✅ Ruta de estudio (≈40 h sugeridas)</li>
+                <li>✅ Simuladores reales</li>
+                <li>✅ Estadística inferencial con tabla de decisión</li>
+                <li>✅ Plataforma 24/7</li>
             </ul>
-            <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-purple); margin-bottom: 20px;">$490 MXN</div>
-            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL3Je0i" class="btn-cta btn-stripe" style="background: #635bff;">INSCRIBIRME AL CURSO AHORA</a>
+            <div style="font-size: 2.5rem; font-weight: 800; color: var(--primary-purple); margin-bottom:15px;">$490 MXN</div>
+            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL3Je0i" class="btn-cta btn-stripe">[INSCRIBIRME AL CURSO]</a>
         </div>
+
+        <h3 style="margin-top: 40px;">Revisión de Respuestas:</h3>
+        <div id="revision-container" class="revision-container"></div>
     </div>
 </div>
 
 <script>
-    const justificaciones = {
-        p1: "Correcta: B. Predecir variables define un diseño Correlacional-predictivo.",
-        p2: "Correcta: B. Una medición en un único momento se define como Transversal.",
-        p3: "Correcta: A. La variable que causa o influye es la Independiente.",
-        p4: "Correcta: C. Seleccionar sujetos disponibles es muestreo por conveniencia.",
-        p5: "Correcta: D. Establecer causas es el objetivo del alcance Explicativo.",
-        p6: "Correcta: A. La asignación aleatoria es el requisito base del experimento puro.",
-        p7: "Correcta: B. Manipular variables sin azar define a los Cuasi-experimentos.",
-        p8: "Correcta: B. La Validez asegura que el test mida el constructo correcto.",
-        p9: "Correcta: A. Predecir promedios futuros es Validez Predictiva.",
-        p10: "Correcta: B. El Alpha de Cronbach mide la consistencia interna de los reactivos.",
-        p11: "Correcta: B. El nivel Ordinal permite jerarquizar pero no distancias exactas.",
-        p12: "Correcta: A. Medición es el proceso de asignar numerales según reglas.",
-        p13: "Correcta: B. La Estadística Inferencial generaliza de muestra a población.",
-        p14: "Correcta: A. t de Student se usa para comparar 2 medias normales.",
-        p15: "Correcta: A. p < 0.05 indica que rechazamos la hipótesis nula.",
-        p16: "Correcta: B. ANOVA es la prueba para comparar 3 o más grupos.",
-        p17: "Correcta: B. r = -0.85 es una relación negativa (inversa) muy fuerte.",
-        p18: "Correcta: A. Mann-Whitney es la alternativa no paramétrica de t de Student.",
-        p19: "Correcta: A. Chi Cuadrada mide asociación entre variables nominales.",
-        p20: "Correcta: A. El Error Tipo I es rechazar H0 cuando es verdadera.",
-        p21: "Correcta: A. Kolmogorov y Shapiro son las pruebas de normalidad estándar.",
-        p22: "Correcta: C. El valor con mayor frecuencia en un conjunto es la Moda."
+    const db = {
+        p1: { q: "¿Diseño para evaluar si afrontamiento predice ansiedad?", r: "Correcta: B. Correlacional-predictivo." },
+        p2: { q: "¿Medición en un único momento del tiempo?", r: "Correcta: B. Transversal." },
+        p3: { q: "¿Variable que influye en otra?", r: "Correcta: A. Variable Independiente." },
+        p4: { q: "¿Muestreo de voluntarios disponibles?", r: "Correcta: C. No probabilístico por conveniencia." },
+        p5: { q: "¿Alcance que establece causas?", r: "Correcta: D. Explicativo." },
+        p6: { q: "¿Requisito de experimento puro?", r: "Correcta: A. Asignación aleatoria." },
+        p7: { q: "¿Manipulación de VI sin azar?", r: "Correcta: B. Cuasi-experimento." },
+        p8: { q: "¿Instrumento que mide lo que pretende?", r: "Correcta: B. Validez." },
+        p9: { q: "¿Test que predice éxito futuro?", r: "Correcta: A. Validez Predictiva." },
+        p10: { q: "¿Qué mide Alpha de Cronbach?", r: "Correcta: B. Consistencia interna." },
+        p11: { q: "¿Nivel que clasifica y jerarquiza?", r: "Correcta: B. Ordinal." },
+        p12: { q: "¿Asignar números según reglas?", r: "Correcta: A. Medición." },
+        p13: { q: "¿Generalizar de muestra a población?", r: "Correcta: B. Estadística Inferencial." },
+        p14: { q: "¿Comparar 2 medias normales?", r: "Correcta: A. t de Student." },
+        p15: { q: "¿Si p = 0.002 con alpha 0.05?", r: "Correcta: A. Rechazamos H0 (Significativo)." },
+        p16: { q: "¿Comparar 3 o más grupos?", r: "Correcta: B. ANOVA." },
+        p17: { q: "¿Correlación de r = -0.85?", r: "Correcta: B. Relación negativa fuerte." },
+        p18: { q: "¿No paramétrica equivalente a t?", r: "Correcta: A. U de Mann-Whitney." },
+        p19: { q: "¿Asociación entre variables nominales?", r: "Correcta: A. Chi Cuadrada de Pearson." },
+        p20: { q: "¿Error Tipo I?", r: "Correcta: A. Rechazar H0 siendo verdadera." },
+        p21: { q: "¿Prueba de normalidad?", r: "Correcta: A. Shapiro-Wilk / Kolmogorov-Smirnov." },
+        p22: { q: "¿Valor más frecuente?", r: "Correcta: C. Moda." }
     };
 
     document.getElementById('quiz-form').addEventListener('submit', function(e) {
@@ -356,7 +349,6 @@
 
     function evaluar() {
         const nombre = document.getElementById('user-name').value;
-        const posgrado = document.getElementById('user-target').value;
         let sMeto = 0, sMed = 0, sEst = 0;
         let revHTML = "";
 
@@ -368,8 +360,12 @@
                 else if(i <= 12) sMed++;
                 else sEst++;
             }
-            revHTML += `<div style="padding:10px; margin-bottom:5px; border-left:5px solid ${ok?'#2e7d32':'#d32f2f'}; background:#f9f9f9;">
-                <strong>Pregunta ${i}:</strong> ${ok?'Correcta ✅':'Incorrecta ❌'} <br> <small>${justificaciones['p'+i]}</small></div>`;
+            const data = db['p'+i];
+            revHTML += `<div style="padding:15px; margin-bottom:10px; border-left:6px solid ${ok?'#2e7d32':'#d32f2f'}; background:#fcfcfc; border-radius:10px;">
+                <strong>Pregunta ${i}: ${ok?'Correcta ✅':'Incorrecta ❌'}</strong><br>
+                <small>${data.q}</small><br>
+                <span style="color:var(--unam-blue)">${data.r}</span>
+            </div>`;
         }
 
         const total = sMeto + sMed + sEst;
@@ -377,31 +373,23 @@
         document.getElementById('quiz-result').style.display = 'block';
         document.getElementById('display-name').innerText = nombre;
         document.getElementById('global-score').innerText = total;
+        document.getElementById('score-meto').innerText = `${sMeto}/7`;
+        document.getElementById('score-med').innerText = `${sMed}/5`;
+        document.getElementById('score-est').innerText = `${sEst}/10`;
         document.getElementById('revision-container').innerHTML = revHTML;
 
-        const upd = (id, s, m, pillId) => {
-            document.getElementById(id).innerText = `${s}/${m}`;
-            document.getElementById(pillId).style.background = (s/m >= 0.8 ? '#2e7d32' : (s/m >= 0.5 ? '#ffa000' : '#d32f2f'));
-        };
-        upd('score-meto', sMeto, 7, 'pill-meto');
-        upd('score-med', sMed, 5, 'pill-med');
-        upd('score-est', sEst, 10, 'pill-est');
-
         const msg = document.getElementById('global-msg');
-        if(total < 15) {
-            msg.innerText = "NIVEL DE RIESGO: Tus bases técnicas son insuficientes para el ingreso. Reforzamiento urgente necesario.";
-            msg.style.background = "#ffebee"; msg.style.color = "#c62828";
+        if(total <= 8) {
+            msg.innerHTML = "<strong>NIVEL DE RIESGO: ALTO</strong><br>Tus bases técnicas no están consolidadas. Se recomienda un reforzamiento académico integral antes del examen.";
+        } else if(total <= 13) {
+            msg.innerHTML = "<strong>NIVEL DE RIESGO: MEDIO-ALTO</strong><br>Persisten vacíos importantes que pueden afectar tu ingreso. Un plan de estudio sistemático es necesario.";
+        } else if(total <= 17) {
+            msg.innerHTML = "<strong>NIVEL DE RIESGO: MEDIO</strong><br>Tu preparación es adecuada, pero hay áreas que requieren consolidación estratégica para asegurar el lugar.";
+        } else if(total <= 20) {
+            msg.innerHTML = "<strong>NIVEL DE RIESGO: BAJO</strong><br>Tienes una base sólida. Refuerza detalles puntuales para llegar con máxima seguridad al examen.";
         } else {
-            msg.innerText = "NIVEL COMPETITIVO: Tienes buenas bases, pero la precisión técnica asegura tu lugar. ¡Asegura tu ingreso!";
-            msg.style.background = "#e8f5e9"; msg.style.color = "#2e7d32";
+            msg.innerHTML = "<strong>NIVEL DE RIESGO: MUY BAJO</strong><br>¡Excelente dominio! Mantén el ritmo de práctica para asegurar tu éxito absoluto.";
         }
-
-        const textoWA = `Hola Dra. Dulce! Soy ${nombre}. Mi diagnóstico para ${posgrado} fue de ${total}/22. Me interesa inscribirme al curso.`;
-        const btnWA = document.createElement('a');
-        btnWA.href = `https://wa.me/525513362585?text=${encodeURIComponent(textoWA)}`;
-        btnWA.className = "btn-cta btn-wa";
-        btnWA.innerText = "ENVIAR RESULTADOS POR WHATSAPP ✅";
-        document.getElementById('wa-container').appendChild(btnWA);
         
         window.scrollTo(0, 0);
     }
