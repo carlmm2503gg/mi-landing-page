@@ -19,7 +19,6 @@
         body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg-light); color: #263238; line-height: 1.6; }
         nav { background: var(--primary-purple); padding: 1rem 5%; color: white; font-weight: 700; text-align: center; font-size: 0.9rem; position: sticky; top: 0; z-index: 1000; }
         
-        /* Encabezado Limpio sin obstrucciones */
         .hero { 
             background: linear-gradient(135deg, #4a148c 0%, #1a237e 100%); 
             padding: 60px 20px; 
@@ -47,38 +46,31 @@
         .option:hover { background: #f3e5f5; border-color: var(--accent-purple); }
         .option input { margin-right: 15px; transform: scale(1.2); }
 
-        /* Formulario de Registro */
         .lead-form { background: var(--white); padding: 40px; border-radius: 25px; border: 3px solid var(--primary-purple); margin-top: 40px; }
         .form-group { margin-bottom: 20px; text-align: left; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 8px; }
         .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; box-sizing: border-box; }
         .btn-submit { background: var(--primary-purple); color: white; border: none; padding: 20px; width: 100%; border-radius: 50px; font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-submit:hover { background: var(--accent-purple); transform: translateY(-2px); }
 
-        /* Resultados */
         .result-box { display: none; animation: fadeIn 0.5s ease-in; }
         .area-pill { padding: 15px; border-radius: 12px; margin-bottom: 10px; color: white; display: flex; justify-content: space-between; font-weight: 700; }
         .p-meto { background: var(--bar-purple); }
         .p-med { background: var(--bar-blue); }
         .p-est { background: var(--bar-purple); }
         
-        /* Semblanza Dra Dulce */
         .bio-section { display: flex; gap: 30px; align-items: flex-start; background: #f9f4ff; padding: 30px; border-radius: 25px; margin: 35px 0; border: 1px solid #e0d0f0; }
         .bio-section img { width: 200px; height: 200px; border-radius: 20px; border: 5px solid var(--primary-purple); object-fit: cover; }
-        .bio-text h4 { margin: 0 0 10px; color: var(--primary-purple); font-size: 1.2rem; }
-        .bio-text p { margin: 0; font-size: 0.95rem; color: #444; text-align: left; }
+        .bio-text p { text-align: left; font-size: 0.95rem; }
 
-        .btn-cta { display: block; width: 100%; padding: 20px; border-radius: 50px; font-size: 1.3rem; font-weight: 700; text-decoration: none; text-align: center; background: var(--primary-purple); color: white; margin-top: 25px; transition: 0.3s; }
-        .btn-cta:hover { background: var(--accent-purple); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .btn-cta { display: block; width: 100%; padding: 20px; border-radius: 50px; font-size: 1.3rem; font-weight: 700; text-decoration: none; text-align: center; background: var(--primary-purple); color: white; margin-top: 25px; }
 
-        /* Revisión de Seguridad */
-        .rev-item { padding: 15px; margin-bottom: 12px; border-radius: 10px; border-left: 6px solid #ccc; background: #fff; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .rev-q { font-weight: 600; font-size: 0.95rem; margin-bottom: 5px; display: block; color: var(--unam-blue); }
+        .rev-item { padding: 15px; margin-bottom: 12px; border-radius: 10px; border-left: 6px solid #ccc; background: #fff; text-align: left; }
+        .rev-q { font-weight: 600; color: var(--unam-blue); display: block; margin-bottom: 5px; }
         .rev-correct { border-left-color: #4caf50; }
         .rev-incorrect { border-left-color: #f44336; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media (max-width: 600px) { .bio-section { flex-direction: column; align-items: center; text-align: center; } }
+        @media (max-width: 600px) { .bio-section { flex-direction: column; align-items: center; } }
     </style>
 </head>
 <body>
@@ -93,7 +85,9 @@
 
 <div class="container">
     <div id="quiz-container">
-        <form id="quiz-form">
+        <form id="quiz-form" name="diagnostico-unam" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="diagnostico-unam" />
+            
             <div class="section-title">METODOLOGÍA DE LA INVESTIGACIÓN</div>
             <div class="card">
                 <span class="question">1. Un investigador desea evaluar si las estrategias de afrontamiento predicen los síntomas de ansiedad en adultos. ¿Cuál es el diseño más adecuado?</span>
@@ -258,24 +252,23 @@
                 <h2 style="text-align:center; color:var(--primary-purple); margin-top:0;">Finalizar y Ver Resultados</h2>
                 <div class="form-group">
                     <label>Nombre Completo:</label>
-                    <input type="text" id="user-name" required>
+                    <input type="text" name="nombre" required>
                 </div>
                 <div class="form-group">
                     <label>WhatsApp:</label>
-                    <input type="tel" id="user-phone" placeholder="Ej: 5512345678" required>
+                    <input type="tel" name="whatsapp" placeholder="Ej: 5512345678" required>
                 </div>
                 <div class="form-group">
                     <label>Email:</label>
-                    <input type="email" id="user-email" required>
+                    <input type="email" name="email" required>
                 </div>
                 <div class="form-group">
                     <label>¿Desde dónde nos encontraste?</label>
-                    <select id="user-source" required>
+                    <select name="origen" required>
                         <option value="">Selecciona una opción</option>
                         <option value="Facebook">Facebook</option>
                         <option value="Instagram">Instagram</option>
                         <option value="Youtube">Youtube</option>
-                        <option value="Youtube">Recomendación</option>
                     </select>
                 </div>
                 <button type="submit" class="btn-submit">VER DIAGNÓSTICO AHORA</button>
@@ -298,45 +291,43 @@
                 <div class="area-pill p-est"><span>Estadística para la Investigación</span><span id="score-est">0/10</span></div>
             </div>
 
-            <div id="diagnostic-msg" style="padding: 25px; border-radius: 15px; margin: 25px 0; text-align: left; background: #fdfbff; border: 1px solid #ddd;">
-                </div>
+            <div id="diagnostic-msg" style="padding: 25px; border-radius: 15px; margin: 25px 0; text-align: left; background: #fdfbff; border: 1px solid #ddd;"></div>
         </div>
 
         <div class="bio-section">
-            <img src="dulce.webp"Dra. Dulce Monroy">
+            <img src="https://images.squarespace-cdn.com/content/v1/5e9f3b7f8f9d4e5f8f9f3b7f/1587428479532-3N4J4J4J4J4J4J4J4J4J/Dra.+Dulce+Monroy.jpg" alt="Dra. Dulce Monroy">
             <div class="bio-text">
                 <h4>Curso diseñado por la Dra. Dulce María Monroy Robles</h4>
-                <p>Doctora en Psicología y Maestra en Medicina Conductual por la <b>UNAM</b>. Cuenta con experiencia clínica e institucional en el Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán, el Hospital General Dr. Manuel Gea González y la FES Zaragoza-UNAM. Realizó estancia de investigación doctoral en España y cuenta con publicaciones científicas en intervención cognitivo-conductual.</p>
+                <p>Doctora en Psicología y Maestra en Medicina Conductual por la <b>UNAM</b>. Cuenta con experiencia clínica e institucional en el Salvador Zubirán, el Hospital Manuel Gea González y la FES Zaragoza. Realizó estancia de investigación en España y cuenta con publicaciones en intervención cognitivo-conductual.</p>
             </div>
         </div>
 
         <div class="card" style="border: 2px solid var(--accent-purple); text-align: center;">
             <h3 style="color:var(--primary-purple); margin-top:0;">🚀 ¿Cómo trabajar tus resultados?</h3>
-            <p style="text-align:left;">El curso intensivo está diseñado para transformar este diagnóstico en un plan de estudio concreto: </p>
             <ul style="text-align: left; font-size: 0.95rem;">
                 <li>✔️ Ruta de estudio guiada (qué sí estudiar y qué no).</li>
-                <li>✔️ Guías por módulo para ordenar conceptos clave. </li>
+                <li>✔️ Guías por módulo para ordenar conceptos clave.</li>
                 <li>✔️ Simuladores por módulo para entrenar decisiones reales.</li>
                 <li>✔️ Estadística con tabla de decisión (paramétrica y no paramétrica).</li>
                 <li>✔️ Acceso 24/7 en Google Classroom.</li>
                 <li>✔️ Carga estimada de estudio: ~35–45 horas sugeridas.</li>
             </ul>
             <div style="font-size: 2.2rem; font-weight: 800; margin: 15px 0;">$490 MXN</div>
-            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL3Je0i" class="btn-cta">Ver cómo prepararme mejor</a>
+            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL" class="btn-cta">Ver cómo prepararme mejor</a>
         </div>
 
         <div class="card" style="background:#f0f4ff; border:none; text-align: center;">
-            <h4 style="margin-top:0;">⚠️ Lo que este simulador NO evalúa (y sí aparece en el examen real)</h4>
+            <h4 style="margin-top:0;">⚠️ Lo que este simulador NO evalúa</h4>
             <ul style="text-align: left; font-size: 0.9rem; color:#333; columns: 2;">
                 <li>🔵 Manejo del tiempo.</li>
                 <li>🔵 Justificación metodológica.</li>
-                <li>🔵 Elección de pruebas estadísticas.</li>
+                <li>🔵 Elección de pruebas.</li>
                 <li>🔵 Seguridad sin ensayo-error.</li>
             </ul>
-            <p style="font-size:0.9rem; margin-top:15px; font-weight:600;">Este simulador detecta brechas. La preparación real consiste en cerrarlas con una ruta clara.</p>
         </div>
 
         <h3 style="margin-top: 40px; color: var(--primary-purple);">Revisión de respuestas:</h3>
+        <p style="font-size:0.8rem; color:#777; margin-bottom:15px;">(Solo se indica si fue correcto o incorrecto para evitar memorización automática)</p>
         <div id="revision-container"></div>
     </div>
 </div>
@@ -369,18 +360,22 @@
 
     document.getElementById('quiz-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        let meto = 0, med = 0, est = 0;
         const formData = new FormData(this);
-        
-        // Calcular puntos
+
+        // Envío a Netlify
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        });
+
+        let meto = 0, med = 0, est = 0;
         for(let i=1; i<=7; i++) meto += parseInt(formData.get('p'+i) || 0);
         for(let i=8; i<=12; i++) med += parseInt(formData.get('p'+i) || 0);
         for(let i=13; i<=22; i++) est += parseInt(formData.get('p'+i) || 0);
         
         let total = meto + med + est;
 
-        // Ocultar Quiz y Mostrar Resultados
         document.getElementById('quiz-container').style.display = 'none';
         document.getElementById('quiz-result').style.display = 'block';
         
@@ -390,23 +385,19 @@
         document.getElementById('score-est').innerText = est + "/10";
 
         const msgBox = document.getElementById('diagnostic-msg');
-        
-        // Lógica de Niveles [cite: 68-100]
         if(total <= 7) {
-            msgBox.innerHTML = `<h3>🔹 Nivel 1 — Base por consolidar</h3><p>Reconoces algunos conceptos, pero todavía hay confusión entre definiciones, aplicaciones y criterios de elección. Bajo presión, es fácil dudar o cambiar respuestas. En el examen real esto suele pasar cuando se estudia de forma fragmentada o se memorizan conceptos sin jerarquía.</p><b>👉 Aquí la prioridad no es hacer más simuladores, sino ordenar bases y criterio.</b>`;
+            msgBox.innerHTML = `<h3>🔹 Nivel 1 — Base por consolidar</h3><p>Reconoces algunos conceptos, pero todavía hay confusión entre definiciones. En el examen real esto suele pasar cuando se estudia de forma fragmentada.</p><b>👉 La prioridad es ordenar bases y criterio.</b>`;
         } else if(total <= 12) {
-            msgBox.innerHTML = `<h3>🔹 Nivel 2 — Comprensión parcial</h3><p>Identificas bien los temas, pero todavía hay errores al decidir entre opciones similares. La duda aparece cuando las preguntas requieren justificación, no solo reconocimiento. Esto se nota cuando dos respuestas "parecen correctas" o falta seguridad para descartar distractores.</p><b>👉 Necesitas entrenar razonamiento y toma de decisiones, no solo repasar teoría.</b>`;
+            msgBox.innerHTML = `<h3>🔹 Nivel 2 — Comprensión parcial</h3><p>Identificas bien los temas, pero todavía hay errores al decidir entre opciones similares. Falta seguridad para descartar distractores.</p><b>👉 Necesitas entrenar razonamiento, no solo repasar teoría.</b>`;
         } else if(total <= 17) {
-            msgBox.innerHTML = `<h3>🔹 Nivel 3 — Preparación funcional</h3><p>Tienes una estructura clara de los contenidos y sueles elegir bien, aunque aún hay áreas específicas que pueden afinarse para responder con mayor rapidez y seguridad. Esto mejora practicando con simuladores por módulo y reforzando puntos débiles.</p><b>👉 Estás cerca, pero pulir detalles hace la diferencia.</b>`;
+            msgBox.innerHTML = `<h3>🔹 Nivel 3 — Preparación funcional</h3><p>Tienes una estructura clara de los contenidos y sueles elegir bien. Pulir detalles específicos hará la diferencia.</p><b>👉 Estás cerca, enfócate en tus áreas débiles.</b>`;
         } else {
-            msgBox.innerHTML = `<h3>🔹 Nivel 4 — Preparación sólida</h3><p>Manejas conceptos, criterios y lógica de evaluación. Tus respuestas reflejan comprensión y consistencia, incluso en preguntas complejas. El enfoque aquí es mantener el entrenamiento y afianzar consistencia bajo presión.</p><b>👉 El objetivo aquí es sostener el nivel el día del examen.</b>`;
+            msgBox.innerHTML = `<h3>🔹 Nivel 4 — Preparación sólida</h3><p>Manejas conceptos, criterios y lógica de evaluación. Tus respuestas reflejan comprensión y consistencia.</p><b>👉 El objetivo es sostener el nivel el día del examen.</b>`;
         }
 
-        // Generar Revisión de Seguridad (Pregunta + Correcto/Incorrecto sin mostrar respuesta)
         let revHTML = "";
         for(let i=0; i<22; i++) {
-            const userChoice = formData.get('p'+(i+1));
-            const isCorrect = userChoice === "1";
+            const isCorrect = formData.get('p'+(i+1)) === "1";
             revHTML += `
                 <div class="rev-item ${isCorrect ? 'rev-correct' : 'rev-incorrect'}">
                     <span class="rev-q">${questionsText[i]}</span>
@@ -417,6 +408,5 @@
         window.scrollTo(0,0);
     });
 </script>
-
 </body>
 </html>
