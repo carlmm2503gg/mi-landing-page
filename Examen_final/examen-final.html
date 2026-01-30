@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen Final | Posgrado Psicología UNAM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #4a148c; --accent: #7b1fa2; --bg: #f4f7fa; --white: #ffffff; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; color: #333; }
+        nav { background: var(--primary); color: white; padding: 1rem; text-align: center; font-weight: 700; position: sticky; top: 0; z-index: 1000; }
+        .hero { background: linear-gradient(135deg, #4a148c 0%, #1a237e 100%); padding: 40px 20px; text-align: center; color: white; }
+        .container { max-width: 850px; margin: -30px auto 50px; padding: 0 20px; }
+        .section-title { background: #e1bee7; color: var(--primary); padding: 10px 20px; border-radius: 8px; margin: 40px 0 15px; font-weight: 700; border-left: 5px solid var(--primary); }
+        .card { background: var(--white); border-radius: 15px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .question { font-weight: 600; color: #1a237e; display: block; margin-bottom: 15px; }
+        .option { display: block; padding: 12px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: 0.2s; }
+        .option:hover { background: #f3e5f5; }
+        .btn-finish { background: var(--primary); color: white; border: none; padding: 20px; width: 100%; border-radius: 50px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-top: 20px; }
+        .feedback-box { background: #fff; padding: 30px; border-radius: 20px; border: 2px solid var(--primary); margin-top: 40px; }
+        textarea { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #ccc; font-family: inherit; resize: vertical; box-sizing: border-box; }
+        #results { display: none; text-align: center; animation: fadeIn 0.5s; }
+        .score-num { font-size: 4rem; font-weight: 800; color: var(--primary); }
+        .rev-item { padding: 10px; margin-bottom: 5px; border-radius: 8px; text-align: left; font-size: 0.9rem; }
+        .correct { background: #e8f5e9; border-left: 5px solid #2e7d32; }
+        .incorrect { background: #ffebee; border-left: 5px solid #c62828; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<nav>EXAMEN FINAL DE SIMULACIÓN - POSGRADO UNAM</nav>
+
+<section class="hero">
+    <h1>Simulacro General de 65 Reactivos</h1>
+    <p>Evaluación final de Metodología, Psicometría y Estadística</p>
+</section>
+
+<div class="container">
+    <form id="final-form" name="examen-final-feedback" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="examen-final-feedback" />
+
+        <div class="section-title">SECCIÓN I: METODOLOGÍA (1-23)</div>
+        <div id="metodologia-container"></div>
+
+        <div class="section-title">SECCIÓN II: MEDICIÓN Y PSICOMETRÍA (24-44)</div>
+        <div id="psicometria-container"></div>
+
+        <div class="section-title">SECCIÓN III: ESTADÍSTICA (45-65)</div>
+        <div id="estadistica-container"></div>
+
+        <div class="feedback-box">
+            <h3 style="margin-top:0; color:var(--primary);">¡Felicidades por llegar al final!</h3>
+            <p>Tu opinión es muy valiosa para nosotros. Cuéntanos, ¿qué te pareció el curso y este simulador?</p>
+            <textarea name="opinion_curso" rows="4" placeholder="Escribe aquí tus comentarios..." required></textarea>
+            <button type="submit" class="btn-finish">FINALIZAR Y VER CALIFICACIÓN</button>
+        </div>
+    </form>
+
+    <div id="results">
+        <div class="card">
+            <h2>Puntaje Obtenido</h2>
+            <div class="score-num"><span id="total-score">0</span>/65</div>
+            <p id="feedback-msg"></p>
+            <hr>
+            <h3>Revisión de respuestas</h3>
+            <p style="font-size:0.8rem; color:#666;">Solo se indica si fue correcto o no para proteger la integridad del examen.</p>
+            <div id="review-list"></div>
+            <a href="https://wa.me/525513362585" class="btn-finish" style="text-decoration:none; display:block; background:#25d366;">Contactar a la Dra. Dulce</a>
+        </div>
+    </div>
+</div>
+
+<script>
+   
+    const questions = [
+        { id: 1, q: "1. Un investigador examina la asociación entre la autoestima y la comparación en redes sociales, a partir de datos recolectados en un solo momento. ¿A qué tipo de diseño corresponde?", a: ["Longitudinal", "Cuasi-experimental", "Experimental puro", "Transversal correlacional"], c: 3 },
+        { id: 2, q: "2. En un estudio sobre desgaste profesional, los participantes fueron seleccionados entre médicos residentes disponibles durante determinados turnos hospitalarios. ¿Qué tipo de muestreo se utilizó?", a: ["Aleatorio simple", "No probabilístico por conveniencia", "Estratificado", "Por conglomerados"], c: 1 },
+        { id: 3, q: "3. ¿Qué diferencia a un diseño cuasi-experimental de uno experimental?", a: ["Número de variables", "Análisis estadístico", "Procedimiento de asignación", "Mediciones posteriores"], c: 2 },
+        { id: 4, q: "4. Una investigación evalúa si la presencia de distractores visuales produce cambios en el tiempo de reacción durante una tarea cognitiva. El alcance del estudio es:", a: ["Exploratorio.", "Descriptivo.", "Correlacional.", "Explicativo."], c: 3 },
+        { id: 5, q: "5. Un equipo de investigación busca comprender cómo médicos residentes interpretan y experimentan el agotamiento emocional en su vida cotidiana. Este objetivo corresponde a un enfoque:", a: ["Cuantitativo descriptivo. ", "DCualitativo.", "Mixto.", "Experimental."], c: 1 },
+        { id: 6, q: "6. ¿Qué factor amenaza la validez interna cuando los participantes cambian como resultado natural del tiempo transcurrido durante el estudio?", a: [" Maduración.", "Historia.", "Instrumentación.", "Mortalidad experimental."], c: 0 },
+        { id: 7, q: "7. Un estudio analiza los cambios en el nivel de ansiedad de adolescentes que participan en un taller semanal durante dos meses. Al finalizar el periodo, se aplica un inventario estandarizado para evaluar la ansiedad. En este estudio,<br><br><b> ¿Cuál es la variable independiente?", a: ["Nivel de ansiedad", "Taller semanal", "Inventario estandarizado", "Adolescentes"], c: 1 },
+        { id: 8, q: "8. Sobre el mismo caso anterior... <br><br><b> ¿Cuál es la variable dependiente?", a: ["Duración del estudio", "Taller semanal", "Nivel de ansiedad", "Tipo de instrumento"], c: 2 },
+        { id: 9, q: "9. En un estudio sobre creencias relacionadas con la obesidad se plantea que el nivel educativo de las madres se asocia inversamente con la atribución hereditaria del problema. Este enunciado corresponde a una hipótesis:", a: ["Descriptiva.", "Causal.", "De diferencia entre grupos.", "Correlacional. "], c: 3 },
+        { id: 10, q: "10. Un investigador sostiene que no se presentan diferencias estadísticamente significativas en los niveles de ansiedad-estado entre dos grupos de madres en la Ciudad de México.", a: ["Hipótesis de investigación (Hi).", "Hipótesis estadística de estimación.", "Hipótesis alternativa (Ha).", "Hipótesis nula (H0)."], c: 3 },
+        { id: 11, q: "11. Un estudio da seguimiento a los niveles de depresión de los mismos participantes a lo largo de varios años. ¿A qué tipo de diseño corresponde?", a: ["Longitudinal.", "Transversal.", "Ex post facto.", "Pre-experimental."], c: 0 },
+        { id: 12, q: "12. Un investigador evalúa ansiedad y bienestar en estudiantes de medicina en un único momento previo al inicio del internado. Este estudio corresponde a un diseño:", a: ["Longitudinal de tendencia (trend).", "Longitudinal de panel.", "No experimental, transversal descriptivo.", "Experimental puro."], c: 2 },
+        { id: 13, q: "13. Un estudio analiza si existe diferencia en los niveles de ansiedad entre hombres y mujeres universitarios. El análisis estadístico se plantea antes de la recolección de datos. ¿Cuál de los siguientes enunciados corresponde a la hipótesis nula del estudio?", a: ["Existen diferencias significativas en los niveles de ansiedad entre hombres y mujeres.", "Los niveles de ansiedad son mayores en mujeres que en hombres.", "No se presentan diferencias significativas en los niveles de ansiedad entre hombres y mujeres.", "Las diferencias no se relaciona con el sexo de los participantes."], c: 2 },
+        { id: 14, q: "14. Durante una intervención para disminuir la ansiedad, algunos participantes adoptan por iniciativa propia prácticas externas que pueden influir en los resultados. Este hecho constituye una amenaza a la validez interna denominada:", a: ["Maduración.", "Administración de pruebas.", "Instrumentación.", "Historia."], c: 3 },
+        { id: 15, q: "15. Un estudio evalúa el impacto de una intervención psicológica breve para reducir el estrés. Los participantes fueron reclutados entre voluntarios de una institución educativa, todos eran del 7° semestre, y la intervención se llevó a cabo en condiciones estructuradas. A partir de esta información, ¿qué aspecto compromete principalmente la posibilidad de generalizar los resultados?", a: ["La ausencia de aleatorización en la asignación a condiciones.", "Las características específicas de la muestra y del contexto de la intervención.", "El contexto estructurado de la intervención.", "La falta de equivalencia inicial entre los participantes."], c: 1 },
+        { id: 16, q: "16. Las variables 'Edad', 'Peso' y 'Estatura' son ejemplos de variables:", a: ["Cualitativas", "Cuantitativas continuas", "Categóricas nominales", "Dicotómicas"], c: 1 },
+        { id: 17, q: "17. Un investigador evalúa el efecto de tres tipos de intervención psicológica (cognitiva, conductual y mindfulness) y dos modalidades de aplicación (presencial y en línea) sobre los niveles de ansiedad. Cada participante recibe solo una combinación de intervención y modalidad. A partir de este planteamiento <br><br><b>¿Cuál es la descripción correcta del diseño utilizado?", a: ["Se analizan dos variables independientes, una con tres condiciones y otra con dos", "Se comparan cinco variables independientes distintas", "Se requiere un solo grupo con mediciones repetidas", "El análisis se limita a comparar dos grupos mediante una prueba t"], c: 0 },
+        { id: 18, q: "18. Un investigador evalúa la eficacia de un programa breve para reducir ansiedad en universitarios. Aplica una escala de ansiedad antes y después de la intervención. Durante el estudio, algunos participantes abandonan el programa por falta de tiempo, aunado a que la segunda aplicación de la escala se realizó en un periodo cercano a los exámenes finales.<br><br><b> ¿Cuáles son dos posibles amenazas a la validez interna presentes en este estudio?", a: ["Historia y maduración.", "Mortalidad experimental e historia.", "Instrumentación y mortalidad experimental", "Maduración y selección."], c: 1 }, 
+        { id: 19, q: "19. Un investigador realiza un estudio con el objetivo de estimar la frecuencia y distribución de distintos niveles de ansiedad (bajo, moderado y alto) en estudiantes de primer año de medicina de una universidad pública. Con base en este planteamiento, el alcance del estudio es:", a: ["Exploratorio.", "Descriptivo.", "Correlacional.", "Explicativo."], c: 1 },
+        { id: 20, q: "20. Un estudio sobre creencias relacionadas con la obesidad se realizó con una muestra de estudiantes universitarios de una institución privada. A partir de los resultados, los autores plantean conclusiones generales sobre la población mexicana. Al analizar este planteamiento <br><br><b>¿Qué factor metodológico limita la solidez de dichas conclusiones?", a: ["La interacción entre los errores de selección y el tratamiento experimental.", "Efectos reactivos de los tratamientos experimentales.", "La exposición repetida a la variable independiente.", "El efecto del experimentador ."], c: 0 },
+        { id: 21, q: "21. Un investigador evalúa los efectos de una nueva intervención psicológica sobre los síntomas depresivos en adultos. Antes de analizar los datos, se formulan distintos enunciados que anticipan posibles resultados del tratamiento, considerando escenarios distintos a la ausencia de cambio. ¿Cuál de los siguientes enunciados cumple la función de una hipótesis alternativa en este estudio?", a: ["Los síntomas depresivos presentarán cambios significativos tras la intervención.", "La intervención producirá un efecto diferente al planteado inicialmente sobre los síntomas.", "Los niveles de depresión se mantendrán constantes a lo largo del estudio.", "La depresión se relaciona con múltiples factores psicosociales."], c: 1 }, 
+        { id: 22, q: "22. En la investigación sobre Factores de Desgaste Profesional, el equipo de estudio define que el interés son 'todos los médicos residentes de México' (I). Sin embargo, por presupuesto, solo tienen acceso a los médicos del Hospital General de Sonora (II), de los cuales eligen al azar a 150 para aplicarles las escalas (III). Los elementos I, II y III corresponden respectivamente a:", a: ["I: Muestra | II: Población | III: Unidad muestral. ", "I: Muestra | II: Población | III: Universo.", "I: Población | II: Universo | III: Muestra. ", "I: Universo | II: Población | III: Muestra. "], c: 3 }, 
+        { id: 23, q: "23. Un investigador desea evaluar si un nuevo fármaco psicológico produce cambios en los síntomas de ansiedad. Para ello, administra el fármaco a un grupo de participantes y compara sus resultados con los de otro grupo que no lo recibe, asegurando que ambos grupos sean comparables desde el inicio del estudio. A partir de este planteamiento, ¿qué tipo de diseño corresponde al estudio?", a: ["No experimental.", "Cuasi-experimental.", "Experimental.", "Longitudinal descriptivo."], c: 2 },
+        { id: 24, q: "24. Un investigador decide medir el Burnout a los mismos 50 médicos residentes, cada seis meses durante los cuatro años que dura su especialidad, el diseño se clasifica como:", a: ["Transversal correlacional.", "Longitudinal de evolución de grupo (cohorte).", "Longitudinal de panel.", "Cuasi-experimental de series cronológicas."], c: 2 },
+        { id: 25, q: "25. Un investigador desea analizar cómo cambian las actitudes hacia la obesidad en un grupo de adolescentes desde el inicio hasta el final de la preparatoria. Para ello, planea aplicar el mismo instrumento en tres momentos distintos a los mismos participantes. ¿Cuál es el diseño de este estudio?", a: ["Transversal.", "Longitudinal.", "Transversal comparativo.", "Estudio de caso."], c: 1 },
+        { id: 26, q: "26. Un investigador desea comparar las actitudes hacia la obesidad en adolescentes de primero, tercero y sexto semestre de preparatoria. Para ello, aplica el mismo instrumento una sola vez a cada grupo durante el mismo ciclo escolar. ¿Cuál es el diseño de este estudio?", a: ["Longitudinal.", "Longitudinal de panel.", "Transversal.", "Seguimiento prospectivo."], c: 2 },
+        { id: 27, q: "27. Si aplicamos un test hoy y lo aplicamos de nuevo en 15 días al mismo grupo obteniendo resultados similares, el test posee:", a: ["Validez concurrente.", "Confiabilidad Test-retest.", "Sensibilidad diagnóstica.", "Invarianza de medida."], c: 1 },
+        { id: 28, q: "28. La 'Resiliencia' se define como la capacidad de recuperar el equilibrio emocional tras un trauma. Al ser un concepto que no es directamente observable pero se infiere a través de conductas, se denomina: ", a: ["Unidad de análisis. ", "Constructo. ", "Variable operativa. ", "Indicador empírico."], c: 1 },
+        { id: 29, q: "29. Se pide a médicos residentes que indiquen su 'Satisfacción Laboral' entre: 1. Muy insatisfecho, 2. Insatisfecho, 3. Satisfecho y 4. Muy satisfecho. ¿A qué nivel de medición corresponde?", a: ["Nominal. ", "Ordinal. ", "De intervalo. ", "De razón."], c: 1 },
+        { id: 30, q: "30. Un equipo de expertos revisa si los ítems de un test cubren todas las dimensiones del modelo teórico propuesto. Este procedimiento busca obtener evidencia de:", a: ["Validez aparente. ", "Validez de contenido. ", "Validez convergente. ", "Validez predictiva."], c: 1 },
+        { id: 31, q: "31. Un grupo de investigadores diseña una escala para evaluar riesgo de abandono del tratamiento en pacientes con enfermedad renal crónica. La escala se aplica al inicio del seguimiento, cuando los pacientes ingresan al programa hospitalario. Seis meses después, los investigadores revisan los expedientes clínicos y clasifican a los pacientes según si mantuvieron o no la adherencia al tratamiento durante ese periodo. Al analizar los datos, encuentran que los puntajes obtenidos en la escala inicial se asocian de manera significativa con la conducta real de adherencia observada meses después. Con base en este procedimiento, ¿qué tipo de evidencia de validez está siendo evaluada?", a: ["Validez de contenido.", "Validez de constructo.", "Validez predictiva.", "Validez concurrente."], c: 0 },
+        { id: 32, q: "32. Se correlacionan los resultados de una escala de 'Ideación Suicida' con los intentos de suicidio reales ocurridos en los seis meses posteriores. ¿Qué tipo de validez de criterio se evalúa? ", a: ["Concurrente. ", "De constructo factorial.", "Divergente. ", "Predictiva. "], c: 3 },
+        { id: 33, q: "33. Un psicólogo educativo diseña un examen de conocimientos sobre psicopatología básica para aspirantes a un programa de posgrado.El instrumento está compuesto por 40 reactivos de opción múltiple, calificados como respuesta correcta o incorrecta, y se aplica a una muestra piloto de estudiantes con características similares a la población objetivo. Al analizar las respuestas, el investigador calcula un coeficiente Kuder–Richardson 20 (K-R 20) = 0.82. A partir de esta información, ¿cuál es la interpretación metodológica correcta del resultado obtenido? ", a: ["El instrumento demuestra que mide adecuadamente el constructo teórico propuesto.", "El 82% de la varianza total del instrumento corresponde al error de medición.", "El examen presenta una adecuada consistencia interna para reactivos dicotómicos.", "El coeficiente indica una confiabilidad insuficiente, por lo que el instrumento debe descartarse."], c: 1 },
+        { id: 34, q: "34. Un equipo de investigadores desarrolla un instrumento para evaluar habilidades de razonamiento clínico en estudiantes de Psicología. Con el fin de evitar efectos de memoria y práctica, elaboran dos versiones distintas del instrumento (Forma A y Forma B), ambas con el mismo número de reactivos, el mismo formato de respuesta y diseñadas para medir el mismo contenido y nivel de dificultad. Las dos versiones se aplican al mismo grupo de estudiantes, con un intervalo breve entre aplicaciones, y posteriormente se analiza el grado de correspondencia entre las puntuaciones obtenidas en ambas formas. ¿Cuál es la medida de confiabilidad que corresponde al procedimiento descrito?", a: ["Confiabilidad test–retest.", "Consistencia interna mediante alfa de Cronbach.", "Confiabilidad por formas paralelas.", "Confiabilidad interevaluador."], c: 2 },
+        { id: 35, q: "35. Un test que arroja siempre el mismo resultado pero no mide lo que dice medir es:", a: ["Válido pero no confiable.", "Confiable pero no válido.", "Ni confiable ni válido.", "Sensible pero poco específico."], c: 1 },
+        { id: 36, q: "36. Un investigador desea evaluar el 'Agotamiento Emocional' en residentes. Para ello, selecciona el ítem 'Me siento frustrado por mi trabajo', y establece que si el médico responde 'Nunca' se le asigne un 0 y si responde 'Siempre' un 6. Este proceso de vincular el concepto abstracto con el indicador observable mediante una regla de asignación numérica hace referencia a:", a: ["Análisis descriptivo de frecuencias. ", "Medición. ", "Confiabilidad por mitades. ", "Definición nominal de la variable."], c: 3 },
+        { id: 37, q: "37. Un investigador desea comparar los niveles de depresión, medida con un inventario estandarizado (puntaje total: 0 a 63), entre un grupo de madres solteras y un grupo de madres casadas. ¿Qué prueba debe usar?", a: ["t de Student para muestras independientes.", "t de Student para muestras relacionadas.", "Chi-cuadrada.", "U de Mann-Whitney."], c: 0 },
+        { id: 38, q: "38. Se evalúa la eficacia de un taller para reducir el estrés. Se mide el estrés a 30 participantes antes de iniciar el taller y después de terminarlo. ¿Qué prueba es la indicada?", a: ["t de Student para muestras independientes.", "t de Student para muestras relacionadas.", "ANOVA de un factor.", "U de Mann-Whitney."], c: 1 },
+        { id: 39, q: "39. Un estudio busca saber si existe relación entre el neuroticismo (escala de 0 a 50) y la satisfacción con la vida (escala de 0 a 100). ¿Qué estadístico se requiere?", a: ["t de Student.", "Coeficiente de correlación de Pearson.", "Chi-cuadrada de Pearson", "Coeficiente de Spearman."], c: 1 },
+        { 
+    id: 40, 
+    q: "40. Un investigador desea comparar el rendimiento académico (promedio final) de estudiantes de tres licenciaturas distintas: Psicología, Medicina e Ingeniería. Los grupos son independientes entre sí y el rendimiento se mide en una escala continua. Antes de realizar la comparación, se obtienen los siguientes resultados preliminares:<br><br>" +
+       "<b>Tabla 1. Estadísticos descriptivos y pruebas de supuestos</b><br>" +
+       "<pre style='background: #f4f4f4; padding: 15px; border-radius: 8px; font-size: 0.9rem; overflow-x: auto;'>" +
+"Licenciatura |  n  | Mediana | Rango IQ | Normalidad (p)\n" +
+"---------------------------------------------------------\n" +
+"Psicología   | 42  |   8.1   |    1.4   |     0.012\n" +
+"Medicina     | 38  |   8.7   |    1.1   |     0.021\n" +
+"Ingeniería   | 40  |   7.9   |    1.6   |     0.009" +
+       "</pre><br>" +
+       "<b>Con base en esta información, ¿cuál es la prueba estadística más adecuada para contrastar las diferencias en el rendimiento académico entre los tres grupos?</b>", 
+    a: [
+        "ANOVA de un factor", 
+        "Prueba H de Kruskal–Wallis", 
+        "Prueba U de Mann–Whitney", 
+        "Prueba de rangos con signo de Wilcoxon"
+    ], 
+    c: 1 
+},
+        { id: 41, q: "41. Un hospital quiere saber si el hábito de fumar (Sí/No) está asociado con el diagnóstico de asma. ¿Qué prueba analiza esta asociación entre variables?", a: ["Coeficiente de Pearson.", "Chi-cuadrada.", "Regresión lineal.", "ANOVA de medidas repetidas."], c: 1 },
+        { id: 42, q: "42. Un investigador quiere predecir el puntaje de ansiedad a partir del número de horas de sueño. ¿Qué análisis debe realizar?", a: ["Análisis Factorial.", "Regresión Lineal Simple.", "Regresión Logística.", "Prueba t."], c: 1 },
+        { 
+    id: 43, 
+    q: "43. Un investigador analiza el peso corporal de adultos atendidos en una clínica de primer nivel. Al explorar la distribución de los datos, observa que la mayoría de los participantes se concentra en valores relativamente bajos, mientras que un número reducido presenta pesos considerablemente más altos, extendiendo la cola de la distribución hacia un solo extremo.<br><br>" +
+       "<div style='text-align:center; margin: 15px 0;'>" +
+       "  <img src='histograma.webp' alt='Histograma de Peso' style='width:100%; max-width:500px; border-radius:12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #ddd;'>" +
+       "  <p style='font-size: 0.8rem; color: #666; margin-top: 5px;'><i>Figura: Distribución de Peso Corporal con sesgo a la derecha</i></p>" +
+       "</div>" +
+       "<b>Con base en esta descripción y en el histograma, ¿qué forma presenta la distribución de los datos?</b>", 
+    a: [
+        "A) Distribución normal", 
+        "B) Asimetría negativa", 
+        "C) Asimetría positiva", 
+        "D) Distribución bimodal"
+    ], 
+    c: 2 // Respuesta correcta: C
+},
+        { id: 44, q: "44. Un psicólogo rechaza la hipótesis nula de que un tratamiento no funciona (p = .01), pero en la realidad el tratamiento sí es efectivo. ¿Qué error cometió?", a: ["Error de Tipo I (Falso positivo).", "Error de Tipo II (Falso negativo).", "Error de medición.", "Error estándar."], c: 0 },
+        { id: 45, q: "45. En un estudio sobre bienestar en pacientes con enfermedad crónica, un investigador evalúa la calidad de vida mediante una escala continua estandarizada.Los participantes se distribuyeron en tres grupos según su nivel socioeconómico (bajo, medio y alto). El objetivo es determinar si existen diferencias en el promedio de calidad de vida entre los grupos. ¿Qué procedimiento estadístico es el más adecuado para analizar estos datos?", a: ["t de Student.", "ANOVA de un factor.", "Correlación de Spearman.", "Chi-cuadrada."], c: 1 },
+        { 
+    id: 46, 
+    q: "46. Un estudio analiza si existen diferencias en el nivel de estrés percibido entre estudiantes de primer, quinto y noveno semestre (n=90). Se realizó el análisis correspondiente para comparar los grupos:<br><br>" +
+       "<b>Tabla. Resultados del análisis (ANOVA)</b>" +
+       "<pre style='background: #1e1e1e; color: #dcdcdc; padding: 15px; border-radius: 10px; font-size: 0.85rem; font-family: monospace; overflow-x: auto;'>" +
+"Fuente        | gl |  CM   |  F   |  p\n" +
+"-----------------------------------------\n" +
+"Entre grupos  | 2  | 112.4 | 4.86 | .010\n" +
+"Dentro grupos | 87 | 23.1  |      | \n" +
+"Total         | 89 |       |      | " +
+       "</pre><br>" +
+       "<b>Con base en estos resultados, ¿cuál es la interpretación correcta?</b>", 
+    a: [
+        "No existen diferencias en el nivel de estrés entre los semestres", 
+        "Existen diferencias estadísticamente significativas entre al menos dos semestres", 
+        "El estrés aumenta linealmente conforme avanza el semestre", 
+        "El estrés es mayor en el noveno semestre que en los otros dos"
+    ], 
+    c: 1 // La respuesta correcta es la B
+},
+{ 
+    id: 47, 
+    q: "47. Un investigador analiza si las horas de estudio semanal se relacionan con el puntaje obtenido en un examen estandarizado (0-100) en estudiantes universitarios (n=120). Se verificó normalidad y linealidad.<br><br>" +
+       "<b>Tabla. Resultados del análisis de regresión</b>" +
+       "<pre style='background: #1e1e1e; color: #dcdcdc; padding: 15px; border-radius: 10px; font-size: 0.82rem; font-family: monospace; overflow-x: auto; line-height: 1.4;'>" +
+"Predictor         |  B   |  EE  |  β   |  t   |  p\n" +
+"---------------------------------------------------\n" +
+"Constante         |52.10 | 3.20 |  —   |16.28 | .000\n" +
+"Horas de estudio  | 1.85 | 0.35 | .48  | 5.29 | .000\n" +
+"\n" +
+"R² = .23  |  F = 27.98  |  p = .000" +
+       "</pre><br>" +
+       "<b>¿Cuál es la interpretación correcta de estos resultados?</b>", 
+    a: [
+        "Cada hora adicional de estudio incrementa en promedio 1.85 puntos el puntaje del examen", 
+        "El 48% de los estudiantes aprueban el examen por estudiar más horas", 
+        "Existe una relación significativa, pero no es posible estimar cambios en el puntaje", 
+        "Las horas de estudio explican el 48% de la varianza del puntaje"
+    ], 
+    c: 0 // La respuesta correcta es la A
+},
+        { id: 48, q: "48. En una curva normal, un estudiante obtiene una puntuación Z = +1. Esto significa que su puntaje está:", a: ["Exactamente en la media.", "Una desviación estándar por encima de la media.", "En el 5% de los valores más bajos.", "Es un valor atípico (outlier)."], c: 1 },
+        { id: 49, q: "49. Se desea analizar cómo influyen simultáneamente el Género y el Tipo de Terapia (TCC vs Humanista) sobre el nivel de Bienestar. ¿Qué diseño estadístico se requiere?", a: ["t de Student.", "ANOVA factorial (2x2).", "Regresión Lineal Simple.", "Correlación de Spearman."], c: 1 },
+        { id: 50, q: "50. Un investigador evalúa el nivel de estrés percibido en una muestra de trabajadores del sector salud mediante un cuestionario cuyo puntaje total va de 0 a 40. El análisis arroja un promedio muestral de 25 puntos y se construye un intervalo de confianza al 95% con límites inferiores y superiores de 22 y 28 puntos, respectivamente. Con base en esta información, ¿cuál es la interpretación más adecuada del intervalo de confianza reportado?", a: ["La mayoría de los participantes obtuvo puntajes entre 22 y 28.", "Si se repitiera el estudio muchas veces, el 95% de los intervalos construidos contendrían el valor real de la media poblacional.", "El estrés individual de los participantes varía en un rango de 6 puntos.", "El intervalo indica que el error muestral fue del 5%."], c: 1 },
+        { id: 51, q: "51. Un investigador evalúa si un programa de intervención psicológica mejora la calidad de vida en pacientes con una enfermedad crónica. Se comparan los puntajes de calidad de vida antes y después de la intervención. El análisis se realiza con un nivel de significancia α = 0.05. El resultado estadístico arroja un valor de p = 0.032. Con base en esta información, ¿cuál es la decisión estadística correcta?", a: ["Se acepta la hipótesis nula porque el valor de p es mayor que α.", "No se puede tomar una decisión porque p no es exactamente 0.05.", "Se rechaza la hipótesis nula porque p es menor que α.", "El programa no tuvo efecto clínicamente relevante."], c: 2 },
+        { id: 52, q: "52. Un investigador obtiene los siguientes puntajes de ansiedad en una pequeña muestra de 5 residentes: 8, 6, 10, 8, 8. Calcula la Media y la Varianza (s2) de esta distribución: ", a: ["Media = 8; Varianza = 2 ", "Media = 8; Varianza = 1.6 ", "Media = 40; Varianza = 8 ", "Media = 8; Varianza = 4"], c: 1 },
+        { id: 53, q: "53. Un equipo de investigación evalúa un programa psicoeducativo para mejorar la adherencia al tratamiento farmacológico en pacientes con hipertensión.Se compara un grupo que recibe la intervención con un grupo control, utilizando un nivel de significancia α = .05. Los resultados muestran una diferencia estadísticamente significativa entre grupos, por lo que los investigadores concluyen que el programa mejora la adherencia y recomiendan su implementación en clínicas de primer nivel. Meses después, un metaanálisis que incluye estudios con muestras más grandes y mejor control metodológico demuestra que el programa no tiene un efecto real sobre la adherencia, y que la diferencia observada fue producto de variabilidad muestral. Con base en este escenario, ¿qué tipo de error estadístico ocurrió en el estudio original?", a: ["Error tipo I (α), al concluir que existe un efecto cuando en realidad no lo hay.", "Error tipo II (β), al no detectar un efecto que sí existe", "Error de medición, por utilizar instrumentos poco confiables.", "Error de muestreo, por no usar un diseño probabilístico."], c: 0 },
+       { 
+    id: 54, 
+    q: "54. Un investigador evalúa el nivel de estrés percibido en 50 estudiantes universitarios utilizando una escala cuyos puntajes van de 0 a 40. Con fines descriptivos, los resultados se organizaron en la siguiente tabla:<br><br>" +
+       "<b>Tabla de distribución de frecuencias</b>" +
+       "<pre style='background: #1e1e1e; color: #dcdcdc; padding: 15px; border-radius: 10px; font-size: 0.85rem; font-family: monospace; overflow-x: auto; line-height: 1.5;'>" +
+"Intervalo de puntaje | Frecuencia (f) | Frecuencia ac. (Fa)\n" +
+"----------------------------------------------------------\n" +
+"      0 – 9          |       6        |         6\n" +
+"     10 – 19         |      14        |        20\n" +
+"     20 – 29         |      18        |        38\n" +
+"     30 – 40         |      12        |        50" +
+       "</pre><br>" +
+       "<b>Con base en la información de la tabla, ¿cuál de las siguientes interpretaciones es correcta?</b>", 
+    a: [
+        "A) La mayoría de los estudiantes presenta niveles bajos de estrés (0–9)", 
+        "B) Más de la mitad de los estudiantes obtuvo puntajes menores o iguales a 19", 
+        "C) El intervalo con mayor frecuencia corresponde a puntajes entre 20 y 29", 
+        "D) Exactamente 38 estudiantes obtuvieron puntajes mayores a 20"
+    ], 
+    c: 2 // La respuesta correcta es la C
+},
+
+        { id: 55, q: "55. Se realiza un ANOVA de un factor para comparar el bienestar entre 4 grupos. El estadístico F es significativo (p < 0.05), pero la prueba de Levene arroja un p = 0.001. ¿Qué debe interpretar el investigador?", a: ["Los resultados son válidos porque el ANOVA es significativo", "Se ha violado el supuesto de homocedasticidad (igualdad de varianzas)", "Los datos no siguen una distribución normal", "La muestra es demasiado pequeña para el ANOVA"], c: 1 },
+        { id: 56, q: "56. Un investigador utiliza un diseño factorial 2 (Género: H/M) x 3 (Terapia: A, B, C). El análisis arroja que el efecto de la terapia cambia dependiendo de si el paciente es hombre o mujer. ¿Cómo se le llama técnicamente a este hallazgo? ", a: ["Efecto principal de la variable Género.", "Efecto de interacción.", "Error de muestreo sistemático. ", "Covarianza de grupos independientes."], c: 1 },
+        { id: 57, q: "57. En un estudio con estudiantes universitarios se analiza la relación entre el tiempo promedio diario dedicado al uso recreativo de redes sociales y el rendimiento académico, medido a través del promedio semestral.Al analizar los datos se obtiene un coeficiente de correlación de Pearson de r = −0.90, con un valor de p < 0.001. Con base en este resultado, ¿cuál es la interpretación más adecuada?", a: ["No existe una relación relevante entre las variables, ya que el coeficiente es negativo.", "Existe una relación fuerte en la que ambas variables aumentan de manera conjunta.", "Existe una relación fuerte en la que al aumentar el uso recreativo de redes sociales, el rendimiento académico tiende a disminuir. ", "El coeficiente obtenido indica un error metodológico, ya que las correlaciones válidas no pueden ser negativas."], c: 2 },
+        { id: 58, q: "58. Un investigador desea predecir el nivel de Bienestar Subjetivo a partir de las Horas de Interacción Social semanales. Tras el análisis, obtiene la siguiente ecuación de regresión: Y = 30 + 4X. Si un paciente reporta tener 5 horas de interacción social a la semana, ¿cuál es su puntaje de bienestar estimado y qué representa técnicamente el valor 4 en este modelo?", a: ["50 puntos; representa el puntaje de bienestar cuando el paciente no tiene interacción social alguna", "50 puntos; representa la tasa de incremento en el bienestar por cada hora adicional de interacción social.", "34 puntos; representa la correlación promedio entre las dos variables.", "39 puntos; representa el error estándar de la medición."], c: 3 },
+        { id: 59, q: "59. Un equipo de investigación en psicología social analiza la asociación entre ingreso mensual y nivel de bienestar subjetivo en una muestra de 120 adultos residentes en una zona urbana. Ambas variables se midieron mediante escalas cuantitativas continuas y cumplieron los supuestos para el uso de estadística paramétrica. El análisis arrojó un coeficiente de correlación de Pearson de r = 0.75, con un valor de probabilidad p = 0.001. A partir de estos resultados, ¿cuál es la conclusión estadísticamente correcta?", a: ["El nivel de ingreso explica el 75% de la felicidad de los participantes.", "Existe una asociación positiva, de magnitud alta y estadísticamente significativa entre las variables.", "La relación observada es espuria debido al tamaño de la muestra.", "El resultado indica una relación causal directa entre ingreso y bienestar."], c: 1 },
+       { 
+    id: 60, 
+    q: "60. Un investigador desea comparar el nivel de ansiedad entre dos grupos de estudiantes universitarios:<br>" +
+       "• Grupo A: Estudiantes que trabajan además de estudiar (n = 28)<br>" +
+       "• Grupo B: Estudiantes que solo estudian (n = 30)<br><br>" +
+       "La ansiedad se midió con una escala de 1 a 5 (1 = Muy baja a 5 = Muy alta). Resultados preliminares:<br><br>" +
+       "<b>Tabla 1. Distribución de ansiedad por grupo</b>" +
+       "<pre style='background: #1e1e1e; color: #dcdcdc; padding: 12px; border-radius: 8px; font-size: 0.82rem; font-family: monospace;'>" +
+"Nivel de ansiedad | Grupo A | Grupo B\n" +
+"--------------------------------------\n" +
+"Muy baja          |    1    |    5\n" +
+"Baja              |    3    |    8\n" +
+"Moderada          |    7    |   10\n" +
+"Alta              |   10    |    5\n" +
+"Muy alta          |    7    |    2" +
+       "</pre><br>" +
+       "<b>Tabla 2. Pruebas de supuestos (Shapiro-Wilk)</b>" +
+       "<pre style='background: #1e1e1e; color: #dcdcdc; padding: 12px; border-radius: 8px; font-size: 0.82rem; font-family: monospace;'>" +
+"Prueba                   | Resultado\n" +
+"------------------------------------\n" +
+"Shapiro-Wilk (Grupo A)   | p = .018\n" +
+"Shapiro-Wilk (Grupo B)   | p = .011" +
+       "</pre><br>" +
+       "<b>Con base en el tipo de variable y los resultados, ¿cuál es la prueba estadística más adecuada?</b>", 
+    a: [
+        "t de Student para muestras independientes", 
+        "U de Mann-Whitney", 
+        "ANOVA de un factor", 
+        "Prueba de Friedman"
+    ], 
+    c: 1 // La respuesta correcta es la B
+},
+{ 
+    id: 61, 
+    q: "61. Un equipo de investigación analiza si existe relación entre el tipo de turno laboral y la presencia de síntomas de insomnio en personal de enfermería:<br>" +
+       "• Turno laboral: Matutino, Vespertino, Nocturno<br>" +
+       "• Síntomas de insomnio: Presente / Ausente<br><br>" +
+       "<b>Tabla 1. Distribución de insomnio según turno laboral</b>" +
+       "<pre style='background: #1e1e1e; color: #dcdcdc; padding: 15px; border-radius: 10px; font-size: 0.85rem; font-family: monospace; overflow-x: auto;'>" +
+"Turno laboral | Insomnio (+) | Insomnio (-) | Total\n" +
+"----------------------------------------------------\n" +
+"Matutino      |      12      |      28      |  40\n" +
+"Vespertino    |      18      |      22      |  40\n" +
+"Nocturno      |      30      |      10      |  40\n" +
+"----------------------------------------------------\n" +
+"Total         |      60      |      60      |  120" +
+       "</pre><br>" +
+       "<b>¿Cuál es la prueba estadística más adecuada para analizar si existe una asociación significativa entre estas variables?</b>", 
+    a: [
+        "ANOVA de un factor", 
+        "Correlación de Spearman", 
+        "Chi-cuadrada de independencia", 
+        "U de Mann-Whitney"
+    ], 
+    c: 2 // La respuesta correcta es la C
+},
+        { id: 62, q: "62.Un equipo de investigación evaluó el efecto de dos diferentes modalidades de talleres de lectura (presencial y en línea) sobre las habilidades de comprensión de lectura en estudiantes universitarios. Los participantes fueron asignados a un solo tipo de intervención y se clasificaron además según su sexo (hombres o mujeres). Cada participante fue evaluado una sola vez al finalizar el programa. Los objetivos del estudio fueron determinar: Si el tipo de intervención se asocia con diferencias en los niveles de ansiedad; si el sexo se asocia con diferencias en los niveles de ansiedad y si el efecto de la intervención depende del sexo. ¿Cuál es el análisis estadístico más adecuado para responder a estos objetivos?", a: ["t de Student para muestras independientes", "ANOVA de un factor", "ANOVA de dos factores para muestras independientes", "ANOVA de medidas repetidas"], c: 2 },
+        { id: 63, q: "63. Un psicólogo deportivo investiga la relación entre el nivel de concentración y el nivel de activación fisiológica en atletas de alto rendimiento durante una competencia oficial. Ambas variables se obtienen a partir de escalas estandarizadas. El interés del investigador es determinar si existe una asociación sistemática entre ambas variables, sin asumir una relación lineal estricta. ¿Cuál es la prueba estadística más adecuada para analizar estos datos?", a: ["U de Mann-Whitney", "T de Wilcoxon", "t de Student para muestras relacionadas", "Rho de Spearman "], c: 3 },
+        { id: 64, q: "64. En una investigación con 4 grupos independientes de niños donde se mide la frecuencia de conductas agresivas (Nunca, Rara vez, A veces, Frecuentemente, Muy frecuentemente), se quiere determinar si existen diferencias significativas entre los grupos. La prueba adecuada es: ", a: ["ANOVA de un factor. ", "F de Friedman. ", "Kruskal-Wallis. ", "Ji-cuadrada."], c: 2 },
+        { id: 65, q: "65. Un investigador desea conocer el grado de asociación entre el Lugar ocupado en una competencia (1º, 2º, 3º) y el Nivel de Autoestima (Bajo, Medio, Alto) de 15 atletas. El estadístico de elección y su interpretación correcta es: ", a: ["r de Pearson", "Rho (rho) de Spearman", "Regresión Lineal", "Coeficiente de Contingencia"], c: 3 },
+        { id: 66, q: "66. Un investigador evalúa la efectividad de un programa breve de regulación emocional aplicado a un grupo de estudiantes universitarios. La variable de interés es el nivel de ansiedad, la cual se midió con una escala estandarizada antes de iniciar el programa y nuevamente al finalizar la intervención, en los mismos participantes. La distribución de los puntajes no cumple con el supuesto de normalidad. ¿Cuál es la prueba estadística más adecuada para determinar si existen cambios estadísticamente significativos entre ambas mediciones?", a: ["Kruskal-Wallis", "ANOVA de medidas repetidas ", "T de Wilcoxon para muestras relacionadas ", "Ji-cuadrada de independencia"], c: 2 },
+    ];
+
+    // Función para renderizar preguntas rápidamente
+    function renderQuestions() {
+        // Nota: Por brevedad en este ejemplo uso un loop, pero aquí van los textos del PDF
+        // Para q4 a q64 seguirías el mismo formato de arriba.
+        const containers = {
+            meto: document.getElementById('metodologia-container'),
+            psico: document.getElementById('psicometria-container'),
+            est: document.getElementById('estadistica-container')
+        };
+
+        // Simulación de carga (en producción aquí van los 65 objetos detallados)
+        questions.forEach(item => {
+            let target = containers.meto;
+            if(item.id > 23) target = containers.psico;
+            if(item.id > 44) target = containers.est;
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <span class="question">${item.q}</span>
+                ${item.a.map((opt, i) => `
+                    <label class="option">
+                        <input type="radio" name="q${item.id}" value="${i === item.c ? 1 : 0}" required>
+                        ${String.fromCharCode(65 + i)}) ${opt}
+                    </label>
+                `).join('')}
+            `;
+            target.appendChild(card);
+        });
+    }
+
+    renderQuestions();
+
+    document.getElementById('final-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        // Envío a Netlify
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        });
+
+        let score = 0;
+        let revHTML = "";
+        for(let i=1; i<=66; i++) {
+            const isCorrect = formData.get('q'+i) === "1";
+            if(isCorrect) score++;
+            revHTML += `<div class="rev-item ${isCorrect ? 'correct' : 'incorrect'}">Pregunta ${i}: ${isCorrect ? 'Correcto ✅' : 'Incorrecto ❌'}</div>`;
+        }
+
+        document.getElementById('final-form').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('total-score').innerText = score;
+        document.getElementById('review-list').innerHTML = revHTML;
+        window.scrollTo(0,0);
+    });
+</script>
+</body>
+</html>
