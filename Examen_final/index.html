@@ -144,10 +144,10 @@
        "</div>" +
        "<b>Con base en esta descripción y en el histograma, ¿qué forma presenta la distribución de los datos?</b>", 
     a: [
-        "A) Distribución normal", 
-        "B) Asimetría negativa", 
-        "C) Asimetría positiva", 
-        "D) Distribución bimodal"
+        "Distribución normal", 
+        "Asimetría negativa", 
+        "Asimetría positiva", 
+        "Distribución bimodal"
     ], 
     c: 2 // Respuesta correcta: C
 },
@@ -214,10 +214,10 @@
        "</pre><br>" +
        "<b>Con base en la información de la tabla, ¿cuál de las siguientes interpretaciones es correcta?</b>", 
     a: [
-        "A) La mayoría de los estudiantes presenta niveles bajos de estrés (0–9)", 
-        "B) Más de la mitad de los estudiantes obtuvo puntajes menores o iguales a 19", 
-        "C) El intervalo con mayor frecuencia corresponde a puntajes entre 20 y 29", 
-        "D) Exactamente 38 estudiantes obtuvieron puntajes mayores a 20"
+        "La mayoría de los estudiantes presenta niveles bajos de estrés (0–9)", 
+        "Más de la mitad de los estudiantes obtuvo puntajes menores o iguales a 19", 
+        "El intervalo con mayor frecuencia corresponde a puntajes entre 20 y 29", 
+        "Exactamente 38 estudiantes obtuvieron puntajes mayores a 20"
     ], 
     c: 2 // La respuesta correcta es la C
 },
@@ -313,7 +313,7 @@
                 ${item.a.map((opt, i) => `
                     <label class="option">
                         <input type="radio" name="q${item.id}" value="${i === item.c ? 1 : 0}" required>
-                        ${String.fromCharCode(65 + i)}) ${opt}
+                        ${String.fromCharCode(66 + i)}) ${opt}
                     </label>
                 `).join('')}
             `;
