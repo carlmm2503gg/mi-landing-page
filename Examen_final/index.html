@@ -32,7 +32,7 @@
 <nav>EXAMEN FINAL DE SIMULACIÓN - POSGRADO UNAM</nav>
 
 <section class="hero">
-    <h1>Simulacro General de 65 Reactivos</h1>
+    <h1>Simulacro General de 66 Reactivos</h1>
     <p>Evaluación final de Metodología, Psicometría y Estadística</p>
 </section>
 
@@ -333,14 +333,21 @@
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(formData).toString()
         });
+let score = 0;
+let revHTML = "";
 
-        let score = 0;
-        let revHTML = "";
-        for(let i=1; i<=66; i++) {
-            const isCorrect = formData.get('q'+i) === "1";
-            if(isCorrect) score++;
-            revHTML += `<div class="rev-item ${isCorrect ? 'correct' : 'incorrect'}">Pregunta ${i}: ${isCorrect ? 'Correcto ✅' : 'Incorrecto ❌'}</div>`;
-        }
+// Usamos questions.length para que si mañana agregas otra, se corrija solo
+for(let i = 0; i < questions.length; i++) {
+    // Usamos questions[i].id porque tus IDs empiezan en 1
+    const qId = questions[i].id;
+    const isCorrect = formData.get('q' + qId) === "1";
+    
+    if(isCorrect) score++;
+    
+    revHTML += `<div class="rev-item ${isCorrect ? 'correct' : 'incorrect'}">
+        Pregunta ${qId}: ${isCorrect ? 'Correcto ✅' : 'Incorrecto ❌'}
+    </div>`;
+}
 
         document.getElementById('final-form').style.display = 'none';
         document.getElementById('results').style.display = 'block';
