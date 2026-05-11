@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador para Posgrado | UNAM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-light: #f8fafc;
+            --primary: #6d28d9;
+            --primary-hover: #5b21b6;
+            --accent: #10b981;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0; 
+            background-color: var(--bg-light); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* BARRA DE PROGRESO GLOWING */
+        .progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 8px; background: rgba(0,0,0,0.1); z-index: 9999; }
+        .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px var(--accent); }
+
+        /* NAV & TIMER */
+        nav { 
+            background: var(--bg-dark); 
+            padding: 15px 5%; 
+            color: white; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-weight: 800; 
+            position: sticky; 
+            top: 8px; 
+            z-index: 1000;
+            border-bottom: 4px solid var(--primary);
+        }
+        .timer-badge { 
+            background: #1e293b; 
+            padding: 8px 20px; 
+            border-radius: 8px; 
+            font-family: monospace; 
+            font-size: 1.4rem; 
+            font-weight: 700;
+            color: var(--accent);
+            border: 1px solid #334155;
+        }
+        .timer-badge.warning { color: #ef4444; border-color: #ef4444; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        /* HERO ALTAMENTE VISIBLE */
+        .hero { 
+            background: var(--bg-dark); 
+            padding: 80px 20px 100px; 
+            text-align: center; 
+            color: white; 
+        }
+        .hero h1 { margin: 0; font-size: 3rem; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin: 15px auto 0; font-weight: 500; }
+
+        /* CONTENEDOR PRINCIPAL */
+        .container { max-width: 800px; margin: -50px auto 80px; padding: 0 20px; position: relative; z-index: 10; min-height: 400px; }
+        
+        .card { 
+            background: var(--card-bg); 
+            border-radius: 24px; 
+            padding: 40px; 
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1); 
+            border: 1px solid var(--border-color); 
+        }
+        
+        /* MOTOR STEPPER */
+        .question-step { display: none; animation: slideUp 0.4s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        .question-step.active { display: block; }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+        .section-tag { display: inline-block; background: #ede9fe; color: var(--primary); padding: 8px 16px; border-radius: 50px; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
+        .question { font-weight: 800; color: var(--text-main); display: block; margin-bottom: 30px; font-size: 1.4rem; line-height: 1.4; }
+        
+        /* OPCIONES NIVEL JEFE (HITBOX GRANDE Y VISIBLE) */
+        .option { 
+            display: flex; 
+            align-items: center; 
+            padding: 20px 25px; 
+            border: 3px solid var(--border-color); 
+            border-radius: 16px; 
+            margin-bottom: 15px; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            background: #fff; 
+            font-weight: 700; 
+            color: var(--text-light); 
+            font-size: 1.1rem;
+        }
+        .option input[type="radio"] { position: absolute; opacity: 0; }
+        .option:hover { border-color: #c4b5fd; background: #f5f3ff; color: var(--primary); transform: translateX(5px); }
+        .option:has(input[type="radio"]:checked) { 
+            background: #f5f3ff; 
+            border-color: var(--primary); 
+            color: var(--primary); 
+            box-shadow: 0 10px 20px -10px rgba(109, 40, 217, 0.3);
+        }
+        
+        /* BOTONES DE NAVEGACIÓN */
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 40px; gap: 20px; }
+        .btn-nav { padding: 18px 30px; border-radius: 14px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: all 0.2s; border: none; flex: 1; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-prev { background: var(--bg-light); color: var(--text-light); border: 2px solid var(--border-color); }
+        .btn-prev:hover { background: #e2e8f0; color: var(--text-main); }
+        .btn-next { background: var(--primary); color: white; box-shadow: 0 10px 20px -10px var(--primary); }
+        .btn-next:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-next:disabled { background: #cbd5e1; cursor: not-allowed; transform: none; box-shadow: none; color: #94a3b8; }
+
+        /* FORMULARIO FINAL (MUY VISIBLE, SIN DISTRACCIONES) */
+        .lead-form { display: none; animation: slideUp 0.5s ease forwards; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group label { display: block; font-weight: 800; margin-bottom: 10px; color: var(--text-main); font-size: 1.1rem;}
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 18px; 
+            border: 3px solid var(--border-color); 
+            border-radius: 12px; 
+            font-family: inherit; 
+            font-size: 1.1rem; 
+            font-weight: 500;
+            box-sizing: border-box; 
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); }
+        .btn-submit { background: var(--text-main); color: white; border: none; padding: 22px; width: 100%; border-radius: 14px; font-size: 1.3rem; font-weight: 800; cursor: pointer; transition: all 0.3s; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-submit:hover { background: #000; transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4); }
+
+        /* PANTALLA DE RESULTADOS */
+        .result-box { display: none; text-align: center; }
+        .score-display { font-size: 6rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 20px 0; letter-spacing: -3px;}
+        
+        .bio-section { display: flex; gap: 25px; align-items: center; background: var(--bg-light); padding: 35px; border-radius: 20px; margin: 40px 0; text-align: left; border: 2px solid var(--border-color);}
+        .bio-section img { width: 100px; height: 100px; border-radius: 24px; object-fit: cover; box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);}
+        .bio-text h4 { margin:0 0 5px; font-size: 1.3rem; color: var(--text-main); font-weight: 800;}
+        .bio-text p { margin:0; font-size:1rem; color: var(--text-light); }
+
+        .cta-container { background: var(--bg-dark); padding: 40px; border-radius: 24px; text-align: center; color: white; }
+        .cta-container h3 { font-size: 1.8rem; margin-top: 0; margin-bottom: 20px; font-weight: 800;}
+        .btn-cta { display: block; padding: 22px; border-radius: 14px; font-size: 1.2rem; font-weight: 800; text-decoration: none; background: var(--accent); color: white; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-cta:hover { background: #059669; transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(16, 185, 129, 0.5); }
+        
+        @media (max-width: 600px) { 
+            .hero h1 { font-size: 2.2rem; }
+            .bio-section { flex-direction: column; text-align: center; } 
+            .nav-buttons { flex-direction: column-reverse; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+
+<nav>
+    <span style="letter-spacing: 1px;">RUTA AL POSGRADO</span>
+    <div class="timer-badge" id="timerDisplay">30:00</div>
+</nav>
+
+<section class="hero">
+    <h1>Simulador para Posgrado</h1>
+    <p>Responde las preguntas y obtén tu diagnóstico detallado para el examen de ingreso.</p>
+</section>
+
+<div class="container">
+    <div id="quiz-container">
+        <form id="quiz-form" name="diagnostico-unam" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="diagnostico-unam" />
+            
+            <div id="questions-wrapper">
+                <!-- Inyectado vía JS -->
+            </div>
+
+            <!-- FORMULARIO DE LEAD -->
+            <div class="card lead-form" id="lead-step">
+                <h2 style="text-align:center; margin-top:0; font-size: 2rem; font-weight: 800;">Evaluación Completada</h2>
+                <p style="text-align:center; color:var(--text-light); font-size: 1.1rem; margin-bottom: 30px;">Ingresa tus datos para procesar tu calificación.</p>
+                
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp (10 dígitos)</label>
+                    <input type="tel" name="whatsapp" placeholder="Ej. 5512345678" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" name="email" placeholder="correo@ejemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label>¿Cómo te enteraste?</label>
+                    <select name="origen" required>
+                        <option value="">Selecciona una opción...</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Youtube">Youtube</option>
+                        <option value="Recomendacion">Recomendación</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Ver Mi Diagnóstico</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div id="quiz-result" class="card result-box">
+        <h2 style="margin-top:0; font-size: 2rem; font-weight: 800;">Puntaje Obtenido</h2>
+        <div class="score-display"><span id="global-score">0</span><span style="font-size: 2.5rem; color:#cbd5e1;">/22</span></div>
+        
+        <div id="diagnostic-msg" style="padding:30px; background:var(--bg-light); border-radius:16px; text-align:left; font-size:1.15rem; margin:30px 0; border: 2px solid var(--border-color); font-weight: 500;"></div>
+        
+        <div class="bio-section">
+            <img src="dulce.webp" alt="Dra. Dulce Monroy">
+            <div class="bio-text">
+                <h4>Dra. Dulce Monroy</h4>
+                <p>Especialista en evaluación y diseño metodológico por la UNAM.</p>
+            </div>
+        </div>
+
+        <div class="cta-container">
+            <h3>Asegura tu preparación</h3>
+            <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px;">Accede al curso intensivo con temarios depurados, guías y simuladores exactos.</p>
+            <a href="https://buy.stripe.com/4gM14ffLxfXe0q11wL3Je0i" class="btn-cta">Inscripción al Curso Pro</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DATOS DE PREGUNTAS
+    const questionsData = [
+        { sec: "Metodología", q: "Un investigador desea evaluar si las estrategias de afrontamiento predicen los síntomas de ansiedad. ¿Diseño?", opts: ["A. Experimental", "B. Correlacional-predictivo", "C. Cualitativo etnógrafico", "D. Descriptivo simple"], ans: [0,1,0,0], name: "p1" },
+        { sec: "Metodología", q: "Estudio del impacto de una intervención cognitivo-conductual midiendo antes y después. ¿Diseño?", opts: ["A. Cuasi-experimental", "B. Transversal", "C. Longitudinal-evolutivo", "D. Factorial"], ans: [1,0,0,0], name: "p2" },
+        { sec: "Metodología", q: "¿Qué característica define primordialmente a un experimento puro?", opts: ["A. Cuestionarios validados", "B. Manipulación de la VI y aleatorización", "C. Observación natural", "D. Análisis de varianza"], ans: [0,1,0,0], name: "p3" },
+        { sec: "Metodología", q: "Prevalencia de estrés laboral en un único momento del tiempo. ¿Diseño?", opts: ["A. Caso único", "B. Descriptivo transversal", "C. Correlacional", "D. Ex post facto"], ans: [0,1,0,0], name: "p4" },
+        { sec: "Metodología", q: "La variable que se manipula para observar su efecto se denomina:", opts: ["A. Independiente", "B. Dependiente", "C. Extraña", "D. Interviniente"], ans: [1,0,0,0], name: "p5" },
+        { sec: "Metodología", q: "El sexo (hombre/mujer) como variable de comparación es de tipo:", opts: ["A. Continua", "B. Categórica/Nominal", "C. Ordinal", "D. De razón"], ans: [0,1,0,0], name: "p6" },
+        { sec: "Metodología", q: "¿Cuál es la principal limitación de los diseños correlacionales?", opts: ["A. No establecen causa-efecto", "B. Muestras pequeñas", "C. Variables cualitativas", "D. Son costosos"], ans: [1,0,0,0], name: "p7" },
+        { sec: "Psicometría", q: "Grado en que un instrumento mide realmente el constructo que pretende medir:", opts: ["A. Confiabilidad", "B. Validez", "C. Sensibilidad", "D. Estandarización"], ans: [0,1,0,0], name: "p8" },
+        { sec: "Psicometría", q: "Si un test se aplica hoy y en dos semanas obteniendo resultados idénticos, es:", opts: ["A. Confiable", "B. Válido", "C. Subjetivo", "D. Divergente"], ans: [1,0,0,0], name: "p9" },
+        { sec: "Psicometría", q: "El Alfa de Cronbach se utiliza para evaluar:", opts: ["A. Validez de criterio", "B. Consistencia interna", "C. Diferencia de grupos", "D. Normalidad"], ans: [0,1,0,0], name: "p10" },
+        { sec: "Psicometría", q: "Un índice de discriminación de 0.05 indica que:", opts: ["A. No diferencia entre quienes saben y quienes no", "B. Es muy difícil", "C. Es excelente", "D. Es muy fácil"], ans: [1,0,0,0], name: "p11" },
+        { sec: "Psicometría", q: "La validez que evalúa si los ítems son muestra representativa del contenido es:", opts: ["A. Predictiva", "B. De contenido", "C. Convergente", "D. De constructo"], ans: [0,1,0,0], name: "p12" },
+        { sec: "Estadística", q: "Comparar promedio de ansiedad entre tres grupos. ¿Qué prueba usar?", opts: ["A. t de Student", "B. ANOVA de un factor", "C. Correlación", "D. Chi-cuadrada"], ans: [0,1,0,0], name: "p13" },
+        { sec: "Estadística", q: "Si p = 0.02 y la significancia es 0.05, ¿qué se concluye?", opts: ["A. Se rechaza hipótesis nula", "B. Se acepta hipótesis nula", "C. Estudio no válido", "D. Faltan datos"], ans: [1,0,0,0], name: "p14" },
+        { sec: "Estadística", q: "Prueba no paramétrica equivalente a t de Student para independientes:", opts: ["A. U de Mann-Whitney", "B. Wilcoxon", "C. Kruskal-Wallis", "D. Spearman"], ans: [1,0,0,0], name: "p15" },
+        { sec: "Estadística", q: "Estadístico para medir fuerza y dirección de relación lineal:", opts: ["A. r de Pearson", "B. Desviación estándar", "C. Error típico", "D. Mediana"], ans: [1,0,0,0], name: "p16" },
+        { sec: "Estadística", q: "El error Tipo I consiste en:", opts: ["A. Rechazar hipótesis nula cuando es verdadera", "B. Aceptar hipótesis nula cuando es falsa", "C. Error de captura", "D. Muestra grande"], ans: [1,0,0,0], name: "p17" },
+        { sec: "Estadística", q: "Medida de tendencia central que representa el valor que más se repite:", opts: ["A. Media", "B. Mediana", "C. Moda", "D. Rango"], ans: [0,0,1,0], name: "p18" },
+        { sec: "Estadística", q: "Requisito principal para usar pruebas paramétricas:", opts: ["A. Distribución normal", "B. Muestra cualitativa", "C. Sin varianza", "D. Muestra pequeña"], ans: [1,0,0,0], name: "p19" },
+        { sec: "Estadística", q: "Una correlación de r = -0.85 indica:", opts: ["A. Relación fuerte e inversa", "B. Relación débil y directa", "C. Sin relación", "D. Error"], ans: [1,0,0,0], name: "p20" },
+        { sec: "Estadística", q: "Analizar si consumo de tabaco (Sí/No) se relaciona con género (H/M). Usar:", opts: ["A. Chi-cuadrada", "B. Regresión múltiple", "C. t para relacionadas", "D. Componentes"], ans: [1,0,0,0], name: "p21" },
+        { sec: "Estadística", q: "Varianza de la VD explicada por la VI en regresión:", opts: ["A. Coeficiente R²", "B. Varianza de error", "C. Puntuación Z", "D. Desviación media"], ans: [1,0,0,0], name: "p22" }
+    ];
+
+    const wrapper = document.getElementById('questions-wrapper');
+    questionsData.forEach((item, index) => {
+        let optionsHTML = '';
+        item.opts.forEach((opt, oIndex) => {
+            optionsHTML += `<label class="option"><input type="radio" name="${item.name}" value="${item.ans[oIndex]}"> ${opt}</label>`;
+        });
+
+        wrapper.innerHTML += `
+            <div class="card question-step ${index === 0 ? 'active' : ''}" id="step-${index}">
+                <span class="section-tag">${item.sec} • Reactivo ${index + 1} de ${questionsData.length}</span>
+                <span class="question">${item.q}</span>
+                ${optionsHTML}
+                <div class="nav-buttons">
+                    <button type="button" class="btn-nav btn-prev" onclick="changeStep(${index - 1})" ${index === 0 ? 'style="visibility:hidden"' : ''}>Regresar</button>
+                    <button type="button" class="btn-nav btn-next" id="next-${index}" onclick="changeStep(${index + 1})" disabled>Continuar</button>
+                </div>
+            </div>
+        `;
+    });
+
+    let currentStep = 0;
+    const totalSteps = questionsData.length;
+    const progressBar = document.getElementById('myBar');
+
+    document.getElementById('quiz-form').addEventListener('change', (e) => {
+        if(e.target.type === 'radio') {
+            document.getElementById(`next-${currentStep}`).disabled = false;
+        }
+    });
+
+    window.changeStep = function(nextIndex) {
+        document.getElementById(`step-${currentStep}`).classList.remove('active');
+        
+        if (nextIndex < totalSteps) {
+            document.getElementById(`step-${nextIndex}`).classList.add('active');
+            currentStep = nextIndex;
+            progressBar.style.width = ((currentStep) / totalSteps) * 100 + '%';
+        } else {
+            document.getElementById('lead-step').style.display = 'block';
+            progressBar.style.width = '100%';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    let time = 30 * 60;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timer = setInterval(() => {
+        let m = Math.floor(time / 60);
+        let s = time % 60;
+        timerDisplay.textContent = `${m}:${s < 10 ? '0'+s : s}`;
+        if(time <= 300) timerDisplay.classList.add('warning');
+        if(time <= 0) { clearInterval(timer); alert("Tiempo agotado."); }
+        time--;
+    }, 1000);
+
+    document.getElementById('quiz-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(this.whatsapp.value)) { alert("Ingresa un WhatsApp válido de 10 dígitos numéricos."); return; }
+
+        const formData = new FormData(this);
+        fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(formData).toString() }).catch(e=>console.log(e));
+
+        let total = 0;
+        for(let i=1; i<=22; i++) total += parseInt(formData.get('p'+i) || 0);
+
+        document.getElementById('quiz-container').style.display = 'none';
+        clearInterval(timer);
+        
+        const resBox = document.getElementById('quiz-result');
+        resBox.style.display = 'block';
+        document.getElementById('global-score').innerText = total;
+
+        let msg = total >= 18 ? "🔥 <b>Nivel Sobresaliente.</b> Tienes altas probabilidades de ingreso. Asegura tu lugar perfeccionando tus tiempos con el curso intensivo." 
+                : "⚠️ <b>Requiere Reforzamiento.</b> Detectamos áreas de oportunidad importantes en tu razonamiento metodológico. Se recomienda tomar el curso guiado a la brevedad.";
+        document.getElementById('diagnostic-msg').innerHTML = msg;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>
