@@ -56,13 +56,12 @@
         .btn-simulator { background: white; color: var(--primary); padding: 18px 35px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 1.1rem; transition: 0.3s; display: inline-block; }
         .btn-simulator:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* 5. SECCIÓN EQUIPO ACADÉMICO */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-bottom: 40px; }
-        .bio-card { display: flex; align-items: flex-start; gap: 30px; background: white; padding: 40px; border-radius: 24px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.04); text-align: left; }
-        .bio-img { width: 140px; height: 140px; border-radius: 20px; object-fit: cover; box-shadow: 0 10px 20px rgba(0,0,0,0.08); flex-shrink: 0; border: 3px solid var(--border-color); }
-        .bio-text h3 { font-size: 1.6rem; margin: 0 0 5px; font-weight: 800; color: var(--text-main); }
-        .bio-text h4 { color: var(--primary); font-size: 1.05rem; margin: 0 0 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .bio-text p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.5; }
+        /* 5. SECCIÓN DIRECCIÓN ACADÉMICA (ÚNICA Y CENTRADA) */
+        .bio-card { display: flex; align-items: center; gap: 50px; background: white; padding: 50px; border-radius: 24px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05); max-width: 850px; margin: 0 auto 60px; text-align: left; }
+        .bio-img { width: 220px; height: 220px; border-radius: 24px; object-fit: cover; box-shadow: 15px 15px 0px var(--unam-gold); flex-shrink: 0; border: 1px solid var(--border-color); }
+        .bio-text h3 { font-size: 2rem; margin: 0 0 5px; font-weight: 800; color: var(--text-main); }
+        .bio-text h4 { color: var(--primary); font-size: 1.1rem; margin: 0 0 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .bio-text p { font-size: 1.05rem; color: var(--text-light); margin-bottom: 15px; line-height: 1.6; }
 
         /* 6. TESTIMONIOS */
         .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
@@ -93,8 +92,8 @@
         .features-list li::before { content: '✓'; color: var(--accent); font-weight: bold; }
 
         @media (max-width: 768px) {
-            .team-grid { grid-template-columns: 1fr; }
-            .bio-card { flex-direction: column; text-align: center; align-items: center; }
+            .bio-card { flex-direction: column; text-align: center; padding: 35px 25px; gap: 30px; }
+            .bio-img { width: 100%; max-width: 200px; height: auto; box-shadow: 10px 10px 0px var(--unam-gold); }
             .hero h1 { font-size: 2.4rem; }
         }
     </style>
@@ -106,13 +105,13 @@
         <span>CPEP</span>
         <div class="sub-logo">Centro de Preparación Estratégica para Posgrado</div>
     </div>
-    <a href="#inscription" class="nav-btn">Inscribirme Ahora</a>
+    <a href="#pricing" class="nav-btn">Inscribirme Ahora</a>
 </nav>
 
 <section class="hero">
     <h1>Asegura tu ingreso al posgrado de psicología de la <span>UNAM</span></h1>
     <p>Domina la metodología de la investigación, medición y estadística (descriptiva e inferencial) con el sistema de entrenamiento estratégico diseñado para aprobar el examen.</p>
-    <a href="#inscription" class="btn-main">Quiero asegurar mi lugar</a>
+    <a href="#pricing" class="btn-main">Quiero asegurar mi lugar</a>
 </section>
 
 <section class="section">
@@ -147,28 +146,16 @@
 </div>
 
 <section class="section" style="padding-top: 0;">
-    <h2 class="section-title">Nuestro Equipo Académico</h2>
-    <p class="section-subtitle">Especialistas dedicadas a guiar paso a paso tu proceso de admisión institucional.</p>
+    <h2 class="section-title">Dirección Académica</h2>
+    <p class="section-subtitle">Tu preparación está respaldada por experiencia científica y clínica real en el sector salud.</p>
     
-    <div class="team-grid">
-        <div class="bio-card">
-            <img src="dulce.webp" alt="Dra. Dulce Monroy" class="bio-img">
-            <div class="bio-text">
-                <h3>Dra. Dulce Monroy</h3>
-                <h4>Dirección Académica</h4>
-                <p>Doctora en Psicología y Maestra en Medicina Conductual por la <b>UNAM</b>. Ha formado parte del equipo clínico e institucional en el Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán (INCMNSZ) y el Hospital General Dr. Manuel Gea González.</p>
-                <p>Con amplia experiencia en metodología y estadística, diseñó este curso específicamente para cerrar la brecha entre lo que los aspirantes repasan y lo que la universidad evalúa en el Examen General de Conocimientos.</p>
-            </div>
-        </div>
-
-        <div class="bio-card">
-            <div class="bio-img" style="background: #e2e8f0; display:flex; align-items:center; justify-content:center; font-size:2.5rem; color:#94a3b8;">👩‍⚕️</div>
-            <div class="bio-text">
-                <h3>Mtra. Isis [Apellido]</h3>
-                <h4>Coordinación y Estrategia</h4>
-                <p>Especialista en [Agregar campo de especialidad/Psicología Clínica] con amplia trayectoria en la gestión de programas de acompañamiento académico y retención métrica de estudiantes profesionales.</p>
-                <p>Se encarga de estructurar tu plan diario de estudio, el seguimiento de tus simuladores modulares y asegurar que cuentes con las herramientas precisas para optimizar tu rendimiento bajo presión.</p>
-            </div>
+    <div class="bio-card">
+        <img src="dulce.webp" alt="Dra. Dulce Monroy" class="bio-img">
+        <div class="bio-text">
+            <h3>Dra. Dulce Monroy</h3>
+            <h4>Dirección Académica</h4>
+            <p>Doctora en Psicología y Maestra en Medicina Conductual por la <b>UNAM</b>. Ha formado parte del equipo clínico e institucional en el Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán (INCMNSZ) y el Hospital General Dr. Manuel Gea González.</p>
+            <p>Con amplia experiencia en metodología y estadística, diseñó este curso específicamente para cerrar la brecha entre lo que los aspirantes repasan y lo que la universidad realmente evalúa en el Examen General de Conocimientos.</p>
         </div>
     </div>
 </section>
@@ -211,7 +198,7 @@
 </section>
 
 <section class="pricing-section" id="pricing">
-    <div class="price-box" id="inscription">
+    <div class="price-box">
         <h2 style="margin-top:0; font-size: 2.2rem; font-weight: 800;">Formulario de Inscripción</h2>
         <p style="color: #94a3b8; margin-bottom: 25px;">Completa tu registro oficial para habilitar el enlace directo a Stripe.</p>
         
@@ -256,14 +243,12 @@
 </section>
 
 <script>
-    // Pequeño script para asegurar que llenen el formulario antes de ir a Stripe
     document.getElementById('submitButton').addEventListener('click', function(e) {
         const form = document.getElementById('registrationForm');
         if (!form.checkValidity()) {
-            e.preventDefault(); // Bloquea la redirección a Stripe
-            form.reportValidity(); // Muestra qué campos faltan por llenar
+            e.preventDefault();
+            form.reportValidity();
         } else {
-            // Aquí en un futuro se puede mandar la data directo a Netlify o tu CRM
             console.log("Datos de registro validados con éxito");
         }
     });
