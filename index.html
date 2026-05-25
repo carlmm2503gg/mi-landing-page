@@ -22,8 +22,6 @@
                         text_dark: '#2C1B23', /* Marrón oscuro / Negro, para texto estándar */
                         text_light: '#FFFFFF', /* Blanco puro, para texto sobre fondos oscuros */
                         dark_footer: '#4A2A38', /* Un tono más oscuro, para el footer */
-                        
-                        /* Nuevo color para alternar secciones */
                         pink_light: '#FFE4E8', 
                     }
                 }
@@ -47,13 +45,13 @@
         .hero-title { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); }
         .hero-subtitle { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
         .cta-button {
-            background-color: theme('colors.secondary'); /* Usar el rosa principal */
+            background-color: theme('colors.secondary');
             color: theme('colors.text_light');
-            padding: 16px 32px;
+            padding: 12px 28px;
             text-decoration: none;
             border-radius: 5px;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             transition: background-color 0.3s, transform 0.3s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: inline-block;
@@ -89,7 +87,6 @@
             100% { transform: translateX(-50%); }
         }
         .logos-container { overflow: hidden; white-space: nowrap; }
-        /* Esta es la velocidad que pediste (15s) */
         .logos { animation: scroll-infinite 15s linear infinite; display: inline-flex; }
         .whatsapp-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; animation: pulse 2s infinite; }
         .whatsapp-float:hover { transform: scale(1.1); }
@@ -98,46 +95,24 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-        .hero-section-with-image { transition: opacity 0.3s ease-out; }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
     <style>
-        /* 1. Título del Hero Section */
-        #hero h1 { font-size: 2.75rem; }
-        @media (min-width: 768px) { #hero h1 { font-size: 4.5rem; } }
-        /* 2. Subtítulo del Hero Section */
+        #hero h1 { font-size: 2.5rem; }
+        @media (min-width: 768px) { #hero h1 { font-size: 4rem; } }
         #hero p { font-size: 1.125rem; }
         @media (min-width: 768px) { #hero p { font-size: 1.25rem; } }
-        /* 3. Espaciado vertical de las secciones */
-        section { padding-top: 4rem; padding-bottom: 4rem; }
-        #hero { padding-top: 6rem; padding-bottom: 6rem; }
-        /* 4. Títulos de las secciones (H2) */
-        h2 { font-size: 1.875rem; }
-        @media (min-width: 768px) { h2 { font-size: 2.25rem; } }
-        /* 5. Títulos de las tarjetas (H3) */
-        h3 { font-size: 1.125rem; }
-        /* 6. Botones principales (un poco más finos) */
-        .cta-button { padding: 12px 28px; font-size: 1.125rem; }
-        /* 7. Estilos para el carrusel de testimonios */
-        .testimonials-track {
-            animation: scroll-infinite 20s linear infinite; /* Animación más rápida: 20s */
-            display: inline-flex;
-        }
-        .testimonials-container:hover .testimonials-track {
-            animation-play-state: paused;
-        }
-        /* Clase para pausar animación con JS */
-        .animation-paused {
-            animation-play-state: paused !important;
-        }
+        section { padding-top: 5rem; padding-bottom: 5rem; }
+        #hero { padding-top: 8rem; padding-bottom: 7rem; }
+        h2 { font-size: 2rem; }
+        @media (min-width: 768px) { h2 { font-size: 2.5rem; } }
+        h3 { font-size: 1.25rem; }
     </style>
 </head>
 <body class="bg-primary text-text_dark">
 
 <header class="bg-secondary text-text_light fixed w-full top-0 z-50 shadow-md">
     <nav class="container mx-auto px-6 py-2 flex justify-between items-center">
-        
         <a href="index.html" class="flex items-center gap-2 group">
             <div class="bg-white p-1 rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300">
                 <img src="logo.jpeg" alt="Logo" class="h-8 w-auto"> 
@@ -154,7 +129,7 @@
             <a href="blog.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Blog</a>
             <a href="recursos.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Recursos</a>
             <a href="agendar.html" class="text-sm text-text_light hover:text-pink_light font-medium transition-colors">Contacto</a>
-            <a href="equipo.html" class="cta-button bg-white text-secondary px-4 py-1.5 rounded-full font-bold text-sm hover:bg-pink_light transition-all transform hover:scale-105 shadow-sm">
+            <a href="agendar.html" class="cta-button bg-white text-secondary px-5 py-2 rounded-full font-bold text-sm hover:bg-pink_light transition-all transform hover:scale-105 shadow-sm">
                 Agenda tu cita
             </a>
         </div>
@@ -175,455 +150,334 @@
         <li><a href="recursos.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Recursos</a></li>
         <li><a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Contacto</a></li>
         <li class="pt-4">
-           <a href="equipo.html" class="cta-button rounded-lg bg-secondary text-white">Agenda tu cita</a>
+           <a href="agendar.html" class="cta-button rounded-lg bg-secondary text-white">Agenda tu cita</a>
         </li>
     </ul>
 </div>
 
-<section id="hero" class="relative flex flex-col items-center pt-20 pb-8 text-center bg-secondary">
-    
+<!-- OPTIMIZACIÓN 1: Hero con propuesta de valor clara y directa hacia la acción -->
+<section id="hero" class="relative flex flex-col items-center text-center bg-secondary">
     <div class="relative container mx-auto px-4 text-text_light z-20 hero-text">
-        
-        <h1 class="font-serif font-bold leading-none text-4xl md:text-6xl max-w-5xl mx-auto mb-4 mt-2">
-            Encuentra la claridad que necesitas en tu vida y en tu relación
+        <h1 class="font-serif font-bold leading-tight max-w-4xl mx-auto mb-4">
+            Terapia psicológica online orientada a resultados estables y duraderos
         </h1>
-        
-        <p class="font-sans text-base font-light leading-normal max-w-xl mx-auto mb-6 opacity-90">
-            Un espacio para manejar la ansiedad, la depresión, los desafíos de comunicación y los conflictos de pareja.
+        <p class="font-sans text-base font-light leading-relaxed max-w-2xl mx-auto mb-8 opacity-90">
+            Un espacio con respaldo clínico y ético para manejar la ansiedad, la depresión, los desafíos de comunicación y los conflictos de pareja.
         </p>
-        
         <div class="flex justify-center">
-            <a href="equipo.html" 
-               class="cta-button rounded-lg bg-white text-secondary hover:bg-pink_light font-medium py-2.5 px-8 text-base shadow-md transition-all transform hover:scale-105">
-               Agenda tu cita
+            <a href="agendar.html" 
+               class="cta-button rounded-lg bg-white text-secondary hover:bg-pink_light font-bold py-3.5 px-8 text-lg shadow-md transition-all transform hover:scale-105">
+               Comienza tu proceso aquí
             </a>
         </div>
     </div>
 </section>
 
-<section id="team-preview-collage-bg" class="bg-primary w-full py-4">
-    
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-1 w-full px-1">
-        
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Addi.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="liz.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Paola.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Janeth.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Montserrat.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Anarely.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Miranda.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Mikaela.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="sara.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-        <div class="aspect-square overflow-hidden rounded-sm">
-            <img src="Claudia.webp" alt="Psicóloga" class="w-full h-full object-cover">
-        </div>
-    </div>
-</section>
-
-    <section id="paises" class="bg-white overflow-hidden">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="font-bold text-text_dark mb-2">Apoyo profesional sin importar dónde vivas</h2>
-                <h3 class="font-medium text-text_dark opacity-75 mb-6">Países a los que hemos llegado</h3>
-            </div>
-            
-            <div class="logos-container overflow-hidden whitespace-nowrap py-4">
-                
-                <div class="logos flex">
-                    
-                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Qatar" class="h-12 w-auto flex-shrink-0 mr-8">
-
-                    
-                    <img src="Flag_of_Mexico.svg.webp" alt="Bandera de México" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="istockphoto-479224872-612x612.jpg" alt="Bandera de España" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Colombia.svg.png" alt="Bandera de Colombia" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="istockphoto-175584631-612x612.jpg" alt="Bandera de Chile" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Ecuador.svg.png" alt="Bandera de Ecuador" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Bandera de Perú" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Australia.svg.png" alt="Bandera de Australia" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="bandera-nacional-republica-dominicana-fondo-bandera-republica-dominicana_659987-45655.jpg" alt="Bandera de la República Dominicana" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Nicaragua.svg.png" alt="Bandera de Nicaragua" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Saudi_Arabia.svg.png" alt="Bandera de Arabia Saudita" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Germany.svg.png" alt="Bandera de Alemania" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_the_United_States.svg.png" alt="Bandera de Estados Unidos" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Ireland.svg.png" alt="Bandera de Irlanda" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_France.svg.png" alt="Bandera de Francia" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Portugal.svg.png" alt="Bandera de Portugal" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_the_People's_Republic_of_China.svg.png" alt="Bandera de China" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Brazil.svg.png" alt="Bandera de Brasil" class="h-12 w-auto flex-shrink-0 mr-8">
-                    <img src="Flag_of_Qatar.svg.png" alt="Bandera de Qatar" class="h-12 w-auto flex-shrink-0 mr-8">
-                </div>
-            </div>
-        </section>
-        
-    <section id="tipos-terapia" class="bg-white">
+<!-- OPTIMIZACIÓN 2: Mover los Tipos de Apoyo inmediatamente debajo del Hero para responder la necesidad del usuario -->
+<section id="tipos-terapia" class="bg-white">
     <div class="container mx-auto px-6 text-center max-w-4xl">
-        <h2 class="font-bold text-text_dark mb-8">¿Qué tipo de apoyo necesitas?</h2>
+        <h2 class="font-bold text-text_dark mb-2">¿Qué tipo de apoyo necesitas?</h2>
+        <p class="text-gray-500 mb-10 max-w-xl mx-auto text-sm">Selecciona la modalidad que se adapte a tu situación actual para ver nuestras opciones de atención.</p>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-            <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
-                
+            <!-- Terapia Individual -->
+            <div class="service-card bg-primary rounded-xl shadow-lg border border-pink_light text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
                 <a href="equipo.html?tipo=individual" class="block">
-                    <img src="terapia ind.webp" alt="Mujer en terapia individual online" class="w-full h-56 object-cover">
+                    <img src="terapia ind.webp" alt="Terapia individual online" class="w-full h-56 object-cover">
                 </a>
-
-                <div class="p-6 flex flex-col flex-1 items-center text-center">
-                    <h3 class="font-semibold text-secondary mb-2 text-lg">
-                        <a href="equipo.html?tipo=individual" class="hover:underline">
-                            Terapia individual
-                        </a>
+                <div class="p-6 flex flex-col flex-grow items-center text-center">
+                    <h3 class="font-semibold text-secondary mb-3 text-xl">
+                        <a href="equipo.html?tipo=individual" class="hover:underline">Terapia individual</a>
                     </h3>
-                    <p class="text-text_dark text-sm flex-grow">Esta opción es para ti si quieres trabajar en temas personales como la ansiedad, depresión, autoestima, regulación de emociones, ruptura, entre otros.</p>
-                    
-                    <div class="mt-auto pt-6">
-                        <a href="equipo.html?tipo=individual" class="cta-button">
-                            Más información
-                        </a>
+                    <p class="text-text_dark text-sm flex-grow mb-6">Idónea para trabajar en tu bienestar personal, gestionar la ansiedad, regular emociones, superar rupturas y fortalecer la autoestima.</p>
+                    <div class="mt-auto">
+                        <a href="equipo.html?tipo=individual" class="cta-button text-sm py-2.5 px-6">Ver especialistas</a>
                     </div>
                 </div>
             </div>
 
-            <div class="service-card bg-primary rounded-xl shadow-lg border border-secondary text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
-                
+            <!-- Terapia de Pareja -->
+            <div class="service-card bg-primary rounded-xl shadow-lg border border-pink_light text-left h-full flex flex-col overflow-hidden hover:scale-105 transition-transform duration-300">
                 <a href="equipo.html?tipo=pareja" class="block">
-                    <img src="terapia pareja.webp" alt="Pareja en terapia online" class="w-full h-56 object-cover">
+                    <img src="terapia pareja.webp" alt="Terapia de pareja online" class="w-full h-56 object-cover">
                 </a>
-
-                <div class="p-6 flex flex-col flex-1 items-center text-center">
-                    <h3 class="font-semibold text-secondary mb-2 text-lg">
-                        <a href="equipo.html?tipo=pareja" class="hover:underline">
-                            Terapia de pareja
-                        </a>
+                <div class="p-6 flex flex-col flex-grow items-center text-center">
+                    <h3 class="font-semibold text-secondary mb-3 text-xl">
+                        <a href="equipo.html?tipo=pareja" class="hover:underline">Terapia de pareja</a>
                     </h3>
-                    <p class="text-text_dark text-sm flex-grow">Esta opción es para ustedes si quieren resolver juntos desafíos como la falta de comunicación o los conflictos constantes.</p>
-                    
-                    <div class="mt-auto pt-6">
-                        <a href="equipo.html?tipo=pareja" class="cta-button">
-                            Más información
-                        </a>
+                    <p class="text-text_dark text-sm flex-grow mb-6">Un espacio neutral para resolver desafíos de comunicación, distanciamiento afectivo, manejo de crisis o resolución de conflictos recurrentes.</p>
+                    <div class="mt-auto">
+                        <a href="equipo.html?tipo=pareja" class="cta-button text-sm py-2.5 px-6">Ver especialistas</a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-<section id="intro-valor" class="bg-pink_light">
-
-
-        <section id="about" class="bg-pink_light"> <div class="container mx-auto px-6 text-center">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="md:order-2">
-                        <img src="Isis.webp" alt="Foto de la Psicóloga Isis San Juan" class="rounded-full shadow-lg w-full md:w-full mx-auto border-4 border-secondary">
-                    </div>
-                    <div class="md:order-1 text-left">
-                        <h2 class="font-bold text-secondary mb-4">Conoce el proyecto que creamos para ti</h2>
-                        <h3 class="font-serif text-text_dark mb-6" style="font-size: 1.75rem;">Fundadora Psic. Isis San Juan.</h3>
-                        <p class="text-text_dark leading-relaxed mb-4">
-                            Mi trayectoria en la UNAM, en el área de la psicobiología y las neurociencias, me enseñó que la evidencia debe ser la base de cualquier intervención. Con el tiempo, mi enfoque se centró en el ámbito emocional, donde confirmé que la terapia no es solo ir a hablar, sino un proceso serio respaldado por enfoques clínicos de eficacia comprobada a largo plazo. De esa convicción nació este proyecto, con la misión de brindar resultados duraderos y expectativas realistas.
-                        </f>
-                        <p class="text-text_dark leading-relaxed">
-                            Nos diferenciamos por nuestro compromiso real con la calidad, alejado de estrategias de marketing. Cada psicóloga de nuestro equipo comparte una sólida formación y una calidez humana que genera una conexión auténtica. Nos hemos especializado en los temas que más te preocupan, lo que nos permite ofrecerte intervenciones más acertadas, en el menor tiempo posible y con la calidez que necesitas para sanar.
-                        </p>
-                    </div>
-                </div>
+<!-- OPTIMIZACIÓN 3: Sección de Autoridad y Método Clínico Basado en Evidencia (Fundadora) -->
+<section id="about" class="bg-pink_light"> 
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+            <div class="md:order-2">
+                <img src="Isis.webp" alt="Psicóloga Isis San Juan" class="rounded-full shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover mx-auto border-4 border-secondary">
             </div>
-        </section>
+            <div class="md:order-1 text-left">
+                <h2 class="font-bold text-secondary mb-2">Un proyecto diseñado para tu evolución real</h2>
+                <h3 class="font-serif text-text_dark mb-6 text-xl">Fundadora: Psic. Isis San Juan</h3>
+                <p class="text-text_dark leading-relaxed mb-4 text-sm md:text-base">
+                    Mi trayectoria en la UNAM, dentro de la investigación en psicobiología y neurociencias, consolidó mi convicción de que la evidencia científica debe regir cada intervención clínica. La psicoterapia formal no consiste únicamente en desahogarse, sino en implementar un proceso estructurado con un respaldo metodológico riguroso.
+                </p>
+                <p class="text-text_dark leading-relaxed text-sm md:text-base">
+                    Nos distanciamos de las soluciones improvisadas. Cada especialista de nuestro equipo cuenta con una formación sólida y actualizada, seleccionada bajo estrictos criterios de calidad técnica y calidez humana. Nos enfocamos en ofrecer herramientas precisas en el menor tiempo posible para construir autonomía y bienestar.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-<section id="testimonials" class="bg-white py-16 relative">
-    <div class="container mx-auto px-6 text-center max-w-6xl">
-        <h2 class="font-bold text-text_dark mb-12 text-center">Lo que dicen nuestros pacientes</h2>
+<!-- OPTIMIZACIÓN 4: Prueba Social contextualizada e internacional -->
+<section id="testimonials" class="bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="text-center mb-12">
+            <h2 class="font-bold text-text_dark mb-2">La experiencia de quienes confían en nosotros</h2>
+            <p class="text-gray-500 text-sm max-w-md mx-auto">Procesos terapéuticos respaldados por el cumplimiento de objetivos de nuestros pacientes.</p>
+        </div>
         
         <div class="relative">
-            <div id="carousel" class="flex overflow-hidden scroll-smooth snap-x snap-mandatory">
-                
-                <div class="w-full md:w-1/3 flex-shrink-0 snap-center p-4">
-                    <div class="bg-primary p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col h-full">
-                        <h3 class="font-semibold text-secondary text-xl mb-3 text-left">"Los resultados han sido maravillosos"</h3>
-                        <p class="text-text_dark text-left mb-4 flex-grow">
-                            "¡Paola es una maravillosa terapeuta, es amable, cálida, clara y muy asertiva! Doy fé que tanto mis habilidades comunicacionales como mi relación con él han mejorado del cielo a la tierra! Lo mejor, es que es online, entonces tengo la suerte de tener el servicio desde Chile :)"
+            <div id="carousel" class="flex overflow-hidden scroll-smooth snap-x snap-mandatory gap-6 pb-4">
+                <!-- Testimonio 1 -->
+                <div class="w-full md:w-[calc(33.333%-16px)] flex-shrink-0 snap-center">
+                    <div class="bg-primary p-6 rounded-xl border border-gray-100 flex flex-col h-full shadow-sm">
+                        <h3 class="font-semibold text-secondary text-lg mb-2 text-left">Resultados maravillosos</h3>
+                        <p class="text-text_dark text-left text-sm mb-4 flex-grow">
+                            Paola es una excelente terapeuta, clara y muy asertiva. Mis habilidades de comunicación y la dinámica de mi relación mejoraron por completo. La modalidad online facilita tomar las sesiones desde Chile de forma cómoda.
                         </p>
-                        <div class="flex items-center mt-auto pt-4">
-                            <img src="avatars-francisca-gonzalez.webp" alt="Foto de perfil de Francisca González" class="w-12 h-12 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
-                            <div class="ml-4 text-left">
-                                <p class="font-bold text-text_dark">Francisca González Cohens</p>
-                                <p class="text-sm text-text_dark opacity-75">Paciente desde Chile</p>
+                        <div class="flex items-center mt-auto pt-4 border-t border-pink_light">
+                            <img src="avatars-francisca-gonzalez.webp" alt="Francisca González" class="w-10 h-10 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
+                            <div class="ml-3 text-left">
+                                <p class="font-bold text-text_dark text-xs">Francisca González Cohens</p>
+                                <p class="text-[11px] text-text_dark opacity-75">Paciente desde Chile</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/3 flex-shrink-0 snap-center p-4">
-                    <div class="bg-primary p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col h-full">
-                        <h3 class="font-semibold text-secondary text-xl mb-3 text-left">"Me hicieron sentirme acompañado"</h3>
-                        <p class="text-text_dark text-left mb-4 flex-grow">
-                            "Tienen muy buen plan de trabajo. Me apoyaron a visualizar de mejor manera situaciones que parecían muy difíciles... Gracias al apoyo de mi terapeuta Addi logre mantenerme en una de las etapas mas difíciles de mi vida."
+                <!-- Testimonio 2 -->
+                <div class="w-full md:w-[calc(33.333%-16px)] flex-shrink-0 snap-center">
+                    <div class="bg-primary p-6 rounded-xl border border-gray-100 flex flex-col h-full shadow-sm">
+                        <h3 class="font-semibold text-secondary text-lg mb-2 text-left">Acompañamiento constante</h3>
+                        <p class="text-text_dark text-left text-sm mb-4 flex-grow">
+                            Tienen un plan de trabajo muy bien estructurado. Me apoyaron a procesar de forma ordenada situaciones complejas. Gracias al enfoque de la terapeuta Addi logré salir adelante en una etapa difícil.
                         </p>
-                        <div class="flex items-center mt-auto pt-4">
-                            <img src="avatars-diego-martinez.webp" alt="Foto de perfil de Diego Martínez" class="w-12 h-12 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
-                            <div class="ml-4 text-left">
-                                <p class="font-bold text-text_dark">Diego Martínez Hernández</p>
-                                <p class="text-sm text-text_dark opacity-75">Local Guide</p>
+                        <div class="flex items-center mt-auto pt-4 border-t border-pink_light">
+                            <img src="avatars-diego-martinez.webp" alt="Diego Martínez" class="w-10 h-10 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
+                            <div class="ml-3 text-left">
+                                <p class="font-bold text-text_dark text-xs">Diego Martínez Hernández</p>
+                                <p class="text-[11px] text-text_dark opacity-75">Local Guide</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/3 flex-shrink-0 snap-center p-4">
-                    <div class="bg-primary p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col h-full">
-                        <h3 class="font-semibold text-secondary text-xl mb-3 text-left">"Conocerse y sentirse bien vale muchísimo"</h3>
-                        <p class="text-text_dark text-left mb-4 flex-grow">
-                            "No me había dado cuenta de lo necesario que era... en mi momento más oscuro, lloraba todos los días... ahora puedo decir que me siento mucho mejor... ver que poco a poco puedo derrumbar esas creencias que yo solita me cree es increíble."
+                <!-- Testimonio 3 -->
+                <div class="w-full md:w-[calc(33.333%-16px)] flex-shrink-0 snap-center">
+                    <div class="bg-primary p-6 rounded-xl border border-gray-100 flex flex-col h-full shadow-sm">
+                        <h3 class="font-semibold text-secondary text-lg mb-2 text-left">Claridad en momentos oscuros</h3>
+                        <p class="text-text_dark text-left text-sm mb-4 flex-grow">
+                            No era consciente de lo necesario que era este espacio hasta que inicié. Lograr deconstruir de manera guiada aquellas creencias limitantes que me generaban malestar ha sido un cambio invaluable.
                         </p>
-                        <div class="flex items-center mt-auto pt-4">
-                            <img src="avatars-sandra-chivico.webp" alt="Foto de perfil de Sandra Chivico" class="w-12 h-12 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
-                            <div class="ml-4 text-left">
-                                <p class="font-bold text-text_dark">Sandra Chivico</p>
-                                <p class="text-sm text-text_dark opacity-75">Paciente</p>
+                        <div class="flex items-center mt-auto pt-4 border-t border-pink_light">
+                            <img src="avatars-sandra-chivico.webp" alt="Sandra Chivico" class="w-10 h-10 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
+                            <div class="ml-3 text-left">
+                                <p class="font-bold text-text_dark text-xs">Sandra Chivico</p>
+                                <p class="text-[11px] text-text_dark opacity-75">Paciente</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="w-full md:w-1/3 flex-shrink-0 snap-center p-4">
-                    <div class="bg-primary p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col h-full">
-                        <h3 class="font-semibold text-secondary text-xl mb-3 text-left">"He podido descubrir mas sobre mi"</h3>
-                        <p class="text-text_dark text-left mb-4 flex-grow">
-                            "Las sesiones con Lizbeth me han permitido descubrir mas sobre mi, ademas para mi, es muy importante hacer match con tu psicóloga, asi es que deseo continuar para seguir explorando mas posibilidades de mejoras y los beneficios que nos ofrece la terapia. :)"
+                <!-- Testimonio 4 -->
+                <div class="w-full md:w-[calc(33.333%-16px)] flex-shrink-0 snap-center">
+                    <div class="bg-primary p-6 rounded-xl border border-gray-100 flex flex-col h-full shadow-sm">
+                        <h3 class="font-semibold text-secondary text-lg mb-2 text-left">Descubrimiento personal</h3>
+                        <p class="text-text_dark text-left text-sm mb-4 flex-grow">
+                            Las sesiones con Lizbeth me han permitido profundizar en mi autoconocimiento. Lograr una sintonía genuina con tu psicóloga es clave, y el trato recibido aquí cumple con creces esa expectativa.
                         </p>
-                        <div class="flex items-center mt-auto pt-4">
-                            <img src="avatars-selena-vasquez.webp" alt="Foto de perfil de Selena Vasquez" class="w-12 h-12 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
-                            <div class="ml-4 text-left">
-                                <p class="font-bold text-text_dark">Selena Vasquez</p>
-                                <p class="text-sm text-text_dark opacity-75">Paciente</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full md:w-1/3 flex-shrink-0 snap-center p-4">
-                    <div class="bg-primary p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col h-full">
-                        <h3 class="font-semibold text-secondary text-xl mb-3 text-left">"100% recomendable"</h3>
-                        <p class="text-text_dark text-left mb-4 flex-grow">
-                            "Muy buena atención, las terapias y las tareas muy buenas para poder llevar tu caso, 100% recomendable."
-                        </p>
-                        <div class="flex items-center mt-auto pt-4">
-                            <img src="avatarscarlos-montoya.webp" alt="Foto de perfil de Carlos Montoya" class="w-12 h-12 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
-                            <div class="ml-4 text-left">
-                                <p class="font-bold text-text_dark">Carlos Montoya</p>
-                                <p class="text-sm text-text_dark opacity-75">Local Guide</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full md:w-1/3 flex-shrink-0 snap-center p-4">
-                    <div class="bg-primary p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 flex flex-col h-full">
-                        <h3 class="font-semibold text-secondary text-xl mb-3 text-left">"Me da buenas lecciones"</h3>
-                        <p class="text-text_dark text-left mb-4 flex-grow">
-                            "La psicóloga que me atiende me ayuda muchísimo. Me escucha. Me da buenas lecciones para encontrar mi felicidad ❤️"
-                        </p>
-                        <div class="flex items-center mt-auto pt-4">
-                            <img src="avatars-carolina-reyes.webp" alt="Foto de perfil de Carolina Reyes" class="w-12 h-12 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
-                            <div class="ml-4 text-left">
-                                <p class="font-bold text-text_dark">Carolina Reyes</p>
-                                <p class="text-sm text-text_dark opacity-75">Paciente</p>
+                        <div class="flex items-center mt-auto pt-4 border-t border-pink_light">
+                            <img src="avatars-selena-vasquez.webp" alt="Selena Vasquez" class="w-10 h-10 rounded-full object-cover border-2 border-secondary/30 flex-shrink-0">
+                            <div class="ml-3 text-left">
+                                <p class="font-bold text-text_dark text-xs">Selena Vasquez</p>
+                                <p class="text-[11px] text-text_dark opacity-75">Paciente</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-lg z-30 ml-2">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full shadow-lg z-30 mr-2">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+            <!-- Controles del carrusel -->
+            <div class="flex justify-center gap-4 mt-6">
+                <button id="prev-testimonial" class="bg-secondary text-white p-2 rounded-full shadow hover:bg-[#880E4F] transition-colors">
+                    <i class="fas fa-chevron-left text-sm"></i>
+                </button>
+                <button id="next-testimonial" class="bg-secondary text-white p-2 rounded-full shadow hover:bg-[#880E4F] transition-colors">
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </button>
+            </div>
         </div>
     </div>
 </section>
 
-        <section id="faq" class="bg-pink_light">
-            <div class="container mx-auto px-6 text-center max-w-4xl">
-                <h2 class="font-bold text-secondary mb-12">Preguntas frecuentes (FAQ)</h2>
-                <div class="bg-white rounded-xl shadow-lg">
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq1">
-                        <label for="faq1">¿Cuánto dura el proceso de terapia?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">La duración puede variar, pero nuestra experiencia muestra que los mejores resultados se logran en un promedio de 16 sesiones. Al inicio del proceso, recomendamos sesiones semanales o quincenales, y con el tiempo, la frecuencia se va espaciando.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq2">
-                        <label for="faq2">¿Las psicólogas están realmente bien formadas?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">Absolutamente. Nuestro equipo es experto en los temas que abordamos y ha pasado por un riguroso proceso de selección que evalúa su capacidad técnica y habilidades prácticas. Además, cada una participa en procesos de supervisión y capacitación interna para asegurar una calidad constante.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq3">
-                        <label for="faq3">¿Qué pasa si no me gusta la psicóloga que me asignan?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">Entendemos que esto puede pasar. Si no te sientes cómodo/a con la profesional asignada, tenemos un protocolo para reasignarte a otra psicóloga del equipo. Trabajamos con notas clínicas que, con tu consentimiento, se comparten con la nueva psicóloga para que no tengas que repetir todo el proceso desde cero.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq4">
-                        <label for="faq4">¿Se pueden mandar mensajes a la psicóloga entre sesiones?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">El acompañamiento psicológico se realiza durante las sesiones. Entendemos que pueden surgir dudas, por lo que puedes escribir para resolverlas, pero no damos atención en crisis por mensaje. Las sesiones son el espacio para trabajar tus emociones y procesos.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq5">
-                        <label for="faq5">¿Qué pasa con mi confidencialidad?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">Tu privacidad es nuestra prioridad. Firmamos una carta de consentimiento al inicio del proceso para garantizar que tu información personal está resguardada con total confidencialidad, cumpliendo con las regulaciones de México.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq6">
-                        <label for="faq6">¿Qué pasa si necesito cancelar o cambiar mi cita?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">Entendemos que los imprevistos suceden. Puedes cambiar o cancelar tu sesión con un aviso de al menos 24 horas para acceder a un reembolso o reprogramación. Los cambios solo se permiten una vez por sesión.</p>
-                        </div>
-                    </div>
-                    <div class="faq-item">
-                        <input type="checkbox" id="faq7">
-                        <label for="faq7">¿El pago es antes de la sesión?</label>
-                        <div class="faq-content">
-                            <p class="text-text_dark">Sí. Aseguramos el tiempo y esfuerzo de nuestras psicólogas, ya que cada sesión conlleva horas de preparación, supervisión e investigación. También ofrecemos un paquete de 4 sesiones con un 10% de descuento.</p>
-                        </div>
-                    </div>
+<!-- Países de alcance -->
+<section id="paises" class="bg-primary border-t border-b border-pink_light overflow-hidden py-10">
+    <div class="container mx-auto px-6 text-center mb-6">
+        <h3 class="font-medium text-text_dark opacity-90 text-base tracking-wide uppercase">Atención profesional sin fronteras · Pacientes atendidos en</h3>
+    </div>
+    <div class="logos-container overflow-hidden whitespace-nowrap">
+        <div class="logos flex items-center">
+            <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-6 opacity-80">
+            <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-6 opacity-80">
+            <img src="istockphoto-175584631-612x612.jpg" alt="Chile" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_Ecuador.svg.png" alt="Ecuador" class="h-8 w-auto mx-6 opacity-80">
+            <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Perú" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_Australia.svg.png" alt="Australia" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_the_United_States.svg.png" alt="Estados Unidos" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_Germany.svg.png" alt="Alemania" class="h-8 w-auto mx-6 opacity-80">
+            
+            <!-- Duplicado para loop infinito fluido -->
+            <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-6 opacity-80">
+            <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-6 opacity-80">
+            <img src="istockphoto-175584631-612x612.jpg" alt="Chile" class="h-8 w-auto mx-6 opacity-80">
+            <img src="Flag_of_Ecuador.svg.png" alt="Ecuador" class="h-8 w-auto mx-6 opacity-80">
+        </div>
+    </div>
+</section>
+
+<!-- OPTIMIZACIÓN 5: El collage de especialistas se reubica hacia el cierre como elemento de respaldo humano -->
+<section id="team-preview-collage-bg" class="bg-white py-12">
+    <div class="container mx-auto px-6 text-center max-w-4xl mb-8">
+        <h2 class="font-bold text-text_dark mb-2">Un equipo clínico comprometido contigo</h2>
+        <p class="text-gray-500 text-sm max-w-md mx-auto">Especialistas dispuestas a acompañarte en tu espacio de consulta.</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 max-w-6xl mx-auto px-4">
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Addi.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="liz.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Paola.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Janeth.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Montserrat.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Anarely.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Miranda.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Mikaela.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="sara.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+        <div class="aspect-square overflow-hidden rounded-lg shadow-sm"><img src="Claudia.webp" alt="Terapeuta" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div>
+    </div>
+    <div class="text-center mt-8">
+        <a href="equipo.html" class="text-secondary font-semibold hover:underline">Conoce los perfiles y cédulas profesionales del equipo →</a>
+    </div>
+</section>
+
+<section id="faq" class="bg-pink_light">
+    <div class="container mx-auto px-6 text-center max-w-3xl">
+        <h2 class="font-bold text-secondary mb-8">Preguntas frecuentes</h2>
+        <div class="bg-white rounded-xl shadow-md text-left overflow-hidden">
+            <div class="faq-item">
+                <input type="checkbox" id="faq1">
+                <label for="faq1">¿Cuánto dura el proceso de terapia?</label>
+                <div class="faq-content">
+                    <p class="text-text_dark text-sm">La duración varía según los objetivos. Estructuralmente observamos consolidación de avances en un promedio de 16 sesiones. Inicialmente se sugiere una periodicidad semanal o quincenal para mantener la consistencia del tratamiento.</p>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer class="bg-dark_footer text-text_light py-12">
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-            <div class="md:col-span-2">
-                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
-                <p class="text-sm text-gray-300 mt-2">&copy; 2025 TherapyHomeISJ. Todos los derechos reservados.</p>
-                <p class="text-sm text-gray-300">Hecho con 🤍</p>
+            <div class="faq-item">
+                <input type="checkbox" id="faq2">
+                <label for="faq2">¿Cómo se valida la formación del equipo?</label>
+                <div class="faq-content">
+                    <p class="text-text_dark text-sm">Todo nuestro personal cuenta con título y cédula profesional verificable. El ingreso al equipo exige acreditar evaluaciones de competencias técnico-clínicas y un seguimiento formativo interno continuo.</p>
+                </div>
             </div>
-            <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces rápidos</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#about" class="hover:text-white transition-colors duration-300">Acerca de mí</a></li>
-                    <li><a href="#tipos-terapia" class="hover:text-white transition-colors duration-300">Terapia</a></li>
-                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
-                    <li><a href="#faq" class="hover:text-white transition-colors duration-300">Preguntas Frecuentes</a></li>
-                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu cita</a></li>
-                </ul>
+            <div class="faq-item">
+                <input type="checkbox" id="faq3">
+                <label for="faq3">¿Qué sucede si requiero cambiar de terapeuta?</label>
+                <div class="faq-content">
+                    <p class="text-text_dark text-sm">Disponemos de un protocolo transparente de reasignación. Previo consentimiento informado, se transfieren las notas de evolución clínica internas para dar continuidad al proceso sin necesidad de reiniciar la anamnesis.</p>
+                </div>
             </div>
-            <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Información legal</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
-                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de cookies</a></li>
-                </ul>
+            <div class="faq-item">
+                <input type="checkbox" id="faq5">
+                <label for="faq5">¿Cómo se garantiza la confidencialidad?</label>
+                <div class="faq-content">
+                    <p class="text-text_dark text-sm">El resguardo de la información se rige estrictamente bajo el secreto profesional legal y normativo aplicable en México, formalizado mediante un contrato de consentimiento informado desde la primera sesión.</p>
+                </div>
             </div>
         </div>
-    </footer>
-
-    <a href="https://wa.link/lefkj3" target="_blank" class="whatsapp-float">
-        <img src="whats.png" alt="Logo de WhatsApp" class="w-16 h-16 transition-transform duration-300">
-    </a>
-
-    <div id="lightbox" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <span id="close-lightbox" class="absolute top-4 right-6 text-white text-5xl font-bold cursor-pointer">&times;</span>
-        <img id="lightbox-image" src="" alt="Reseña ampliada" class="max-w-full max-h-[90vh] rounded-lg">
     </div>
+</section>
+
+<footer class="bg-dark_footer text-text_light py-12">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div class="md:col-span-2">
+            <a href="index.html" class="text-2xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
+            <p class="text-xs text-gray-400 mt-2">&copy; 2026 TherapyHomeISJ. Todos los derechos reservados.</p>
+            <p class="text-xs text-gray-400">Compromiso con la salud mental y la evidencia clínica.</p>
+        </div>
+        <div>
+            <h3 class="text-lg font-bold text-secondary mb-4">Enlaces rápidos</h3>
+            <ul class="space-y-2 text-sm text-gray-300">
+                <li><a href="#about" class="hover:text-white transition-colors">Acerca de nosotros</a></li>
+                <li><a href="#tipos-terapia" class="hover:text-white transition-colors">Modalidades de terapia</a></li>
+                <li><a href="equipo.html" class="hover:text-white transition-colors">Nuestro equipo</a></li>
+                <li><a href="faq" class="hover:text-white transition-colors">Preguntas frecuentes</a></li>
+                <li><a href="agendar.html" class="hover:text-white transition-colors">Agenda tu cita</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-lg font-bold text-secondary mb-4">Información legal</h3>
+            <ul class="space-y-2 text-sm text-gray-300">
+                <li><a href="#" class="hover:text-white transition-colors">Aviso legal</a></li>
+                <li><a href="privacidad.html" class="hover:text-white transition-colors">Política de privacidad</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Uso de cookies</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.link/lefkj3" target="_blank" class="whatsapp-float">
+    <img src="whats.png" alt="WhatsApp de Soporte" class="w-16 h-16">
+</a>
 
 <script>
-        // --- Menú Móvil ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('-translate-x-full');
+    // Menú Móvil
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('-translate-x-full');
+    });
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-x-full');
         });
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('-translate-x-full');
-            });
-        });
-    
+    });
 
-        // --- Carrusel de Testimonios ---
-        const carousel = document.getElementById('carousel');
-        const prevButton = document.getElementById('prev-testimonial');
-        const nextButton = document.getElementById('next-testimonial');
+    // Control manual del carrusel
+    const carousel = document.getElementById('carousel');
+    const prevButton = document.getElementById('prev-testimonial');
+    const nextButton = document.getElementById('next-testimonial');
 
-        // Función para desplazar el carrusel
+    if(carousel && prevButton && nextButton) {
         function scrollCarousel(direction) {
-            const itemWidth = carousel.children[0].offsetWidth; // Ancho de una reseña
-            const scrollAmount = itemWidth * (window.innerWidth >= 768 ? 3 : 1); // Desplaza 3 ítems en desktop, 1 en mobile
-
+            const itemWidth = carousel.children[0].offsetWidth + 24; 
+            const scrollAmount = itemWidth * (window.innerWidth >= 768 ? 1 : 1);
             if (direction === 'next') {
                 carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             } else {
                 carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
             }
         }
-
         prevButton.addEventListener('click', () => scrollCarousel('prev'));
         nextButton.addEventListener('click', () => scrollCarousel('next'));
-
-        // Opcional: Para el snap-center sea más preciso en algunos navegadores
-        carousel.addEventListener('scroll', () => {
-            clearTimeout(carousel.scrollTimeout);
-            carousel.scrollTimeout = setTimeout(() => {
-                const scrollLeft = carousel.scrollLeft;
-                const itemWidth = carousel.children[0].offsetWidth;
-                const closestIndex = Math.round(scrollLeft / itemWidth);
-                carousel.scrollTo({
-                    left: closestIndex * itemWidth,
-                    behavior: 'smooth'
-                });
-            }, 100);
-        });
-
-    </script>
+    }
+</script>
 </body>
 </html>
