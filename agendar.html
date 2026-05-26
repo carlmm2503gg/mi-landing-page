@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+content = """<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -100,7 +100,7 @@
 
                 <div class="bg-white p-8 md:p-12 rounded-xl shadow-lg border border-gray-200">
                     
-                    <form action="https://formspree.io/f/movpjwag" method="POST" class="space-y-6">
+                    <form id="form-contacto-landing" class="space-y-6">
 
                         <div>
                             <label for="nombre" class="block text-sm font-medium text-text_dark mb-2">Nombre Completo</label>
@@ -163,7 +163,7 @@
                         </div>
 
                         <div class="text-center pt-4">
-                            <button type="submit" class="cta-button rounded-lg">
+                            <button type="submit" id="btn-submit-contacto" class="cta-button rounded-lg">
                                 Enviar Solicitud de Cita
                             </button>
                         </div>
@@ -223,5 +223,66 @@
             });
         });
     </script>
+
+    <script>
+        const formLead = document.getElementById('form-contacto-landing');
+        const btnLead = document.getElementById('btn-submit-contacto');
+        const BACKEND_URL = "https://crm-backend-oztv.onrender.com"; 
+
+        if (formLead && btnLead) {
+            formLead.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Bloqueo preventivo e indicador visual de procesamiento
+                btnLead.disabled = true;
+                const textoOriginal = btnLead.innerHTML;
+                btnLead.innerHTML = '⏳ Procesando solicitud...';
+
+                const dataPayload = {
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    telefono: document.getElementById('telefono').value,
+                    pais: document.getElementById('pais').value,
+                    ciudad: document.getElementById('ciudad').value,
+                    tipo_terapia: document.getElementById('tipo_terapia').value,
+                    motivo: document.getElementById('motivo').value
+                };
+
+                try {
+                    const response = await fetch(`${BACKEND_URL}/api/contacto`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dataPayload)
+                    });
+
+                    if (!response.ok) throw new Error('Respuesta de servidor inválida');
+
+                    // Renderizado dinámico de éxito en pantalla para evitar redirecciones frías
+                    formLead.innerHTML = `
+                        <div class="text-center py-10 transition-all duration-500 ease-in-out">
+                            <div class="text-5xl mb-4">✨</div>
+                            <h3 class="text-2xl font-bold text-text_dark mb-2">¡Mensaje recibido con éxito!</h3>
+                            <p class="text-gray-600 max-w-md mx-auto mb-6 text-sm">
+                                Los detalles han sido registrados. El equipo administrativo se comunicará de manera prioritaria a la brevedad posible a través de WhatsApp o correo electrónico.
+                            </p>
+                            <a href="index.html" class="cta-button rounded-lg text-sm inline-block py-2.5 px-6">
+                                Volver a la página principal
+                            </a>
+                        </div>
+                    `;
+                } catch (err) {
+                    alert('🛑 Hubo un problema temporal al procesar el envío. Por favor, intenta de nuevo o comunícate directamente mediante el botón flotante de WhatsApp.');
+                    btnLead.disabled = false;
+                    btnLead.innerHTML = textoOriginal;
+                }
+            });
+        }
+    </script>
 </body>
 </html>
+"""
+
+with open("agendar-v2.html", "w", encoding="utf-8") as f:
+    f.write(content)
+
+print("agendar-v2.html generado exitosamente")
