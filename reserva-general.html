@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuentra a tu Psicóloga - Therapy Home ISJ OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #fdfafb; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #4a4a4a; }
+        .triage-container { max-width: 650px; margin: 3rem auto; padding: 0 15px; }
+        .card-step { background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #f4eff1; display: none; animation: fadeIn 0.5s; }
+        .card-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        h3 { color: #2c1b23; font-weight: 800; margin-bottom: 0.5rem; }
+        .text-muted { color: #8c7e84 !important; }
+        
+        .form-label { font-weight: 600; color: #5c4d53; margin-top: 1.5rem; }
+        .form-control, .form-select { border-radius: 10px; border: 1px solid #e2d9dc; padding: 12px; background-color: #faf7f8; }
+        .form-control:focus, .form-select:focus { border-color: #c04374; box-shadow: 0 0 0 0.25rem rgba(192, 67, 116, 0.15); background-color: white; }
+        
+        .option-box { display: block; padding: 15px; border: 1.5px solid #e2d9dc; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; background: white; font-weight: 500; font-size: 0.95rem; line-height: 1.3;}
+        .option-box:hover { border-color: #c04374; background: #fdfafb; }
+        .option-box input[type="radio"], .option-box input[type="checkbox"] { margin-right: 10px; accent-color: #c04374; transform: scale(1.2); }
+        .option-box.selected { border-color: #c04374; background: #fff0f4; color: #9c27b0; }
+
+        .btn-next { background-color: #2c1b23; color: white; border-radius: 10px; padding: 12px 30px; font-weight: bold; border: none; transition: 0.2s; }
+        .btn-next:hover { background-color: #000; color: white; transform: translateY(-2px); }
+        .btn-back { background-color: white; color: #2c1b23; border: 1px solid #e2d9dc; border-radius: 10px; padding: 12px 30px; font-weight: bold; }
+
+        .progress { height: 6px; border-radius: 10px; background-color: #f4eff1; margin-bottom: 2rem; }
+        .progress-bar { background-color: #c04374; border-radius: 10px; transition: width 0.4s ease; }
+
+        .radio-scale { transform: scale(1.4); accent-color: #c04374; cursor: pointer; }
+        
+        .animation-fade-in { animation: fadeIn 0.8s ease-in-out; }
+
+        @media (max-width: 768px) {
+            .card-step { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container triage-container">
+    
+    <div class="progress">
+        <div class="progress-bar" id="progress-bar" style="width: 25%"></div>
+    </div>
+
+    <!-- PASO 1: DATOS PERSONALES -->
+    <div class="card-step active" id="step-1">
+        <h3>Cuéntanos sobre ti 🌸</h3>
+        <p class="text-muted">Esta información es confidencial. La usamos con un único propósito: encontrar a la psicóloga que mejor pueda acompañarte. No hay respuestas incorrectas.</p>
+        
+        <label class="form-label">¿Cómo te llamas?</label>
+        <input type="text" id="q_nombre" class="form-control" placeholder="Tu nombre completo">
+
+        <label class="form-label">Correo electrónico</label>
+        <input type="email" id="q_email" class="form-control" placeholder="Para enviarte tu confirmación">
+
+        <label class="form-label">WhatsApp o Teléfono</label>
+        <input type="tel" id="q_telefono" class="form-control" placeholder="Ej: +52 55 1234 5678">
+
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">¿Fecha de nacimiento?</label>
+                <input type="date" id="q_fecha_nac" class="form-control">
+            </div>
+            <div class="col-6">
+                <label class="form-label">¿País / Ciudad?</label>
+                <input type="text" id="q_ciudad" class="form-control" placeholder="Ej. CDMX, México">
+            </div>
+        </div>
+
+        <label class="form-label">¿Con qué género te identificas?</label>
+        <select id="q_genero" class="form-select">
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option>Mujer</option>
+            <option>Hombre</option>
+            <option>No binario</option>
+            <option>Prefiero no decirlo</option>
+        </select>
+
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-next" onclick="nextStep(1, 2)">Siguiente ➡️</button>
+        </div>
+    </div>
+
+    <!-- PASO 2: MOTIVO E INTENSIDAD -->
+    <div class="card-step" id="step-2">
+        <h3>Lo que te trajo aquí</h3>
+        
+        <label class="form-label">¿Qué tipo de acompañamiento estás buscando? *</label>
+        <label class="option-box"><input type="radio" name="q_tipo_terapia" value="individual"> Terapia individual (para mí)</label>
+        <label class="option-box"><input type="radio" name="q_tipo_terapia" value="pareja"> Terapia de pareja (mi pareja y yo)</label>
+        <label class="option-box"><input type="radio" name="q_tipo_terapia" value="individual"> No estoy segura/o todavía</label>
+
+        <label class="form-label">¿Cuál es el tema principal que te trajo aquí? *</label>
+        <div id="temas-container">
+            <label class="option-box py-2"><input type="checkbox" value="Ansiedad"> Ansiedad o preocupación constante</label>
+            <label class="option-box py-2"><input type="checkbox" value="Depresión"> Tristeza, desgano o depresión</label>
+            <label class="option-box py-2"><input type="checkbox" value="Duelo"> Ruptura amorosa o duelo afectivo</label>
+            <label class="option-box py-2"><input type="checkbox" value="Dependencia"> Dependencia emocional o apego ansioso</label>
+            <label class="option-box py-2"><input type="checkbox" value="Pareja"> Conflictos en mi relación de pareja</label>
+            <label class="option-box py-2"><input type="checkbox" value="Autoestima"> Autoestima o inseguridad</label>
+            <label class="option-box py-2"><input type="checkbox" value="Limites"> Límites y dificultad para decir no</label>
+            <label class="option-box py-2"><input type="checkbox" value="Perfeccionismo"> Perfeccionismo o autoexigencia excesiva</label>
+            <label class="option-box py-2"><input type="checkbox" value="Burnout"> Estrés laboral o burnout</label>
+            <label class="option-box py-2"><input type="checkbox" value="Regulacion"> Regulación emocional (enojo, explosiones, bloqueos)</label>
+            <label class="option-box py-2"><input type="checkbox" value="Trauma"> Trauma o experiencias difíciles del pasado</label>
+            <label class="option-box py-2"><input type="checkbox" value="Violencia"> Violencia o relación desigual</label>
+            <label class="option-box py-2"><input type="checkbox" value="Duelo pérdida"> Duelo por pérdida (persona, trabajo, etapa de vida)</label>
+            <div class="mt-2"><input type="text" id="q_temas_otro" class="form-control" placeholder="Otro..."></div>
+        </div>
+
+        <label class="form-label">En dos o tres frases, ¿qué está pasando en tu vida que te trajo aquí? No necesitas dar detalles, una idea general es suficiente. *</label>
+        <textarea id="q_descripcion" class="form-control" rows="3"></textarea>
+
+        <label class="form-label">¿Cómo describirías la intensidad de lo que estás viviendo? *</label>
+        <div class="d-flex justify-content-between align-items-center mt-3 mb-4 px-2 px-md-4">
+            <div class="text-center"><input type="radio" name="q_intensidad" value="1" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-2">1</small></div>
+            <div class="text-center"><input type="radio" name="q_intensidad" value="2" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-2">2</small></div>
+            <div class="text-center"><input type="radio" name="q_intensidad" value="3" class="radio-scale" checked><br><small class="text-muted fw-bold d-block mt-2">3</small></div>
+            <div class="text-center"><input type="radio" name="q_intensidad" value="4" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-2">4</small></div>
+            <div class="text-center"><input type="radio" name="q_intensidad" value="5" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-2">5</small></div>
+        </div>
+        <div class="d-flex justify-content-between small text-muted px-1" style="margin-top: -15px;">
+            <span>Puedo manejarlo pero quiero apoyo</span><span>Siento que ya no puedo sola/solo</span>
+        </div>
+
+        <label class="form-label">¿Hace cuánto tiempo estás viviendo esto? *</label>
+        <label class="option-box py-2"><input type="radio" name="q_tiempo" value="Menos de un mes"> Menos de un mes</label>
+        <label class="option-box py-2"><input type="radio" name="q_tiempo" value="Entre 1 y 6 meses"> Entre 1 y 6 meses</label>
+        <label class="option-box py-2"><input type="radio" name="q_tiempo" value="Entre 6 meses y 1 año"> Entre 6 meses y 1 año</label>
+        <label class="option-box py-2"><input type="radio" name="q_tiempo" value="Más de un año"> Más de un año</label>
+        <label class="option-box py-2"><input type="radio" name="q_tiempo" value="Toda la vida"> Toda la vida, pero ahora se intensificó</label>
+
+        <div class="d-flex justify-content-between mt-4 border-top pt-4">
+            <button class="btn btn-back" onclick="nextStep(2, 1)">⬅️ Atrás</button>
+            <button class="btn btn-next" onclick="nextStep(2, 3)">Siguiente ➡️</button>
+        </div>
+    </div>
+
+    <!-- PASO 3: HISTORIAL CLÍNICO -->
+    <div class="card-step" id="step-3">
+        <h3>Tu experiencia previa</h3>
+        
+        <label class="form-label">¿Has estado en terapia psicológica antes? *</label>
+        <label class="option-box"><input type="radio" name="q_terapia_previa" value="Sí, y fue útil"> Sí, y fue útil</label>
+        <label class="option-box"><input type="radio" name="q_terapia_previa" value="Sí, pero no sentí que funcionó"> Sí, pero no sentí que funcionó</label>
+        <label class="option-box"><input type="radio" name="q_terapia_previa" value="Sí, con varios terapeutas sin mucho resultado"> Sí, con varios terapeutas sin mucho resultado</label>
+        <label class="option-box"><input type="radio" name="q_terapia_previa" value="No, es mi primera vez"> No, es mi primera vez</label>
+
+        <label class="form-label">Si has estado en terapia antes, ¿qué fue lo que no funcionó? Esto nos ayuda a que esta vez sea diferente.</label>
+        <div id="no-funciono-container">
+            <label class="option-box py-2"><input type="checkbox" value="Solo escuchaba"> Sentí que la terapeuta solo escuchaba pero no me orientaba</label>
+            <label class="option-box py-2"><input type="checkbox" value="Muy distante"> Sentí que era muy distante o poco cercana</label>
+            <label class="option-box py-2"><input type="checkbox" value="Sin conexion"> No sentí conexión o empatía</label>
+            <label class="option-box py-2"><input type="checkbox" value="Enfoque no encajo"> El enfoque no encajó con lo que yo necesitaba</label>
+            <label class="option-box py-2"><input type="checkbox" value="Sin continuidad"> No hubo continuidad o consistencia</label>
+            <div class="mt-2"><input type="text" id="q_nofunciono_otro" class="form-control" placeholder="Otro..."></div>
+        </div>
+
+        <label class="form-label">¿Tienes diagnóstico psicológico o psiquiátrico previo? *</label>
+        <div id="diagnosticos-container">
+            <label class="option-box py-2"><input type="checkbox" value="No que yo sepa"> No, que yo sepa</label>
+            <label class="option-box py-2"><input type="checkbox" value="Ansiedad o depresión"> Ansiedad o depresión diagnosticada</label>
+            <label class="option-box py-2"><input type="checkbox" value="TLP o Personalidad"> Trastorno de personalidad (TLP u otro)</label>
+            <label class="option-box py-2"><input type="checkbox" value="Bipolar o estado de ánimo"> Trastorno del estado de ánimo (bipolar u otro)</label>
+            <label class="option-box py-2"><input type="checkbox" value="TDAH o neurodesarrollo"> TDAH o condición del neurodesarrollo</label>
+            <label class="option-box py-2"><input type="checkbox" value="Prefiero no decirlo"> Prefiero no decirlo</label>
+            <div class="mt-2"><input type="text" id="q_diagnosticos_otro" class="form-control" placeholder="Otro..."></div>
+        </div>
+
+        <label class="form-label">¿Actualmente estás tomando medicación psiquiátrica o psicológica? *</label>
+        <label class="option-box py-2"><input type="radio" name="q_meds" value="Sí"> Sí</label>
+        <label class="option-box py-2"><input type="radio" name="q_meds" value="No"> No</label>
+        <label class="option-box py-2"><input type="radio" name="q_meds" value="Estoy en proceso de evaluación"> Estoy en proceso de evaluación</label>
+        <label class="option-box py-2"><input type="radio" name="q_meds" value="Prefiero no decirlo"> Prefiero no decirlo</label>
+
+        <div class="d-flex justify-content-between mt-4 border-top pt-4">
+            <button class="btn btn-back" onclick="nextStep(3, 2)">⬅️ Atrás</button>
+            <button class="btn btn-next" onclick="nextStep(3, 4)">Siguiente ➡️</button>
+        </div>
+    </div>
+
+    <!-- PASO 4: EXPECTATIVAS Y LOGÍSTICA -->
+    <div class="card-step" id="step-4">
+        <h3>Tus expectativas y lo práctico</h3>
+        
+        <label class="form-label text-danger fw-bold">¿En este momento estás teniendo pensamientos de hacerte daño o de que ya no quieres estar aquí? *</label>
+        <label class="option-box py-2"><input type="radio" name="q_riesgo" value="No" checked> No</label>
+        <label class="option-box py-2"><input type="radio" name="q_riesgo" value="A veces tengo esos pensamientos pero no actúo en ellos"> A veces tengo esos pensamientos pero no actúo en ellos</label>
+        <label class="option-box py-2 border-danger text-danger"><input type="radio" name="q_riesgo" value="Alerta Roja"> Sí, y me preocupa</label>
+        <label class="option-box py-2"><input type="radio" name="q_riesgo" value="Prefiero hablarlo en la primera sesión"> Prefiero hablarlo en la primera sesión</label>
+
+        <label class="form-label mt-4">¿Cómo te imaginas que sería tu psicóloga ideal? (Puedes elegir más de una) *</label>
+        <div id="ideal-container">
+            <label class="option-box py-2"><input type="checkbox" value="Que me escuche sin interrumpir"> Que me escuche sin interrumpir mucho</label>
+            <label class="option-box py-2"><input type="checkbox" value="Que sea activa y de perspectivas"> Que sea activa, me haga preguntas y me dé perspectivas</label>
+            <label class="option-box py-2"><input type="checkbox" value="Que me confronte"> Que me confronte cuando lo necesite</label>
+            <label class="option-box py-2"><input type="checkbox" value="Experiencia personal"> Que tenga experiencia personal en temas similares a los míos (maternidad, pareja, etc.)</label>
+            <label class="option-box py-2"><input type="checkbox" value="Que sea cercana y cálida"> Que sea cercana y cálida</label>
+            <label class="option-box py-2"><input type="checkbox" value="Que sea estructurada"> Que sea más profesional y estructurada</label>
+            <label class="option-box py-2"><input type="checkbox" value="No tengo preferencia"> No tengo preferencia</label>
+        </div>
+
+        <label class="form-label">¿Qué esperas que pase en una sesión? Elige la que más se acerque *</label>
+        <label class="option-box py-2"><input type="radio" name="q_expectativa_sesion" value="Hablar y sentirme escuchada"> Principalmente hablar y sentirme escuchada</label>
+        <label class="option-box py-2"><input type="radio" name="q_expectativa_sesion" value="Entender qué me pasa"> Que me ayuden a entender qué me pasa</label>
+        <label class="option-box py-2"><input type="radio" name="q_expectativa_sesion" value="Herramientas concretas"> Que me den herramientas concretas para aplicar</label>
+        <label class="option-box py-2"><input type="radio" name="q_expectativa_sesion" value="Una mezcla de todo"> Una mezcla de todo lo anterior</label>
+
+        <label class="form-label mt-4">¿Cuál es tu disponibilidad general para sesiones? (hora de tu ciudad) *</label>
+        <div id="disp-container">
+            <label class="option-box py-2"><input type="checkbox" value="Mañanas"> Mañanas (7 - 12h)</label>
+            <label class="option-box py-2"><input type="checkbox" value="Tardes"> Tardes (12 - 17h)</label>
+            <label class="option-box py-2"><input type="checkbox" value="Noches"> Noches (17 - 21h)</label>
+            <label class="option-box py-2"><input type="checkbox" value="Fines"> Fines de semana</label>
+        </div>
+
+        <label class="form-label">¿Qué tan pronto quisieras iniciar? *</label>
+        <select id="q_urgencia" class="form-select">
+            <option>Esta semana si es posible</option>
+            <option>En los próximos 15 días</option>
+            <option>No tengo prisa, cuando haya disponibilidad</option>
+        </select>
+
+        <label class="form-label">¿Hay algo más que quieras que sepamos antes de asignarte una psicóloga? Cualquier cosa que sientas importante (preferencias, preocupaciones, lo que sea).</label>
+        <textarea id="q_extra" class="form-control" rows="2"></textarea>
+
+        <div id="submit-loader" class="text-center mt-4" style="display: none;">
+            <div class="spinner-border text-dark" role="status"></div>
+            <p class="mt-3 fw-bold fs-5" style="color: #c04374;">Analizando tu perfil y disponibilidad de nuestro equipo...</p>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4 border-top pt-4" id="submit-btns">
+            <button class="btn btn-back" onclick="nextStep(4, 3)">⬅️ Atrás</button>
+            <button class="btn btn-next" onclick="enviarFormulario()" style="background-color: #c04374;">Encontrar mi Terapeuta ✨</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const API = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:") 
+        ? "http://localhost:8000" : "https://crm-backend-oztv.onrender.com";
+
+    // DICCIONARIO INTELIGENTE DE ESPECIALIDADES
+    const especialidades = {
+        "Blanca": ["Depresión", "Ansiedad", "Trauma", "Pareja", "Violencia", "Regulacion"],
+        "Sara": ["Ansiedad", "Autoestima", "Duelo", "Depresión", "Pareja", "Dependencia", "Trauma", "Limites", "Regulacion", "Violencia"],
+        "Alondra": ["Duelo", "Pareja", "Ansiedad", "Depresión", "Trauma", "Autoestima", "Limites", "Regulacion", "Violencia"],
+        "Marina": ["Ansiedad", "Depresión", "Autoestima", "Duelo", "Dependencia", "Pareja", "Perfeccionismo", "Burnout", "Regulacion"],
+        "Paola": ["Ansiedad", "Depresión", "Pareja", "Duelo", "Autoestima", "Dependencia", "Limites", "Perfeccionismo", "Regulacion"],
+        "Janeth": ["Dependencia", "Pareja", "Depresión", "Perfeccionismo", "Violencia"],
+        "Anarely": ["Ansiedad", "Depresión", "Duelo", "Pareja", "Perfeccionismo", "Violencia", "Regulacion"],
+        "Lizbeth": ["Ansiedad", "Autoestima", "Dependencia", "Duelo", "Pareja", "Limites", "Regulacion"],
+        "Mikaela": ["Ansiedad", "Autoestima", "Depresión", "Regulacion"],
+        "Tania": ["Ansiedad", "Depresión", "Duelo", "Perfeccionismo", "Burnout", "Regulacion"],
+        "Areli": ["Pareja", "Ansiedad", "Depresión", "Trauma", "Autoestima", "Violencia", "Burnout"],
+        "Claudia": ["Ansiedad", "Depresión", "Duelo", "Pareja"],
+        "Isis": ["Trauma", "Ansiedad"]
+    };
+
+    document.querySelectorAll('.option-box input').forEach(input => {
+        input.addEventListener('change', function() {
+            if(this.type === 'radio') {
+                document.querySelectorAll(`input[name="${this.name}"]`).forEach(r => r.parentElement.classList.remove('selected'));
+            }
+            if(this.checked) this.parentElement.classList.add('selected');
+            else this.parentElement.classList.remove('selected');
+        });
+    });
+
+    function nextStep(current, next) {
+        // Solo validamos si el usuario intenta avanzar (no si regresa al paso anterior)
+        if (next > current) {
+            
+            // Validaciones del Paso 1
+            if (current === 1) {
+                const nombre = document.getElementById('q_nombre').value.trim();
+                const email = document.getElementById('q_email').value.trim();
+                const telefono = document.getElementById('q_telefono').value.trim();
+                
+                if (!nombre || !email || !telefono) {
+                    alert("Por favor, completa tu nombre, correo y teléfono para que podamos contactarte.");
+                    return; // Detiene la función y no deja avanzar
+                }
+            }
+            
+            // Validaciones del Paso 2
+            if (current === 2) {
+                const tipoTerapia = document.querySelector('input[name="q_tipo_terapia"]:checked');
+                const temas = document.querySelectorAll('#temas-container input[type="checkbox"]:checked');
+                const temasOtro = document.getElementById('q_temas_otro').value.trim();
+                const descripcion = document.getElementById('q_descripcion').value.trim();
+                const tiempo = document.querySelector('input[name="q_tiempo"]:checked');
+                
+                if (!tipoTerapia) {
+                    alert("Por favor, indícanos qué tipo de acompañamiento buscas.");
+                    return;
+                }
+                if (temas.length === 0 && !temasOtro) {
+                    alert("Por favor, selecciona al menos un tema principal.");
+                    return;
+                }
+                if (!descripcion) {
+                    alert("Por favor, descríbenos brevemente qué está pasando.");
+                    return;
+                }
+                if (!tiempo) {
+                    alert("Por favor, indícanos hace cuánto tiempo vives esto.");
+                    return;
+                }
+            }
+
+            // Validaciones del Paso 3
+            if (current === 3) {
+                const terapiaPrevia = document.querySelector('input[name="q_terapia_previa"]:checked');
+                const diagnosticos = document.querySelectorAll('#diagnosticos-container input[type="checkbox"]:checked');
+                const diagnosticosOtro = document.getElementById('q_diagnosticos_otro').value.trim();
+                const meds = document.querySelector('input[name="q_meds"]:checked');
+
+                if (!terapiaPrevia || (!diagnosticos.length && !diagnosticosOtro) || !meds) {
+                    alert("Por favor, asegúrate de responder las preguntas sobre tu experiencia previa y diagnósticos.");
+                    return;
+                }
+            }
+        }
+
+        // Si pasa las validaciones, hacemos el cambio visual de la tarjeta
+        document.getElementById(`step-${current}`).classList.remove('active');
+        document.getElementById(`step-${next}`).classList.add('active');
+        document.getElementById('progress-bar').style.width = `${(next / 4) * 100}%`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function enviarFormulario() {
+        document.getElementById('submit-btns').style.display = 'none';
+        document.getElementById('submit-loader').style.display = 'block';
+
+        const nombre = document.getElementById('q_nombre').value || "Paciente Anónimo";
+        const email = document.getElementById('q_email').value || "sin@correo.com";
+        const telefono = document.getElementById('q_telefono').value || "0000000000";
+        
+        const tipoTerapiaRadio = document.querySelector('input[name="q_tipo_terapia"]:checked');
+        const tipo_terapia = tipoTerapiaRadio ? tipoTerapiaRadio.value : "individual";
+        
+        let temasSeleccionados = [];
+        document.querySelectorAll('#temas-container input[type="checkbox"]:checked').forEach(cb => temasSeleccionados.push(cb.value));
+        const temasOtro = document.getElementById('q_temas_otro').value;
+        if(temasOtro) temasSeleccionados.push(`Otro: ${temasOtro}`);
+        
+        const descripcion = document.getElementById('q_descripcion').value;
+        const intensidadRadio = document.querySelector('input[name="q_intensidad"]:checked');
+        const intensidad = intensidadRadio ? intensidadRadio.value : "3";
+        
+        const tiempoRadio = document.querySelector('input[name="q_tiempo"]:checked');
+        const tiempo = tiempoRadio ? tiempoRadio.value : "No especificó";
+        
+        const terapiaPreviaRadio = document.querySelector('input[name="q_terapia_previa"]:checked');
+        const terapiaPrevia = terapiaPreviaRadio ? terapiaPreviaRadio.value : "No contestó";
+        
+        let noFunciono = [];
+        document.querySelectorAll('#no-funciono-container input[type="checkbox"]:checked').forEach(cb => noFunciono.push(cb.value));
+        const noFuncionoOtro = document.getElementById('q_nofunciono_otro').value;
+        if(noFuncionoOtro) noFunciono.push(`Otro: ${noFuncionoOtro}`);
+
+        let diagnosticos = [];
+        document.querySelectorAll('#diagnosticos-container input[type="checkbox"]:checked').forEach(cb => diagnosticos.push(cb.value));
+        const diagOtro = document.getElementById('q_diagnosticos_otro').value;
+        if(diagOtro) diagnosticos.push(`Otro: ${diagOtro}`);
+        
+        const medsRadio = document.querySelector('input[name="q_meds"]:checked');
+        const medicacion = medsRadio ? medsRadio.value : "No especificó";
+
+        const riesgoRadio = document.querySelector('input[name="q_riesgo"]:checked');
+        const riesgo = riesgoRadio ? riesgoRadio.value : "No";
+
+        let ideal = [];
+        document.querySelectorAll('#ideal-container input:checked').forEach(cb => ideal.push(cb.value));
+        
+        const expectativaSesionRadio = document.querySelector('input[name="q_expectativa_sesion"]:checked');
+        const expectativaSesion = expectativaSesionRadio ? expectativaSesionRadio.value : "No contestó";
+
+        let disponibilidad = [];
+        document.querySelectorAll('#disp-container input:checked').forEach(cb => disponibilidad.push(cb.value));
+
+        let motivoClinico = `<b>🔍 TRIAGE CLÍNICO INICIAL:</b><br><br>`;
+        motivoClinico += `<b>--- MOTIVO PRINCIPAL ---</b><br>`;
+        motivoClinico += `<b>Temas:</b> ${temasSeleccionados.join(', ') || 'No especificado'}<br>`;
+        motivoClinico += `<b>Tiempo viviendo esto:</b> ${tiempo}<br>`;
+        motivoClinico += `<b>Intensidad:</b> ${intensidad} / 5<br>`;
+        motivoClinico += `<b>En sus palabras:</b> "${descripcion}"<br><br>`;
+        
+        motivoClinico += `<b>--- HISTORIAL CLÍNICO ---</b><br>`;
+        motivoClinico += `<b>Terapia previa:</b> ${terapiaPrevia}<br>`;
+        if (noFunciono.length > 0) motivoClinico += `<b>Lo que no le funcionó antes:</b> ${noFunciono.join(', ')}<br>`;
+        motivoClinico += `<b>Diagnósticos:</b> ${diagnosticos.join(', ') || 'Ninguno marcado'}<br>`;
+        motivoClinico += `<b>Medicación:</b> ${medicacion}<br>`;
+        if(riesgo === "Alerta Roja") motivoClinico += `🚨 <b>ALERTA DE RIESGO MARCADA EN FORMULARIO</b> 🚨<br><br>`;
+        else motivoClinico += `<b>Pensamientos de riesgo:</b> ${riesgo}<br><br>`;
+
+        motivoClinico += `<b>--- EXPECTATIVAS Y LOGÍSTICA ---</b><br>`;
+        motivoClinico += `<b>Psicóloga ideal:</b> ${ideal.join(', ') || 'No especificado'}<br>`;
+        motivoClinico += `<b>Espera de la sesión:</b> ${expectativaSesion}<br>`;
+        motivoClinico += `<b>Disponibilidad:</b> ${disponibilidad.join(', ') || 'No especificado'} | <b>Urgencia:</b> ${document.getElementById('q_urgencia').value}<br>`;
+        motivoClinico += `<b>Comentarios extra:</b> "${document.getElementById('q_extra').value}"`;
+
+        let tituloTerapia = tipo_terapia;
+        if(riesgo === "Alerta Roja" || intensidad === "5") tituloTerapia = "[URGENTE/RIESGO] " + tipo_terapia;
+
+        try {
+            // 1. DESCARGAMOS PSICÓLOGAS Y EL CALENDARIO AL MISMO TIEMPO
+            const [resPs, resAppts] = await Promise.all([
+                fetch(`${API}/psychologists/`),
+                fetch(`${API}/appointments/`)
+            ]);
+            let psicologas = await resPs.json();
+            const allAppts = await resAppts.json();
+
+            // Filtramos los bloques disponibles en el futuro
+            const ahora = new Date();
+            const dispAppts = allAppts.filter(a => 
+                a.extendedProps.patient_name === "DISPONIBLE" && 
+                new Date(a.start) > ahora
+            );
+
+            // Filtramos a las psicólogas válidas y por tipo de terapia (Individual/Pareja)
+            psicologas = psicologas.filter(p => 
+                p.name !== "Administrador" && 
+                !p.name.toLowerCase().includes("supervisora") && 
+                !p.name.toLowerCase().includes("therapy home") &&
+                !p.name.toLowerCase().includes("dulce") &&
+                p.accepts_new_patients !== false
+            );
+
+            if(tipo_terapia === "pareja") {
+                psicologas = psicologas.filter(p => p.therapy_types === "pareja" || p.therapy_types === "ambas");
+            } else if (tipo_terapia === "individual") {
+                psicologas = psicologas.filter(p => p.therapy_types === "individual" || p.therapy_types === "ambas");
+            }
+
+            // 2. COMENZAMOS LA CALIFICACIÓN (MATCH SCORING AVANZADO)
+            psicologas.forEach(p => {
+                p.matchScore = 0;
+                let primerNombre = p.name.split(' ')[0];
+                
+                // --- A) MATCH CLÍNICO (Temas y Especialidades) ---
+                let misTemasFuerte = especialidades[primerNombre] || [];
+                let dbSpecialties = p.specialties ? p.specialties.toLowerCase() : "";
+                
+                temasSeleccionados.forEach(tema => {
+                    let t = tema.toLowerCase();
+                    if(misTemasFuerte.includes(tema) || dbSpecialties.includes(t)) {
+                        p.matchScore += 3; 
+                    }
+                });
+
+                // --- B) MATCH DE DISPONIBILIDAD REAL (El más crítico) ---
+                let misHorarios = { "Mañanas": 0, "Tardes": 0, "Noches": 0, "Fines": 0 };
+                
+                dispAppts.filter(a => a.extendedProps.psychologist_id == p.id).forEach(a => {
+                    let d = new Date(a.start);
+                    let h = d.getHours();
+                    let day = d.getDay(); // 0 es Domingo, 6 es Sábado
+                    
+                    if (day === 0 || day === 6) misHorarios["Fines"]++;
+                    else if (h >= 7 && h < 12) misHorarios["Mañanas"]++;
+                    else if (h >= 12 && h < 17) misHorarios["Tardes"]++;
+                    else if (h >= 17) misHorarios["Noches"]++;
+                });
+
+                let coincidenciasHorario = 0;
+                disponibilidad.forEach(franja => {
+                    if (misHorarios[franja] > 0) {
+                        p.matchScore += 6; 
+                        coincidenciasHorario++;
+                        if (misHorarios[franja] >= 3) p.matchScore += 1; // Extra si tiene mucha disponibilidad
+                    }
+                });
+
+                let misCitasTotales = misHorarios["Mañanas"] + misHorarios["Tardes"] + misHorarios["Noches"] + misHorarios["Fines"];
+                if (misCitasTotales === 0) {
+                    p.matchScore -= 10; 
+                } else if (coincidenciasHorario === 0 && disponibilidad.length > 0) {
+                    p.matchScore -= 5;
+                }
+
+                // --- C) MATCH DE PERSONALIDAD (Bio y Preferencias) ---
+                let bio = ((p.bio || "") + " " + (p.hook_phrase || "")).toLowerCase();
+                ideal.forEach(rasgo => {
+                    let r = rasgo.toLowerCase();
+                    if (r.includes("activa") && (bio.includes("cognitivo") || bio.includes("solucion") || bio.includes("herramienta"))) p.matchScore += 1;
+                    if (r.includes("confronte") && (bio.includes("conductual") || bio.includes("directo") || bio.includes("reto"))) p.matchScore += 1;
+                    if (r.includes("cálida") && (bio.includes("cálid") || bio.includes("empat") || bio.includes("acompañ") || bio.includes("humanista"))) p.matchScore += 1;
+                    if (r.includes("estructurada") && (bio.includes("estructur") || bio.includes("ciencia") || bio.includes("evidencia"))) p.matchScore += 1;
+                });
+
+                p.matchScore += Math.random(); 
+            });
+
+            // 3. ORDENAMOS Y TOMAMOS A LAS MEJORES 4
+            psicologas.sort((a, b) => b.matchScore - a.matchScore);
+            let recomendadas = psicologas.slice(0, 4);
+            let matchIds = recomendadas.map(p => p.id).join(',');
+
+            // 4. GENERAMOS EL LINK DE RESERVA
+            const linkReserva = `${window.location.origin}/reserva.html?id=all&matches=${matchIds}&type=${tipo_terapia}`;
+            
+            // 5. AGREGAMOS EL LINK AL CORREO DE ADMINISTRACIÓN
+            motivoClinico += `<br><br><div style="background-color:#e8f0fe; padding:15px; border-radius:8px; border-left:4px solid #1a73e8;"><b>🔗 LINK GENERADO PARA ESTE PACIENTE (MATCH ALGORÍTMICO):</b><br><a href="${linkReserva}" target="_blank" style="word-break: break-all;">${linkReserva}</a><br><br><small>Copia este link y envíaselo por WhatsApp junto con su saludo de bienvenida.</small></div>`;
+
+            // 6. ENVIAMOS EL CORREO A LA CLÍNICA
+            fetch(`${API}/api/contacto`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nombre: nombre, email: email, telefono: telefono,
+                    pais: document.getElementById('q_ciudad').value || 'No indico',
+                    ciudad: document.getElementById('q_fecha_nac').value || 'Sin fecha',
+                    tipo_terapia: tituloTerapia,
+                    motivo: motivoClinico
+                })
+            }).catch(e => console.log("Notificación correo ignorada"));
+
+            // 7. ENVIAMOS A GOOGLE SHEETS
+            const datosSheets = {
+                fecha: new Date().toLocaleString('es-MX'),
+                nombre: nombre, telefono: telefono, email: email,
+                tipo_terapia: tipo_terapia, temas: temasSeleccionados.join(', '), tiempo: tiempo,
+                intensidad: intensidad, descripcion: descripcion, terapia_previa: terapiaPrevia,
+                no_funciono: noFunciono.join(', '), diagnosticos: diagnosticos.join(', '),
+                medicacion: medicacion, riesgo: riesgo, psicologa_ideal: ideal.join(', '),
+                expectativa: expectativaSesion, disponibilidad: disponibilidad.join(', '),
+                urgencia: document.getElementById('q_urgencia').value, extra: document.getElementById('q_extra').value
+            };
+
+            const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxrimZvZp6huFVE_XuLacK3Z3iE2bHgR7Gek6dhHTvOPkJNZ8jPELFaSsXNEVWA5JgXOQ/exec"; 
+            
+            fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST', mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datosSheets)
+            }).catch(e => console.log("Error al guardar en Sheets", e));
+
+            // 8. MOSTRAMOS EL MENSAJE CÁLIDO AL PACIENTE
+            const nombrePila = nombre && nombre !== "Paciente Anónimo" ? nombre.split(' ')[0] : "";
+            const saludo = nombrePila ? `¡Gracias por compartirnos esto, ${nombrePila}! ✨` : `¡Gracias por compartirnos tu información! ✨`;
+
+            document.getElementById('step-4').innerHTML = `
+                <div class="text-center p-4 animation-fade-in">
+                    <h3 class="fw-bold mb-3" style="color: #c04374;">${saludo}</h3>
+                    <p class="text-muted fs-6 mb-3">Hemos recibido tu información de manera segura.</p>
+                    <p class="text-dark fw-bold fs-6 mb-4" style="line-height: 1.6;">Nuestro equipo clínico revisará tu perfil detalladamente y te contactaremos por WhatsApp a la brevedad para saludarte y enviarte las opciones de especialistas que mejor se adaptan a lo que necesitas y a tus horarios.</p>
+                    
+                    <a href="https://wa.me/525513362585" target="_blank" class="btn fw-bold px-4 py-3 rounded-pill shadow-sm mb-4 text-white" style="background-color: #25D366; transition: transform 0.2s;">
+                        💬 Escribir al WhatsApp de la clínica
+                    </a>
+                    <br>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-4" onclick="window.location.reload()">Volver al inicio</button>
+                </div>
+            `;
+
+        } catch (e) {
+            console.error(e);
+            alert("Hubo un error al procesar tu solicitud. Por favor, asegúrate de estar conectada a internet.");
+            document.getElementById('submit-btns').style.display = 'flex';
+            document.getElementById('submit-loader').style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>
