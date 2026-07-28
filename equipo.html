@@ -6,609 +6,345 @@
     <title>TherapyHomeISJ | Nuestro Equipo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
                     colors: {
-                        // PALETA DE COLORES DE index.html
-                        primary: '#FDF7F8', 
-                        secondary: '#C04374', 
-                        text_dark: '#2C1B23', 
-                        text_light: '#FFFFFF',
-                        dark_footer: '#4A2A38',
+                        crema: '#F5F0ED',
+                        crema_oscuro: '#F0EBE6',
+                        rosagelatina: '#EDD8D0',
+                        rosaprofu: '#C9A097',
+                        carbon: '#1A1412',
+                        blanco: '#FDFCFB'
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        @font-face {
-            font-family: 'Berliana Lovely';
-            src: url('Berliana-Lovely.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
+        body { background-color: theme('colors.crema'); color: theme('colors.carbon'); }
+        .btn-nav { 
+            background-color: theme('colors.rosaprofu'); 
+            color: theme('colors.blanco'); 
+            border-radius: 9999px;
+            transition: background-color 0.2s ease;
         }
-        
-        /* Estilos de Botón adaptados de index.html */
-        .cta-button {
-            background-color: theme('colors.secondary'); /* #C04374 */
-            color: theme('colors.text_light'); /* #FFFFFF */
-            padding: 12px 28px; /* Del estilo personalizado en index.html */
-            text-decoration: none;
-            border-radius: 5px; /* Del estilo en index.html */
-            font-weight: 700; 
-            font-size: 1.125rem; /* Del estilo personalizado en index.html */
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Del estilo en index.html */
-            display: inline-block;
+        .btn-nav:hover { background-color: #B58B82; }
+        .nav-link { position: relative; color: theme('colors.carbon'); text-decoration: none; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px;
+            bottom: 0; left: 0; background-color: theme('colors.carbon');
+            transform-origin: bottom right; transition: transform 0.25s ease-out;
         }
-        .cta-button:hover { 
-            background-color: #880E4F; /* Color de hover oscuro de index.html */
-            transform: translateY(-2px); /* Efecto de index.html */
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
-        /* Estilo para un botón secundario (bordeado) - Se mantiene por si se usa */
-        .cta-button.secondary {
-            background-color: transparent;
-            border: 2px solid theme('colors.secondary');
-            color: theme('colors.secondary');
-            padding: 12px 28px; 
-            border-radius: 5px;
-            font-weight: 700;
-            font-size: 1.125rem;
-            box-shadow: none; 
-        }
-        .cta-button.secondary:hover {
-            background-color: theme('colors.secondary');
-            color: theme('colors.text_light');
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Estilos de Tarjeta de Miembro del Equipo */
-        .team-member-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-        .team-member-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .team-bio-toggle {
-            cursor: pointer;
-            color: theme('colors.secondary');
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        .team-bio-toggle:hover {
-            color: theme('colors.dark_footer');
-        }
-        .team-bio {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-            padding: 0 1rem;
-        }
-        .team-bio.open {
-            max-height: 500px;
-            padding: 1rem;
-        }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+
+        /* Ocultar el marcador nativo del acordeón (details) para usar nuestras flechas */
+        details > summary { list-style: none; outline: none; }
+        details > summary::-webkit-details-marker { display: none; }
     </style>
 </head>
-<body class="bg-primary text-text_dark">
+<body class="font-sans antialiased selection:bg-rosaprofu selection:text-blanco overflow-x-hidden">
 
-<header class="sticky top-0 z-50 bg-secondary shadow-md">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="text-3xl font-serif text-text_light hover:text-pink_light transition-colors duration-300">TherapyHomeISJ</a>
-        
-        <div class="hidden lg:flex items-center space-x-8">
-            <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de mí</a>
-            <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Equipo</a>
-            <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
-            <a href="recursos.html" class="text-text_light hover:text-pink_light font-medium">Recursos</a>
-            <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=all" target="_blank" class="text-text_light hover:text-pink_light font-medium">Agenda tu cita</a>
-            <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Contacto</a>
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 bg-crema/90 backdrop-blur-md z-50 border-b border-rosagelatina">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif font-semibold text-carbon tracking-tight">TherapyHomeISJ</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="equipo.html" class="nav-link">Conócenos</a>
+                <a href="agendar.html" class="btn-nav px-6 py-2.5">Iniciar terapia</a>
+            </nav>
         </div>
-        
-        <button id="mobile-menu-button" class="lg:hidden text-text_light focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-    </nav>
-</header>
+    </header>
 
-<div id="mobile-menu" class="lg:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
-    <ul class="flex flex-col items-center space-y-6 text-xl">
-        <li><a href="index.html#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de mí</a></li>
-        <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
-        <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
-        <li><a href="blog.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Blog</a></li>
-        <li><a href="recursos.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Recursos</a></li>
-        <li><a href="index.html#faq" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Preguntas</a></li>
-        <li>
-            <a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Contacto</a>
-        </li>
-        <li class="pt-4">
-            <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=all" target="_blank" class="cta-button rounded-lg bg-pink-500 hover:bg-pink-700">Agenda tu cita</a>
-        </li>
-    </ul>
-</div>
+    <main class="pt-32 pb-16">
+        <!-- CABECERA DE LA PÁGINA -->
+        <section class="px-6 text-center max-w-4xl mx-auto mb-20">
+            <h1 class="text-4xl md:text-5xl font-serif leading-tight mb-6 text-carbon">Nuestro equipo de especialistas</h1>
+            <p class="text-lg text-carbon/80 max-w-2xl mx-auto font-light">
+                Conoce a las profesionales que te acompañarán en este proceso. Cada una de ellas cuenta con formación clínica rigurosa y un profundo compromiso humano.
+            </p>
+        </section>
 
-    <main>
-        <section id="equipo" class="py-16 bg-primary">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold text-secondary mb-6">Nuestro equipo de especialistas</h2>
-                <p class="text-lg text-text_dark mb-12 max-w-3xl mx-auto">
-                    En TherapyHomeISJ, nuestro equipo está formado por profesionales apasionadas y comprometidas, dedicadas a ofrecerte el mejor acompañamiento en tu camino hacia el bienestar. Nos especializamos en proporcionar un espacio seguro y empático, adaptando nuestras herramientas a tus necesidades específicas.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- GRID DEL EQUIPO (Estilo Editorial / Fotos Controladas) -->
+        <section class="container mx-auto px-6 max-w-7xl mb-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-10">
+                
+                <!-- Lizbeth -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="liz.webp" alt="Lizbeth Ortiz Ramírez" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Lizbeth Ortiz Ramírez</h3>
                     
-            <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="liz.webp" alt="Foto de Lizbeth Ortiz" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Lizbeth Ortiz Ramírez</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 14451464</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología, Maestra en terapia familiar</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Me especializo en el acompañamiento individual, de pareja y familiar, integrando los enfoques Cognitivo-Conductual y Breve Sistémico para ofrecer intervenciones claras y efectivas. Abordo temas como crisis de pareja; rupturas, dependencia emocional, comunicación e infidelidad, así como el fortalecimiento de vínculos sanos. También brindo acompañamiento en procesos individuales de autoestima, ansiedad, depresión y duelos. Mi práctica se centra en crear un espacio seguro y empático, para quienes atraviesan crisis relacionales y buscan desarrollar herramientas para su bienestar emocional y su calidad de vida</p>
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en psicología,Maestría en Terapia Familiar con enfoque breve sistémico, Céd. Prof. 14451464</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Lizbeth Ortiz Ramírez. Soy Licenciada en psicología y Maestra en terapia familiar.</p>
+                                <p>Me especializo en el acompañamiento individual, de pareja y familiar, integrando los enfoques Cognitivo-Conductual y Breve Sistémico para ofrecer intervenciones claras y efectivas.</p>
+                                <p>Abordo temas como crisis de pareja, rupturas, dependencia emocional, comunicación e infidelidad, así como el fortalecimiento de vínculos sanos. También brindo acompañamiento en procesos individuales de autoestima, ansiedad, depresión y duelos.</p>
+                                <p>Mi práctica se centra en crear un espacio seguro y empático, para quienes atraviesan crisis relacionales y buscan desarrollar herramientas para su bienestar emocional.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-lizbeth.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
 
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=13" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Lizbeth
-                </a>
-            </div>
-         </div>
-
-         
-          <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Tania.webp" alt="Foto de Tania Martínez" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Tania Elizabeth Martínez Sánchez</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 13215897</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Psicóloga y Maestrista en Psicología Clínica</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Mi objetivo es acompañarte a transformar la relación con tus emociones y la autoexigencia para así construir una vida más flexible y equilibrada.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-tania.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=19" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Tania
-                </a>
-            </div>
-         </div>
-
-                       <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Marina.webp" alt="Foto de Elisa Juarez " class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Elisa Marina Juárez Zúñiga</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 13583358</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciatura en Psicología Clínica, Maestrante en Terapia Cognitivo Conductual</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm"></p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-elisa.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=22" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Elisa
-                </a>
-            </div>
-         </div>
-
-                                <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Janeth.webp" alt="Foto de Janeth Monterroza" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Janeth Monterroza Gordillo</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 14690058</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciatura, Especialidad y Maestría en Psicología Clínica.</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Me especializo en la atención a adultos con ansiedad y depresión para superar dificultades y mejorar su calidad de vida. He trabajado con grupos de mujeres y niñas que vivieron situaciones de violencia. También he apoyado a personas de la comunidad LGBT+ que requieren de un espacio de escucha y aceptación. Me encanta mi profesión y me dedico con pasión y compromiso al bienestar de mis consultantes.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-janeth.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=1" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Janeth
-                </a>
-            </div>
-         </div>
-                     <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Paola.webp" alt="Foto de Paola Delgado" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">María Paola Delgado Arevalo</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 14227118</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciada en Psicología, Máster en Terapias Conductuales Contextuales</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Me especializo en Terapia Cognitivo Conductual y Terapia de Aceptación y Compromiso. Acompaño a personas que quieran mejorar su relación de pareja, fortalecer vínculos, sanar después de una ruptura o construir una relación sana. Te puedo ayudar también en temas de ansiedad, autoestima, depresión, duelo, asertividad, procrastinación. Mi enfoque es basado en una atención consciente y valores personales, te brindaré herramientas para lograr tus objetivos y construir una vida con sentido, me encantará ofrecerte un espacio seguro y de confianza.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-paola.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=10" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Paola
-                </a>
-            </div>
-         </div>
-
-
-                             <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="pareja">
-                    <img src="Claudia.webp" alt="Foto de Claudia Pineda" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Claudia Pineda Flores</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 11645583</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Psicóloga con Maestría y Doctorado, y estudios avanzados en Psicoterapia Breve, intervención en crisis (TCC) y terapias contextuales.</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Cuento con 14 años de experiencia como psicoterapeuta; en mi práctica clínica he trabajado problemas en el estado del ánimo, pacientes con enfermedades crónicas y específicamente problemas de pareja como: manejo de conflictos, habilidades de comunicación, fortalecimiento del vínculo, confianza e infidelidad, entre otros. Mi objetivo es que juntos podamos construir un camino de bienestar emocional y relaciones saludables.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-claudia.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=15" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Claudia
-                </a>
-            </div>
-         </div>
-
-                         <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Anarely.webp" alt="Foto de Anarely de la Trinidad" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Anarely de la Trinidad Méndez</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 12451642</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciatura y Maestría en psicología clínica.</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Soy psicoterapeuta cognitivo conductual. Me especializo en trabajar con población adulta en temas de resolución de conflictos individuales e interpersonales, comunicación asertiva, rupturas amorosas, autoconcepto, gestión emocional y control del enojo, así como ansiedad y depresión. Durante los procesos me gusta brindar herramientas que permitan mejorar el cómo te sientes contigo y con tu entorno, en un espacio de escucha y empatía hacia tu persona.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-anarely.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=11" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Anarely
-                </a>
-            </div>
-         </div>
-
-                                <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="sara.webp" alt="Foto de Sara Ramos" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Sara Ramos Acevedo</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 14138551</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología, especializada en terapias contextuales.</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Acompaño a adultos que buscan **gestionar sus emociones, fortalecer su autoestima y transformar su historia personal**. Integra la Terapia Cognitivo-Conductual con enfoques de **Psicología Positiva** para ayudarte a reconectar con tus fortalezas y establecer límites saludables. Su objetivo es guiarte en tu proceso de crecimiento.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-sara-ramos.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=3" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Sara
-                </a>
-            </div>
-            </div>
-                                     <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="mikaela.webp" alt="Foto de Mikaela Martínez" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Mikaela Ivanova Martínez Román</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 14892156</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciada en Psicología Clínica con enfoque en terapia Cognitivo-Conductual.</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm"> Como psicóloga clínica, me especializo en el acompañamiento Cognitivo-Conductual de adultos, con énfasis en el trabajo con parejas. Abordo temas como dinámicas de pareja, comunicación, rupturas, infidelidad, celos, codependencia y vínculos sanos. También brindo acompañamiento individual en autoestima, dependencia emocional, ansiedad y depresión, ofreciendo un espacio seguro para comprender el malestar, fortalecer el autoconocimiento y desarrollar herramientas emocionales. Trabajo con un enfoque biopsicosocial, empático y respetuoso, centrado en la historia de cada persona.</p>
-                </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-mikaela.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
-
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=17" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Mikaela
-                </a>
-            </div>
-            </div>
-
+                <!-- Tania -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Tania.webp" alt="Tania Elizabeth Martínez Sánchez" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Tania E. Martínez Sánchez</h3>
                     
-                                 <div class="team-member-card bg-white p-6 rounded-xl shadow-lg flex flex-col items-center" data-terapia="individual">
-                    <img src="Miranda.webp" alt="Foto de Miranda Salazar" class="w-48 h-48 rounded-full object-cover mb-4 border-4 border-secondary mx-auto">
-                    <h3 class="text-xl font-bold text-text_dark mb-2">Miranda Catalina Salazar Villanueva</h3>
-                    <h3 class="text-sm font-light text-text_dark mb-3">Céd. Prof. 12169571</h3>
-                    <p class="text-sm font-light text-secondary mb-3">Licenciada en psicología y Maestría en psicoterapia Cognitivo-Conductual y formación en psicología positiva</p>
-    
-                    <div class="team-bio">
-                    <p class="text-text_dark text-sm">Acompaño adultos que se sienten estancados, con dificultades para gestionar sus emociones o con el deseo de conocerse mejor y transformar su historia. Trabajo con casos de ansiedad, depresión, autoestima, crisis de identidad, duelos emocionales y relaciones de pareja, integrando la TCC con enfoques de Psicología Positiva. Mi objetivo es ayudarte a comprender tus pensamientos, reconectar con tus fortalezas y establecer límites saludables, acompañando tu proceso de crecimiento.</p>
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en Psicología, Maestrante en Psicología Clínica, Céd. Prof. 13215897</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Tania Elizabeth Martínez Sánchez. Soy Psicóloga y Maestrista en Psicología Clínica.</p>
+                                <p>Mi objetivo principal es acompañarte a transformar la relación que tienes con tus emociones y con la autoexigencia, para así construir una vida mucho más flexible y equilibrada.</p>
+                                <p>Trabajaremos en equipo para que logres soltar esos estándares que te agotan y empieces a vivir desde un espacio de mayor compasión hacia ti misma.</p>
+                            </div>
+                        </details>
+                    </div>
                 </div>
-    
-             <div class="mt-auto pt-4 w-full flex flex-col gap-2">
-                <a href="perfil-miranda.html" class="text-secondary hover:underline text-sm font-semibold text-center mb-1">
-                Ver video y perfil detallado →
-                </a>
 
-                <a href="https://crm-backend-oztv.onrender.com/reserva.html?id=2" 
-                 target="_blank" 
-                class="cta-button rounded-lg w-full text-sm py-2 px-4 text-center">
-                Agendar con Miranda
-                </a>
+                <!-- Elisa -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Marina.webp" alt="Elisa Marina Juárez Zúñiga" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Elisa Marina Juárez Zúñiga</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en Psicología Clínica, Maestrante en Terapia Cognitivo Conductual, Céd. Prof. 13583358</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Elisa Marina Juárez Zúñiga. Cuento con Licenciatura en Psicología Clínica y soy Maestrante en Terapia Cognitivo Conductual.</p>
+                                <p>Mi enfoque se centra totalmente en brindarte herramientas prácticas para tu día a día.</p>
+                                <p>Entiendo la terapia como un trabajo colaborativo donde aprenderemos a identificar aquellos pensamientos y conductas que te lastiman, para poder modificarlos por alternativas que construyan tu bienestar.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Janeth -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Janeth.webp" alt="Janeth Monterroza Gordillo" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Janeth Monterroza Gordillo</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en Psicología, Maestría en Terapia Cognitivo Conductual, Diplomado en Terapia de Esquemas, Céd. Prof. 14690058</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Janeth Monterroza Gordillo. Tengo formación en Licenciatura, Especialidad y Maestría en Psicología Clínica.</p>
+                                <p>Me especializo en la atención a adultos con ansiedad y depresión para superar dificultades y mejorar su calidad de vida. He trabajado extensamente con grupos de mujeres y niñas que vivieron situaciones de violencia.</p>
+                                <p>También he apoyado a personas de la comunidad LGBT+ que requieren de un espacio de escucha y aceptación genuina. Me apasiona mi profesión y me dedico con total compromiso a tu bienestar.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Paola -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Paola.webp" alt="María Paola Delgado Arevalo" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">María Paola Delgado</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en Psicología, Máster en Terapias Conductuales y Contextuales, Céd. Prof. 14227118</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo María Paola Delgado Arevalo. Soy Licenciada en Psicología y Máster en Terapias Conductuales Contextuales.</p>
+                                <p>Me especializo en Terapia Cognitivo Conductual y Terapia de Aceptación y Compromiso. Acompaño a personas que desean mejorar su relación de pareja, fortalecer vínculos, sanar después de una ruptura o construir una relación sana.</p>
+                                <p>También te puedo ayudar en temas de ansiedad, autoestima, depresión, duelo, asertividad y procrastinación. Mi enfoque, basado en una atención consciente y valores personales, te brindará herramientas en un espacio seguro.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Claudia -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Claudia.webp" alt="Claudia Pineda Flores" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Claudia Pineda Flores</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en psicología, Maestría en Psicología, Doctorado en Psicología, Céd. Prof. 11645583</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Claudia Pineda Flores. Soy Psicóloga con Maestría y Doctorado, además de estudios avanzados en Psicoterapia Breve, intervención en crisis y terapias contextuales.</p>
+                                <p>Cuento con 14 años de experiencia como psicoterapeuta; en mi práctica he trabajado con problemas en el estado del ánimo y pacientes con enfermedades crónicas.</p>
+                                <p>Específicamente en problemas de pareja, abordo el manejo de conflictos, habilidades de comunicación, fortalecimiento del vínculo e infidelidad. Juntos podemos construir un camino de bienestar emocional.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Anarely -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Anarely.webp" alt="Anarely de la Trinidad Méndez" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Anarely de la T. Méndez</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en Psicología, Maestría en Psicoterapia Cognitivo Conductual, Céd. Prof. 15363858</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Anarely de la Trinidad Méndez. Tengo Licenciatura y Maestría en psicología clínica.</p>
+                                <p>Soy psicoterapeuta cognitivo conductual y me especializo en trabajar con población adulta en la resolución de conflictos individuales e interpersonales.</p>
+                                <p>Abordamos la comunicación asertiva, rupturas amorosas, autoconcepto, gestión emocional, ansiedad y depresión. Me gusta brindar herramientas que te permitan mejorar cómo te sientes contigo y con tu entorno, siempre desde un espacio empático.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Sara -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="sara.webp" alt="Sara Ramos Acevedo" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Sara Ramos Acevedo</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciatura en Psicología, Especialidad en psicología clínica y de la salud, Maestría (en curso) de Psicoterapia Transpersonal Integrativa.  Céd. Prof. 14138572</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Sara Ramos Acevedo. Soy Licenciada en psicología, especializada en terapias contextuales.</p>
+                                <p>Acompaño a adultos que buscan gestionar sus emociones, fortalecer su autoestima y transformar su historia personal.</p>
+                                <p>Integro la Terapia Cognitivo-Conductual con enfoques de Psicología Positiva para ayudarte a reconectar con tus fortalezas y establecer límites saludables. Mi objetivo es guiarte de la mano en tu proceso de crecimiento.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Mikaela -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="mikaela.webp" alt="Mikaela Ivanova Martínez Román" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Mikaela I. Martínez Román</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciatura en Psicología Clínica, Maestrante en TCC, Formación continua en intervención clínica, Céd. Prof. 14892156</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Mikaela Ivanova Martínez Román. Soy Licenciada en Psicología Clínica con enfoque Cognitivo-Conductual.</p>
+                                <p>Me especializo en el acompañamiento de adultos, con un gran énfasis en el trabajo con parejas. Abordamos dinámicas de pareja, comunicación, rupturas, infidelidad, celos, codependencia y vínculos sanos.</p>
+                                <p>También brindo apoyo individual en autoestima y dependencia. Trabajo con un enfoque biopsicosocial, empático y respetuoso, centrado totalmente en la historia que te trae hasta aquí.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Miranda -->
+                <div class="flex flex-col">
+                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                        <img src="Miranda.webp" alt="Miranda Catalina Salazar Villanueva" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
+                    </div>
+                    <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Miranda Salazar Villanueva</h3>
+                    
+                    <div class="w-full text-left bg-crema_oscuro rounded-sm shadow-sm">
+                        <details class="group">
+                            <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
+                                <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
+                                <span>Licenciada en psicología y Maestría en psicoterapia Cognitivo-Conductual y formación en psicología positiva, Céd. Prof. 12169571</span>
+                            </summary>
+                            <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
+                                <p>Me llamo Miranda Catalina Salazar Villanueva. Soy Licenciada en psicología con Maestría en psicoterapia Cognitivo-Conductual y formación en psicología positiva.</p>
+                                <p>Acompaño a adultos que se sienten estancados, con dificultades para gestionar sus emociones o con el deseo genuino de conocerse mejor y transformar su historia.</p>
+                                <p>Trabajo con ansiedad, depresión, autoestima, crisis de identidad y duelos emocionales, para ayudarte a reconectar con tus fortalezas y establecer límites saludables.</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
             </div>
-         </div>
+        </section>
+
+        <!-- SECCIÓN DE RESPALDO -->
+        <section class="bg-rosagelatina py-24 px-6 mt-16 border-t border-[#e2dad3]">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-serif mb-10 text-carbon">Nuestro estándar de acompañamiento</h2>
+                <div class="space-y-6 text-carbon/80 text-lg leading-relaxed font-light">
+                    <p>Todo nuestro equipo pasa por un proceso de selección centrado en la formación clínica y en la calidad humana del acompañamiento — no solo en el título.</p>
+                    <p>Participamos en espacios de formación y actualización constante. El trabajo se apoya en enfoques con respaldo científico, adaptados a cada persona — no en fórmulas genéricas.</p>
+                    <p>Cada caso cuenta con seguimiento y supervisión para asegurar que el proceso mantenga el mismo estándar de calidad de principio a fin.</p>
+                </div>
+                <div class="mt-12">
+                    <a href="agendar.html" class="bg-carbon text-blanco px-8 py-3.5 rounded-full text-base font-bold inline-block hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                        Inicia tu proceso
+                    </a>
+                </div>
+            </div>
         </section>
     </main>
 
-<section id="enfoques-y-modalidades" class="bg-primary py-16">
-    <div class="container mx-auto px-6 text-center max-w-6xl">
-        
-        <h2 class="font-bold text-text_dark mb-4 text-3xl md:text-4xl">
-            Tipos de terapias
-        </h2>
-        <p class="text-2xl font-semibold text-secondary mb-6">
-            ¿Cómo trabajamos? Un enfoque a tu medida
-        </p>
-       <p class="text-lg text-text_dark max-w-3xl mx-auto mb-12">
-            Cada persona y cada relación es única. Por eso integramos distintas corrientes psicológicas de probada eficacia para diseñar un plan que se adapte a tus necesidades específicas. Ya sea que busques terapia individual o para tu pareja, nuestro objetivo es acompañarte con las herramientas más efectivas y un profundo respeto por tu historia.
-        </p>
-        <div class="mb-16">
-            <h3 id="enfoque-individual" class="text-3xl font-semibold text-secondary mb-3">Terapia Individual</h3>
-            <p class="text-lg text-text_dark max-w-2xl mx-auto mb-10">
-                Enfocada en tu bienestar personal, te ayudamos a transitar tu camino de autoconocimiento y cambio.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Terapia Cognitivo-Conductual (TCC)</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                        Para romper ciclos.
-¿Sientes que tus pensamientos te juegan en contra? La TCC nos ayuda a detectar esos patrones y transformarlos, cambiando la manera en que te sientes y te comportas en el día a día.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Terapia de Aceptación y Compromiso (ACT)</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                       Para vivir una vida con propósito.
-Aprende a abrazar tus emociones, incluso las incómodas, y a dirigir tu energía hacia lo que realmente importa para ti. Deja de luchar contra tu mente y empieza a vivir según tus valores.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Terapia de Esquemas</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                        Para sanar heridas profundas.
-Si arrastras patrones que se repiten una y otra vez en tus relaciones y en tu autoestima, este enfoque te ayuda a entender su origen en experiencias pasadas y a sanar esas heridas desde la base.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Perspectiva de Género</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                        Porque tu contexto importa.
-Entendemos que las experiencias de vida están marcadas por construcciones sociales y de género. Creamos un espacio seguro donde analizar juntos estos impactos, validando tu experiencia y promoviendo tu autonomía y libertad.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <hr class="border-secondary/30 max-w-lg mx-auto mb-16">
-
-        <div class="mb-12">
-            <h3 id="enfoque-pareja" class="text-3xl font-semibold text-secondary mb-3">Terapia de Pareja</h3>
-            <p class="text-lg text-text_dark max-w-2xl mx-auto mb-10">
-                Diseñada para ayudaros a reconectar, mejorar la comunicación y superar los ciclos de conflicto.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Terapia Cognitivo-Conductual (TCC)</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                       Para mejorar la dinámica.
-Identificamos los patrones de comunicación y comportamiento que os mantienen atrapados en el conflicto. Os proporcionamos herramientas prácticas para romper ese ciclo y construir interacciones más positivas y satisfactorias.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Terapia Integral de Pareja (IBCT)</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                         Para reconectar desde la comprensión.
-Este enfoque va más allá de resolver discusiones puntuales. Os ayudamos a entenderos mejor, a aceptar vuestras diferencias irreconciliables con empatía y a fortalecer el vínculo emocional desde la compasión.
-                    </p>
-                </div>
-
-                <div class="bg-white p-8 rounded-lg shadow-lg border border-secondary transform transition-transform duration-300 hover:scale-103 h-full">
-                    <h3 class="font-semibold text-secondary mb-3 text-xl">Perspectiva de Género</h3>
-                    <p class="text-text_dark text-base leading-relaxed">
-                        Para entenderos en igualdad.
-Analizamos cómo los roles y mandatos de género afectan a la dinámica de la pareja. Fomentamos un espacio de equidad donde ambos puedan sentirse escuchados, respetados y libres de expectativas rígidas, construyendo una relación más justa.
-                    </p>
-                </div>
-            </div>
-        </div>
-        </div>
-</section>
-    <footer class="bg-dark_footer text-text_light py-12">
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-            <div class="md:col-span-2">
-                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
-                <p class="text-sm text-gray-300 mt-2">&copy; 2025 Psicóloga Isis San Juan. Todos los derechos reservados.</p>
-                <p class="text-sm text-gray-300">Hecho con 🤍</p>
-            </div>
+    <!-- FOOTER -->
+    <footer class="bg-crema py-12 px-6 border-t border-rosagelatina text-center md:text-left mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="index.html#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
-                    <li><a href="index.html#especialidades" class="hover:text-white transition-colors duration-300">Terapia</a></li>
-                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
-                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
-                </ul>
+                <h3 class="font-serif text-xl font-bold mb-1">TherapyHomeISJ</h3>
+                <p class="text-sm text-carbon/60">Clínica Psicológica Online</p>
             </div>
-            <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Información Legal</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
-                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de Cookies</a></li>
-                </ul>
+            <div class="text-sm text-carbon/70 space-y-1">
+                <p>📞 55 1336 2585</p>
+                <p>✉️ isis.therapyhome@gmail.com</p>
+            </div>
+            <div class="text-xs text-carbon/50">
+                <a href="#" class="hover:underline">Aviso de privacidad</a> <br>
+                © 2026 TherapyHomeISJ. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
-<script>
-    // 1. LÓGICA DE DESPLEGAR/OCULTAR PERFIL (BIO)
-    document.querySelectorAll('.team-bio-toggle').forEach(button => {
-        button.addEventListener('click', () => {
-            const card = button.closest('.team-member-card');
-            const bio = card.querySelector('.team-bio');
-            
-            bio.classList.toggle('active');
-            
-            if (bio.classList.contains('active')) {
-                button.textContent = 'Ocultar perfil';
-                button.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            } else {
-                button.textContent = 'Ver perfil completo';
-            }
-        });
-    });
-
-    // 2. FUNCIÓN DE FILTRADO DINÁMICO (CORREGIDA)
-    function aplicarFiltro() {
-        const params = new URLSearchParams(window.location.search);
-        const filtro = params.get('tipo'); 
-        const teamMembers = document.querySelectorAll('.team-member-card');
-        const titulo = document.querySelector('#equipo h2');
-
-        // Si no hay filtro o es "todos", mostrar todos y poner título general
-        if (!filtro || filtro === 'todos') {
-            teamMembers.forEach(member => member.style.display = 'flex');
-            if (titulo) titulo.textContent = 'Nuestro Equipo de Especialistas';
-            return; 
-        }
-
-        teamMembers.forEach(member => {
-            // Leemos el atributo data-terapia y lo pasamos a minúsculas
-            const terapias = member.getAttribute('data-terapia') ? member.getAttribute('data-terapia').toLowerCase() : "";
-
-            // USAMOS .includes() para que detecte la palabra aunque haya varias
-            if (terapias.includes(filtro.toLowerCase())) {
-                member.style.display = 'flex'; 
-            } else {
-                member.style.display = 'none'; 
-            }
-        });
-
-        // Actualizar el título según el filtro
-        if (titulo) {
-            if (filtro === 'individual') {
-                titulo.textContent = 'Especialistas en Terapia Individual';
-            } else if (filtro === 'pareja') {
-                titulo.textContent = 'Especialistas en Terapia de Pareja';
-            }
-        }
-    }
-
-    // 3. LÓGICA DEL MENÚ DE NAVEGACIÓN (HEADER)
-    const navBtn = document.getElementById('nav-btn-agendar');
-    const navMenu = document.getElementById('nav-menu');
-    const navArrow = document.getElementById('nav-arrow');
-
-    if (navBtn) {
-        navBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navMenu.classList.toggle('hidden');
-            navArrow.classList.toggle('rotate-180');
-        });
-    }
-
-    window.addEventListener('click', () => {
-        if (navMenu) {
-            navMenu.classList.add('hidden');
-            navArrow.classList.remove('rotate-180');
-        }
-    });
-
-    // Detectar clics en el menú para filtrar sin recargar si ya estamos aquí
-    document.querySelectorAll('#nav-menu a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (href.includes('equipo.html')) {
-                setTimeout(aplicarFiltro, 50);
-            }
-        });
-    });
-
-    // Ejecutar al cargar la página
-    document.addEventListener('DOMContentLoaded', aplicarFiltro);
-    // Escuchar cuando el usuario retrocede o avanza en el historial
-    window.addEventListener('popstate', aplicarFiltro);
-
- // LÓGICA DEL MENÚ MÓVIL (BOTÓN HAMBURGUESA)
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileLinks = document.querySelectorAll('.mobile-link');
-
-if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-        // Alterna entre mostrar y esconder el menú
-        mobileMenu.classList.toggle('-translate-x-full');
-    });
-
-    // Cerrar el menú automáticamente al hacer clic en cualquier enlace
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('-translate-x-full');
-        });
-    });
-}   
-</script>
 </body>
 </html>
