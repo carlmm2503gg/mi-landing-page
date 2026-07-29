@@ -4,205 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TherapyHomeISJ | Política de Privacidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Berliana Lovely', 'cursive'],
-                    },
                     colors: {
-                        primary: '#FDF7F8', 
-                        secondary: '#C04374', 
-                        text_dark: '#2C1B23', 
-                        text_light: '#FFFFFF', 
-                        dark_footer: '#4A2A38', 
-                        pink_light: '#FFE4E8', 
+                        crema: '#F5F0ED',
+                        rosagelatina: '#EDD8D0',
+                        rosaprofu: '#C9A097',
+                        carbon: '#1A1412',
+                        blanco: '#FDFCFB'
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        @font-face {
-            font-family: 'Berliana Lovely';
-            src: url('https://www.aliciagonzalezpsicologia.com/wp-content/uploads/2024/06/Berliana-Lovely.ttf') format('truetype');
+        body { background-color: theme('colors.crema'); color: theme('colors.carbon'); }
+        .btn-nav { 
+            background-color: theme('colors.rosaprofu'); 
+            color: theme('colors.blanco'); 
+            border-radius: 9999px;
+            transition: background-color 0.2s ease;
         }
-        /* Estilos para el contenido de texto legal */
-        .legal-content {
-            padding-top: 4rem;
-            padding-bottom: 4rem;
+        .btn-nav:hover { background-color: #B58B82; }
+        .nav-link { position: relative; color: theme('colors.carbon'); text-decoration: none; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px;
+            bottom: 0; left: 0; background-color: theme('colors.carbon');
+            transform-origin: bottom right; transition: transform 0.25s ease-out;
         }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+
+        /* Estilos específicos para el texto legal */
         .legal-content h2 {
-            font-size: 1.75rem;
-            font-weight: bold;
-            color: theme('colors.secondary');
-            margin-top: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: theme('colors.carbon');
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
-            border-bottom: 2px solid theme('colors.pink_light');
+            border-bottom: 1px solid theme('colors.rosagelatina');
             padding-bottom: 0.5rem;
         }
         .legal-content h3 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: theme('colors.text_dark');
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: theme('colors.carbon');
             margin-top: 1.5rem;
             margin-bottom: 0.5rem;
         }
         .legal-content p, .legal-content li {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
             line-height: 1.8;
             margin-bottom: 1rem;
+            opacity: 0.85;
         }
         .legal-content ul {
             list-style-type: disc;
             margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
         }
         .legal-content strong {
-            color: theme('colors.text_dark');
+            font-weight: 600;
+            opacity: 1;
         }
         .disclaimer-box {
-            background-color: #fffbeb;
-            border: 1px solid #fde68a;
-            color: #b45309;
-            padding: 1rem 1.5rem;
-            border-radius: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 500;
+            background-color: #FDFCFB;
+            border-left: 4px solid theme('colors.rosaprofu');
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
     </style>
 </head>
-<body class="bg-primary text-text_dark">
+<body class="font-sans antialiased selection:bg-rosaprofu selection:text-blanco overflow-x-hidden">
 
-    <header class="sticky top-0 z-50 bg-white bg-opacity-90 backdrop-blur-sm shadow-md">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-3xl font-serif text-secondary hover:text-text_dark transition-colors duration-300">TherapyHomeISJ</a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="index.html#about" class="text-text_dark hover:text-secondary font-medium">Acerca de Mí</a>
-                <a href="equipo.html" class="text-text_dark hover:text-secondary font-medium">Equipo</a>
-                <a href="agendar.html" class="text-text_dark hover:text-secondary font-medium">Agenda tu Cita</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-text_dark focus:outline-none">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 bg-crema/90 backdrop-blur-md z-50 border-b border-rosagelatina">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif font-semibold text-carbon tracking-tight">TherapyHomeISJ</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="equipo.html" class="nav-link">Conócenos</a>
+                <a href="reserva-general.html" class="btn-nav px-6 py-2.5">Iniciar terapia</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-carbon focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
-        </nav>
+        </div>
     </header>
 
-    <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
-        <ul class="flex flex-col items-center space-y-6 text-xl">
-            <li><a href="index.html#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de Mí</a></li>
-            <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
-            <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
-            <li><a href="index.html#faq" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Preguntas</a></li>
-            <li><a href="agendar.html" class="mobile-link cta-button px-8 py-3 mt-4">Agenda tu Cita</a></li>
+    <!-- Menú Móvil -->
+    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-crema z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24 border-r border-rosagelatina w-64 shadow-2xl">
+        <ul class="flex flex-col space-y-6 px-8 text-lg font-serif">
+            <li><a href="index.html" class="mobile-link text-carbon hover:text-rosaprofu transition-colors">Inicio</a></li>
+            <li><a href="equipo.html" class="mobile-link text-carbon hover:text-rosaprofu transition-colors">Conócenos</a></li>
+            <li class="pt-6 border-t border-rosagelatina">
+               <a href="reserva-general.html" class="bg-rosaprofu text-blanco px-6 py-3 rounded-full text-sm font-sans font-bold inline-block text-center w-full">Iniciar terapia</a>
+            </li>
         </ul>
     </div>
 
-    <main>
-        <div class="legal-content bg-white">
-            <div class="container mx-auto px-6 max-w-4xl">
-                
-                <h1 class="text-3xl md:text-4xl font-bold text-secondary text-center mb-8">Aviso de Privacidad</h1>
+    <!-- CONTENIDO LEGAL -->
+    <main class="pt-32 pb-16">
+        <div class="container mx-auto px-6 max-w-4xl legal-content">
+            
+            <h1 class="text-4xl md:text-5xl font-serif leading-tight text-carbon mb-8 text-center">Aviso de Privacidad</h1>
 
-                <div class="disclaimer-box">
-                    <strong>NOTA IMPORTANTE:</strong> Este documento es una plantilla general y no constituye asesoría legal. Debes consultar con un abogado especializado para adaptar este aviso a las leyes específicas de tu país (ej. LFPDPPP en México) y asegurar el cumplimiento normativo, especialmente por el manejo de datos sensibles de salud.
-                </div>
-
-                <p><strong>Última actualización:</strong> 24 de octubre de 2025</p>
-
-                <p>En <strong>TherapyHomeISJ</strong> (en adelante "nosotros", "nuestro"), con domicilio [Agregar tu domicilio fiscal o de operaciones], somos responsables del tratamiento de sus datos personales.</p>
-
-                <h2>1. ¿Qué datos personales recabamos?</h2>
-                <p>Para brindarle nuestros servicios de terapia psicológica, recabamos los siguientes datos personales:</p>
-                <ul>
-                    <li><strong>Datos de Identificación y Contacto:</strong> Nombre completo, correo electrónico, número de teléfono (WhatsApp), país de residencia, ciudad y estado.</li>
-                    <li><strong>Datos de Facturación (si aplica):</strong> Domicilio fiscal, Registro Federal de Contribuyentes (RFC) o equivalente.</li>
-                    <li><strong>Datos Sensibles (Salud):</strong> Motivo de consulta, notas de sesión, historial clínico y cualquier información relacionada con su salud mental y emocional que comparta voluntariamente durante el proceso terapéutico.</li>
-                </ul>
-
-                <h2>2. ¿Para qué fines utilizamos sus datos?</h2>
-                <p>Sus datos personales serán utilizados para las siguientes finalidades:</p>
-                
-                <h3>Finalidades Primarias (Necesarias para el servicio):</h3>
-                <ul>
-                    <li>Agendar, confirmar, modificar o cancelar sus citas de terapia.</li>
-                    <li>Contactarlo por correo electrónico o WhatsApp para dar seguimiento a su solicitud.</li>
-                    <li>Proveer el servicio de terapia psicológica online contratado.</li>
-                    <li>Crear y administrar su expediente clínico.</li>
-                    <li>Realizar el cobro y facturación de nuestros servicios.</li>
-                    <li>Identificar su zona horaria para una correcta asignación de horarios.</li>
-                </ul>
-
-                <h3>Finalidades Secundarias (Opcionales):</h3>
-                <ul>
-                    <li>Enviarle comunicaciones informativas, artículos de blog o promociones sobre nuestros servicios (Usted podrá oponerse a esto en cualquier momento).</li>
-                </ul>
-
-                <h2>3. Tratamiento de Datos Personales Sensibles</h2>
-                <p>El "Motivo de Consulta" y toda la información compartida en sesión se consideran <strong>datos personales sensibles</strong>. Nos comprometemos a que estos datos serán tratados bajo las más estrictas medidas de seguridad y confidencialidad, y serán utilizados única y exclusivamente para los fines del diagnóstico, tratamiento y acompañamiento terapéutico, conforme al secreto profesional psicólogo-paciente.</p>
-
-                <h2>4. ¿Con quién compartimos sus datos?</h2>
-                <p>Nos comprometemos a no transferir su información personal a terceros sin su consentimiento, salvo las excepciones previstas por la ley. Sus datos (incluyendo los sensibles) podrán ser compartidos únicamente con:</p>
-                <ul>
-                    <li>La psicóloga o psicólogo de nuestro equipo que le sea asignado para proveer el servicio terapéutico.</li>
-                    <li>En casos de supervisión clínica (práctica estándar en psicología), sus datos se presentarán de forma anónima, protegiendo siempre su identidad.</li>
-                    <li>Autoridades competentes, únicamente si existe un requerimiento legal o una orden judicial, o en casos donde esté en riesgo grave su vida o la de terceros.</li>
-                </ul>
-
-                <h2>5. ¿Cómo puede ejercer sus Derechos ARCO?</h2>
-                <p>Usted tiene derecho a <strong>Acceder</strong> a sus datos personales, <strong>Rectificarlos</strong> en caso de ser inexactos, <strong>Cancelarlos</strong> cuando considere que ya no son necesarios para los fines establecidos, u <strong>Oponerse</strong> a su tratamiento para fines específicos.</p>
-                <p>Para ejercer sus Derechos ARCO, por favor envíe una solicitud por escrito a nuestro correo electrónico: <strong>[Tu Correo Electrónico de Contacto]</strong>, indicando su nombre completo y el derecho que desea ejercer.</p>
-
-                <h2>6. Uso de Cookies</h2>
-                <p>Nuestro sitio web utiliza cookies técnicas para su correcto funcionamiento. No utilizamos cookies para recabar información personal o con fines publicitarios invasivos.</p>
-
-                <h2>7. Modificaciones al Aviso de Privacidad</h2>
-                <p>Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad. Estas modificaciones estarán disponibles al público a través de nuestro sitio web en esta misma sección.</p>
-
-                <h2>8. Consentimiento</h2>
-                <p>Al proporcionarnos sus datos personales y sensibles a través de nuestro formulario de agendamiento, usted manifiesta que ha leído y entendido el presente Aviso de Privacidad y otorga su consentimiento expreso para el tratamiento de sus datos, incluidos sus datos sensibles, en los términos aquí descritos.</p>
+            <div class="disclaimer-box text-carbon/70">
+                <strong class="text-rosaprofu block mb-1">NOTA IMPORTANTE:</strong> Este documento es una plantilla general y no constituye asesoría legal. Debes consultar con un abogado especializado para adaptar este aviso a las leyes específicas de tu país y asegurar el cumplimiento normativo, especialmente por el manejo de datos sensibles de salud.
             </div>
+
+            <p><strong>Última actualización:</strong> 24 de octubre de 2025</p>
+
+            <p>En <strong>TherapyHomeISJ</strong> (en adelante "nosotros", "nuestro"), con domicilio [Agregar tu domicilio fiscal o de operaciones], somos responsables del tratamiento de sus datos personales.</p>
+
+            <h2>1. ¿Qué datos personales recabamos?</h2>
+            <p>Para brindarle nuestros servicios de terapia psicológica, recabamos los siguientes datos personales:</p>
+            <ul>
+                <li><strong>Datos de Identificación y Contacto:</strong> Nombre completo, correo electrónico, número de teléfono (WhatsApp), país de residencia, ciudad y estado.</li>
+                <li><strong>Datos de Facturación (si aplica):</strong> Domicilio fiscal, Registro Federal de Contribuyentes (RFC) o equivalente.</li>
+                <li><strong>Datos Sensibles (Salud):</strong> Motivo de consulta, notas de sesión, historial clínico y cualquier información relacionada con su salud mental y emocional que comparta voluntariamente durante el proceso terapéutico.</li>
+            </ul>
+
+            <h2>2. ¿Para qué fines utilizamos sus datos?</h2>
+            <p>Sus datos personales serán utilizados para las siguientes finalidades:</p>
+            
+            <h3>Finalidades Primarias (Necesarias para el servicio):</h3>
+            <ul>
+                <li>Agendar, confirmar, modificar o cancelar sus citas de terapia.</li>
+                <li>Contactarlo por correo electrónico o WhatsApp para dar seguimiento a su solicitud.</li>
+                <li>Proveer el servicio de terapia psicológica online contratado.</li>
+                <li>Crear y administrar su expediente clínico.</li>
+                <li>Realizar el cobro y facturación de nuestros servicios.</li>
+                <li>Identificar su zona horaria para una correcta asignación de horarios.</li>
+            </ul>
+
+            <h3>Finalidades Secundarias (Opcionales):</h3>
+            <ul>
+                <li>Enviarle comunicaciones informativas, artículos de blog o promociones sobre nuestros servicios (Usted podrá oponerse a esto en cualquier momento).</li>
+            </ul>
+
+            <h2>3. Tratamiento de Datos Personales Sensibles</h2>
+            <p>El "Motivo de Consulta" y toda la información compartida en sesión se consideran <strong>datos personales sensibles</strong>. Nos comprometemos a que estos datos serán tratados bajo las más estrictas medidas de seguridad y confidencialidad, y serán utilizados única y exclusivamente para los fines del diagnóstico, tratamiento y acompañamiento terapéutico, conforme al secreto profesional psicólogo-paciente.</p>
+
+            <h2>4. ¿Con quién compartimos sus datos?</h2>
+            <p>Nos comprometemos a no transferir su información personal a terceros sin su consentimiento, salvo las excepciones previstas por la ley. Sus datos (incluyendo los sensibles) podrán ser compartidos únicamente con:</p>
+            <ul>
+                <li>La psicóloga o psicólogo de nuestro equipo que le sea asignado para proveer el servicio terapéutico.</li>
+                <li>En casos de supervisión clínica (práctica estándar en psicología), sus datos se presentarán de forma anónima, protegiendo siempre su identidad.</li>
+                <li>Autoridades competentes, únicamente si existe un requerimiento legal o una orden judicial, o en casos donde esté en riesgo grave su vida o la de terceros.</li>
+            </ul>
+
+            <h2>5. ¿Cómo puede ejercer sus Derechos ARCO?</h2>
+            <p>Usted tiene derecho a <strong>Acceder</strong> a sus datos personales, <strong>Rectificarlos</strong> en caso de ser inexactos, <strong>Cancelarlos</strong> cuando considere que ya no son necesarios para los fines establecidos, u <strong>Oponerse</strong> a su tratamiento para fines específicos.</p>
+            <p>Para ejercer sus Derechos ARCO, por favor envíe una solicitud por escrito a nuestro correo electrónico: <strong>[Tu Correo Electrónico de Contacto]</strong>, indicando su nombre completo y el derecho que desea ejercer.</p>
+
+            <h2>6. Uso de Cookies</h2>
+            <p>Nuestro sitio web utiliza cookies técnicas para su correcto funcionamiento. No utilizamos cookies para recabar información personal o con fines publicitarios invasivos.</p>
+
+            <h2>7. Modificaciones al Aviso de Privacidad</h2>
+            <p>Nos reservamos el derecho de efectuar en cualquier momento modificaciones o actualizaciones al presente aviso de privacidad. Estas modificaciones estarán disponibles al público a través de nuestro sitio web en esta misma sección.</p>
+
+            <h2>8. Consentimiento</h2>
+            <p>Al proporcionarnos sus datos personales y sensibles a través de nuestro formulario de agendamiento, usted manifiesta que ha leído y entendido el presente Aviso de Privacidad y otorga su consentimiento expreso para el tratamiento de sus datos, incluidos sus datos sensibles, en los términos aquí descritos.</p>
         </div>
     </main>
 
-    <footer class="bg-dark_footer text-text_light py-12">
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-            <div class="md:col-span-2">
-                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
-                <p class="text-sm text-gray-300 mt-2">&copy; 2025 TherapyHomeISJ. Todos los derechos reservados.</p>
-                <p class="text-sm text-gray-300">Hecho con amor y código.</p>
-            </div>
+    <!-- FOOTER -->
+    <footer class="bg-crema py-12 px-6 border-t border-rosagelatina text-center md:text-left mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="index.html#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
-                    <li><a href="index.html#tipos-terapia" class="hover:text-white transition-colors duration-300">Terapia</a></li>
-                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
-                    <li><a href="index.html#faq" class="hover:text-white transition-colors duration-300">Preguntas Frecuentes</a></li>
-                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
-                </ul>
+                <h3 class="font-serif text-xl font-bold mb-1">TherapyHomeISJ</h3>
+                <p class="text-sm text-carbon/60">Clínica Psicológica Online</p>
             </div>
-            <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Información Legal</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
-                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de Cookies</a></li>
-                </ul>
+            <div class="text-sm text-carbon/70 space-y-1">
+                <p>📞 55 1336 2585</p>
+                <p>✉️ isis.therapyhome@gmail.com</p>
+            </div>
+            <div class="text-xs text-carbon/50">
+                <a href="privacidad.html" class="hover:underline">Aviso de privacidad</a> <br>
+                © 2026 TherapyHomeISJ. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
     <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        // Funcionalidad para el menú de celular
+        const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('-translate-x-full');
         });
-        const mobileLinks = document.querySelectorAll('.mobile-link');
+
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('-translate-x-full');
