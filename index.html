@@ -365,50 +365,79 @@
         </div>
     </section>
 
-<!-- 4. ASÍ ES TU PROCESO (TARJETAS FLOTANTES) -->
+<!-- 4. ASÍ ES TU PROCESO (EFECTO REVELAR AL PASAR EL MOUSE) -->
     <section class="bg-[#F8F4F1] py-24 px-6 border-t border-rosagelatina">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-serif text-center mb-16 text-carbon">Así es tu proceso</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 lg:gap-6">
+                
                 <!-- Tarjeta 1 -->
-                <div class="bg-blanco p-6 lg:p-8 rounded-2xl border-2 border-rosagelatina shadow-md flex flex-col items-center text-center h-full hover:shadow-xl hover:border-rosaprofu/50 hover:-translate-y-1 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-6 border border-rosagelatina">1</div>
-                    <h3 class="font-bold mb-4 text-carbon text-[17px] leading-tight font-sans">Cuéntanos qué te trae aquí</h3>
-                    <p class="text-sm text-carbon/70 leading-relaxed">Completa un formulario breve para que podamos conocer qué estás viviendo, qué te gustaría trabajar y cómo prefieres que te acompañen. Con esa información podremos orientarte desde el primer momento.</p>
+                <div class="group relative bg-blanco rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center text-center overflow-hidden hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[280px] lg:h-[320px] cursor-pointer">
+                    <!-- Título (Se desliza hacia arriba) -->
+                    <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out group-hover:-translate-y-16 lg:group-hover:-translate-y-24">
+                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500">1</div>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Cuéntanos qué te trae aquí</h3>
+                        <span class="text-rosaprofu mt-3 text-xs opacity-100 group-hover:opacity-0 transition-opacity duration-300 lg:hidden">(Toca para leer)</span>
+                    </div>
+                    <!-- Texto (Aparece desde abajo) -->
+                    <div class="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-end justify-center h-full">
+                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pb-2">Completa un formulario breve para conocer qué vives, qué te gustaría trabajar y cómo prefieres que te acompañen. Con eso te orientamos desde el inicio.</p>
+                    </div>
                 </div>
                 
                 <!-- Tarjeta 2 -->
-                <div class="bg-blanco p-6 lg:p-8 rounded-2xl border-2 border-rosagelatina shadow-md flex flex-col items-center text-center h-full hover:shadow-xl hover:border-rosaprofu/50 hover:-translate-y-1 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-6 border border-rosagelatina">2</div>
-                    <h3 class="font-bold mb-4 text-carbon text-[17px] leading-tight font-sans">Buscamos a la psicóloga indicada para ti</h3>
-                    <p class="text-sm text-carbon/70 leading-relaxed">Revisamos lo que nos compartiste y lo relacionamos con la experiencia de nuestro equipo para asignarte a la psicóloga que mejor pueda acompañarte. Queremos que te sientas comprendido/a desde la primera sesión.</p>
+                <div class="group relative bg-blanco rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center text-center overflow-hidden hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[280px] lg:h-[320px] cursor-pointer">
+                    <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out group-hover:-translate-y-16 lg:group-hover:-translate-y-24">
+                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500">2</div>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans px-2">Buscamos a la psicóloga indicada</h3>
+                        <span class="text-rosaprofu mt-3 text-xs opacity-100 group-hover:opacity-0 transition-opacity duration-300 lg:hidden">(Toca para leer)</span>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-end justify-center h-full">
+                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pb-2">Revisamos lo que compartiste y lo relacionamos con la experiencia de nuestro equipo para asignarte a quien mejor pueda acompañarte y comprenderte.</p>
+                    </div>
                 </div>
                 
                 <!-- Tarjeta 3 -->
-                <div class="bg-blanco p-6 lg:p-8 rounded-2xl border-2 border-rosagelatina shadow-md flex flex-col items-center text-center h-full hover:shadow-xl hover:border-rosaprofu/50 hover:-translate-y-1 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-6 border border-rosagelatina">3</div>
-                    <h3 class="font-bold mb-4 text-carbon text-[17px] leading-tight font-sans">Antes de la primera sesión</h3>
-                    <p class="text-sm text-carbon/70 leading-relaxed">La psicóloga que te acompañará se pondrá en contacto contigo para presentarse, resolver cualquier duda y confirmar los detalles de la sesión. Así llegarás con mayor tranquilidad, sabiendo quién estará contigo.</p>
+                <div class="group relative bg-blanco rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center text-center overflow-hidden hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[280px] lg:h-[320px] cursor-pointer">
+                    <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out group-hover:-translate-y-16 lg:group-hover:-translate-y-24">
+                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500">3</div>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans px-2">Antes de la primera sesión</h3>
+                        <span class="text-rosaprofu mt-3 text-xs opacity-100 group-hover:opacity-0 transition-opacity duration-300 lg:hidden">(Toca para leer)</span>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-end justify-center h-full">
+                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pb-2">Tu psicóloga se pondrá en contacto contigo para presentarse, resolver dudas y confirmar detalles. Así llegarás con mayor tranquilidad a tu cita.</p>
+                    </div>
                 </div>
                 
                 <!-- Tarjeta 4 -->
-                <div class="bg-blanco p-6 lg:p-8 rounded-2xl border-2 border-rosagelatina shadow-md flex flex-col items-center text-center h-full hover:shadow-xl hover:border-rosaprofu/50 hover:-translate-y-1 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-6 border border-rosagelatina">4</div>
-                    <h3 class="font-bold mb-4 text-carbon text-[17px] leading-tight font-sans">Tu primera sesión</h3>
-                    <p class="text-sm text-carbon/70 leading-relaxed">La sesión será por Google Meet. Será un espacio para conocerte, entender qué está pasando y comenzar a definir, junto contigo, los objetivos del proceso.</p>
+                <div class="group relative bg-blanco rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center text-center overflow-hidden hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[280px] lg:h-[320px] cursor-pointer">
+                    <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out group-hover:-translate-y-16 lg:group-hover:-translate-y-24">
+                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500">4</div>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Tu primera sesión</h3>
+                        <span class="text-rosaprofu mt-3 text-xs opacity-100 group-hover:opacity-0 transition-opacity duration-300 lg:hidden">(Toca para leer)</span>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-end justify-center h-full">
+                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pb-2">Será por Google Meet. Un espacio seguro para conocerte, entender qué está pasando y comenzar a definir juntos los objetivos de tu proceso.</p>
+                    </div>
                 </div>
                 
                 <!-- Tarjeta 5 -->
-                <div class="bg-blanco p-6 lg:p-8 rounded-2xl border-2 border-rosagelatina shadow-md flex flex-col items-center text-center h-full hover:shadow-xl hover:border-rosaprofu/50 hover:-translate-y-1 transition-all duration-300">
-                    <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-6 border border-rosagelatina">5</div>
-                    <h3 class="font-bold mb-4 text-carbon text-[17px] leading-tight font-sans">A tu propio ritmo</h3>
-                    <p class="text-sm text-carbon/70 leading-relaxed">Cada proceso es diferente. En promedio, las personas asisten entre 12 y 16 sesiones, aunque la duración depende de lo que necesites trabajar y de tus objetivos. Avanzaremos a un ritmo que te permita construir cambios sólidos y duraderos.</p>
+                <div class="group relative bg-blanco rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center text-center overflow-hidden hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[280px] lg:h-[320px] cursor-pointer">
+                    <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-transform duration-500 ease-in-out group-hover:-translate-y-16 lg:group-hover:-translate-y-24">
+                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500">5</div>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">A tu propio ritmo</h3>
+                        <span class="text-rosaprofu mt-3 text-xs opacity-100 group-hover:opacity-0 transition-opacity duration-300 lg:hidden">(Toca para leer)</span>
+                    </div>
+                    <div class="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out flex items-end justify-center h-full">
+                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pb-2">Cada proceso es diferente. En promedio son entre 12 y 16 sesiones, avanzando a un ritmo que te permita construir cambios sólidos y duraderos.</p>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </section>
-
+    
     <!-- 5. SOBRE NOSOTRAS -->
     <section class="py-24 px-6 max-w-5xl mx-auto border-t border-rosagelatina">
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-12 text-carbon">Sobre nosotras</h2>
