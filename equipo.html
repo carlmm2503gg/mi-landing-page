@@ -14,9 +14,10 @@
                 extend: {
                     colors: {
                         crema: '#F5F0ED',
-                        crema_oscuro: '#F0EBE6',
+                        crema_oscuro: '#F0EBE6', 
                         rosagelatina: '#EDD8D0',
                         rosaprofu: '#C9A097',
+                        cafe: '#8B6A60',
                         carbon: '#1A1412',
                         blanco: '#FDFCFB'
                     },
@@ -56,13 +57,33 @@
     <header class="fixed w-full top-0 bg-crema/90 backdrop-blur-md z-50 border-b border-rosagelatina">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-serif font-semibold text-carbon tracking-tight">TherapyHomeISJ</a>
+            
+            <!-- Menú de Escritorio -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
                 <a href="index.html" class="nav-link">Inicio</a>
                 <a href="equipo.html" class="nav-link">Conócenos</a>
                 <a href="reserva-general.html" class="btn-nav px-6 py-2.5">Iniciar terapia</a>
             </nav>
+
+            <!-- Botón Menú Móvil -->
+            <button id="mobile-menu-btn" class="md:hidden text-carbon focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
     </header>
+
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-crema z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24 border-r border-rosagelatina w-64 shadow-2xl">
+        <ul class="flex flex-col space-y-6 px-8 text-lg font-serif">
+            <li><a href="index.html" class="mobile-link text-carbon hover:text-rosaprofu transition-colors">Inicio</a></li>
+            <li><a href="equipo.html" class="mobile-link text-carbon hover:text-rosaprofu transition-colors">Conócenos</a></li>
+            <li class="pt-6 border-t border-rosagelatina">
+               <a href="reserva-general.html" class="bg-rosaprofu text-blanco px-6 py-3 rounded-full text-sm font-sans font-bold inline-block text-center w-full">Iniciar terapia</a>
+            </li>
+        </ul>
+    </div>
 
     <main class="pt-32 pb-16">
         <!-- CABECERA DE LA PÁGINA -->
@@ -73,13 +94,13 @@
             </p>
         </section>
 
-        <!-- GRID DEL EQUIPO (Estilo Editorial / Fotos Controladas) -->
+        <!-- GRID DEL EQUIPO -->
         <section class="container mx-auto px-6 max-w-7xl mb-24">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-10">
                 
                 <!-- Lizbeth -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="liz.webp" alt="Lizbeth Ortiz Ramírez" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Lizbeth Ortiz Ramírez</h3>
@@ -89,7 +110,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en psicología,Maestría en Terapia Familiar con enfoque breve sistémico, Céd. Prof. 14451464</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 14451464)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Lizbeth Ortiz Ramírez. Soy Licenciada en psicología y Maestra en terapia familiar.</p>
@@ -103,7 +124,7 @@
 
                 <!-- Tania -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Tania.webp" alt="Tania Elizabeth Martínez Sánchez" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Tania E. Martínez Sánchez</h3>
@@ -113,7 +134,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en Psicología, Maestrante en Psicología Clínica, Céd. Prof. 13215897</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 13215897)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Tania Elizabeth Martínez Sánchez. Soy Psicóloga y Maestrista en Psicología Clínica.</p>
@@ -126,7 +147,7 @@
 
                 <!-- Elisa -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Marina.webp" alt="Elisa Marina Juárez Zúñiga" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Elisa Marina Juárez Zúñiga</h3>
@@ -136,7 +157,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en Psicología Clínica, Maestrante en Terapia Cognitivo Conductual, Céd. Prof. 13583358</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 13583358)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Elisa Marina Juárez Zúñiga. Cuento con Licenciatura en Psicología Clínica y soy Maestrante en Terapia Cognitivo Conductual.</p>
@@ -149,7 +170,7 @@
 
                 <!-- Janeth -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Janeth.webp" alt="Janeth Monterroza Gordillo" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Janeth Monterroza Gordillo</h3>
@@ -159,7 +180,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en Psicología, Maestría en Terapia Cognitivo Conductual, Diplomado en Terapia de Esquemas, Céd. Prof. 14690058</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 14690058)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Janeth Monterroza Gordillo. Tengo formación en Licenciatura, Especialidad y Maestría en Psicología Clínica.</p>
@@ -172,7 +193,7 @@
 
                 <!-- Paola -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Paola.webp" alt="María Paola Delgado Arevalo" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">María Paola Delgado</h3>
@@ -182,7 +203,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en Psicología, Máster en Terapias Conductuales y Contextuales, Céd. Prof. 14227118</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 14227118)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo María Paola Delgado Arevalo. Soy Licenciada en Psicología y Máster en Terapias Conductuales Contextuales.</p>
@@ -195,7 +216,7 @@
 
                 <!-- Claudia -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Claudia.webp" alt="Claudia Pineda Flores" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Claudia Pineda Flores</h3>
@@ -205,7 +226,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en psicología, Maestría en Psicología, Doctorado en Psicología, Céd. Prof. 11645583</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 11645583)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Claudia Pineda Flores. Soy Psicóloga con Maestría y Doctorado, además de estudios avanzados en Psicoterapia Breve, intervención en crisis y terapias contextuales.</p>
@@ -218,7 +239,7 @@
 
                 <!-- Anarely -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Anarely.webp" alt="Anarely de la Trinidad Méndez" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Anarely de la T. Méndez</h3>
@@ -228,7 +249,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en Psicología, Maestría en Psicoterapia Cognitivo Conductual, Céd. Prof. 15363858</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 12451642)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Anarely de la Trinidad Méndez. Tengo Licenciatura y Maestría en psicología clínica.</p>
@@ -241,7 +262,7 @@
 
                 <!-- Sara -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="sara.webp" alt="Sara Ramos Acevedo" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Sara Ramos Acevedo</h3>
@@ -251,12 +272,12 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciatura en Psicología, Especialidad en psicología clínica y de la salud, Maestría (en curso) de Psicoterapia Transpersonal Integrativa.  Céd. Prof. 14138572</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 14138551)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Sara Ramos Acevedo. Soy Licenciada en psicología, especializada en terapias contextuales.</p>
                                 <p>Acompaño a adultos que buscan gestionar sus emociones, fortalecer su autoestima y transformar su historia personal.</p>
-                                <p>Integro la Terapia Cognitivo-Conductual con enfoques de Psicología Positiva para ayudarte a reconectar con tus fortalezas y establecer límites saludables. Mi objetivo es guiarte de la mano en tu proceso de crecimiento.</p>
+                                <p>Integro la Terapia Cognitivo-Conductual con enfoques de Psicología Positiva para ayudarte a reconectar con tus fortalezas y establecer límites saludables. Mi principal objetivo es guiarte con profesionalismo en tu proceso de crecimiento.</p>
                             </div>
                         </details>
                     </div>
@@ -264,7 +285,7 @@
 
                 <!-- Mikaela -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="mikaela.webp" alt="Mikaela Ivanova Martínez Román" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Mikaela I. Martínez Román</h3>
@@ -274,7 +295,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciatura en Psicología Clínica, Maestrante en TCC, Formación continua en intervención clínica, Céd. Prof. 14892156</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 14892156)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Mikaela Ivanova Martínez Román. Soy Licenciada en Psicología Clínica con enfoque Cognitivo-Conductual.</p>
@@ -287,7 +308,7 @@
 
                 <!-- Miranda -->
                 <div class="flex flex-col">
-                    <div class="w-full max-w-[250px] mx-auto mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
+                    <div class="w-full mb-6 overflow-hidden bg-blanco shadow-sm rounded-sm">
                         <img src="Miranda.webp" alt="Miranda Catalina Salazar Villanueva" class="w-full aspect-[4/5] object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out">
                     </div>
                     <h3 class="text-2xl font-serif text-carbon mb-5 text-center">Miranda Salazar Villanueva</h3>
@@ -297,7 +318,7 @@
                             <summary class="flex items-start cursor-pointer p-4 font-sans font-medium text-carbon/90 hover:bg-[#e4ddd8] transition-colors">
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] group-open:hidden">▶</span>
                                 <span class="inline-block mt-[3px] mr-2 text-[10px] hidden group-open:inline-block">▼</span>
-                                <span>Licenciada en psicología y Maestría en psicoterapia Cognitivo-Conductual y formación en psicología positiva, Céd. Prof. 12169571</span>
+                                <span>¡Qué bueno que estés aquí! (Céd. Prof. 12169571)</span>
                             </summary>
                             <div class="px-5 pb-6 pt-2 text-carbon/80 text-[15px] leading-relaxed space-y-4 font-sans font-light">
                                 <p>Me llamo Miranda Catalina Salazar Villanueva. Soy Licenciada en psicología con Maestría en psicoterapia Cognitivo-Conductual y formación en psicología positiva.</p>
@@ -320,7 +341,7 @@
                     <p>Cada caso cuenta con seguimiento y supervisión para asegurar que el proceso mantenga el mismo estándar de calidad de principio a fin.</p>
                 </div>
                 <div class="mt-12">
-                    <a href="agendar.html" class="bg-carbon text-blanco px-8 py-3.5 rounded-full text-base font-bold inline-block hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <a href="reserva-general.html" class="bg-carbon text-blanco px-8 py-3.5 rounded-full text-base font-bold inline-block hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         Inicia tu proceso
                     </a>
                 </div>
@@ -340,11 +361,30 @@
                 <p>✉️ isis.therapyhome@gmail.com</p>
             </div>
             <div class="text-xs text-carbon/50">
-                <a href="privacidad.html" class="hover:underline">Aviso de privacidad</a>
+                <a href="privacidad.html" class="hover:underline">Aviso de privacidad</a> <br>
                 © 2026 TherapyHomeISJ. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
+    <script>
+        // Funcionalidad para el menú de celular (Hamburguesa)
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if(mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('-translate-x-full');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('-translate-x-full');
+                });
+            });
+        }
+    </script>
 </body>
 </html>
