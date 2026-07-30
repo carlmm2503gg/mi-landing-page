@@ -53,7 +53,7 @@
         }
         .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
 
-        /* Estilos para Flip Cards adaptados para celular y computadora */
+        /* Estilos para Flip Cards */
         .flip-card {
             perspective: 1000px;
             min-height: 180px; 
@@ -90,13 +90,14 @@
             transform: rotateY(180deg);
         }
 
-        /* Animación para el Carrusel de Banderas */
+        /* Animación para el Carrusel de Banderas (Velocidad ajustada) */
         @keyframes scroll-infinite {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
         .logos-container { overflow: hidden; white-space: nowrap; }
-        .logos { animation: scroll-infinite 20s linear infinite; display: inline-flex; }
+        /* Se redujo a 12s para mayor velocidad */
+        .logos { animation: scroll-infinite 12s linear infinite; display: inline-flex; } 
     </style>
 
     <!-- INICIO: Meta Pixel Code -->
@@ -157,26 +158,32 @@
         </ul>
     </div>
 
-    <!-- 1. HERO -->
-    <section class="flex flex-col lg:flex-row items-center min-h-[90vh] pt-28 lg:pt-32 pb-12 lg:pb-0">
-        <div class="w-full lg:w-1/2 px-6 lg:px-12 xl:px-20 py-8 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
-            <h1 class="text-xl md:text-2xl lg:text-[25px] font-serif leading-relaxed mb-6 text-carbon max-w-lg">
-                Si quieres aprender a gestionar tus emociones sin que te hagan daño, a hablarte bonito, quererte, cuidarte, tener unos límites sanos, y en definitiva, saber quién eres y sentirte orgulloso de ello, este es tu lugar.
-            </h1>
-            <p class="text-sm md:text-base text-carbon/80 mb-8 max-w-md">
-                Terapia individual y de pareja, online, con la psicóloga que mejor encaja contigo.
-            </p>
-            <div class="flex flex-col items-center lg:items-start">
-                <a href="reserva-general.html" onclick="if(typeof fbq === 'function') fbq('track', 'Lead');" class="bg-rosaprofu text-blanco px-8 py-3.5 rounded-full text-base font-bold inline-block shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    Empieza tu proceso ahora
-                </a>
-                <span class="text-xs mt-3 text-carbon/50 font-medium">Respuesta en menos de 24 horas</span>
+    <!-- 1. HERO ESTILO EDITORIAL (Mejorado para Móvil) -->
+    <section class="flex flex-col lg:flex-row items-stretch min-h-[90vh] pt-20 lg:pt-32 pb-12 lg:pb-0">
+        
+        <!-- Imagen (En celular va arriba, en laptop a la derecha) -->
+        <div class="w-full lg:w-1/2 h-[45vh] lg:h-[85vh] order-1 lg:order-2">
+            <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop" alt="Espacio terapéutico" class="w-full h-full object-cover rounded-b-[2.5rem] lg:rounded-b-none lg:rounded-l-[4rem] shadow-sm">
+        </div>
+
+        <!-- Texto (En celular se superpone como tarjeta, en laptop a la izquierda) -->
+        <div class="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left px-5 lg:px-12 xl:px-20 order-2 lg:order-1 -mt-16 lg:mt-0 z-10">
+            <div class="bg-crema/95 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none p-8 md:p-10 lg:p-0 rounded-3xl lg:rounded-none shadow-xl lg:shadow-none border border-blanco/60 lg:border-none w-full max-w-lg">
+                <h1 class="text-xl md:text-2xl lg:text-[25px] font-serif leading-relaxed mb-6 text-carbon">
+                    Si quieres aprender a gestionar tus emociones sin que te hagan daño, a hablarte bonito, quererte, cuidarte, tener unos límites sanos, y en definitiva, saber quién eres y sentirte orgulloso de ello, este es tu lugar.
+                </h1>
+                <p class="text-sm md:text-base text-carbon/80 mb-8">
+                    Terapia individual y de pareja, online, con la psicóloga que mejor encaja contigo.
+                </p>
+                <div class="flex flex-col items-center lg:items-start">
+                    <a href="reserva-general.html" onclick="if(typeof fbq === 'function') fbq('track', 'Lead');" class="bg-rosaprofu text-blanco px-8 py-3.5 rounded-full text-base font-bold inline-block shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full lg:w-auto">
+                        Empieza tu proceso ahora
+                    </a>
+                    <span class="text-xs mt-3 text-carbon/50 font-medium">Respuesta en menos de 24 horas</span>
+                </div>
             </div>
         </div>
-        
-        <div class="w-full lg:w-1/2 h-[50vh] lg:h-[85vh]">
-            <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop" alt="Espacio terapéutico" class="w-full h-full object-cover rounded-l-3xl lg:rounded-l-[40px] shadow-lg">
-        </div>
+
     </section>
 
     <!-- 2. FRASE PUENTE -->
@@ -188,7 +195,7 @@
         </div>
     </section>
 
-    <!-- 3. EN QUÉ TE PODEMOS ACOMPAÑAR (FLIP CARDS CAFÉ / CARBON) -->
+    <!-- 3. EN QUÉ TE PODEMOS ACOMPAÑAR -->
     <section class="py-24 px-6 max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-16 text-carbon">En qué te podemos acompañar</h2>
         
@@ -319,70 +326,70 @@
             
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 lg:gap-6">
                 <!-- Tarjeta 1 -->
-                <div class="group relative bg-blanco rounded-2xl border border-rosagelatina shadow-sm flex flex-col overflow-hidden hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[320px] lg:h-[340px] cursor-pointer">
-                    <div class="p-6 md:p-4 lg:p-6 flex flex-col items-center justify-center flex-1 transition-transform duration-500 ease-in-out md:group-hover:-translate-y-12 lg:group-hover:-translate-y-14 w-full">
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">1</div>
-                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans text-center">Cuéntanos qué te trae aquí</h3>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Cuéntanos qué te trae aquí</h3>
                         <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="px-6 pb-6 md:px-4 lg:px-6 md:absolute md:bottom-0 md:inset-x-0 md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-in-out w-full bg-blanco">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed text-center">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Completa un formulario breve para conocer qué vives, qué te gustaría trabajar y cómo prefieres que te acompañen. Con eso te orientamos desde el inicio.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 2 -->
-                <div class="group relative bg-blanco rounded-2xl border border-rosagelatina shadow-sm flex flex-col overflow-hidden hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[320px] lg:h-[340px] cursor-pointer">
-                    <div class="p-6 md:p-4 lg:p-6 flex flex-col items-center justify-center flex-1 transition-transform duration-500 ease-in-out md:group-hover:-translate-y-12 lg:group-hover:-translate-y-14 w-full">
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">2</div>
-                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans text-center">Buscamos a la psicóloga indicada</h3>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans px-2">Buscamos a la psicóloga indicada</h3>
                         <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="px-6 pb-6 md:px-4 lg:px-6 md:absolute md:bottom-0 md:inset-x-0 md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-in-out w-full bg-blanco">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed text-center">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Revisamos lo que compartiste y lo relacionamos con la experiencia de nuestro equipo para asignarte a quien mejor pueda acompañarte y comprenderte.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 3 -->
-                <div class="group relative bg-blanco rounded-2xl border border-rosagelatina shadow-sm flex flex-col overflow-hidden hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[320px] lg:h-[340px] cursor-pointer">
-                    <div class="p-6 md:p-4 lg:p-6 flex flex-col items-center justify-center flex-1 transition-transform duration-500 ease-in-out md:group-hover:-translate-y-12 lg:group-hover:-translate-y-14 w-full">
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">3</div>
-                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans text-center">Antes de la primera sesión</h3>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Antes de la primera sesión</h3>
                         <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="px-6 pb-6 md:px-4 lg:px-6 md:absolute md:bottom-0 md:inset-x-0 md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-in-out w-full bg-blanco">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed text-center">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Tu psicóloga se pondrá en contacto contigo para presentarse, resolver dudas y confirmar detalles. Así llegarás con mayor tranquilidad a tu cita.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 4 -->
-                <div class="group relative bg-blanco rounded-2xl border border-rosagelatina shadow-sm flex flex-col overflow-hidden hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[320px] lg:h-[340px] cursor-pointer">
-                    <div class="p-6 md:p-4 lg:p-6 flex flex-col items-center justify-center flex-1 transition-transform duration-500 ease-in-out md:group-hover:-translate-y-12 lg:group-hover:-translate-y-14 w-full">
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">4</div>
-                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans text-center">Tu primera sesión</h3>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Tu primera sesión</h3>
                         <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="px-6 pb-6 md:px-4 lg:px-6 md:absolute md:bottom-0 md:inset-x-0 md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-in-out w-full bg-blanco">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed text-center">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Será por Google Meet. Un espacio seguro para conocerte, entender qué está pasando y comenzar a definir juntos los objetivos de tu proceso.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 5 -->
-                <div class="group relative bg-blanco rounded-2xl border border-rosagelatina shadow-sm flex flex-col overflow-hidden hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[320px] lg:h-[340px] cursor-pointer">
-                    <div class="p-6 md:p-4 lg:p-6 flex flex-col items-center justify-center flex-1 transition-transform duration-500 ease-in-out md:group-hover:-translate-y-12 lg:group-hover:-translate-y-14 w-full">
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
                         <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">5</div>
-                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans text-center">A tu propio ritmo</h3>
+                        <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">A tu propio ritmo</h3>
                         <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="px-6 pb-6 md:px-4 lg:px-6 md:absolute md:bottom-0 md:inset-x-0 md:opacity-0 md:translate-y-8 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-500 ease-in-out w-full bg-blanco">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed text-center">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Cada proceso es diferente. En promedio son entre 12 y 16 sesiones, avanzando a un ritmo que te permita construir cambios sólidos y duraderos.
                         </p>
                     </div>
@@ -452,22 +459,22 @@
         </div>
         <div class="logos-container overflow-hidden whitespace-nowrap">
             <div class="logos flex items-center">
-                <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="istockphoto-175584631-612x612.jpg" alt="Chile" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_Ecuador.svg.png" alt="Ecuador" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Perú" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_Australia.svg.png" alt="Australia" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_the_United_States.svg.png" alt="Estados Unidos" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_Germany.svg.png" alt="Alemania" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
+                <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="istockphoto-175584631-612x612.jpg" alt="Chile" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_Ecuador.svg.png" alt="Ecuador" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Perú" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_Australia.svg.png" alt="Australia" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_the_United_States.svg.png" alt="Estados Unidos" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_Germany.svg.png" alt="Alemania" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
                 
-                <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="istockphoto-175584631-612x612.jpg" alt="Chile" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="Flag_of_Ecuador.svg.png" alt="Ecuador" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
-                <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Perú" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
+                <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="istockphoto-175584631-612x612.jpg" alt="Chile" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="Flag_of_Ecuador.svg.png" alt="Ecuador" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
+                <img src="51vmLrlheUL._UF1000,1000_QL80_.jpg" alt="Perú" class="h-8 w-auto mx-8 opacity-90 transition-all duration-300">
             </div>
         </div>
     </section>
@@ -640,7 +647,7 @@
                 </button>
                 <div id="faq-14" class="hidden px-6 pb-6 text-sm md:text-base text-carbon/70 leading-relaxed border-t border-crema pt-4 transition-all duration-300 bg-blanco">
                     <p class="mb-3">No te preocupes. Si tienes dudas, te orientaremos antes de agendar.</p>
-                    <p>Te compartiremos una guía sencilla para ayudarte a identify qué modalidad puede ajustarse mejor a tu situación y, si aún quedan dudas, las resolveremos contigo.</p>
+                    <p>Te compartiremos una guía sencilla para ayudarte a identificar qué modalidad puede ajustarse mejor a tu situación y, si aún quedan dudas, las resolveremos contigo.</p>
                 </div>
             </div>
 
