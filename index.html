@@ -17,6 +17,7 @@
                         crema_oscuro: '#F0EBE6',
                         rosagelatina: '#EDD8D0',
                         rosaprofu: '#C9A097',
+                        cafe: '#8B6A60', /* Nuevo tono café premium */
                         carbon: '#1A1412',
                         blanco: '#FDFCFB'
                     },
@@ -55,7 +56,7 @@
         /* Estilos para Flip Cards adaptados para celular y computadora */
         .flip-card {
             perspective: 1000px;
-            min-height: 180px;
+            min-height: 180px; 
             cursor: pointer;
         }
         @media (min-width: 768px) {
@@ -85,21 +86,8 @@
             justify-content: center;
             align-items: center;
         }
-        /* Nuevos colores para las tarjetas */
-        .flip-card-front {
-            background-color: theme('colors.carbon');
-            border: 1px solid theme('colors.carbon');
-        }
-        .flip-card-front:hover {
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
-        }
         .flip-card-back {
-            background-color: theme('colors.rosaprofu');
-            color: theme('colors.blanco');
             transform: rotateY(180deg);
-            border: 1px solid theme('colors.rosaprofu');
         }
 
         /* Animación para el Carrusel de Banderas */
@@ -200,7 +188,7 @@
         </div>
     </section>
 
-    <!-- 3. EN QUÉ TE PODEMOS ACOMPAÑAR (FLIP CARDS CON NUEVO CONTRASTE) -->
+    <!-- 3. EN QUÉ TE PODEMOS ACOMPAÑAR (FLIP CARDS CAFÉ / CARBON) -->
     <section class="py-24 px-6 max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-16 text-carbon">En qué te podemos acompañar</h2>
         
@@ -208,12 +196,12 @@
             <!-- 1. Ansiedad -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Ansiedad</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Ansiedad</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <ul class="list-disc pl-4 space-y-1 md:space-y-2 text-[11px] md:text-sm leading-snug text-left text-blanco">
                             <li>Preocupación constante que no se apaga</li>
                             <li>Cuesta parar la mente antes de dormir</li>
@@ -226,12 +214,12 @@
             <!-- 2. Dependencia emocional -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Dependencia Emocional</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Dependencia Emocional</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Trabajamos en construir vínculos desde la elección y la autonomía, soltando el miedo al abandono o la necesidad constante de validación.</p>
                     </div>
                 </div>
@@ -240,12 +228,12 @@
             <!-- 3. Conflictos de pareja -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Conflictos de Pareja</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Conflictos de Pareja</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Exploramos dinámicas de comunicación, acuerdos no dichos y formas de reconectar cuando parece que hablan idiomas distintos.</p>
                     </div>
                 </div>
@@ -254,12 +242,12 @@
             <!-- 4. Rupturas y duelo amoroso -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Rupturas y Duelo</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Rupturas y Duelo</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Acompañamiento estructurado para atravesar el final de una relación sin perder tu centro, sanando y reconstruyendo tu identidad.</p>
                     </div>
                 </div>
@@ -268,12 +256,12 @@
             <!-- 5. Autoestima e inseguridad -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Autoestima e Inseguridad</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Autoestima e Inseguridad</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Identificamos tus creencias limitantes para construir una autoimagen sólida, basada en la compasión y no en la crítica constante.</p>
                     </div>
                 </div>
@@ -282,12 +270,12 @@
             <!-- 6. Regulación emocional -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Regulación Emocional</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Regulación Emocional</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Aprende herramientas prácticas para transitar la intensidad de tus emociones sin que estas tomen el control de tus decisiones.</p>
                     </div>
                 </div>
@@ -296,12 +284,12 @@
             <!-- 7. Límites -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Límites</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Límites</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Te ayudamos a establecer límites claros y asertivos en tus relaciones, trabajo y vida personal, soltando la culpa por elegirte.</p>
                     </div>
                 </div>
@@ -310,12 +298,12 @@
             <!-- 8. Duelo por pérdida -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-lg">
+                    <div class="flip-card-front bg-cafe shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-blanco"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
-                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight">Duelo por Pérdida</h3>
-                        <p class="text-[10px] md:text-xs text-blanco/60 mt-1 md:mt-2">(Toca aquí)</p>
+                        <h3 class="text-sm md:text-lg font-bold text-blanco font-serif leading-tight px-2">Duelo por Pérdida</h3>
+                        <p class="text-[10px] md:text-xs text-blanco/80 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
-                    <div class="flip-card-back shadow-md">
+                    <div class="flip-card-back bg-carbon shadow-lg border border-carbon">
                         <p class="text-[11px] md:text-sm leading-relaxed text-blanco">Un espacio de respeto y contención para procesar la ausencia, integrar el dolor y reencontrar el sentido en tu nueva realidad.</p>
                     </div>
                 </div>
@@ -408,6 +396,7 @@
     <section class="py-24 px-6 max-w-5xl mx-auto border-t border-rosagelatina">
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-12 text-carbon">¿Por qué existe TherapyHomeISJ?</h2>
         <div class="bg-rosagelatina p-8 md:p-12 rounded-3xl text-carbon/80 space-y-6 leading-relaxed flex flex-col md:flex-row items-center gap-10">
+            <!-- Foto de la fundadora -->
             <div class="w-full md:w-1/3 flex justify-center">
                 <img src="Isis.webp" alt="Psicóloga Isis San Juan" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg border-4 border-blanco transform hover:scale-105 transition-transform duration-500">
             </div>
@@ -437,17 +426,17 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <div class="bg-crema p-8 rounded-2xl">
+                <div class="bg-crema p-8 rounded-2xl border border-[#e8dfd8] shadow-sm">
                     <p class="mb-6 font-medium leading-relaxed">"Siento que por fin alguien entendió exactamente qué me pasaba sin hacerme sentir juzgada. Mis niveles de ansiedad han bajado muchísimo."</p>
                     <p class="text-sm font-bold text-rosaprofu">— M.A.</p>
                     <p class="text-xs text-carbon/60">Terapia para ansiedad</p>
                 </div>
-                <div class="bg-crema p-8 rounded-2xl">
+                <div class="bg-crema p-8 rounded-2xl border border-[#e8dfd8] shadow-sm">
                     <p class="mb-6 font-medium leading-relaxed">"Llegamos pensando en separarnos y hoy tenemos herramientas que nunca nos enseñaron. Nos salvó de tomar una decisión desde el enojo."</p>
                     <p class="text-sm font-bold text-rosaprofu">— Carlos y Ana</p>
                     <p class="text-xs text-carbon/60">Terapia de pareja</p>
                 </div>
-                <div class="bg-crema p-8 rounded-2xl">
+                <div class="bg-crema p-8 rounded-2xl border border-[#e8dfd8] shadow-sm">
                     <p class="mb-6 font-medium leading-relaxed">"Me ayudó a poner límites sin sentirme culpable. Fue un proceso duro pero el más necesario de mi vida adulta."</p>
                     <p class="text-sm font-bold text-rosaprofu">— L.S.</p>
                     <p class="text-xs text-carbon/60">Límites y dependencia</p>
