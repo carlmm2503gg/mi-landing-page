@@ -14,6 +14,7 @@
                 extend: {
                     colors: {
                         crema: '#F5F0ED',
+                        crema_oscuro: '#F0EBE6',
                         rosagelatina: '#EDD8D0',
                         rosaprofu: '#C9A097',
                         carbon: '#1A1412',
@@ -51,11 +52,14 @@
         }
         .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
 
-        /* Estilos para Flip Cards */
+        /* Estilos para Flip Cards adaptados para celular y computadora */
         .flip-card {
             perspective: 1000px;
-            min-height: 250px; 
+            min-height: 180px; /* Tamaño adaptado para celular */
             cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            .flip-card { min-height: 250px; } /* Tamaño normal en computadora */
         }
         .flip-card-inner {
             position: relative;
@@ -75,7 +79,7 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 1rem;
-            padding: 1.5rem;
+            padding: 1.25rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -166,7 +170,7 @@
         </ul>
     </div>
 
-    <!-- 1. HERO ESTILO RAQUEL LÓPEZ (TEXTO FINO Y PEQUEÑO, PANTALLA DIVIDIDA) -->
+    <!-- 1. HERO ESTILO RAQUEL LÓPEZ -->
     <section class="flex flex-col lg:flex-row items-center min-h-[90vh] pt-28 lg:pt-32 pb-12 lg:pb-0">
         <!-- Columna de Texto -->
         <div class="w-full lg:w-1/2 px-6 lg:px-12 xl:px-20 py-8 flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
@@ -184,7 +188,7 @@
             </div>
         </div>
         
-        <!-- Columna de Imagen (Estilo borde a borde) -->
+        <!-- Columna de Imagen -->
         <div class="w-full lg:w-1/2 h-[50vh] lg:h-[85vh]">
             <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=1000&auto=format&fit=crop" alt="Espacio terapéutico" class="w-full h-full object-cover rounded-l-3xl lg:rounded-l-[40px] shadow-lg">
         </div>
@@ -199,21 +203,21 @@
         </div>
     </section>
 
-    <!-- 3. EN QUÉ TE PODEMOS ACOMPAÑAR (FLIP CARDS - Giran al dar clic) -->
+    <!-- 3. EN QUÉ TE PODEMOS ACOMPAÑAR (FLIP CARDS A 2 COLUMNAS EN CELULAR) -->
     <section class="py-24 px-6 max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-16 text-carbon">En qué te podemos acompañar</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
             <!-- 1. Ansiedad -->
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Ansiedad</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Ansiedad</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <ul class="list-disc pl-4 space-y-2 text-sm leading-snug text-left">
+                        <ul class="list-disc pl-4 space-y-1 md:space-y-2 text-[11px] md:text-sm leading-snug text-left">
                             <li>Preocupación constante que no se apaga</li>
                             <li>Cuesta parar la mente antes de dormir</li>
                             <li>El cuerpo se siente en alerta sin razón clara</li>
@@ -226,12 +230,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Dependencia Emocional</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Dependencia Emocional</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Trabajamos en construir vínculos desde la elección y la autonomía, soltando el miedo al abandono o la necesidad constante de validación.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Trabajamos en construir vínculos desde la elección y la autonomía, soltando el miedo al abandono o la necesidad constante de validación.</p>
                     </div>
                 </div>
             </div>
@@ -240,12 +244,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Conflictos de Pareja</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Conflictos de Pareja</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Exploramos dinámicas de comunicación, acuerdos no dichos y formas de reconectar cuando parece que hablan idiomas distintos.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Exploramos dinámicas de comunicación, acuerdos no dichos y formas de reconectar cuando parece que hablan idiomas distintos.</p>
                     </div>
                 </div>
             </div>
@@ -254,12 +258,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Rupturas y Duelo</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Rupturas y Duelo</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Acompañamiento estructurado para atravesar el final de una relación sin perder tu centro, sanando y reconstruyendo tu identidad.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Acompañamiento estructurado para atravesar el final de una relación sin perder tu centro, sanando y reconstruyendo tu identidad.</p>
                     </div>
                 </div>
             </div>
@@ -268,12 +272,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Autoestima e Inseguridad</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Autoestima e Inseguridad</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Identificamos tus creencias limitantes para construir una autoimagen sólida, basada en la compasión y no en la crítica constante.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Identificamos tus creencias limitantes para construir una autoimagen sólida, basada en la compasión y no en la crítica constante.</p>
                     </div>
                 </div>
             </div>
@@ -282,12 +286,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Regulación Emocional</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Regulación Emocional</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Aprende herramientas prácticas para transitar la intensidad de tus emociones sin que estas tomen el control de tus decisiones.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Aprende herramientas prácticas para transitar la intensidad de tus emociones sin que estas tomen el control de tus decisiones.</p>
                     </div>
                 </div>
             </div>
@@ -296,12 +300,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Límites</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Límites</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Te ayudamos a establecer límites claros y asertivos en tus relaciones, trabajo y vida personal, soltando la culpa por elegirte.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Te ayudamos a establecer límites claros y asertivos en tus relaciones, trabajo y vida personal, soltando la culpa por elegirte.</p>
                     </div>
                 </div>
             </div>
@@ -310,54 +314,12 @@
             <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
                 <div class="flip-card-inner">
                     <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Duelo por Pérdida</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
+                        <div class="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
+                        <h3 class="text-sm md:text-lg font-bold text-carbon font-serif leading-tight">Duelo por Pérdida</h3>
+                        <p class="text-[10px] md:text-xs text-carbon/50 mt-1 md:mt-2">(Toca aquí)</p>
                     </div>
                     <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Un espacio de respeto y contención para procesar la ausencia, integrar el dolor y reencontrar el sentido en tu nueva realidad.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 9. Perfeccionismo y autoexigencia -->
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Autoexigencia</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
-                    </div>
-                    <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Aprende a soltar la necesidad de control y el diálogo interno castigador para empezar a vivir con más flexibilidad y calma.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 10. Estrés laboral o burnout -->
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Burnout y Estrés</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
-                    </div>
-                    <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Evaluamos tus cargas de trabajo y te brindamos estrategias para recuperar tu energía y proteger tu espacio personal.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 11. Trauma -->
-            <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front shadow-sm">
-                        <div class="w-12 h-12 mb-4 text-rosaprofu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg></div>
-                        <h3 class="text-lg font-bold text-carbon font-serif">Trauma</h3>
-                        <p class="text-xs text-carbon/50 mt-2">(Toca para descubrir)</p>
-                    </div>
-                    <div class="flip-card-back shadow-md">
-                        <p class="text-sm leading-relaxed">Intervención clínica cuidadosa para procesar eventos dolorosos del pasado que siguen interrumpiendo tu paz en el presente.</p>
+                        <p class="text-[11px] md:text-sm leading-relaxed">Un espacio de respeto y contención para procesar la ausencia, integrar el dolor y reencontrar el sentido en tu nueva realidad.</p>
                     </div>
                 </div>
             </div>
@@ -365,78 +327,78 @@
         </div>
     </section>
 
-<!-- 4. ASÍ ES TU PROCESO (DISEÑO FLUIDO SIN SUPERPOSICIONES) -->
-    <section class="bg-[#F8F4F1] py-24 px-6 border-t border-rosagelatina">
+    <!-- 4. ASÍ ES TU PROCESO (ADAPTATIVO: TEXTO VISIBLE EN MÓVIL, HOVER EN ESCRITORIO) -->
+    <section class="bg-[#F8F4F1] py-16 md:py-24 px-6 border-t border-rosagelatina">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-serif text-center mb-16 text-carbon">Así es tu proceso</h2>
+            <h2 class="text-3xl md:text-4xl font-serif text-center mb-12 md:mb-16 text-carbon">Así es tu proceso</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 lg:gap-6">
                 
                 <!-- Tarjeta 1 -->
-                <div class="group bg-blanco p-6 rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[300px] lg:h-[340px] cursor-pointer">
-                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out group-hover:-translate-y-2">
-                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500 shrink-0">1</div>
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">1</div>
                         <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Cuéntanos qué te trae aquí</h3>
-                        <span class="text-rosaprofu mt-2 text-[11px] lg:hidden block group-hover:opacity-0 transition-opacity duration-300 h-4">(Toca para leer)</span>
+                        <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pt-3">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Completa un formulario breve para conocer qué vives, qué te gustaría trabajar y cómo prefieres que te acompañen. Con eso te orientamos desde el inicio.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 2 -->
-                <div class="group bg-blanco p-6 rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[300px] lg:h-[340px] cursor-pointer">
-                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out group-hover:-translate-y-2">
-                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500 shrink-0">2</div>
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">2</div>
                         <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans px-2">Buscamos a la psicóloga indicada</h3>
-                        <span class="text-rosaprofu mt-2 text-[11px] lg:hidden block group-hover:opacity-0 transition-opacity duration-300 h-4">(Toca para leer)</span>
+                        <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pt-3">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Revisamos lo que compartiste y lo relacionamos con la experiencia de nuestro equipo para asignarte a quien mejor pueda acompañarte y comprenderte.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 3 -->
-                <div class="group bg-blanco p-6 rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[300px] lg:h-[340px] cursor-pointer">
-                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out group-hover:-translate-y-2">
-                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500 shrink-0">3</div>
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">3</div>
                         <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Antes de la primera sesión</h3>
-                        <span class="text-rosaprofu mt-2 text-[11px] lg:hidden block group-hover:opacity-0 transition-opacity duration-300 h-4">(Toca para leer)</span>
+                        <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pt-3">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Tu psicóloga se pondrá en contacto contigo para presentarse, resolver dudas y confirmar detalles. Así llegarás con mayor tranquilidad a tu cita.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 4 -->
-                <div class="group bg-blanco p-6 rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[300px] lg:h-[340px] cursor-pointer">
-                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out group-hover:-translate-y-2">
-                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500 shrink-0">4</div>
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">4</div>
                         <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">Tu primera sesión</h3>
-                        <span class="text-rosaprofu mt-2 text-[11px] lg:hidden block group-hover:opacity-0 transition-opacity duration-300 h-4">(Toca para leer)</span>
+                        <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pt-3">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Será por Google Meet. Un espacio seguro para conocerte, entender qué está pasando y comenzar a definir juntos los objetivos de tu proceso.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Tarjeta 5 -->
-                <div class="group bg-blanco p-6 rounded-2xl border-2 border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-xl hover:border-rosaprofu/50 transition-all duration-500 h-[300px] lg:h-[340px] cursor-pointer">
-                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out group-hover:-translate-y-2">
-                        <div class="w-14 h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-xl font-serif mb-4 border border-rosagelatina group-hover:scale-110 transition-transform duration-500 shrink-0">5</div>
+                <div class="group bg-blanco p-6 md:p-8 rounded-2xl border border-rosagelatina shadow-sm flex flex-col items-center justify-center text-center hover:shadow-lg hover:border-rosaprofu/50 transition-all duration-500 h-auto md:h-[300px] lg:h-[340px] cursor-pointer">
+                    <div class="flex flex-col items-center transition-transform duration-500 ease-in-out md:group-hover:-translate-y-2">
+                        <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-crema text-carbon flex items-center justify-center text-lg md:text-xl font-serif mb-4 border border-rosagelatina md:group-hover:scale-110 transition-transform duration-500 shrink-0">5</div>
                         <h3 class="font-bold text-carbon text-[16px] lg:text-[17px] leading-tight font-sans">A tu propio ritmo</h3>
-                        <span class="text-rosaprofu mt-2 text-[11px] lg:hidden block group-hover:opacity-0 transition-opacity duration-300 h-4">(Toca para leer)</span>
+                        <span class="text-rosaprofu mt-2 text-[11px] hidden md:block md:group-hover:opacity-0 transition-opacity duration-300 h-4">(Pasa el mouse)</span>
                     </div>
-                    <div class="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full">
-                        <p class="text-[13px] lg:text-[14px] text-carbon/80 leading-relaxed pt-3">
+                    <div class="opacity-100 max-h-[300px] md:opacity-0 md:max-h-0 md:group-hover:max-h-[200px] md:group-hover:opacity-100 transition-all duration-500 ease-in-out overflow-hidden w-full mt-3 md:mt-0">
+                        <p class="text-[14px] text-carbon/80 leading-relaxed md:pt-3">
                             Cada proceso es diferente. En promedio son entre 12 y 16 sesiones, avanzando a un ritmo que te permita construir cambios sólidos y duraderos.
                         </p>
                     </div>
@@ -451,10 +413,9 @@
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-12 text-carbon">Sobre nosotras</h2>
         <div class="bg-rosagelatina p-8 md:p-12 rounded-3xl text-carbon/80 space-y-6 leading-relaxed flex flex-col md:flex-row items-center gap-10">
             <!-- Foto de la fundadora -->
-<div class="w-full md:w-1/3 flex justify-center">
-    <img src="Isis.webp" alt="Psicóloga Isis San Juan" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg border-4 border-blanco transform hover:scale-105 transition-transform duration-500">
-</div>
-            
+            <div class="w-full md:w-1/3 flex justify-center">
+                <img src="Isis.webp" alt="Psicóloga Isis San Juan" class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg border-4 border-blanco transform hover:scale-105 transition-transform duration-500">
+            </div>
             <div class="w-full md:w-2/3">
                 <p class="mb-4">
                     A mí también me costó encontrar el acompañamiento correcto. Fui a terapia con varios psicólogos con los que nunca hice match, sin nadie que me orientara sobre qué perfil era el que necesitaba — y aprendí lo mucho que eso importa.
@@ -497,14 +458,13 @@
         </div>
     </section>
 
-    <!-- 6.5 PAÍSES DE ALCANCE (NUEVO) -->
+    <!-- 6.5 PAÍSES DE ALCANCE -->
     <section class="bg-blanco pb-20 border-b border-rosagelatina">
         <div class="max-w-6xl mx-auto px-6 text-center mb-10">
             <h3 class="font-sans font-medium text-carbon/60 text-sm tracking-[0.2em] uppercase">Atención profesional sin fronteras · Pacientes atendidos en</h3>
         </div>
         <div class="logos-container overflow-hidden whitespace-nowrap">
             <div class="logos flex items-center">
-                <!-- Se duplicaron para el loop infinito fluido -->
                 <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
                 <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
                 <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
@@ -515,7 +475,6 @@
                 <img src="Flag_of_the_United_States.svg.png" alt="Estados Unidos" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
                 <img src="Flag_of_Germany.svg.png" alt="Alemania" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
                 
-                <!-- Repetición para el efecto carrusel -->
                 <img src="Flag_of_Mexico.svg.webp" alt="México" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
                 <img src="istockphoto-479224872-612x612.jpg" alt="España" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
                 <img src="Flag_of_Colombia.svg.png" alt="Colombia" class="h-8 w-auto mx-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
@@ -526,13 +485,12 @@
         </div>
     </section>
 
-<!-- 7. PREGUNTAS FRECUENTES -->
+    <!-- 7. PREGUNTAS FRECUENTES (ACTUALIZADAS) -->
     <section class="py-24 px-6 max-w-4xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-serif text-center mb-12 text-carbon">Preguntas frecuentes</h2>
         
         <div class="space-y-4">
-            
-            <!-- Pregunta 1 -->
+            <!-- 1 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-1', 'fi-1')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Cuánto dura el proceso?</span>
@@ -543,7 +501,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 2 -->
+            <!-- 2 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-2', 'fi-2')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Con qué frecuencia son las sesiones?</span>
@@ -554,7 +512,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 3 -->
+            <!-- 3 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-3', 'fi-3')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿La terapia es en línea o presencial?</span>
@@ -565,7 +523,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 4 -->
+            <!-- 4 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-4', 'fi-4')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Cómo es la primera sesión?</span>
@@ -577,7 +535,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 5 -->
+            <!-- 5 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-5', 'fi-5')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Y si no sé explicar lo que me pasa?</span>
@@ -589,7 +547,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 6 -->
+            <!-- 6 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-6', 'fi-6')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Qué pasa con la confidencialidad de lo que hablo?</span>
@@ -601,7 +559,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 7 -->
+            <!-- 7 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-7', 'fi-7')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Cuánto cuesta?</span>
@@ -617,7 +575,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 8 -->
+            <!-- 8 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-8', 'fi-8')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Qué formas de pago aceptan?</span>
@@ -629,7 +587,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 9 -->
+            <!-- 9 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-9', 'fi-9')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Los paquetes tienen vigencia o puedo solicitar un reembolso?</span>
@@ -642,7 +600,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 10 -->
+            <!-- 10 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-10', 'fi-10')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Atienden personas de cualquier edad?</span>
@@ -653,7 +611,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 11 -->
+            <!-- 11 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-11', 'fi-11')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Atienden personas que viven fuera de México?</span>
@@ -664,7 +622,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 12 -->
+            <!-- 12 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-12', 'fi-12')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Emiten factura?</span>
@@ -675,7 +633,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 13 -->
+            <!-- 13 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-13', 'fi-13')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Cómo se elige a mi psicóloga?</span>
@@ -687,7 +645,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 14 -->
+            <!-- 14 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-14', 'fi-14')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">No sé si necesito terapia individual o de pareja.</span>
@@ -699,10 +657,10 @@
                 </div>
             </div>
 
-            <!-- Pregunta 15 -->
+            <!-- 15 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-15', 'fi-15')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
-                    <span class="font-bold text-carbon text-lg font-sans">¿Puedo cambiar de terapia individual a terapia de pareja (o viceversa)?</span>
+                    <span class="font-bold text-carbon text-lg font-sans">¿Puedo cambiar de terapia individual a pareja?</span>
                     <span id="fi-15" class="text-rosaprofu text-2xl font-light transition-transform duration-300">+</span>
                 </button>
                 <div id="faq-15" class="hidden px-6 pb-6 text-sm md:text-base text-carbon/70 leading-relaxed border-t border-crema pt-4 transition-all duration-300 bg-blanco">
@@ -711,7 +669,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 16 -->
+            <!-- 16 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-16', 'fi-16')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Qué pasa si necesito cambiar de horario?</span>
@@ -724,7 +682,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 17 -->
+            <!-- 17 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-17', 'fi-17')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Qué pasa si no conecto con mi psicóloga?</span>
@@ -736,7 +694,7 @@
                 </div>
             </div>
 
-            <!-- Pregunta 18 -->
+            <!-- 18 -->
             <div class="bg-blanco rounded-xl overflow-hidden border border-rosagelatina transition-all shadow-sm">
                 <button onclick="toggleFaq('faq-18', 'fi-18')" class="w-full px-6 py-5 flex justify-between items-center text-left focus:outline-none bg-blanco hover:bg-crema/30 transition-colors">
                     <span class="font-bold text-carbon text-lg font-sans">¿Qué pasa si tengo una urgencia fuera de sesión?</span>
@@ -777,7 +735,7 @@
                 <p>✉️ isis.therapyhome@gmail.com</p>
             </div>
             <div class="text-xs text-carbon/50">
-                <a href="privacidad.html" class="hover:underline">Aviso de privacidad</a>
+                <a href="privacidad.html" class="hover:underline">Aviso de privacidad</a> <br>
                 © 2026 TherapyHomeISJ. Todos los derechos reservados.
             </div>
         </div>
