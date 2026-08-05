@@ -3,228 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TherapyHomeISJ | Agenda tu Cita</title>
+    <title>TherapyHomeISJ | Solicita información</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
                     colors: {
-                        primary: '#FDF7F8', 
-                        secondary: '#C04374', 
-                        text_dark: '#2C1B23', 
-                        text_light: '#FFFFFF', 
-                        dark_footer: '#4A2A38', 
-                        pink_light: '#FFE4E8', 
+                        crema: '#F5F0ED',
+                        crema_oscuro: '#F0EBE6',
+                        rosagelatina: '#EDD8D0',
+                        rosaprofu: '#C9A097',
+                        carbon: '#1A1412',
+                        blanco: '#FDFCFB'
+                    },
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        @font-face {
-            font-family: 'Berliana Lovely';
-            src: url('Berliana-Lovely.ttf') format('truetype');
+        body { background-color: theme('colors.crema'); color: theme('colors.carbon'); }
+        
+        /* Botones de navegación principal */
+        .btn-nav { 
+            background-color: theme('colors.rosaprofu'); 
+            color: theme('colors.blanco'); 
+            border-radius: 9999px;
+            transition: background-color 0.2s ease;
         }
-        .cta-button {
-            background-color: theme('colors.secondary');
-            color: theme('colors.text_light');
-            padding: 12px 28px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 700;
-            font-size: 1.125rem;
-            transition: background-color 0.3s, transform 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+        .btn-nav:hover { background-color: #B58B82; }
+        
+        .nav-link { position: relative; color: theme('colors.carbon'); text-decoration: none; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px;
+            bottom: 0; left: 0; background-color: theme('colors.carbon');
+            transform-origin: bottom right; transition: transform 0.25s ease-out;
         }
-        .cta-button:hover { background-color: #880E4F; transform: translateY(-2px); }
-        section { padding-top: 4rem; padding-bottom: 4rem; }
+        .nav-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+
+        /* Inputs estilizados */
+        .input-clinica {
+            width: 100%;
+            background-color: theme('colors.blanco');
+            border: 1px solid theme('colors.rosagelatina');
+            border-radius: 0.75rem;
+            padding: 0.875rem 1.25rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .input-clinica:focus {
+            border-color: theme('colors.rosaprofu');
+            box-shadow: 0 0 0 3px rgba(201, 160, 151, 0.2);
+        }
+        .input-clinica::placeholder { color: #a19a97; font-weight: 300; }
     </style>
 </head>
-<body class="bg-primary text-text_dark">
+<body class="font-sans antialiased selection:bg-rosaprofu selection:text-blanco overflow-x-hidden flex flex-col min-h-screen">
 
-<header class="sticky top-0 z-50 bg-secondary shadow-md">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="text-3xl font-serif text-text_light hover:text-pink_light transition-colors duration-300">TherapyHomeISJ</a>
-        
-        <div class="hidden lg:flex items-center space-x-8">
-            <a href="index.html#about" class="text-text_light hover:text-pink_light font-medium">Acerca de Mí</a>
-            <a href="equipo.html" class="text-text_light hover:text-pink_light font-medium">Equipo</a>
-            <a href="blog.html" class="text-text_light hover:text-pink_light font-medium">Blog</a>
-            <a href="recursos.html" class="text-text_light hover:text-pink_light font-medium">Recursos</a>
-            <a href="https://therapyhome.as.me/" target="_blank" class="text-text_light hover:text-pink_light font-medium">Agenda tu Cita</a>
-            <a href="agendar.html" class="text-text_light hover:text-pink_light font-medium">Contacto</a>
+    <!-- HEADER (Idéntico al index y equipo) -->
+    <header class="fixed w-full top-0 bg-crema/90 backdrop-blur-md z-50 border-b border-rosagelatina">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-serif font-semibold text-carbon tracking-tight">TherapyHomeISJ</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="equipo.html" class="nav-link">Conócenos</a>
+                <a href="agendar.html" class="btn-nav px-6 py-2.5 shadow-sm">Iniciar terapia</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-carbon focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
         </div>
-        
-        <button id="mobile-menu-button" class="lg:hidden text-text_light focus:outline-none">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-    </nav>
-</header>
+    </header>
 
-<div id="mobile-menu" class="lg:hidden fixed top-0 left-0 w-full h-full bg-primary z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24">
-    <ul class="flex flex-col items-center space-y-6 text-xl">
-        <li><a href="index.html#about" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Acerca de Mí</a></li>
-        <li><a href="index.html#tipos-terapia" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Terapia</a></li>
-        <li><a href="equipo.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Equipo</a></li>
-        <li><a href="blog.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Blog</a></li>
-        <li><a href="recursos.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Recursos</a></li>
-        <li><a href="index.html#faq" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Preguntas</a></li>
-        <li>
-            <a href="agendar.html" class="mobile-link text-text_dark hover:text-secondary font-medium transition-colors">Contacto</a>
-        </li>
-        <li class="pt-4">
-            <a href="https://therapyhome.as.me/" target="_blank" class="cta-button rounded-lg bg-pink-500 hover:bg-pink-700">Agenda tu Cita</a>
-        </li>
-    </ul>
-</div>
+    <!-- Menú Móvil Desplegable -->
+    <div id="mobile-menu" class="md:hidden fixed inset-0 bg-crema z-40 transform -translate-x-full transition-transform duration-300 ease-in-out pt-24 border-r border-rosagelatina w-64 shadow-2xl">
+        <ul class="flex flex-col space-y-6 px-8 text-lg font-serif">
+            <li><a href="index.html" class="mobile-link text-carbon hover:text-rosaprofu transition-colors">Inicio</a></li>
+            <li><a href="equipo.html" class="mobile-link text-carbon hover:text-rosaprofu transition-colors">Conócenos</a></li>
+            <li class="pt-6 border-t border-rosagelatina">
+               <a href="agendar.html" class="bg-rosaprofu text-blanco px-6 py-3 rounded-full text-sm font-sans font-bold inline-block text-center w-full shadow-md">Iniciar terapia</a>
+            </li>
+        </ul>
+    </div>
 
-    <main>
-        <section id="agendar-form" class="bg-pink_light">
-            <div class="container mx-auto px-6 max-w-4xl">
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow pt-32 pb-24 px-6">
+        <section class="max-w-4xl mx-auto">
+            
+            <!-- Cabecera del formulario -->
+            <div class="text-center mb-12">
+                <h1 class="font-serif text-4xl md:text-5xl text-carbon mb-6">Solicita información</h1>
+                <div class="text-[17px] text-carbon/80 max-w-2xl mx-auto space-y-4 font-light leading-relaxed">
+                    <p>
+                        Cuéntanos brevemente qué está pasando y qué tipo de acompañamiento estás buscando.
+                    </p>
+                    <p>
+                        Nos pondremos en contacto contigo para orientarte, resolver tus dudas, compartirte horarios, costos y ayudarte a decidir si este espacio es adecuado para ti.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contenedor del Formulario -->
+            <div class="bg-blanco p-8 md:p-12 rounded-[2rem] shadow-sm border border-rosagelatina relative overflow-hidden">
                 
-                <h2 class="font-bold text-text_dark mb-8 text-center text-3xl md:text-4xl">Agenda tu Cita</h2>
-                <p class="text-lg text-text_dark mb-12 text-center">
-                    Completa el siguiente formulario para solicitar tu sesión. Nos pondremos en contacto contigo a la brevedad por correo o WhatsApp para confirmar el horario y método de pago.
-                </p>
+                <!-- Decoración sutil de fondo -->
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-crema_oscuro rounded-full opacity-50 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-rosagelatina rounded-full opacity-30 blur-3xl pointer-events-none"></div>
 
-                <div class="bg-white p-8 md:p-12 rounded-xl shadow-lg border border-gray-200">
-                    
-                    <form id="form-contacto-landing" class="space-y-6">
+                <form id="form-contacto-landing" class="space-y-6 relative z-10">
 
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Nombre -->
                         <div>
-                            <label for="nombre" class="block text-sm font-medium text-text_dark mb-2">Nombre Completo</label>
-                            <input type="text" name="nombre" id="nombre" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all" 
-                                   placeholder="Tu nombre y apellido">
+                            <label for="nombre" class="block text-sm font-medium text-carbon/90 mb-2">Nombre Completo</label>
+                            <input type="text" name="nombre" id="nombre" required class="input-clinica" placeholder="Ej. Ana Pérez">
                         </div>
 
+                        <!-- Correo -->
                         <div>
-                            <label for="email" class="block text-sm font-medium text-text_dark mb-2">Correo Electrónico</label>
-                            <input type="email" name="email" id="email" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all" 
-                                   placeholder="tu@correo.com">
+                            <label for="email" class="block text-sm font-medium text-carbon/90 mb-2">Correo Electrónico</label>
+                            <input type="email" name="email" id="email" required class="input-clinica" placeholder="tu@correo.com">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Teléfono -->
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium text-carbon/90 mb-2">WhatsApp / Teléfono</label>
+                            <input type="tel" name="telefono" id="telefono" required class="input-clinica" placeholder="+52 (Incluye código de país)">
                         </div>
 
+                        <!-- País -->
                         <div>
-                            <label for="telefono" class="block text-sm font-medium text-text_dark mb-2">Teléfono / WhatsApp</label>
-                            <input type="tel" name="telefono" id="telefono" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all" 
-                                   placeholder="+52 1 55 1234 5678 (Incluye lada)">
+                            <label for="pais" class="block text-sm font-medium text-carbon/90 mb-2">País de Residencia</label>
+                            <input type="text" name="pais" id="pais" required class="input-clinica" placeholder="Ej. México">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Ciudad -->
+                        <div>
+                            <label for="ciudad" class="block text-sm font-medium text-carbon/90 mb-2">Ciudad / Estado</label>
+                            <input type="text" name="ciudad" id="ciudad" required class="input-clinica" placeholder="Para considerar tu zona horaria">
                         </div>
 
+                        <!-- Tipo de terapia -->
                         <div>
-                            <label for="pais" class="block text-sm font-medium text-text_dark mb-2">País de Residencia</label>
-                            <input type="text" name="pais" id="pais" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all" 
-                                   placeholder="País donde vives actualmente">
-                        </div>
-
-                        <div>
-                            <label for="ciudad" class="block text-sm font-medium text-text_dark mb-2">Ciudad / Estado</label>
-                            <input type="text" name="ciudad" id="ciudad" required 
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all" 
-                                   placeholder="Ciudad y/o estado (para zona horaria)">
-                        </div>
-
-                        <div>
-                            <label for="tipo_terapia" class="block text-sm font-medium text-text_dark mb-2">Tipo de Terapia</label>
-                            <select id="tipo_terapia" name="tipo_terapia" required 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all bg-white">
+                            <label for="tipo_terapia" class="block text-sm font-medium text-carbon/90 mb-2">Tipo de Terapia</label>
+                            <select id="tipo_terapia" name="tipo_terapia" required class="input-clinica bg-transparent appearance-none">
                                 <option value="" disabled selected>Selecciona una opción</option>
                                 <option value="individual">Terapia Individual</option>
                                 <option value="pareja">Terapia de Pareja</option>
+                                <option value="duda">Aún no estoy seguro/a</option>
                             </select>
                         </div>
-                        
-                        <div>
-                            <label for="motivo" class="block text-sm font-medium text-text_dark mb-2">Motivo de Consulta (Breve)</label>
-                            <textarea id="motivo" name="motivo" rows="4" 
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all" 
-                                      placeholder="Cuéntanos brevemente qué te gustaría trabajar en terapia..."></textarea>
+                    </div>
+                    
+                    <!-- Motivo -->
+                    <div>
+                        <label for="motivo" class="block text-sm font-medium text-carbon/90 mb-2">Cuéntanos un poco sobre ti (Opcional)</label>
+                        <textarea id="motivo" name="motivo" rows="4" class="input-clinica resize-none" placeholder="¿Qué te gustaría trabajar o resolver en este espacio?"></textarea>
+                    </div>
+                    
+                    <!-- Privacidad -->
+                    <div class="flex items-start pt-2">
+                        <div class="flex items-center h-5">
+                            <input id="privacidad" name="privacidad" type="checkbox" required class="w-5 h-5 text-carbon bg-crema_oscuro border-rosagelatina rounded focus:ring-rosaprofu focus:ring-2 accent-carbon cursor-pointer">
                         </div>
-                        
-                        <div class="flex items-start">
-                            <input id="privacidad" name="privacidad" type="checkbox" required 
-                                   class="h-4 w-4 text-secondary focus:ring-secondary border-gray-300 rounded mt-1">
-                            <label for="privacidad" class="ml-2 block text-sm text-text_dark">
-                                He leído y acepto la <a href="privacidad.html" target="_blank" class="font-medium text-secondary hover:underline">Política de Privacidad</a> y entiendo que este formulario es una solicitud de cita, sujeta a confirmación.
-                            </label>
-                        </div>
+                        <label for="privacidad" class="ml-3 block text-[13px] text-carbon/70 leading-relaxed cursor-pointer select-none">
+                            He leído y acepto el <a href="privacidad.html" target="_blank" class="font-medium text-carbon underline decoration-rosaprofu hover:text-rosaprofu transition-colors">Aviso de Privacidad</a> y entiendo que este formulario es una solicitud de información.
+                        </label>
+                    </div>
 
-                        <div class="text-center pt-4">
-                            <button type="submit" id="btn-submit-contacto" class="cta-button rounded-lg">
-                                Enviar Solicitud de Cita
-                            </button>
-                        </div>
+                    <!-- Botón Enviar -->
+                    <div class="text-center pt-8">
+                        <button type="submit" id="btn-submit-contacto" class="bg-carbon text-blanco px-10 py-4 rounded-full text-base font-bold inline-block hover:shadow-lg hover:-translate-y-1 transition-all duration-300 w-full md:w-auto">
+                            Enviar solicitud
+                        </button>
+                    </div>
 
-                    </form>
-                </div>
+                </form>
             </div>
         </section>
     </main>
 
-    <footer class="bg-dark_footer text-text_light py-12">
-        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-            
-            <div class="md:col-span-2">
-                <a href="index.html" class="text-3xl font-serif text-secondary hover:text-white transition-colors duration-300">TherapyHomeISJ</a>
-                <p class="text-sm text-gray-300 mt-2">&copy; 2025 Psicóloga Isis San Juan. Todos los derechos reservados.</p>
-                <p class="text-sm text-gray-300">Hecho con 🤍</p>
-            </div>
-
+    <!-- FOOTER (Idéntico al index) -->
+    <footer class="bg-crema py-12 px-6 border-t border-rosagelatina text-center md:text-left mt-auto">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Enlaces Rápidos</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="index.html#about" class="hover:text-white transition-colors duration-300">Acerca de Mí</a></li>
-                    <li><a href="index.html#tipos-terapia" class="hover:text-white transition-colors duration-300">Terapia</a></li>
-                    <li><a href="equipo.html" class="hover:text-white transition-colors duration-300">Equipo</a></li>
-                    <li><a href="blog.html" class="hover:text-white transition-colors duration-300">Blog</a></li>
-                    <li><a href="recursos.html" class="hover:text-white transition-colors duration-300">Recursos</a></li>
-                    <li><a href="agendar.html" class="hover:text-white transition-colors duration-300">Agenda tu Cita</a></li>
-                </ul>
+                <h3 class="font-serif text-xl font-bold mb-1">TherapyHomeISJ</h3>
+                <p class="text-sm text-carbon/60">Clínica Psicológica Online</p>
             </div>
-
-            <div>
-                <h3 class="text-xl font-bold text-secondary mb-4">Información Legal</h3>
-                <ul class="space-y-2 text-gray-300">
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Aviso Legal</a></li>
-                    <li><a href="privacidad.html" class="hover:text-white transition-colors duration-300">Política de Privacidad</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Política de Cookies</a></li>
-                </ul>
+            <div class="text-sm text-carbon/70 space-y-1">
+                <p>📞 55 1336 2585</p>
+                <p>✉️ isis.therapyhome@gmail.com</p>
+            </div>
+            <div class="text-xs text-carbon/50">
+                <a href="privacidad.html" class="hover:underline">Aviso de privacidad</a> <br>
+                © 2026 TherapyHomeISJ. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.link/lefkj3" target="_blank" class="whatsapp-float" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 999;">
-        <img src="whats.png" alt="Logo de WhatsApp" class="w-16 h-16 transition-transform duration-300">
+    <!-- Botón flotante WhatsApp -->
+    <a href="https://wa.link/lefkj3" target="_blank" class="fixed bottom-6 right-6 z-[99] hover:scale-110 transition-transform duration-300 drop-shadow-lg">
+        <img src="whats.png" alt="Contáctanos por WhatsApp" class="w-14 h-14">
     </a>
 
+    <!-- SCRIPTS -->
     <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        // Menú Móvil
+        const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('-translate-x-full');
-        });
         const mobileLinks = document.querySelectorAll('.mobile-link');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('-translate-x-full');
-            });
-        });
-    </script>
 
-    <script>
+        if(mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('-translate-x-full');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('-translate-x-full');
+                });
+            });
+        }
+
+        // Lógica de Envío del Formulario
         const formLead = document.getElementById('form-contacto-landing');
         const btnLead = document.getElementById('btn-submit-contacto');
         const BACKEND_URL = "https://crm-backend-oztv.onrender.com"; 
@@ -233,10 +247,11 @@
             formLead.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
-                // Bloqueo preventivo e indicador visual de procesamiento
+                // Efecto de carga en el botón
                 btnLead.disabled = true;
                 const textoOriginal = btnLead.innerHTML;
-                btnLead.innerHTML = '⏳ Procesando solicitud...';
+                btnLead.innerHTML = '⏳ Procesando...';
+                btnLead.classList.add('opacity-70', 'cursor-not-allowed');
 
                 const dataPayload = {
                     nombre: document.getElementById('nombre').value,
@@ -255,34 +270,31 @@
                         body: JSON.stringify(dataPayload)
                     });
 
-                    if (!response.ok) throw new Error('Respuesta de servidor inválida');
+                    if (!response.ok) throw new Error('Error en el servidor');
 
-                    // Renderizado dinámico de éxito en pantalla para evitar redirecciones frías
+                    // Mensaje de Éxito adaptado al nuevo diseño
                     formLead.innerHTML = `
-                        <div class="text-center py-10 transition-all duration-500 ease-in-out">
-                            <div class="text-5xl mb-4">✨</div>
-                            <h3 class="text-2xl font-bold text-text_dark mb-2">¡Mensaje recibido con éxito!</h3>
-                            <p class="text-gray-600 max-w-md mx-auto mb-6 text-sm">
-                                Los detalles han sido registrados. El equipo administrativo se comunicará de manera prioritaria a la brevedad posible a través de WhatsApp o correo electrónico.
+                        <div class="text-center py-12 px-4 transition-all duration-500 ease-in-out animate-fade-in">
+                            <div class="w-20 h-20 bg-crema_oscuro rounded-full flex items-center justify-center mx-auto mb-6">
+                                <span class="text-4xl">✨</span>
+                            </div>
+                            <h3 class="text-3xl font-serif text-carbon mb-4">¡Mensaje recibido!</h3>
+                            <p class="text-carbon/70 max-w-md mx-auto mb-8 leading-relaxed">
+                                Tu información nos ha llegado correctamente. Estaremos revisándola y nos pondremos en contacto contigo lo antes posible para ayudarte a dar el siguiente paso.
                             </p>
-                            <a href="index.html" class="cta-button rounded-lg text-sm inline-block py-2.5 px-6">
-                                Volver a la página principal
+                            <a href="index.html" class="bg-rosaprofu text-blanco px-8 py-3 rounded-full text-sm font-bold inline-block hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                                Volver al inicio
                             </a>
                         </div>
                     `;
                 } catch (err) {
-                    alert('🛑 Hubo un problema temporal al procesar el envío. Por favor, intenta de nuevo o comunícate directamente mediante el botón flotante de WhatsApp.');
+                    alert('🛑 Hubo un problema de conexión al procesar el envío. Por favor, intenta de nuevo o comunícate directamente mediante el botón flotante de WhatsApp.');
                     btnLead.disabled = false;
                     btnLead.innerHTML = textoOriginal;
+                    btnLead.classList.remove('opacity-70', 'cursor-not-allowed');
                 }
             });
         }
     </script>
 </body>
 </html>
-"""
-
-with open("agendar-v2.html", "w", encoding="utf-8") as f:
-    f.write(content)
-
-print("agendar-v2.html generado exitosamente")
