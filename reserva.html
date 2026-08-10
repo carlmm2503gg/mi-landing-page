@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita - Therapy Home ISJ</title>
+    <link rel="icon" type="image/x-icon" href="Logo.ico">
+    <link rel="apple-touch-icon" href="Logo.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        body { background-color: #f8fafc; font-family: 'Inter', sans-serif; color: #334155; }
+        
+        .main-container { max-width: 1100px; margin: 3rem auto; padding: 0 15px; }
+        
+        /* 🔥 CARRUSEL DE PSICÓLOGAS (STORIES) 🔥 */
+        .story-container { display: flex; gap: 20px; overflow-x: auto; padding: 10px 5px 25px 5px; scrollbar-width: none; -ms-overflow-style: none; justify-content: center; }
+        .story-container::-webkit-scrollbar { display: none; }
+        @media (max-width: 768px) { .story-container { justify-content: flex-start; } }
+        .story-item { text-align: center; cursor: pointer; min-width: 80px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0.6; filter: grayscale(40%); }
+        .story-item:hover { transform: translateY(-3px); opacity: 0.9; filter: grayscale(0%); }
+        .story-item.active { opacity: 1; transform: scale(1.05) translateY(-2px); filter: grayscale(0%); }
+        
+        .story-photo-wrapper { position: relative; width: 75px; height: 75px; margin: 0 auto; border-radius: 50%; background: linear-gradient(135deg, #e2e8f0, #cbd5e1); padding: 3px; transition: all 0.3s; }
+        .story-item.active .story-photo-wrapper { background: linear-gradient(135deg, #38bdf8, #0ea5e9); box-shadow: 0 8px 15px rgba(14, 165, 233, 0.3); }
+        .story-photo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white; background: white; }
+        .story-name { font-size: 0.8rem; font-weight: 700; margin-top: 8px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 85px; margin-left: auto; margin-right: auto;}
+        .story-item.active .story-name { color: #0f172a; }
+
+        /* 🔥 TARJETAS PREMIUM 🔥 */
+        .white-card { background: white; border-radius: 24px; padding: 35px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; height: 100%; transition: all 0.3s ease; }
+
+        /* PERFIL (IZQUIERDA) */
+        .profile-wrapper { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .profile-pic-clean { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.08); margin-bottom: 20px; transition: all 0.3s ease; }
+        .psych-name-clean { font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .psych-degree { font-size: 1.05rem; color: #64748b; margin-bottom: 10px; font-weight: 500; }
+        .link-especialidades { font-size: 0.95rem; color: #0284c7; background: #e0f2fe; padding: 6px 16px; border-radius: 20px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block;}
+        .link-especialidades:hover { background: #bae6fd; transform: translateY(-1px); color: #0369a1; }
+        
+        .profile-info-list { width: 100%; text-align: left; margin-top: 30px; font-size: 0.95rem; color: #475569; }
+        .info-badge-row { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; padding: 12px 15px; background: #f8fafc; border-radius: 16px; border: 1px solid #f1f5f9; }
+        .icon-circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .icon-success { background: #dcfce7; color: #16a34a; }
+        .icon-primary { background: #e0f2fe; color: #0284c7; }
+        .icon-dark { background: #f1f5f9; color: #334155; }
+        
+        /* 🔥 CALENDARIO (DERECHA) 🔥 */
+        .doc-day-header { padding: 15px 5px; text-align: center; border-radius: 16px; transition: all 0.2s; border: 2px solid transparent; margin-bottom: 15px; }
+        .doc-day-header.has-slots { background-color: #f0fdfa; color: #0f766e; border-color: #ccfbf1; }
+        .doc-day-header.no-slots { background-color: #f8fafc; color: #94a3b8; border-color: #e2e8f0; opacity: 0.6; }
+        .doc-day-name { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px;}
+        .doc-day-num { font-size: 1.1rem; font-weight: 800; }
+        
+        /* BOTONES DE HORA (PILLS) */
+        .doc-slot-btn { background: #f8fafc; color: #334155; border: 1px solid #e2e8f0; padding: 12px 0; border-radius: 12px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); width: 100%; cursor: pointer; text-align: center; display: block; margin-bottom: 10px; text-decoration: none; }
+        .doc-slot-btn:hover { background: #0f172a; color: white; border-color: #0f172a; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(15, 23, 42, 0.15); }
+        
+        .nav-btn { background: #fff; border: 1px solid #e2e8f0; padding: 0; border-radius: 50%; font-weight: bold; cursor: pointer; color: #475569; transition: all 0.2s; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex-shrink: 0; }
+        .nav-btn:hover:not(:disabled) { background: #f8fafc; color: #0f172a; transform: scale(1.05); }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; box-shadow: none; }
+
+        /* CONSTANCIAS */
+        #ps-diplomas::-webkit-scrollbar { display: none; }
+        .constancia-img { height: 160px; width: auto; object-fit: contain; border-radius: 16px; border: 1px solid #f1f5f9; background: #fff; padding: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.03); cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
+        .constancia-img:hover { transform: scale(1.05) translateY(-5px); border-color: #bae6fd; box-shadow: 0 15px 30px rgba(2, 132, 199, 0.1); }
+
+        /* 🔥 MODALES Y CHECKOUT INTERACTIVO 🔥 */
+        .form-label { font-weight: 700; color: #1e293b; font-size: 0.9rem; margin-bottom: 8px; }
+        .form-control, .form-select { border-radius: 12px; border: 1px solid #e2e8f0; padding: 14px; background-color: #f8fafc; color: #0f172a; font-weight: 500; transition: all 0.2s; }
+        .form-control:focus, .form-select:focus { border-color: #38bdf8; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1); background-color: white; }
+
+        /* Tarjetas de Selección (Método de Pago y Paquetes) */
+        .option-box { position: relative; display: flex; align-items: center; padding: 16px 20px; border: 2px solid #e2e8f0; border-radius: 16px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); background: white; font-weight: 600; font-size: 0.95rem; color: #475569; }
+        .option-box:hover { border-color: #cbd5e1; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.03); }
+        .option-box.selected { border-color: #0ea5e9; background: #f0f9ff; color: #0369a1; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.1); }
+        
+        .option-box input[type="radio"] { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+        .custom-check { height: 22px; width: 22px; background-color: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 50%; margin-right: 15px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+        .option-box.selected .custom-check { background-color: #0ea5e9; border-color: #0ea5e9; }
+        .option-box.selected .custom-check::after { content: ''; width: 10px; height: 10px; background: white; border-radius: 50%; }
+
+        .info-box { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: 16px; font-size: 0.85rem; color: #166534; font-weight: 500; display: flex; align-items: center; gap: 10px;}
+        .info-box-paypal { background: #fefce8; border: 1px solid #fef08a; padding: 16px; border-radius: 16px; font-size: 0.85rem; color: #a16207; font-weight: 500; display: flex; align-items: center; gap: 10px;}
+        .info-box-transfer { background: #f8fafc; border: 1px solid #e2e8f0; padding: 16px; border-radius: 16px; font-size: 0.85rem; color: #475569; font-weight: 500; display: flex; align-items: center; gap: 10px;}
+        
+        @media (max-width: 991px) {
+            .white-card { height: auto; margin-bottom: 20px; padding: 25px 20px; }
+            .doc-day-name { font-size: 0.75rem; }
+            .doc-day-num { font-size: 1rem; }
+            .doc-slot-btn { font-size: 0.9rem; padding: 14px 0; }
+            .main-container { margin: 1.5rem auto; padding: 0 10px; }
+            #horarios-container { padding: 0 5px !important; gap: 8px !important; }
+            .nav-btn { width: 40px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <!-- 🔥 CONTENEDOR DEL CARRUSEL 🔥 -->
+        <div id="top-stories-wrapper" class="d-none mb-3">
+            <h6 id="titulo-carrusel" class="fw-bold text-center text-muted mb-3 small text-uppercase" style="letter-spacing: 1px;">Especialistas Disponibles</h6>
+            <div class="story-container" id="story-container">
+                <!-- Se llena con JS -->
+            </div>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+            
+            <!-- PARTE 1: PERFIL DE LA PSICÓLOGA -->
+            <div class="col-lg-5">
+                <div class="white-card profile-wrapper">
+                    <img id="ps-photo" src="https://via.placeholder.com/150" class="profile-pic-clean">
+                    <h1 id="ps-name-main" class="psych-name-clean">Cargando...</h1>
+                    <div id="ps-degree-text" class="psych-degree"></div>
+                    <div class="mt-2 mb-2">
+                        <a href="#" class="link-especialidades shadow-sm" data-bs-toggle="modal" data-bs-target="#modalEspecialidades">✨ Ver Especialidades</a>
+                    </div>
+                    
+                    <div class="profile-info-list border-top border-subtle pt-4 mt-3">
+                        <div class="info-badge-row">
+                            <div class="icon-circle icon-success">✓</div>
+                            <span class="fw-bold text-dark">Especialista de confianza</span>
+                        </div>
+                        <div class="info-badge-row">
+                            <div class="icon-circle icon-primary">📹</div>
+                            <span class="fw-bold text-dark">Sesiones en línea (Google Meet)</span>
+                        </div>
+                        <div class="info-badge-row" style="background: white;">
+                            <div class="icon-circle icon-dark">👤</div>
+                            <span id="ps-therapy-text" class="fw-bold text-dark">Cargando modalidad...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARTE 2: CALENDARIO -->
+            <div class="col-lg-7">
+                <div class="white-card">
+                    
+                    <div class="d-flex justify-content-between align-items-start mb-4 border-bottom pb-4 px-1">
+                        <div>
+                            <h4 class="fw-bold mb-2 text-dark" style="font-size: 1.4rem; letter-spacing: -0.5px;">Selecciona una fecha</h4>
+                            <div class="text-muted" style="font-size: 0.85rem;">
+                                Mostrando en tu zona: <span id="user-tz-display" class="fw-bold text-primary px-2 py-1 bg-light rounded-3 ms-1"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <select id="p-type" class="form-select border-0 bg-light text-dark fw-bold shadow-sm" style="min-width: 130px; border-radius: 12px; cursor: pointer;" onchange="actualizarTiposYPrecios(); buscarHorariosMultiDia(); verificarPaquete();"></select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mb-3 mt-4">
+                        <button type="button" id="btn-prev-week" class="nav-btn" onclick="retrocederDias()">❮</button>
+                        
+                        <div class="d-flex gap-2 flex-grow-1 overflow-hidden px-2" id="horarios-container">
+                            <div class='text-center w-100 py-5 text-muted'><div class='spinner-border text-primary mb-3'></div><br><span class="fw-bold">Buscando disponibilidad...</span></div>
+                        </div>
+                        
+                        <button type="button" class="nav-btn" onclick="avanzarDias()">❯</button>
+                    </div>
+                    
+                    <div class="mt-4 pt-3 border-top d-flex align-items-center justify-content-center gap-2 text-muted" style="font-size: 0.85rem; font-weight: 500;">
+                        <span style="font-size: 1.1rem;">🔒</span> Reserva segura y garantizada
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PARTE 3: CONSTANCIAS -->
+        <div class="row mt-4" id="seccion-constancias">
+            <div class="col-12">
+                <div class="white-card position-relative px-3 px-lg-5">
+                    <h5 class="fw-bold mb-4 text-dark border-bottom pb-3">Certificaciones y Constancias</h5>
+                    
+                    <button id="btn-scroll-left" class="btn btn-light border shadow-sm position-absolute start-0 top-50 translate-middle-y z-1 rounded-circle d-none align-items-center justify-content-center" style="width: 45px; height: 45px; margin-left: 15px; font-weight: bold; background: white;" onclick="document.getElementById('ps-diplomas').scrollBy({left: -350, behavior: 'smooth'})">❮</button>
+                    
+                    <div id="ps-diplomas" class="d-flex gap-4 overflow-auto py-3 px-2" style="scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;">
+                        <div class="text-muted small fw-bold"><div class="spinner-border spinner-border-sm text-secondary me-2"></div> Cargando documentos...</div>
+                    </div>
+                    
+                    <button id="btn-scroll-right" class="btn btn-light border shadow-sm position-absolute end-0 top-50 translate-middle-y z-1 rounded-circle d-none align-items-center justify-content-center" style="width: 45px; height: 45px; margin-right: 15px; font-weight: bold; background: white;" onclick="document.getElementById('ps-diplomas').scrollBy({left: 350, behavior: 'smooth'})">❯</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal de Especialidades -->
+    <div class="modal fade" id="modalEspecialidades" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 24px;">
+                <div class="modal-header border-0 pb-0 pt-4 px-4 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title fw-bold text-dark mb-0 fs-4">✨ Especialidades</h5>
+                    <button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4" style="max-height: 65vh; overflow-y: auto;">
+                    <div id="lista-especialidades" class="d-flex flex-wrap gap-2 justify-content-start">
+                        <span class="text-muted small">Cargando...</span>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0 pb-4 px-4 justify-content-center">
+                    <button class="btn btn-dark w-100 fw-bold shadow-sm py-3 rounded-pill" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inputs ocultos requeridos para la reserva -->
+    <input type="hidden" id="selected-date">
+    <input type="hidden" id="selected-time">
+    <input type="hidden" id="selected-local-time">
+    <input type="hidden" id="assigned-psych-id">
+    <input type="hidden" id="assigned-psych-name">
+    <select id="p-loc" class="d-none"><option value="mexico">México</option><option value="internacional">Internacional</option></select>
+
+    <!-- Modal de Checkout (PREMIUM) -->
+    <div class="modal fade" id="modalCheckout" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 24px; overflow: hidden;">
+                <div class="modal-header border-0 pb-0 pt-4 px-4 px-md-5 d-flex justify-content-between align-items-start">
+                    <div>
+                        <h3 class="fw-bold mb-2" style="letter-spacing: -0.5px;">Reserva tu sesión</h3>
+                        <p class="text-primary fw-bold mb-0 px-3 py-1 bg-light rounded-pill d-inline-block" id="resumen-cita" style="font-size: 0.9rem;">Con Especialista el...</p>
+                    </div>
+                    <button type="button" class="btn-close bg-light rounded-circle p-2" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 px-md-5">
+                    <form id="booking-form" onsubmit="event.preventDefault(); procesarReserva();">
+                        <div class="row g-5">
+                            <div class="col-md-6 border-end-md pe-md-4">
+                                <h6 class="fw-bold mb-4 text-muted text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">1. Tus Datos</h6>
+                                
+                                <label class="form-label">Nombre Completo *</label>
+                                <div class="mb-4"><input type="text" id="p-name" class="form-control" required placeholder="Ej: Juan Pérez"></div>
+                                
+                                <label class="form-label">WhatsApp *</label>
+                                <div class="mb-4"><input type="tel" id="p-phone" class="form-control" required placeholder="+52 55..." onblur="verificarPaquete()" onkeyup="if(this.value.length >= 10) verificarPaquete()"></div>
+                                
+                                <label class="form-label">Correo Electrónico *</label>
+                                <div class="mb-4"><input type="email" id="p-email" class="form-control" required placeholder="Para enviarte el enlace de Meet"></div>
+                                
+                                <div id="div-motivo">
+                                    <label class="form-label">Motivo de Consulta (Opcional)</label>
+                                    <div class="mb-3"><textarea id="p-motivo" class="form-control" rows="2" placeholder="Breve descripción..."></textarea></div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 ps-md-4">
+                                <h6 class="fw-bold mb-4 text-muted text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">2. Modalidad de Pago</h6>
+                                
+                                <div id="package-alert" class="package-alert d-none shadow-sm mb-4 rounded-4 p-3 border"></div>
+                                
+                                <div id="payment-section">
+                                    
+                                    <label class="option-box" id="method-card">
+                                        <input type="radio" name="pay_method" value="stripe" onchange="updatePayMethodUI()">
+                                        <span class="custom-check"></span> 💳 Tarjeta (Stripe)
+                                    </label>
+                                    
+                                    <label class="option-box" id="method-paypal">
+                                        <input type="radio" name="pay_method" value="paypal" onchange="updatePayMethodUI()">
+                                        <span class="custom-check"></span> 🅿️ PayPal Seguros
+                                    </label>
+                                    
+                                    <label class="option-box selected" id="method-transfer">
+                                        <input type="radio" name="pay_method" value="transfer" checked onchange="updatePayMethodUI()">
+                                        <span class="custom-check"></span> 🏦 Transferencia / Efectivo
+                                    </label>
+
+                                    <h6 class="fw-bold mb-3 text-muted text-uppercase mt-4" style="font-size: 0.75rem; letter-spacing: 1px;">Paquetes Especiales</h6>
+                                    
+                                    <label class="option-box selected py-3" id="card-single">
+                                        <input type="radio" name="package_opt" value="false" checked onchange="updateStyles()">
+                                        <span class="custom-check"></span>
+                                        <div>
+                                            <span class="d-block">1 Sesión Normal</span>
+                                        </div>
+                                    </label>
+                                    
+                                    <label class="option-box py-3" id="card-package">
+                                        <input type="radio" name="package_opt" value="true" onchange="updateStyles()">
+                                        <span class="custom-check"></span>
+                                        <div>
+                                            <span class="d-block fw-bold" style="color: #059669;">Paquete 4 Sesiones (-10%)</span>
+                                            <span class="d-block fw-normal" style="font-size: 0.8rem; opacity: 0.8;">Pagas 3.6 sesiones, te damos 4.</span>
+                                        </div>
+                                    </label>
+
+                                    <div id="info-stripe" class="info-box mb-3 d-none"><span>🔒</span> Serás redirigido a Stripe para un pago seguro encriptado.</div>
+                                    <div id="info-paypal" class="info-box-paypal mb-3 d-none"><span>🛡️</span> Se abrirá PayPal para proteger tu compra.</div>
+                                    <div id="info-transfer" class="info-box-transfer mb-3"><span>📱</span> Se te darán los datos para transferir tras confirmar tu horario.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loader mt-4 text-center" id="loader" style="display:none;"><div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div><div class="mt-3 text-dark fw-bold fs-5">Procesando reserva segura...</div></div>
+                        <div class="border-top border-subtle pt-4 mt-3 pb-2"><button type="submit" id="btn-submit" class="btn btn-lg w-100 fw-bold shadow-sm text-white rounded-pill py-3" style="background: #0f172a; font-size: 1.1rem;">Confirmar y Agendar Cita</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales de Éxito -->
+    <div class="modal fade" id="modalTransferencia" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 24px;">
+                <div class="modal-header bg-success text-white border-0" style="border-radius: 24px 24px 0 0; padding: 20px;"><h4 class="modal-title fw-bold m-0">🎉 ¡Horario Apartado!</h4></div>
+                <div class="modal-body text-center p-5">
+                    <h4 class="fw-bold text-dark mb-3">Tu cita está en nuestra agenda.</h4>
+                    <p class="text-muted mb-4" style="font-size: 0.95rem;">Para confirmar definitivamente tu lugar, por favor realiza tu transferencia en las próximas 12 horas a la siguiente cuenta:</p>
+                    <div class="bg-light p-4 rounded-4 border text-start mb-4 shadow-sm">
+                        <p class="mb-2"><strong class="text-secondary">Banco:</strong> <span class="text-dark fw-bold">STP (Mercado Pago)</span></p>
+                        <p class="mb-2"><strong class="text-secondary">Beneficiaria:</strong> <span class="text-dark fw-bold">Isis Vázquez</span></p>
+                        <p class="mb-2"><strong class="text-secondary">Cuenta / CLABE:</strong> <span class="text-dark fw-bold" style="font-size: 1.1rem; letter-spacing: 1px;">722969010110408956</span></p>
+                        <p class="mb-2"><strong class="text-secondary">Monto:</strong> <span class="fw-bold text-success fs-5">El indicado por Administración</span></p>
+                        <p class="mb-0"><strong class="text-secondary">Concepto:</strong> <span class="text-dark fw-bold">Tu nombre completo</span></p>
+                    </div>
+                    <p class="text-dark fw-bold mb-4">Una vez realizado el pago, envíanos el comprobante por WhatsApp para liberar tu link de Meet:</p>
+                    <button onclick="mandarWhatsAppTransfer()" class="btn btn-success btn-lg w-100 fw-bold mb-3 rounded-pill py-3 shadow-sm" style="background: #25D366; border: none;">💬 Enviar Comprobante Ahora</button>
+                    <button onclick="window.location.reload()" class="btn btn-light border w-100 fw-bold rounded-pill py-2 text-secondary">Cerrar y Volver al inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPayPal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 24px;">
+                <div class="modal-header text-white border-0" style="background-color: #003087; border-radius: 24px 24px 0 0; padding: 20px;"><h4 class="modal-title fw-bold m-0">🅿️ Completa tu pago</h4></div>
+                <div class="modal-body text-center p-4 p-md-5">
+                    <h4 class="fw-bold text-dark mb-3">¡Cita apartada con éxito!</h4>
+                    <p class="text-muted mb-4">Para confirmarla de forma definitiva y liberar tu enlace, procesa tu pago a continuación de forma segura con PayPal.</p>
+                    <div id="paypal-button-container" class="mb-4 mt-2"></div>
+                    <button onclick="window.location.reload()" class="btn btn-light border w-100 fw-bold rounded-pill py-2 text-secondary">Cancelar y Volver al inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalPaquete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 24px;">
+                <div class="modal-header bg-success text-white border-0" style="border-radius: 24px 24px 0 0; padding: 20px;"><h4 class="modal-title fw-bold m-0">🎉 ¡Cita Confirmada!</h4></div>
+                <div class="modal-body text-center p-5">
+                    <div style="font-size: 4rem; margin-bottom: 10px;">✨</div>
+                    <h4 class="fw-bold text-dark mb-3">Se ha utilizado 1 sesión de tu paquete.</h4>
+                    <p class="text-muted mb-4 fs-6">No necesitas pagar nada el día de hoy. Tu psicóloga ya fue notificada de tu horario y en tu correo encontrarás el enlace de la videollamada.</p>
+                    <button onclick="window.location.reload()" class="btn btn-success btn-lg w-100 fw-bold rounded-pill shadow-sm">Cerrar y Volver al inicio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ver Constancia -->
+    <div class="modal fade" id="modalVerConstancia" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-transparent border-0 shadow-none">
+                <div class="modal-header border-0 p-0 justify-content-end">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" style="background-color: #000; opacity: 0.8; padding: 10px; border-radius: 50%; margin-right: -10px; margin-top: -10px; z-index: 1050; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"></button>
+                </div>
+                <div class="modal-body text-center p-0 position-relative">
+                    <img id="img-constancia-full" src="" alt="Constancia" class="img-fluid rounded-4 shadow-lg" style="max-height: 80vh; border: 4px solid white; object-fit: contain;">
+                    <h5 id="titulo-constancia-full" class="text-white mt-3 fw-bold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.9); font-size: 1.2rem;"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AaVr8XRYZsGPIy1H42Cz8dOK5rGrfVU1HGzAmFp9Tk59XF0j5eO8JIr2A9b3d9ob4zHrPEsin0zJU_nP&currency=MXN"></script>
+
+<script>
+    const API = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:") 
+        ? "http://localhost:8000" : "https://crm-backend-oztv.onrender.com";
+        
+    const urlParams = new URLSearchParams(window.location.search);
+    const psychId = urlParams.get('id');
+
+    let usesPackageBalance = false; 
+    
+    let currentPsych = null; 
+    let psychsEnLink = []; 
+    let dummyEquipo = null; 
+    let currentFiltroId = 'todas';
+
+    let fechaInicioSemana = new Date();
+    fechaInicioSemana.setHours(0,0,0,0);
+    let fechaMinima = new Date(fechaInicioSemana); 
+    let historialFechas = []; 
+
+    document.addEventListener('DOMContentLoaded', () => { 
+        const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Mexico_City";
+        document.getElementById('user-tz-display').innerText = userTZ; 
+        
+        const isMexico = /mexico|cancun|merida|monterrey|matamoros|mazatlan|chihuahua|hermosillo|tijuana|bahia_banderas/i.test(userTZ);
+        const locSelect = document.getElementById('p-loc');
+        
+        if(isMexico) {
+            locSelect.value = 'mexico';
+            document.getElementById('method-transfer').style.display = 'block'; 
+            document.querySelector('input[value="transfer"]').checked = true; 
+        } else {
+            locSelect.value = 'internacional';
+            document.getElementById('method-transfer').style.display = 'none';
+            document.querySelector('input[value="stripe"]').checked = true;
+        }
+        
+        updatePayMethodUI();
+    });
+
+    // 🔥 ACTUALIZADA PARA MANEJAR LAS NUEVAS TARJETAS (.option-box) 🔥
+    function updatePayMethodUI() {
+        if(usesPackageBalance) return; 
+        
+        // Limpiamos selección visual
+        document.querySelectorAll('input[name="pay_method"]').forEach(r => r.parentElement.classList.remove('selected'));
+        
+        const selectedInput = document.querySelector('input[name="pay_method"]:checked');
+        if (!selectedInput) return;
+        const method = selectedInput.value;
+        
+        // Añadimos selección visual al padre (.option-box)
+        selectedInput.parentElement.classList.add('selected');
+
+        const btnSubmit = document.getElementById('btn-submit'); 
+        const infoStripe = document.getElementById('info-stripe'); 
+        const infoPaypal = document.getElementById('info-paypal'); 
+        const infoTransfer = document.getElementById('info-transfer');
+
+        if(method === "stripe") {
+            infoStripe.classList.remove('d-none'); infoPaypal.classList.add('d-none'); infoTransfer.classList.add('d-none');
+            btnSubmit.innerText = "Reservar y Pagar Seguro"; btnSubmit.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+        } else if (method === "paypal") {
+            infoPaypal.classList.remove('d-none'); infoStripe.classList.add('d-none'); infoTransfer.classList.add('d-none');
+            btnSubmit.innerText = "Reservar y Pagar con PayPal"; btnSubmit.style.background = "#003087";
+        } else {
+            infoTransfer.classList.remove('d-none'); infoStripe.classList.add('d-none'); infoPaypal.classList.add('d-none');
+            btnSubmit.innerText = "Agendar Cita (Pago Posterior)"; btnSubmit.style.background = "#0f172a"; 
+        }
+        actualizarTiposYPrecios();
+    }
+
+    function actualizarTiposYPrecios() {
+        const selectTipo = document.getElementById('p-type');
+        const selectedMethod = document.querySelector('input[name="pay_method"]:checked');
+        const payMethod = selectedMethod ? selectedMethod.value : 'stripe';
+        
+        const typeParam = urlParams.get('type');
+        let tipoOfrecido = currentPsych && currentPsych.therapy_types ? currentPsych.therapy_types.toLowerCase() : 'individual';
+        
+        if (typeParam === 'individual' || typeParam === 'pareja') {
+            tipoOfrecido = typeParam;
+        }
+
+        let daAmbas = (tipoOfrecido === 'ambas'); 
+        let soloPareja = (tipoOfrecido === 'pareja');
+        
+        const valorAnterior = selectTipo.value; 
+        let html = "";
+
+        const txtInd = payMethod === 'transfer' ? "Individual" : "Individual ($650 MXN)";
+        const txtPar = payMethod === 'transfer' ? "De Pareja" : "De Pareja ($750 MXN)";
+
+        if (soloPareja) html = `<option value="pareja">${txtPar}</option>`;
+        else if (daAmbas) html = `<option value="individual">${txtInd}</option><option value="pareja">${txtPar}</option>`;
+        else html = `<option value="individual">${txtInd}</option>`;
+        
+        selectTipo.innerHTML = html;
+        if (valorAnterior === 'pareja' && (daAmbas || soloPareja)) selectTipo.value = 'pareja';
+        else if (soloPareja) selectTipo.value = 'pareja';
+        else selectTipo.value = 'individual';
+    }
+
+    async function loadPsych() {
+        if(!psychId) return document.body.innerHTML = "<h3 class='text-center mt-5 text-danger fw-bold'>Enlace de reserva no válido</h3>";
+        try {
+            const resPs = await fetch(`${API}/psychologists/`); 
+            const allPsychs = await resPs.json();
+            
+            if (psychId === 'all') {
+                const excludeParam = urlParams.get('exclude');
+                const matchesParam = urlParams.get('matches'); 
+                const typeParam = urlParams.get('type'); 
+                const excludedIds = excludeParam ? excludeParam.split(',').map(s => s.trim()) : [];
+                
+                psychsEnLink = allPsychs.filter(p => 
+                    p.name !== "Administrador" && 
+                    !p.name.toLowerCase().includes("isis") && 
+                    !p.name.toLowerCase().includes("therapy home psi") &&
+                    !p.name.toLowerCase().includes("dulce") &&
+                    !p.name.toLowerCase().includes("supervisora") &&
+                    !excludedIds.includes(String(p.id)) &&
+                    p.accepts_new_patients !== false 
+                );
+                
+                if (matchesParam) {
+                    const matchIds = matchesParam.split(',').map(id => parseInt(id));
+                    psychsEnLink = psychsEnLink.filter(p => matchIds.includes(p.id));
+                    
+                    psychsEnLink.sort((a, b) => matchIds.indexOf(a.id) - matchIds.indexOf(b.id));
+                    
+                    const titulo = document.getElementById('titulo-carrusel');
+                    if(titulo) {
+                        titulo.innerHTML = "✨ ESTAS ESPECIALISTAS HACEN MATCH CONTIGO";
+                        titulo.style.color = "#0ea5e9";
+                        titulo.classList.remove("text-muted");
+                    }
+                }
+                
+                let todasSonPareja = psychsEnLink.length > 0 && psychsEnLink.every(p => p.therapy_types && p.therapy_types.toLowerCase() === 'pareja');
+
+                let tipoParaEquipo = "ambas";
+                if (typeParam === "individual") tipoParaEquipo = "individual";
+                else if (typeParam === "pareja") tipoParaEquipo = "pareja";
+                else if (todasSonPareja) tipoParaEquipo = "pareja";
+
+                let tituloPerfil = "Equipo Clínico";
+                let subtituloPerfil = "Especialistas Certificados";
+
+                if (psychsEnLink.length > 0 && psychsEnLink.length <= 4) {
+                    let nombres = psychsEnLink.map(p => p.name.split(' ')[0]); 
+                    if (nombres.length === 1) {
+                        tituloPerfil = nombres[0];
+                        subtituloPerfil = psychsEnLink[0].degree || "Psicóloga Clínica";
+                    } else {
+                        let ultimo = nombres.pop();
+                        tituloPerfil = nombres.join(', ') + ' y ' + ultimo;
+                        subtituloPerfil = "Especialistas en Terapia";
+                    }
+                }
+
+                dummyEquipo = { 
+                    id: 'all', 
+                    name: tituloPerfil,
+                    degree: subtituloPerfil,
+                    therapy_types: tipoParaEquipo, 
+                    max_patients_per_day: 999,
+                    photo_url: "https://cdn-icons-png.flaticon.com/512/9131/9131529.png",
+                    specialties: tipoParaEquipo === "pareja" ? "Atención psicológica integral, Terapia de pareja" : "Atención psicológica integral, Terapia individual",
+                    diplomas: ""
+                };
+
+                if (psychsEnLink.length > 1) {
+                    document.getElementById('top-stories-wrapper').classList.remove('d-none');
+                    
+                    let storiesHtml = `
+                        <div class="story-item active" id="story-todas" onclick="filtrarAgenda('todas')">
+                            <div class="story-photo-wrapper"><img src="https://cdn-icons-png.flaticon.com/512/615/615075.png" class="story-photo shadow-sm"></div>
+                            <div class="story-name">Ver Todas</div>
+                        </div>
+                    `;
+                    
+                    psychsEnLink.forEach(p => {
+                        let primerNombre = p.name.split(' ')[0];
+                        let foto = p.photo_url || 'https://via.placeholder.com/150';
+                        storiesHtml += `
+                        <div class="story-item" id="story-${p.id}" onclick="filtrarAgenda('${p.id}')">
+                            <div class="story-photo-wrapper"><img src="${foto}" class="story-photo shadow-sm"></div>
+                            <div class="story-name">${primerNombre}</div>
+                        </div>
+                        `;
+                    });
+                    
+                    document.getElementById('story-container').innerHTML = storiesHtml;
+                }
+
+                if (matchesParam && psychsEnLink.length > 0) {
+                     filtrarAgenda('todas');
+                } else {
+                     filtrarAgenda('todas');
+                }
+                
+                return;
+            }
+
+            const ps = allPsychs.find(p => p.id == psychId);
+            if(ps) {
+                psychsEnLink = [ps];
+                
+                const typeParam = urlParams.get('type');
+                if(typeParam === "individual" || typeParam === "pareja") {
+                    ps.therapy_types = typeParam;
+                }
+                
+                filtrarAgenda(ps.id);
+            } else document.body.innerHTML = "<h3 class='text-center mt-5 text-danger fw-bold'>Psicóloga no encontrada</h3>";
+        } catch(e) {
+            console.error("Error al cargar psicóloga:", e);
+        }
+    }
+
+    function filtrarAgenda(filtroId) {
+        currentFiltroId = filtroId;
+        
+        document.querySelectorAll('.story-item').forEach(item => item.classList.remove('active'));
+        let activeItem = document.getElementById(`story-${filtroId}`);
+        if(activeItem) activeItem.classList.add('active');
+
+        if (filtroId === 'todas') {
+            currentPsych = dummyEquipo;
+        } else {
+            currentPsych = psychsEnLink.find(p => p.id == filtroId) || dummyEquipo;
+        }
+
+        document.getElementById('ps-name-main').innerText = currentPsych.name;
+        document.getElementById('ps-photo').src = currentPsych.photo_url || 'https://via.placeholder.com/150';
+        document.getElementById('ps-degree-text').innerText = (currentPsych.degree || 'Psicóloga Clínica');
+
+        let tipoTerapia = currentPsych.therapy_types ? currentPsych.therapy_types.toLowerCase() : 'individual';
+        let textoTerapia = document.getElementById('ps-therapy-text');
+        
+        if(tipoTerapia === 'ambas') textoTerapia.innerHTML = '👥 Terapia Individual y de Pareja';
+        else if(tipoTerapia === 'pareja') textoTerapia.innerHTML = '👥 Terapia de Pareja';
+        else textoTerapia.innerHTML = '👤 Terapia Individual';
+
+        let eHtmlModal = '';
+        let eText = currentPsych.specialties || 'Depresión, Ansiedad, Dependencia, Autoestima, Duelo';
+        eText.split(',').forEach(e => {
+            if(e.trim()) {
+                eHtmlModal += `<span class="badge w-100" style="background-color: #f8fafc; color: #0f172a; border: 1px solid #e2e8f0; padding: 12px 18px; font-size: 0.9rem; font-weight: 600; border-radius: 12px; white-space: normal; text-align: left; line-height: 1.4;">✨ ${e.trim()}</span>`;
+            }
+        });
+        document.getElementById('lista-especialidades').innerHTML = eHtmlModal;
+        
+        const seccionConstancias = document.getElementById('seccion-constancias');
+        if (filtroId === 'todas') {
+            if (seccionConstancias) seccionConstancias.style.display = 'none';
+        } else {
+            if (seccionConstancias) seccionConstancias.style.display = ''; 
+            let dHtml = '';
+            let dText = currentPsych.diplomas || '';
+            if (dText) {
+                dText.split(',').forEach(item => {
+                    let partes = item.split('|');
+                    let url = partes[1] ? partes[1].trim() : '';
+                    let nombre = partes[0] ? partes[0].trim() : '';
+                    
+                    if (url) {
+                        let imgSrc = url;
+                        if (url.includes('drive.google.com/file/d/')) {
+                            let driveId = url.split('/d/')[1].split('/')[0];
+                            imgSrc = `https://lh3.googleusercontent.com/d/${driveId}`; 
+                        }
+                        dHtml += `<img src="${imgSrc}" alt="${nombre}" title="${nombre}" class="constancia-img" onclick="abrirConstanciaModal('${imgSrc}', '${nombre}')">`;
+                    }
+                });
+            }
+            if(dHtml === '') dHtml = `<div class="text-muted small fw-bold px-3">No hay documentos cargados en este perfil.</div>`;
+            document.getElementById('ps-diplomas').innerHTML = dHtml;
+
+            setTimeout(() => {
+                const cont = document.getElementById('ps-diplomas');
+                if (cont && cont.scrollWidth > cont.clientWidth) {
+                    document.getElementById('btn-scroll-left').classList.replace('d-none', 'd-md-flex');
+                    document.getElementById('btn-scroll-right').classList.replace('d-none', 'd-md-flex');
+                } else {
+                    document.getElementById('btn-scroll-left').classList.replace('d-md-flex', 'd-none');
+                    document.getElementById('btn-scroll-right').classList.replace('d-md-flex', 'd-none');
+                }
+            }, 500);
+        }
+
+        actualizarTiposYPrecios();
+        buscarHorariosMultiDia();
+    }
+
+    function abrirConstanciaModal(imgSrc, nombre) {
+        document.getElementById('img-constancia-full').src = imgSrc;
+        document.getElementById('titulo-constancia-full').innerText = nombre;
+        new bootstrap.Modal(document.getElementById('modalVerConstancia')).show();
+    }
+
+    async function verificarPaquete() {
+        const phoneInput = document.getElementById('p-phone').value; 
+        const typeInput = document.getElementById('p-type').value; 
+        const digitos = phoneInput.replace(/\D/g, ''); 
+        
+        if(digitos.length < 10) {
+            document.getElementById('div-motivo').style.display = 'block';
+            document.getElementById('package-alert').classList.add('d-none');
+            return;
+        }
+        
+        try {
+            let urlCheck = `${API}/patients/check/${encodeURIComponent(phoneInput)}?type=${typeInput}`;
+            if (psychId && psychId !== 'all') { urlCheck += `&psych_id=${psychId}`; }
+            const res = await fetch(urlCheck); 
+            const data = await res.json();
+            
+            const paymentSection = document.getElementById('payment-section'); 
+            const alertBox = document.getElementById('package-alert'); 
+            const btnSubmit = document.getElementById('btn-submit');
+            
+            alertBox.style.backgroundColor = '';
+            alertBox.style.color = '';
+            alertBox.style.borderColor = '';
+            
+            if(data.found && data.pending_appt) {
+                usesPackageBalance = false; 
+                paymentSection.style.display = 'block'; 
+                
+                const f = new Date(data.pending_appt.date);
+                const fechaStr = f.toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'short', hour: '2-digit', minute:'2-digit' });
+                const linkPago = `https://crm-backend-oztv.onrender.com/mi_cita.html?id=${data.pending_appt.id}&token=${data.pending_appt.token}`;
+                
+                alertBox.innerHTML = `
+                    <div class="d-flex gap-3 align-items-center">
+                        <div style="font-size: 2rem;">⚠️</div>
+                        <div>
+                            <strong>¡Hola ${data.name}!</strong><br>
+                            Tienes una cita el <strong>${fechaStr}</strong> <span style="color: #dc3545; font-weight: bold;">Pendiente de Pago</span>.<br>
+                            <a href="${linkPago}" target="_blank" class="btn btn-sm btn-warning fw-bold mt-2 rounded-pill px-3 shadow-sm">💳 Pagar Cita Actual</a>
+                        </div>
+                    </div>
+                `;
+                
+                alertBox.style.backgroundColor = '#fffbeb';
+                alertBox.style.color = '#92400e';
+                alertBox.style.borderColor = '#fde68a';
+                alertBox.classList.remove('d-none'); 
+                updatePayMethodUI(); 
+                
+            } else if(data.found && data.balance > 0) {
+                usesPackageBalance = true; 
+                paymentSection.style.display = 'none';
+                
+                alertBox.innerHTML = `
+                    <div class="d-flex gap-3 align-items-center">
+                        <div style="font-size: 2rem;">✨</div>
+                        <div>
+                            <strong>¡Hola ${data.name}!</strong> Tienes <strong>${data.balance} sesiones a favor</strong>.<br>No necesitas pagar nada hoy.
+                        </div>
+                    </div>
+                `;
+                alertBox.style.backgroundColor = '#f0fdf4';
+                alertBox.style.color = '#166534';
+                alertBox.style.borderColor = '#bbf7d0';
+                alertBox.classList.remove('d-none'); 
+                
+                btnSubmit.innerText = "Agendar cita (Usar Saldo)"; 
+                btnSubmit.style.background = "#10b981"; 
+            } else {
+                usesPackageBalance = false; 
+                paymentSection.style.display = 'block'; 
+                alertBox.classList.add('d-none'); 
+                updatePayMethodUI(); 
+            }
+        } catch(e) { console.log("Error:", e); }
+    }
+
+    // 🔥 ACTUALIZADA PARA MANEJAR LAS NUEVAS TARJETAS (.option-box) 🔥
+    function updateStyles() {
+        document.querySelectorAll('input[name="package_opt"]').forEach(r => r.parentElement.classList.remove('selected'));
+        const isPackage = document.querySelector('input[name="package_opt"]:checked');
+        if(isPackage) isPackage.parentElement.classList.add('selected');
+        actualizarTiposYPrecios();
+    }
+
+    function avanzarDias() {
+        historialFechas.push(new Date(fechaInicioSemana)); 
+        let diasMostrar = window.innerWidth <= 768 ? 3 : 4;
+        fechaInicioSemana.setDate(fechaInicioSemana.getDate() + diasMostrar);
+        buscarHorariosMultiDia();
+    }
+
+    function retrocederDias() {
+        if (historialFechas.length > 0) {
+            fechaInicioSemana = historialFechas.pop(); 
+        } else {
+            let diasMostrar = window.innerWidth <= 768 ? 3 : 4;
+            fechaInicioSemana.setDate(fechaInicioSemana.getDate() - diasMostrar);
+            if(fechaInicioSemana < fechaMinima) fechaInicioSemana = new Date(fechaMinima);
+        }
+        buscarHorariosMultiDia();
+    }
+
+    async function buscarHorariosMultiDia() {
+        const cont = document.getElementById('horarios-container'); 
+        const btnPrev = document.getElementById('btn-prev-week');
+        
+        document.getElementById('selected-date').value = ""; 
+        document.getElementById('selected-time').value = ""; 
+        document.getElementById('selected-local-time').value = "";
+        document.getElementById('assigned-psych-id').value = ""; 
+        document.getElementById('assigned-psych-name').value = "";
+
+        cont.innerHTML = "<div class='text-center w-100 py-5 text-muted'><div class='spinner-border text-primary mb-3'></div><br><span class='fw-bold'>Buscando disponibilidad...</span></div>";
+
+        const ahora = new Date();
+
+        try {
+            const res = await fetch(`${API}/appointments/`); const appts = await res.json();
+            
+            const formatter = new Intl.DateTimeFormat('es-MX', { hour: '2-digit', minute: '2-digit', hour12: false });
+            const selectedType = document.getElementById('p-type').value;
+
+            let allAvailableSlots = [];
+            
+            let psychsToScan = [];
+            if (currentFiltroId === 'todas') {
+                psychsToScan = psychsEnLink;
+            } else {
+                psychsToScan = psychsEnLink.filter(p => p.id == currentFiltroId);
+            }
+
+            psychsToScan.forEach(ps => {
+                const psTherapy = ps.therapy_types ? ps.therapy_types.toLowerCase() : 'individual';
+                if (selectedType === 'pareja' && psTherapy === 'individual') return;
+                if (selectedType === 'individual' && psTherapy === 'pareja') return;
+
+                const anticipacionHoras = ps.booking_lead_time || 8;
+                const limite = ps.max_patients_per_day || 8;
+
+                let ocupados = appts.filter(a => a.extendedProps.psychologist_id == ps.id && a.extendedProps.patient_name !== "DISPONIBLE" && a.extendedProps.patient_name !== "BLOQUEO" && a.extendedProps.patient_name !== "REUNIÓN");
+                let ocupadosPorDia = {};
+                ocupados.forEach(o => {
+                    let d = o.start.split('T')[0]; 
+                    ocupadosPorDia[d] = (ocupadosPorDia[d] || 0) + 1;
+                });
+
+                const disponibilidades = appts.filter(a => a.extendedProps.psychologist_id == ps.id && a.extendedProps.patient_name === "DISPONIBLE");
+
+                disponibilidades.forEach(disp => {
+                    let mxDateStr = disp.start.split('T')[0];
+                    if ((ocupadosPorDia[mxDateStr] || 0) >= limite) return; 
+
+                    let blockStartUTC = new Date(disp.start + "Z").getTime();
+                    let blockEndUTC = new Date(disp.end + "Z").getTime();
+                    let currentUTC = blockStartUTC;
+
+                    while(currentUTC < blockEndUTC) {
+                        let nextUTC = currentUTC + 60*60000;
+                        if(nextUTC <= blockEndUTC) {
+                            let d = new Date(currentUTC);
+                            let dateMx = d.toISOString().split('T')[0];
+                            let timeMx = d.toISOString().split('T')[1].substring(0,5);
+                            
+                            let exactIsoMx = `${dateMx}T${timeMx}:00-06:00`;
+                            let slotDateObj = new Date(exactIsoMx);
+                            
+                            let diffHoras = (slotDateObj.getTime() - ahora.getTime()) / 3600000;
+                            if(diffHoras > anticipacionHoras) {
+                                let choca = ocupados.some(o => {
+                                    let oStartUTC = new Date(o.start + "Z").getTime();
+                                    let oEndUTC = new Date(o.end + "Z").getTime();
+                                    return (currentUTC < oEndUTC && nextUTC > oStartUTC);
+                                });
+                                
+                                if(!choca) {
+                                    allAvailableSlots.push({
+                                        slotDateObj: slotDateObj,
+                                        mxDate: dateMx,
+                                        mxTimeStr: timeMx,
+                                        ps: {id: ps.id, name: ps.name}
+                                    });
+                                }
+                            }
+                        }
+                        currentUTC += 60*60000;
+                    }
+                });
+            });
+
+            allAvailableSlots.sort((a, b) => a.slotDateObj - b.slotDateObj);
+            let diasMostrar = window.innerWidth <= 768 ? 3 : 4; 
+            
+            if (allAvailableSlots.length > 0) {
+                let endOfView = new Date(fechaInicioSemana);
+                endOfView.setDate(endOfView.getDate() + diasMostrar);
+
+                let hasSlotsInCurrentView = allAvailableSlots.some(slot => 
+                    slot.slotDateObj >= fechaInicioSemana && slot.slotDateObj < endOfView
+                );
+
+                if (!hasSlotsInCurrentView) {
+                    let firstFutureSlot = allAvailableSlots.find(slot => slot.slotDateObj >= fechaInicioSemana);
+                    if (firstFutureSlot) {
+                        fechaInicioSemana = new Date(firstFutureSlot.slotDateObj);
+                        fechaInicioSemana.setHours(0,0,0,0);
+                        historialFechas = []; 
+                    }
+                }
+            }
+            
+            btnPrev.disabled = (fechaInicioSemana <= fechaMinima && historialFechas.length === 0);
+
+            let slotsByLocalDate = {};
+            allAvailableSlots.forEach(slot => {
+                const localH = slot.slotDateObj.getHours();
+                if (localH >= 8 && localH <= 21) {
+                    const yyyy = slot.slotDateObj.getFullYear();
+                    const mm = String(slot.slotDateObj.getMonth() + 1).padStart(2, '0');
+                    const dd = String(slot.slotDateObj.getDate()).padStart(2, '0');
+                    const localDateStr = `${yyyy}-${mm}-${dd}`; 
+
+                    if(!slotsByLocalDate[localDateStr]) slotsByLocalDate[localDateStr] = [];
+                    slotsByLocalDate[localDateStr].push(slot);
+                }
+            });
+
+            let viewDates = [];
+            for(let i=0; i<diasMostrar; i++) {
+                let d = new Date(fechaInicioSemana);
+                d.setDate(d.getDate() + i);
+                viewDates.push(d);
+            }
+
+            let hasSlotsInView = false;
+            let gridHtml = `<div class="d-flex gap-2 w-100 overflow-hidden">`;
+            
+            viewDates.forEach(vd => {
+                let yyyy = vd.getFullYear();
+                let mm = String(vd.getMonth() + 1).padStart(2, '0');
+                let dd = String(vd.getDate()).padStart(2, '0');
+                let localDateStr = `${yyyy}-${mm}-${dd}`;
+                
+                const diaAbrev = vd.toLocaleDateString('es-MX', { weekday: 'short' });
+                const mesAbrev = vd.toLocaleDateString('es-MX', { month: 'short' });
+                const diaNum = vd.getDate();
+                
+                let hasSlots = slotsByLocalDate[localDateStr] && slotsByLocalDate[localDateStr].length > 0;
+                let headerClass = hasSlots ? 'has-slots' : 'no-slots';
+                if(hasSlots) hasSlotsInView = true;
+
+                gridHtml += `
+                <div class="flex-grow-1" style="flex-basis: 0;">
+                    <div class="doc-day-header ${headerClass}">
+                        <div class="doc-day-name">${diaAbrev}</div>
+                        <div class="doc-day-num">${diaNum} ${mesAbrev}</div>
+                    </div>
+                    <div class="d-flex flex-column gap-1 pe-1" style="max-height: 250px; overflow-y: auto;">`;
+                
+                if(hasSlots) {
+                    let uniqueTimes = {};
+                    slotsByLocalDate[localDateStr].forEach(slot => {
+                        let timeDisplay = formatter.format(slot.slotDateObj).toUpperCase();
+                        if(!uniqueTimes[timeDisplay]) uniqueTimes[timeDisplay] = [];
+                        uniqueTimes[timeDisplay].push(slot);
+                    });
+
+                    Object.keys(uniqueTimes).sort().forEach(timeDisplay => {
+                        let opciones = uniqueTimes[timeDisplay];
+                        let chosen = opciones[Math.floor(Math.random() * opciones.length)];
+                        gridHtml += `<button type="button" class="doc-slot-btn shadow-sm" onclick="selectAndCheckout(this, '${chosen.mxDate}', '${chosen.mxTimeStr}', '${timeDisplay}', ${chosen.ps.id}, '${chosen.ps.name}')">${timeDisplay}</button>`;
+                    });
+                } else {
+                    gridHtml += `<div class="text-center text-muted small py-3 fw-bold opacity-50">-</div>`;
+                }
+                gridHtml += `</div></div>`;
+            });
+            gridHtml += `</div>`;
+
+            if(!hasSlotsInView) {
+                gridHtml = `<div class="text-center text-muted w-100 py-5 mt-2 border rounded-4 bg-light fw-bold" style="border-style: dashed !important;">No hay horarios disponibles en estos días. Intenta avanzando a la siguiente semana.</div>`;
+            }
+
+            cont.innerHTML = gridHtml;
+
+        } catch(e) { console.log(e); cont.innerHTML = "<div class='text-danger text-center w-100 py-3'>Error al buscar horarios. Intenta recargar.</div>"; }
+    }
+
+    function selectAndCheckout(element, dateStr, mxTimeStr, timeDisplay, assignedId, assignedName) { 
+        document.getElementById('selected-date').value = dateStr; 
+        document.getElementById('selected-time').value = mxTimeStr; 
+        document.getElementById('selected-local-time').value = timeDisplay;
+        document.getElementById('assigned-psych-id').value = assignedId;
+        document.getElementById('assigned-psych-name').value = assignedName;
+        
+        const partesFecha = dateStr.split('-');
+        const textoFechaBonita = `${partesFecha[2]}/${partesFecha[1]}/${partesFecha[0]}`;
+        document.getElementById('resumen-cita').innerText = `Con ${assignedName.split(' ')[0]} el ${textoFechaBonita} a las ${timeDisplay}`;
+        
+        new bootstrap.Modal(document.getElementById('modalCheckout')).show();
+    }
+
+    function mandarWhatsAppTransfer() {
+        const nombre = document.getElementById('p-name').value; 
+        const fecha = document.getElementById('selected-date').value; 
+        const horaLocal = document.getElementById('selected-local-time').value;
+        const psNombre = document.getElementById('assigned-psych-name').value || document.getElementById('ps-name-main').innerText; 
+        
+        const mensaje = `Hola Clínica! Acabo de agendar una cita con ${psNombre} para el día ${fecha} a las ${horaLocal}. Mi nombre es ${nombre}. Adjunto mi comprobante de transferencia.`;
+        window.open(`https://wa.me/525513362585?text=${encodeURIComponent(mensaje)}`, '_blank');
+    }
+
+    function mandarWhatsAppPayPal() {
+        const nombre = document.getElementById('p-name').value; 
+        const fecha = document.getElementById('selected-date').value; 
+        const psNombre = document.getElementById('assigned-psych-name').value || document.getElementById('ps-name-main').innerText; 
+        const mensaje = `¡Hola! He pagado mi sesión con ${psNombre} usando PayPal para el ${fecha}. Mi nombre es ${nombre}.`;
+        window.open(`https://wa.me/525513362585?text=${encodeURIComponent(mensaje)}`, '_blank');
+        window.location.reload();
+    }
+
+    function setupPayPalButtons(apptId, isPackage) {
+        document.getElementById('paypal-button-container').innerHTML = '';
+        paypal.Buttons({
+            createOrder: async function() {
+                try {
+                    const res = await fetch(`${API}/create-paypal-transaction/?appt_id=${apptId}&buy_package=${isPackage}`, { method: 'POST' });
+                    const orderData = await res.json();
+                    return orderData.id;
+                } catch(e) { alert("Error comunicándose con PayPal."); }
+            },
+            onApprove: async function(data) {
+                try {
+                    const res = await fetch(`${API}/capture-paypal-transaction/`, {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ order_id: data.orderID, appt_id: apptId, is_package: isPackage })
+                    });
+                    const captureData = await res.json();
+                    if(captureData.status === "COMPLETED") {
+                        alert("✅ ¡Pago completado con éxito!");
+                        mandarWhatsAppPayPal();
+                    } else alert("Error procesando el pago.");
+                } catch(e) { alert("Error de conexión."); }
+            }
+        }).render('#paypal-button-container');
+    }
+
+    async function procesarReserva() {
+        const dateStr = document.getElementById('selected-date').value;
+        const time = document.getElementById('selected-time').value; 
+        if(!dateStr || !time) return alert("Por favor, selecciona una hora de tu cita.");
+
+        const assignedId = document.getElementById('assigned-psych-id').value;
+        const localTimeText = document.getElementById('selected-local-time').value;
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const motivoText = document.getElementById('div-motivo').style.display !== 'none' ? document.getElementById('p-motivo').value : "";
+        const methodSelected = document.querySelector('input[name="pay_method"]:checked').value;
+
+        const payload = {
+            psychologist_id: parseInt(assignedId), 
+            patient_name: document.getElementById('p-name').value,
+            patient_email: document.getElementById('p-email').value,
+            patient_phone: document.getElementById('p-phone').value,
+            date: `${dateStr}T${time}:00`,
+            therapy_type: document.getElementById('p-type').value,
+            location: document.getElementById('p-loc').value,
+            buy_package: document.querySelector('input[name="package_opt"]:checked').value === "true",
+            timezone: tz,
+            local_time_text: `${localTimeText} (${tz})`,
+            motivo_consulta: motivoText,
+            pay_method: methodSelected
+        };
+
+        document.getElementById('btn-submit').style.display = 'none'; document.getElementById('loader').style.display = 'block';
+
+        try {
+            const res = await fetch(`${API}/public-reserve/`, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+            if(!res.ok) { const data = await res.json(); throw new Error(data.detail || "Error al agendar."); }
+            const reserva = await res.json();
+
+            bootstrap.Modal.getInstance(document.getElementById('modalCheckout')).hide();
+
+            if(reserva.paid_with_balance) { document.getElementById('loader').style.display = 'none'; new bootstrap.Modal(document.getElementById('modalPaquete')).show(); return; }
+            
+            if(methodSelected === "transfer") {
+                document.getElementById('loader').style.display = 'none';
+                new bootstrap.Modal(document.getElementById('modalTransferencia')).show(); return;
+            }
+            
+            if(methodSelected === "paypal") {
+                document.getElementById('loader').style.display = 'none';
+                setupPayPalButtons(reserva.appt_id, payload.buy_package);
+                new bootstrap.Modal(document.getElementById('modalPayPal')).show(); return;
+            }
+
+            const resStripe = await fetch(`${API}/create-checkout-session/?appt_id=${reserva.appt_id}&buy_package=${payload.buy_package}`, { method: 'POST' });
+            const sessionStripe = await resStripe.json(); window.location.href = sessionStripe.checkout_url;
+        } catch(e) { alert(e.message); document.getElementById('btn-submit').style.display = 'block'; document.getElementById('loader').style.display = 'none'; }
+    }
+    
+    loadPsych();
+</script>
+</body>
+</html>

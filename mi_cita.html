@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapy Home ISJ OS - Tu Cita</title>
+    <link rel="icon" type="image/x-icon" href="Logo.ico">
+    <link rel="apple-touch-icon" href="Logo.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.paypal.com/sdk/js?client-id=AaVr8XRYZsGPIy1H42Cz8dOK5rGrfVU1HGzAmFp9Tk59XF0j5eO8JIr2A9b3d9ob4zHrPEsin0zJU_nP&currency=MXN"></script>
+    <style>
+        body { background-color: #f0f4f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .card { background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); max-width: 500px; margin: 3rem auto; }
+        .slot-btn { border: 1px solid #dadce0; background: white; color: #3c4043; border-radius: 8px; padding: 8px; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .slot-btn:hover { border-color: #667eea; color: #667eea; }
+        .slot-btn.selected { background: #667eea; color: white; border-color: #667eea; font-weight: bold; }
+        .btn-meet { background-color: #1a73e8; border-color: #1a73e8; font-weight: bold; font-size: 1.1rem; padding: 12px; border-radius: 12px; }
+        .btn-meet:hover { background-color: #1557b0; border-color: #1557b0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card p-4">
+        <h4 class="fw-bold mb-3 text-center text-primary">📅 Gestión de Cita</h4>
+        
+        <div id="loading" class="text-center py-4">
+            <div class="spinner-border text-primary"></div><br><small class="text-muted mt-2">Cargando tu información...</small>
+        </div>
+
+        <div id="error" class="d-none alert alert-danger text-center shadow-sm"></div>
+
+        <div id="content" class="d-none">
+            <div class="alert alert-info shadow-sm mb-3" style="border-radius: 12px;">
+                <p class="mb-1"><strong>👤 Paciente:</strong> <span id="c-paciente"></span></p>
+                <p class="mb-1"><strong>👩‍⚕️ Psicóloga:</strong> <span id="c-psicologa"></span></p>
+                <p class="mb-0"><strong>⏰ Fecha de Sesión:</strong> <span id="c-fecha" class="fw-bold"></span></p>
+            </div>
+            
+            <div id="meet-section" class="mb-4 text-center">
+            </div>
+            
+            <h6 class="fw-bold border-top pt-3 text-secondary">🔄 Reprogramar tu Cita</h6>
+            <p class="small text-muted mb-3">Si necesitas cambiar de horario, selecciona una nueva fecha a continuación. <em>(Requiere al menos 8 horas de anticipación)</em>.</p>
+            
+            <input type="date" id="p-date" class="form-control form-control-lg mb-3 shadow-sm" onchange="buscarHorarios()">
+            
+            <div class="alert py-2 mb-3 text-center shadow-sm" style="font-size: 0.85rem; background-color: #f8f9fa; border: 1px solid #dadce0; border-radius: 10px;">
+                🌍 Mostrando horarios en tu hora local: <strong id="user-tz-display" class="text-primary"></strong>
+            </div>
+
+            <div id="horarios-container" class="row g-2 mb-4">
+                <div class="col-12 text-muted small text-center p-3 bg-light rounded border">
+                    👆 Elige un día en el calendario de arriba para ver horarios disponibles.
+                </div>
+            </div>
+            <input type="hidden" id="selected-time">
+            
+            <button onclick="moverCita()" id="btn-mover" class="btn btn-outline-primary btn-lg w-100 shadow-sm fw-bold" style="border-radius: 12px; display: none;">
+                Confirmar Nuevo Horario
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API = "https://crm-backend-oztv.onrender.com";
+    const urlParams = new URLSearchParams(window.location.search);
+    const apptId = urlParams.get('id');
+    const token = urlParams.get('token');
+
+    let apptData = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('user-tz-display').innerText = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const dateInput = document.getElementById('p-date');
+        const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+        cargarCita();
+    });
+
+    async function cargarCita() {
+        if(!apptId || !token) return mostrarError("❌ El enlace es inválido o ha expirado.");
+        try {
+            const res = await fetch(`${API}/public-appointment/${apptId}?token=${token}`);
+            if(!res.ok) throw new Error("No se pudo cargar la cita. Es posible que el enlace haya expirado.");
+            apptData = await res.json();
+            
+            if(apptData.is_cancelled) return mostrarError("🛑 Esta cita ya fue cancelada previamente.");
+
+            document.getElementById('c-paciente').innerText = apptData.patient_name;
+            document.getElementById('c-psicologa').innerText = apptData.psychologist_name;
+            
+            const fechaObj = new Date(apptData.date + "-06:00");
+            document.getElementById('c-fecha').innerText = fechaObj.toLocaleString('es-MX', { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit', hour12: true });
+
+            const meetSection = document.getElementById('meet-section');
+            if (apptData.paid && apptData.meet_link) {
+                meetSection.innerHTML = `
+                    <div class="p-3 bg-success bg-opacity-10 border border-success rounded shadow-sm">
+                        <p class="small text-success fw-bold mb-2">✅ Pago confirmado. Tu link está listo:</p>
+                        <a href="${apptData.meet_link}" target="_blank" class="btn btn-primary w-100 btn-meet shadow">
+                            📹 Unirse a la Videollamada (Meet)
+                        </a>
+                    </div>
+                `;
+            } else if (apptData.paid && !apptData.meet_link) {
+                meetSection.innerHTML = `
+                    <div class="alert alert-warning small py-2 shadow-sm">
+                        ✅ Pago confirmado. El enlace de videollamada se está generando o se te enviará por WhatsApp.
+                    </div>
+                `;
+            } else {
+                meetSection.innerHTML = `
+                    <div class="alert py-3 shadow-sm text-start" style="border-radius: 12px; background-color: #fff5f5; border: 1px solid #f5c2c7;">
+                        <h5 class="fw-bold text-danger mb-2">⚠️ Acción Requerida: Pago Pendiente</h5>
+                        <p class="mb-3 text-dark">Tu horario está apartado, pero necesitamos procesar el pago para liberar el enlace de tu videollamada y confirmar la cita con tu psicóloga.</p>
+                        
+                        <div class="mb-3 bg-white p-3 rounded border shadow-sm">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="pay_option_cita" id="pay_single" value="false" checked onchange="reloadPaypal()">
+                                <label class="form-check-label fw-bold text-dark" for="pay_single">
+                                    Pagar solo esta sesión
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pay_option_cita" id="pay_package" value="true" onchange="reloadPaypal()">
+                                <label class="form-check-label fw-bold text-success" for="pay_package">
+                                    Hacer Upgrade a Paquete 4 Sesiones (-10%)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button id="btn-stripe-cita" onclick="pagarStripeCita()" class="btn btn-lg fw-bold text-white shadow-sm" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">💳 Pagar con Tarjeta (Seguro)</button>
+                            <div id="paypal-button-container-cita" class="mt-2" style="position: relative; z-index: 1;"></div>
+                            
+                            <hr class="my-2 border-danger opacity-25">
+                            <p class="small text-muted mb-1 text-center fw-bold">¿Decidiste hacer transferencia?</p>
+                            <a href="https://wa.me/525513362585" target="_blank" class="btn btn-outline-secondary fw-bold">💬 Enviar comprobante por WhatsApp</a>
+                        </div>
+                    </div>
+                `;
+                setupPayPalButtons(apptData.id);
+            }
+
+            document.getElementById('loading').classList.add('d-none');
+            document.getElementById('content').classList.remove('d-none');
+
+            // Lógica estricta de 8 horas para reprogramar
+            const ahora = new Date();
+            const diffHoras = (fechaObj.getTime() - ahora.getTime()) / (1000 * 60 * 60);
+            
+            if (diffHoras < 8) {
+                document.getElementById('p-date').disabled = true;
+                document.getElementById('horarios-container').innerHTML = "<div class='alert alert-danger w-100 text-center shadow-sm fw-bold'>⚠️ Faltan menos de 8 horas para tu sesión. Por políticas de la clínica, ya no es posible reprogramar este horario.</div>";
+                
+                const infoMsg = document.querySelector('p.small.text-muted.mb-3');
+                if (infoMsg) infoMsg.style.display = 'none';
+            }
+
+        } catch (e) {
+            mostrarError(e.message);
+        }
+    }
+
+    function mostrarError(msg) {
+        document.getElementById('loading').classList.add('d-none');
+        const err = document.getElementById('error');
+        err.innerHTML = `<strong>${msg}</strong>`;
+        err.classList.remove('d-none');
+    }
+
+    async function buscarHorarios() {
+        const dateStr = document.getElementById('p-date').value; 
+        const cont = document.getElementById('horarios-container'); 
+        const btnMover = document.getElementById('btn-mover');
+        
+        document.getElementById('selected-time').value = "";
+        btnMover.style.display = 'none'; 
+        
+        if(!dateStr) return; 
+        cont.innerHTML = "<div class='text-center w-100 py-3'><div class='spinner-border spinner-border-sm text-primary'></div> Buscando horarios...</div>";
+        
+        const ahora = new Date();
+        const leadTime = apptData.psychologist_lead_time || 8;
+        const limiteReservaPropio = new Date(ahora.getTime() + (leadTime * 60 * 60 * 1000));
+
+        const infoMsg = document.querySelector('p.small.text-muted.mb-3');
+        if (infoMsg) infoMsg.innerHTML = `Si necesitas cambiar de horario, selecciona una nueva fecha a continuación. <em>(Requiere al menos ${leadTime} horas de anticipación)</em>.`;
+
+        try {
+            const res = await fetch(`${API}/appointments/`); const appts = await res.json();
+            const dayAppts = appts.filter(a => a.start.startsWith(dateStr) && a.extendedProps.psychologist_id == apptData.psychologist_id && a.id !== apptData.id);
+            const ocupados = dayAppts.filter(a => a.extendedProps.patient_name !== "DISPONIBLE" && a.extendedProps.patient_name !== "BLOQUEO");
+            const limite = apptData.psychologist_limit || 8;
+            
+            if (ocupados.length >= limite) return cont.innerHTML = "<div class='alert alert-danger small w-100 text-center shadow-sm'>Agenda llena para este día. Elige otra fecha.</div>";
+
+            const disponibilidades = dayAppts.filter(a => a.extendedProps.patient_name === "DISPONIBLE");
+            let html = "";
+            const formatter = new Intl.DateTimeFormat('es-MX', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+            disponibilidades.forEach(disp => {
+                let currentT = new Date(disp.start); const endT = new Date(disp.end);
+                while(currentT < endT) {
+                    const blockEnd = new Date(currentT.getTime() + 60*60000); 
+                    
+                    if(blockEnd <= endT && currentT > limiteReservaPropio) {
+                        let choca = ocupados.some(ocup => { const oStart = new Date(ocup.start); const oEnd = new Date(ocup.end); return (currentT < oEnd && blockEnd > oStart); });
+                        if(!choca) {
+                            const mxTimeStr = `${currentT.getHours().toString().padStart(2, '0')}:${currentT.getMinutes().toString().padStart(2, '0')}`;
+                            const exactIsoMx = disp.start.split('T')[0] + 'T' + mxTimeStr + ':00-06:00'; const patientT = new Date(exactIsoMx);
+                            
+                            const ampmTime = formatter.format(patientT).toUpperCase();
+                            html += `<div class="col-6 col-md-4"><div class="slot-btn shadow-sm" onclick="selectSlot(this, '${mxTimeStr}')">${ampmTime}</div></div>`;
+                        }
+                    }
+                    currentT = new Date(currentT.getTime() + 60*60000); 
+                }
+            });
+            if(html === "") cont.innerHTML = "<div class='alert alert-warning small w-100 text-center shadow-sm'>No hay horarios disponibles que cumplan con el tiempo de anticipación. Intenta otro día.</div>";
+            else cont.innerHTML = html;
+        } catch(e) { cont.innerHTML = "<div class='text-danger text-center w-100 fw-bold'>Error al buscar. Reintenta.</div>"; }
+    }
+
+    function selectSlot(element, mxTimeStr) { 
+        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected')); 
+        element.classList.add('selected'); 
+        document.getElementById('selected-time').value = mxTimeStr; 
+        document.getElementById('btn-mover').style.display = 'block'; 
+        
+        document.getElementById('btn-mover').scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+
+    async function moverCita() {
+        const time = document.getElementById('selected-time').value; 
+        if(!time) return alert("Selecciona un horario nuevo haciendo clic en algún botón.");
+        const exactDate = `${document.getElementById('p-date').value}T${time}:00`;
+        
+        const btnMover = document.getElementById('btn-mover');
+        btnMover.disabled = true;
+        btnMover.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Guardando...';
+
+        try {
+            const res = await fetch(`${API}/public-appointment/${apptId}/reschedule`, { 
+                method: 'POST', headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify({ token: token, new_date: exactDate }) 
+            });
+            if(!res.ok) { const data = await res.json(); throw new Error(data.detail || "Error al reprogramar."); }
+            
+            alert("✅ ¡Cita reprogramada con éxito!\n\nTu psicóloga y tú han recibido un correo con el nuevo horario.");
+            window.location.reload();
+        } catch(e) { 
+            alert("❌ " + e.message); 
+            btnMover.disabled = false;
+            btnMover.innerText = "Confirmar Nuevo Horario";
+        }
+    }
+
+    // Funciones nuevas de pago dentro del historial
+    async function pagarStripeCita() {
+        const btn = document.getElementById('btn-stripe-cita');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Cargando pasarela...';
+        
+        const isPackage = document.getElementById('pay_package').checked;
+        try {
+            const res = await fetch(`${API}/create-checkout-session/?appt_id=${apptData.id}&buy_package=${isPackage}`, { method: 'POST' });
+            const sessionStripe = await res.json();
+            window.location.href = sessionStripe.checkout_url;
+        } catch(e) {
+            alert("Error al cargar Stripe.");
+            btn.disabled = false;
+            btn.innerText = "💳 Pagar con Tarjeta (Seguro)";
+        }
+    }
+
+    function reloadPaypal() {
+        document.getElementById('paypal-button-container-cita').innerHTML = '';
+        setupPayPalButtons(apptData.id);
+    }
+
+    function setupPayPalButtons(apptId) {
+        const isPackage = document.getElementById('pay_package') ? document.getElementById('pay_package').checked : false;
+        paypal.Buttons({
+            createOrder: async function() {
+                try {
+                    const res = await fetch(`${API}/create-paypal-transaction/?appt_id=${apptId}&buy_package=${isPackage}`, { method: 'POST' });
+                    const orderData = await res.json();
+                    return orderData.id;
+                } catch(e) { alert("Error comunicándose con PayPal."); }
+            },
+            onApprove: async function(data) {
+                try {
+                    const res = await fetch(`${API}/capture-paypal-transaction/`, {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ order_id: data.orderID, appt_id: apptId, is_package: isPackage })
+                    });
+                    const captureData = await res.json();
+                    if(captureData.status === "COMPLETED") {
+                        alert("✅ ¡Pago completado con éxito!");
+                        window.location.reload();
+                    } else alert("Error procesando el pago.");
+                } catch(e) { alert("Error de conexión."); }
+            }
+        }).render('#paypal-button-container-cita');
+    }
+</script>
+</body>
+</html>
