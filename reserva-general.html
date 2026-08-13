@@ -264,19 +264,20 @@
         ? "http://localhost:8000" : "https://crm-backend-oztv.onrender.com";
 
     const especialidades = {
-        "Blanca": ["Depresión", "Ansiedad", "Trauma", "Pareja", "Violencia", "Regulacion"],
-        "Sara": ["Ansiedad", "Autoestima", "Duelo", "Depresión", "Pareja", "Dependencia", "Trauma", "Limites", "Regulacion", "Violencia"],
-        "Alondra": ["Duelo", "Pareja", "Ansiedad", "Depresión", "Trauma", "Autoestima", "Limites", "Regulacion", "Violencia"],
-        "Marina": ["Ansiedad", "Depresión", "Autoestima", "Duelo", "Dependencia", "Pareja", "Perfeccionismo", "Burnout", "Regulacion"],
-        "Paola": ["Ansiedad", "Depresión", "Pareja", "Duelo", "Autoestima", "Dependencia", "Limites", "Perfeccionismo", "Regulacion"],
-        "Janeth": ["Dependencia", "Pareja", "Depresión", "Perfeccionismo", "Violencia"],
-        "Anarely": ["Ansiedad", "Depresión", "Duelo", "Pareja", "Perfeccionismo", "Violencia", "Regulacion"],
-        "Lizbeth": ["Ansiedad", "Autoestima", "Dependencia", "Duelo", "Pareja", "Limites", "Regulacion"],
-        "Mikaela": ["Ansiedad", "Autoestima", "Depresión", "Regulacion"],
-        "Tania": ["Ansiedad", "Depresión", "Duelo", "Perfeccionismo", "Burnout", "Regulacion"],
-        "Areli": ["Pareja", "Ansiedad", "Depresión", "Trauma", "Autoestima", "Violencia", "Burnout"],
-        "Claudia": ["Ansiedad", "Depresión", "Duelo", "Pareja"],
-        "Isis": ["Trauma", "Ansiedad"]
+        "Blanca": ["Depresión", "Trauma", "Pareja", "Violencia"],
+        "Sara": ["Ansiedad", "Autoestima", "Dependencia", "Regulacion"],
+        "Alondra": ["Pareja", "Trauma", "Limites", "Violencia"],
+        "Marina": ["Autoestima", "Duelo", "Perfeccionismo", "Burnout"],
+        "Paola": ["Depresión", "Dependencia", "Limites", "Regulacion"],
+        "Janeth": ["Pareja", "Depresión", "Perfeccionismo", "Violencia"],
+        "Anarely": ["Ansiedad", "Duelo", "Pareja", "Regulacion"],
+        "Lizbeth": ["Ansiedad", "Autoestima", "Duelo", "Limites"],
+        "Mikaela": ["Ansiedad", "Depresión", "Regulacion"],
+        "Tania": ["Duelo", "Perfeccionismo", "Burnout"],
+        "Areli": ["Pareja", "Trauma", "Autoestima", "Burnout"],
+        "Claudia": ["Depresión", "Duelo", "Pareja"],
+        "Isis": ["Trauma", "Ansiedad"],
+        "Belen": ["Trauma", "Ansiedad", "Duelo", "Regulacion", "Violencia", "Pareja", "Autoestima", "Limites", "Dependencia"] // A Belén la dejamos como comodín temporal para que agarre pacientes rápido
     };
 
     // 🔥 LOGICA DE SELECCION VISUAL PARA LAS NUEVAS TARJETAS 🔥
@@ -409,7 +410,7 @@
                 
                 temasSeleccionados.forEach(tema => {
                     let t = tema.toLowerCase();
-                    if(misTemasFuerte.includes(tema) || dbSpecialties.includes(t)) p.matchScore += 3; 
+                    if(misTemasFuerte.includes(tema) || dbSpecialties.includes(t)) p.matchScore += 6;
                 });
 
                 let misHorarios = { "Mañanas": 0, "Tardes": 0, "Noches": 0, "Fines": 0 };
@@ -428,7 +429,7 @@
                 let coincidenciasHorario = 0;
                 disponibilidad.forEach(franja => {
                     if (misHorarios[franja] > 0) {
-                        p.matchScore += 6; 
+                        p.matchScore += 3; 
                         coincidenciasHorario++;
                         if (misHorarios[franja] >= 3) p.matchScore += 1; 
                     }
@@ -437,6 +438,21 @@
                 let misCitasTotales = misHorarios["Mañanas"] + misHorarios["Tardes"] + misHorarios["Noches"] + misHorarios["Fines"];
                 if (misCitasTotales === 0) p.matchScore -= 10; 
                 else if (coincidenciasHorario === 0 && disponibilidad.length > 0) p.matchScore -= 5;
+                
+                // 🔥 SÚPER PODER: BALANCEADOR DE CARGA (LOAD BALANCING) 🔥
+                // Contamos cuántas citas a futuro YA TIENE agendadas esta psicóloga
+                let misCitasOcupadas = allAppts.filter(a => 
+                    a.extendedProps.psychologist_id == p.id && 
+                    a.extendedProps.patient_name !== "DISPONIBLE" && 
+                    a.extendedProps.patient_name !== "BLOQUEO" && 
+                    a.extendedProps.patient_name !== "REUNIÓN" &&
+                    new Date(a.start) >= ahora
+                ).length;
+
+                // Le restamos 0.6 puntos por cada paciente que ya tiene.
+                // Así, si Sara tiene 15 citas a futuro (-9 pts) y Elisa tiene 2 (-1.2 pts),
+                // el sistema priorizará a Elisa para equilibrar las agendas de la clínica.
+                p.matchScore -= (misCitasOcupadas * 0.6);
 
                 let bio = ((p.bio || "") + " " + (p.hook_phrase || "")).toLowerCase();
                 ideal.forEach(rasgo => {
