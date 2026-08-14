@@ -69,27 +69,27 @@
         <h3>Cuéntanos sobre ti 🌸</h3>
         <p class="text-muted">Esta información es confidencial. La usamos con un único propósito: encontrar a la psicóloga que mejor pueda acompañarte.</p>
         
-        <label class="form-label">¿Cómo te llamas?</label>
+        <label class="form-label">¿Cómo te llamas? *</label>
         <input type="text" id="q_nombre" class="form-control" placeholder="Tu nombre completo">
 
-        <label class="form-label">Correo electrónico</label>
+        <label class="form-label">Correo electrónico *</label>
         <input type="email" id="q_email" class="form-control" placeholder="Para enviarte tu confirmación">
 
-        <label class="form-label">WhatsApp o Teléfono</label>
-        <input type="tel" id="q_telefono" class="form-control" placeholder="Ej: +52 55 1234 5678">
+        <label class="form-label">WhatsApp o Teléfono (10 dígitos) *</label>
+        <input type="tel" id="q_telefono" class="form-control" placeholder="Ej: 55 1234 5678">
 
         <div class="row">
             <div class="col-6">
-                <label class="form-label">¿Fecha de nacimiento?</label>
+                <label class="form-label">¿Fecha de nacimiento? *</label>
                 <input type="date" id="q_fecha_nac" class="form-control">
             </div>
             <div class="col-6">
-                <label class="form-label">¿País / Ciudad?</label>
+                <label class="form-label">¿País / Ciudad? *</label>
                 <input type="text" id="q_ciudad" class="form-control" placeholder="Ej. CDMX, México">
             </div>
         </div>
 
-        <label class="form-label">¿Con qué género te identificas?</label>
+        <label class="form-label">¿Con qué género te identificas? *</label>
         <select id="q_genero" class="form-select">
             <option value="" disabled selected>Selecciona una opción</option>
             <option>Mujer</option>
@@ -131,13 +131,13 @@
         </div>
 
         <label class="form-label">En dos o tres frases, ¿qué está pasando en tu vida que te trajo aquí? *</label>
-        <textarea id="q_descripcion" class="form-control" rows="3"></textarea>
+        <textarea id="q_descripcion" class="form-control" rows="3" placeholder="Por favor, descríbenos brevemente tu situación..."></textarea>
 
         <label class="form-label">¿Cómo describirías la intensidad de lo que estás viviendo? *</label>
         <div class="d-flex justify-content-between align-items-center mt-4 mb-4 px-2 px-md-4">
             <div class="text-center"><input type="radio" name="q_intensidad" value="1" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-3">1</small></div>
             <div class="text-center"><input type="radio" name="q_intensidad" value="2" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-3">2</small></div>
-            <div class="text-center"><input type="radio" name="q_intensidad" value="3" class="radio-scale" checked><br><small class="text-muted fw-bold d-block mt-3">3</small></div>
+            <div class="text-center"><input type="radio" name="q_intensidad" value="3" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-3">3</small></div>
             <div class="text-center"><input type="radio" name="q_intensidad" value="4" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-3">4</small></div>
             <div class="text-center"><input type="radio" name="q_intensidad" value="5" class="radio-scale"><br><small class="text-muted fw-bold d-block mt-3">5</small></div>
         </div>
@@ -205,8 +205,14 @@
     <div class="card-step" id="step-4">
         <h3>Expectativas y lo práctico</h3>
         
+        <!-- 🔥 TRAMPA HONEYPOT PARA BLOQUEAR BOTS 🔥 -->
+        <div style="display: none; visibility: hidden; position: absolute; left: -9999px;">
+            <label>Si eres humano, deja este campo en blanco:</label>
+            <input type="text" id="campo-trampa" name="apellido_materno_fake" value="" tabindex="-1">
+        </div>
+
         <label class="form-label text-danger">¿En este momento estás teniendo pensamientos de hacerte daño o de que ya no quieres estar aquí? *</label>
-        <label class="option-box"><input type="radio" name="q_riesgo" value="No" checked><span class="custom-check"></span> No</label>
+        <label class="option-box"><input type="radio" name="q_riesgo" value="No"><span class="custom-check"></span> No</label>
         <label class="option-box"><input type="radio" name="q_riesgo" value="A veces tengo esos pensamientos pero no actúo en ellos"><span class="custom-check"></span> A veces, pero no actúo en ellos</label>
         <label class="option-box"><input type="radio" name="q_riesgo" value="Alerta Roja"><span class="custom-check"></span> Sí, y me preocupa</label>
         <label class="option-box"><input type="radio" name="q_riesgo" value="Prefiero hablarlo en la primera sesión"><span class="custom-check"></span> Prefiero hablarlo en la primera sesión</label>
@@ -238,9 +244,10 @@
 
         <label class="form-label mt-4">¿Qué tan pronto quisieras iniciar? *</label>
         <select id="q_urgencia" class="form-select">
-            <option>Esta semana si es posible</option>
-            <option>En los próximos 15 días</option>
-            <option>No tengo prisa, cuando haya disponibilidad</option>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="Esta semana si es posible">Esta semana si es posible</option>
+            <option value="En los próximos 15 días">En los próximos 15 días</option>
+            <option value="No tengo prisa, cuando haya disponibilidad">No tengo prisa, cuando haya disponibilidad</option>
         </select>
 
         <label class="form-label mt-4">¿Hay algo más que quieras que sepamos? (Opcional)</label>
@@ -277,7 +284,7 @@
         "Areli": ["Pareja", "Trauma", "Autoestima", "Burnout"],
         "Claudia": ["Depresión", "Duelo", "Pareja"],
         "Isis": ["Trauma", "Ansiedad"],
-        "Belen": ["Trauma", "Ansiedad", "Duelo", "Regulacion", "Violencia", "Pareja", "Autoestima", "Limites", "Dependencia"] // A Belén la dejamos como comodín temporal para que agarre pacientes rápido
+        "Belen": ["Trauma", "Ansiedad", "Duelo", "Regulacion", "Violencia", "Pareja", "Autoestima", "Limites", "Dependencia"] 
     };
 
     // 🔥 LOGICA DE SELECCION VISUAL PARA LAS NUEVAS TARJETAS 🔥
@@ -291,7 +298,62 @@
         });
     });
 
+    // 🔥 FUNCIÓN CON VALIDACIÓN ESTRICTA PASO A PASO 🔥
     function nextStep(current, next) {
+        if (next > current) {
+            // Validaciones Paso 1
+            if (current === 1) {
+                const nombre = document.getElementById('q_nombre').value.trim();
+                const email = document.getElementById('q_email').value.trim();
+                const telefono = document.getElementById('q_telefono').value.trim();
+                const fechaNac = document.getElementById('q_fecha_nac').value;
+                const ciudad = document.getElementById('q_ciudad').value.trim();
+                const genero = document.getElementById('q_genero').value;
+
+                if (!nombre || !email || !telefono || !fechaNac || !ciudad || !genero) {
+                    return alert("⚠️ Por favor, llena todos tus datos personales para continuar.");
+                }
+
+                if (nombre.toLowerCase().includes("anónimo") || nombre.toLowerCase().includes("test") || nombre.length < 3) {
+                    return alert("⚠️ Por favor, ingresa un nombre real y válido.");
+                }
+
+                const soloNumeros = telefono.replace(/\D/g, '');
+                const telefonosFalsos = /^(\d)\1{9}$/; 
+                if (telefonosFalsos.test(soloNumeros) || soloNumeros === "1234567890" || soloNumeros.length < 10) {
+                    return alert("⚠️ El número de WhatsApp no parece válido. Verifica que sean al menos 10 dígitos reales.");
+                }
+            }
+            
+            // Validaciones Paso 2
+            if (current === 2) {
+                const tipoTerapia = document.querySelector('input[name="q_tipo_terapia"]:checked');
+                let temasSeleccionados = document.querySelectorAll('#temas-container input[type="checkbox"]:checked');
+                const descripcion = document.getElementById('q_descripcion').value.trim();
+                const intensidad = document.querySelector('input[name="q_intensidad"]:checked');
+                const tiempo = document.querySelector('input[name="q_tiempo"]:checked');
+
+                if (!tipoTerapia || temasSeleccionados.length === 0 || !descripcion || !intensidad || !tiempo) {
+                    return alert("⚠️ Por favor, selecciona y contesta todas las opciones de esta sección para continuar.");
+                }
+
+                if (descripcion.length < 15) {
+                    return alert("⚠️ Por favor, explícanos un poco más de tu motivo de consulta en la caja de texto (mínimo 15 caracteres) para entenderte mejor.");
+                }
+            }
+
+            // Validaciones Paso 3
+            if (current === 3) {
+                const terapiaPrevia = document.querySelector('input[name="q_terapia_previa"]:checked');
+                let diagnosticos = document.querySelectorAll('#diagnosticos-container input[type="checkbox"]:checked');
+                const medicacion = document.querySelector('input[name="q_meds"]:checked');
+
+                if (!terapiaPrevia || diagnosticos.length === 0 || !medicacion) {
+                    return alert("⚠️ Por favor, completa tu historial clínico marcando las opciones correspondientes.");
+                }
+            }
+        }
+
         document.getElementById(`step-${current}`).classList.remove('active');
         document.getElementById(`step-${next}`).classList.add('active');
         document.getElementById('progress-bar').style.width = `${(next / 4) * 100}%`;
@@ -299,12 +361,34 @@
     }
 
     async function enviarFormulario() {
+        // 🔥 COMPROBAR LA TRAMPA HONEYPOT (SI SE LLENA, ES UN BOT) 🔥
+        const trampa = document.getElementById('campo-trampa').value;
+        if (trampa !== "") {
+            console.log("Envío bloqueado silenciosamente por actividad sospechosa.");
+            // Simulamos que cargó para no alertar al bot
+            document.getElementById('submit-btns').style.display = 'none';
+            document.getElementById('submit-loader').style.display = 'block';
+            setTimeout(() => { window.location.reload(); }, 2000);
+            return;
+        }
+
+        // Validación final (Paso 4)
+        const riesgo = document.querySelector('input[name="q_riesgo"]:checked');
+        let ideal = document.querySelectorAll('#ideal-container input:checked');
+        const expectativa = document.querySelector('input[name="q_expectativa_sesion"]:checked');
+        let disp = document.querySelectorAll('#disp-container input:checked');
+        const urgencia = document.getElementById('q_urgencia').value;
+
+        if (!riesgo || ideal.length === 0 || !expectativa || disp.length === 0 || !urgencia) {
+            return alert("⚠️ Faltan preguntas por contestar. Por favor selecciona todas las opciones para enviar tu formulario.");
+        }
+
         document.getElementById('submit-btns').style.display = 'none';
         document.getElementById('submit-loader').style.display = 'block';
 
-        const nombre = document.getElementById('q_nombre').value || "Paciente Anónimo";
-        const email = document.getElementById('q_email').value || "sin@correo.com";
-        const telefono = document.getElementById('q_telefono').value || "0000000000";
+        const nombre = document.getElementById('q_nombre').value.trim();
+        const email = document.getElementById('q_email').value.trim();
+        const telefono = document.getElementById('q_telefono').value.trim();
         
         const tipoTerapiaRadio = document.querySelector('input[name="q_tipo_terapia"]:checked');
         const tipo_terapia = tipoTerapiaRadio ? tipoTerapiaRadio.value : "individual";
@@ -337,21 +421,19 @@
         const medsRadio = document.querySelector('input[name="q_meds"]:checked');
         const medicacion = medsRadio ? medsRadio.value : "No especificó";
 
-        const riesgoRadio = document.querySelector('input[name="q_riesgo"]:checked');
-        const riesgo = riesgoRadio ? riesgoRadio.value : "No";
+        const riesgoValor = riesgo.value;
 
-        let ideal = [];
-        document.querySelectorAll('#ideal-container input:checked').forEach(cb => ideal.push(cb.value));
+        let idealValores = [];
+        ideal.forEach(cb => idealValores.push(cb.value));
         
-        const expectativaSesionRadio = document.querySelector('input[name="q_expectativa_sesion"]:checked');
-        const expectativaSesion = expectativaSesionRadio ? expectativaSesionRadio.value : "No contestó";
+        const expectativaSesionValor = expectativa.value;
 
-        let disponibilidad = [];
-        document.querySelectorAll('#disp-container input:checked').forEach(cb => disponibilidad.push(cb.value));
+        let disponibilidadValores = [];
+        disp.forEach(cb => disponibilidadValores.push(cb.value));
 
         let motivoClinico = `<b>🔍 TRIAGE CLÍNICO INICIAL:</b><br><br>`;
         motivoClinico += `<b>--- MOTIVO PRINCIPAL ---</b><br>`;
-        motivoClinico += `<b>Temas:</b> ${temasSeleccionados.join(', ') || 'No especificado'}<br>`;
+        motivoClinico += `<b>Temas:</b> ${temasSeleccionados.join(', ')}<br>`;
         motivoClinico += `<b>Tiempo viviendo esto:</b> ${tiempo}<br>`;
         motivoClinico += `<b>Intensidad:</b> ${intensidad} / 5<br>`;
         motivoClinico += `<b>En sus palabras:</b> "${descripcion}"<br><br>`;
@@ -359,19 +441,19 @@
         motivoClinico += `<b>--- HISTORIAL CLÍNICO ---</b><br>`;
         motivoClinico += `<b>Terapia previa:</b> ${terapiaPrevia}<br>`;
         if (noFunciono.length > 0) motivoClinico += `<b>Lo que no le funcionó antes:</b> ${noFunciono.join(', ')}<br>`;
-        motivoClinico += `<b>Diagnósticos:</b> ${diagnosticos.join(', ') || 'Ninguno marcado'}<br>`;
+        motivoClinico += `<b>Diagnósticos:</b> ${diagnosticos.join(', ')}<br>`;
         motivoClinico += `<b>Medicación:</b> ${medicacion}<br>`;
-        if(riesgo === "Alerta Roja") motivoClinico += `🚨 <b>ALERTA DE RIESGO MARCADA EN FORMULARIO</b> 🚨<br><br>`;
-        else motivoClinico += `<b>Pensamientos de riesgo:</b> ${riesgo}<br><br>`;
+        if(riesgoValor === "Alerta Roja") motivoClinico += `🚨 <b>ALERTA DE RIESGO MARCADA EN FORMULARIO</b> 🚨<br><br>`;
+        else motivoClinico += `<b>Pensamientos de riesgo:</b> ${riesgoValor}<br><br>`;
 
         motivoClinico += `<b>--- EXPECTATIVAS Y LOGÍSTICA ---</b><br>`;
-        motivoClinico += `<b>Psicóloga ideal:</b> ${ideal.join(', ') || 'No especificado'}<br>`;
-        motivoClinico += `<b>Espera de la sesión:</b> ${expectativaSesion}<br>`;
-        motivoClinico += `<b>Disponibilidad:</b> ${disponibilidad.join(', ') || 'No especificado'} | <b>Urgencia:</b> ${document.getElementById('q_urgencia').value}<br>`;
+        motivoClinico += `<b>Psicóloga ideal:</b> ${idealValores.join(', ')}<br>`;
+        motivoClinico += `<b>Espera de la sesión:</b> ${expectativaSesionValor}<br>`;
+        motivoClinico += `<b>Disponibilidad:</b> ${disponibilidadValores.join(', ')} | <b>Urgencia:</b> ${urgencia}<br>`;
         motivoClinico += `<b>Comentarios extra:</b> "${document.getElementById('q_extra').value}"`;
 
         let tituloTerapia = tipo_terapia;
-        if(riesgo === "Alerta Roja" || intensidad === "5") tituloTerapia = "[URGENTE/RIESGO] " + tipo_terapia;
+        if(riesgoValor === "Alerta Roja" || intensidad === "5") tituloTerapia = "[URGENTE/RIESGO] " + tipo_terapia;
 
         try {
             const [resPs, resAppts] = await Promise.all([
@@ -427,7 +509,7 @@
                 });
 
                 let coincidenciasHorario = 0;
-                disponibilidad.forEach(franja => {
+                disponibilidadValores.forEach(franja => {
                     if (misHorarios[franja] > 0) {
                         p.matchScore += 3; 
                         coincidenciasHorario++;
@@ -437,10 +519,9 @@
 
                 let misCitasTotales = misHorarios["Mañanas"] + misHorarios["Tardes"] + misHorarios["Noches"] + misHorarios["Fines"];
                 if (misCitasTotales === 0) p.matchScore -= 10; 
-                else if (coincidenciasHorario === 0 && disponibilidad.length > 0) p.matchScore -= 5;
+                else if (coincidenciasHorario === 0 && disponibilidadValores.length > 0) p.matchScore -= 5;
                 
-                // 🔥 SÚPER PODER: BALANCEADOR DE CARGA (LOAD BALANCING) 🔥
-                // Contamos cuántas citas a futuro YA TIENE agendadas esta psicóloga
+                // BALANCEADOR DE CARGA (LOAD BALANCING)
                 let misCitasOcupadas = allAppts.filter(a => 
                     a.extendedProps.psychologist_id == p.id && 
                     a.extendedProps.patient_name !== "DISPONIBLE" && 
@@ -449,13 +530,10 @@
                     new Date(a.start) >= ahora
                 ).length;
 
-                // Le restamos 0.6 puntos por cada paciente que ya tiene.
-                // Así, si Sara tiene 15 citas a futuro (-9 pts) y Elisa tiene 2 (-1.2 pts),
-                // el sistema priorizará a Elisa para equilibrar las agendas de la clínica.
                 p.matchScore -= (misCitasOcupadas * 0.6);
 
                 let bio = ((p.bio || "") + " " + (p.hook_phrase || "")).toLowerCase();
-                ideal.forEach(rasgo => {
+                idealValores.forEach(rasgo => {
                     let r = rasgo.toLowerCase();
                     if (r.includes("activa") && (bio.includes("cognitivo") || bio.includes("solucion") || bio.includes("herramienta"))) p.matchScore += 1;
                     if (r.includes("confronte") && (bio.includes("conductual") || bio.includes("directo") || bio.includes("reto"))) p.matchScore += 1;
@@ -473,7 +551,7 @@
             const linkReserva = `${window.location.origin}/reserva.html?id=all&matches=${matchIds}&type=${tipo_terapia}`;
             
             let nombresMatch = recomendadas.map(p => p.name.split(' ')[0]).join(', ');
-            let nombrePila = nombre && nombre !== "Paciente Anónimo" ? nombre.split(' ')[0] : "Paciente";
+            let nombrePila = nombre.split(' ')[0];
             
             let justificacionHTML = `<br><br><b>🧠 ANÁLISIS DE MATCH Y ASIGNACIÓN:</b><br><ul>`;
             recomendadas.forEach(p => {
@@ -486,7 +564,7 @@
 
             let sugerenciaWhatsapp = `¡Hola ${nombrePila}! Gracias por tu paciencia y por compartirnos tu situación. Nuestro equipo clínico ya revisó tu perfil detalladamente. Te recomendamos a ${nombresMatch}, quienes son expertas en los temas que mencionas y coinciden con tus horarios. Puedes ver sus perfiles y elegir tu fecha aquí:`;
 
-            if (riesgo === "Alerta Roja" || intensidad === "5") {
+            if (riesgoValor === "Alerta Roja" || intensidad === "5") {
                 justificacionHTML += `<div style="background-color:#ffebee; color:#c62828; padding:15px; border-radius:8px; margin-bottom:15px;">
                 <b>🚨 PROTOCOLO DE RIESGO DETECTADO:</b><br>
                 El paciente marcó intensidad 5/5 o pensamientos de riesgo. Se sugiere añadir los números de apoyo al mensaje de WhatsApp:<br>
@@ -508,8 +586,8 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     nombre: nombre, email: email, telefono: telefono,
-                    pais: document.getElementById('q_ciudad').value || 'No indico',
-                    ciudad: document.getElementById('q_fecha_nac').value || 'Sin fecha',
+                    pais: document.getElementById('q_ciudad').value,
+                    ciudad: document.getElementById('q_fecha_nac').value,
                     tipo_terapia: tituloTerapia,
                     motivo: motivoClinico
                 })
@@ -519,25 +597,25 @@
             const datosSheets = {
                 "Marca temporal": new Date().toLocaleString('es-MX'),
                 "Nombre": nombre,
-                "Nacimiento": document.getElementById('q_fecha_nac').value || 'No indicó',
-                "País/Ciudad": document.getElementById('q_ciudad').value || 'No indicó',
-                "Género": document.getElementById('q_genero').value || 'No indicó',
+                "Nacimiento": document.getElementById('q_fecha_nac').value,
+                "País/Ciudad": document.getElementById('q_ciudad').value,
+                "Género": document.getElementById('q_genero').value,
                 "Telefono": telefono,
                 "Correo": email,
                 "Tipo": tipo_terapia,
-                "Temas": temasSeleccionados.join(', ') || 'No indicó',
+                "Temas": temasSeleccionados.join(', '),
                 "Tiempo": tiempo,
                 "Intensidad": intensidad,
-                "Descripción": descripcion || 'No indicó',
+                "Descripción": descripcion,
                 "Terapia previa": terapiaPrevia,
-                "No funcionó": noFunciono.join(', ') || 'No indicó',
-                "Diagnósticos": diagnosticos.join(', ') || 'No indicó',
+                "No funcionó": noFunciono.join(', '),
+                "Diagnósticos": diagnosticos.join(', '),
                 "Medicación": medicacion,
-                "Riesgo": riesgo,
-                "Psicologa ideal": ideal.join(', ') || 'No indicó',
-                "Expectativa": expectativaSesion,
-                "Disponibilidad": disponibilidad.join(', ') || 'No indicó',
-                "Urgencia": document.getElementById('q_urgencia').value || 'No indicó',
+                "Riesgo": riesgoValor,
+                "Psicologa ideal": idealValores.join(', '),
+                "Expectativa": expectativaSesionValor,
+                "Disponibilidad": disponibilidadValores.join(', '),
+                "Urgencia": urgencia,
                 "Extra": document.getElementById('q_extra').value || 'Ninguno'
             };
 
