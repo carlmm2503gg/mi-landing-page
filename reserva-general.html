@@ -365,7 +365,6 @@
         const trampa = document.getElementById('campo-trampa').value;
         if (trampa !== "") {
             console.log("Envío bloqueado silenciosamente por actividad sospechosa.");
-            // Simulamos que cargó para no alertar al bot
             document.getElementById('submit-btns').style.display = 'none';
             document.getElementById('submit-loader').style.display = 'block';
             setTimeout(() => { window.location.reload(); }, 2000);
@@ -455,6 +454,9 @@
         let tituloTerapia = tipo_terapia;
         if(riesgoValor === "Alerta Roja" || intensidad === "5") tituloTerapia = "[URGENTE/RIESGO] " + tipo_terapia;
 
+        // 🔥 CONSOLIDACIÓN DE TEXTO DEL PACIENTE PARA BÚSQUEDA PROFUNDA DE RED FLAGS 🔥
+        let historiaCompletaPaciente = (temasSeleccionados.join(' ') + " " + descripcion + " " + diagnosticos.join(' ') + " " + riesgoValor + " " + document.getElementById('q_extra').value).toLowerCase();
+
         try {
             const [resPs, resAppts] = await Promise.all([
                 fetch(`${API}/psychologists/`),
@@ -490,6 +492,22 @@
                 let misTemasFuerte = especialidades[primerNombre] || [];
                 let dbSpecialties = p.specialties ? p.specialties.toLowerCase() : "";
                 
+                // 🔥 FASE 2: EL ALGORITMO CAÑÓN (LÍMITES DE COMPETENCIA / EXCLUSIÓN) 🔥
+                let dbExcluded = p.excluded_topics ? p.excluded_topics.toLowerCase() : "";
+                let temasProhibidos = dbExcluded.split(',').map(t => t.trim()).filter(t => t.length > 2);
+                
+                let tieneRedFlag = false;
+                temasProhibidos.forEach(prohibido => {
+                    if (historiaCompletaPaciente.includes(prohibido)) {
+                        tieneRedFlag = true;
+                    }
+                });
+
+                if (tieneRedFlag) {
+                    p.matchScore -= 1000; // Penalización masiva: garantiza que NUNCA quede en el Top 4
+                }
+
+                // Sumar puntos por temas que SÍ atiende
                 temasSeleccionados.forEach(tema => {
                     let t = tema.toLowerCase();
                     if(misTemasFuerte.includes(tema) || dbSpecialties.includes(t)) p.matchScore += 6;
@@ -558,7 +576,13 @@
                 let primerNombre = p.name.split(' ')[0];
                 let pts = Math.round(p.matchScore);
                 let temasPsic = especialidades[primerNombre] ? especialidades[primerNombre].join(', ') : "Temas generales";
-                justificacionHTML += `<li><b>${primerNombre}</b> (Afinidad: ~${pts} pts): Tiene disponibilidad que coincide y trata temas como: ${temasPsic}.</li>`;
+                
+                // Si la puntuación es negativa y muy grande, el correo se lo avisará a Isis
+                if (pts < -500) {
+                    justificacionHTML += `<li><span style="color:#d9534f;"><b>⚠️ ${primerNombre}</b> (Descartada por límites de competencia, pts: ${pts})</span></li>`;
+                } else {
+                    justificacionHTML += `<li><b>${primerNombre}</b> (Afinidad: ~${pts} pts): Tiene disponibilidad que coincide y trata temas como: ${temasPsic}.</li>`;
+                }
             });
             justificacionHTML += `</ul>`;
 
