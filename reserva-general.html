@@ -568,7 +568,8 @@
 
             const linkReserva = `${window.location.origin}/reserva.html?id=all&matches=${matchIds}&type=${tipo_terapia}`;
             
-            let nombresMatch = recomendadas.map(p => p.name.split(' ')[0]).join(', ');
+            // Reemplazo para que el diseño salga como: "Mikaela · Blanca · Sara · Tania"
+            let nombresMatch = recomendadas.map(p => p.name.split(' ')[0]).join(' &middot; ');
             let nombrePila = nombre.split(' ')[0];
             
             let justificacionHTML = `<br><br><b>🧠 ANÁLISIS DE MATCH Y ASIGNACIÓN:</b><br><ul>`;
@@ -586,7 +587,7 @@
             });
             justificacionHTML += `</ul>`;
 
-            let sugerenciaWhatsapp = `¡Hola ${nombrePila}! Gracias por tu paciencia y por compartirnos tu situación. Nuestro equipo clínico ya revisó tu perfil detalladamente. Te recomendamos a ${nombresMatch}, quienes son expertas en los temas que mencionas y coinciden con tus horarios. Puedes ver sus perfiles y elegir tu fecha aquí:`;
+            let sugerenciaWhatsapp = `¡Hola ${nombrePila}! Gracias por tu paciencia y por compartirnos tu situación. Nuestro equipo clínico ya revisó tu perfil detalladamente. Te recomendamos a las especialistas que han hecho match con tu perfil. Puedes ver sus horarios y agendar aquí:`;
 
             if (riesgoValor === "Alerta Roja" || intensidad === "5") {
                 justificacionHTML += `<div style="background-color:#ffebee; color:#c62828; padding:15px; border-radius:8px; margin-bottom:15px;">
@@ -652,20 +653,27 @@
                 body: JSON.stringify(datosSheets)
             }).catch(e => console.log("Error al guardar en Sheets", e));
 
-            const saludo = nombrePila ? `¡Gracias por compartirnos esto, ${nombrePila}! ✨` : `¡Gracias por compartirnos tu información! ✨`;
-
+            // 🔥 NUEVA PANTALLA DE RESULTADOS DIRECTOS Y SOBRIOS (SIN EMOJIS) 🔥
             document.getElementById('step-4').innerHTML = `
                 <div class="text-center p-4 animation-fade-in">
-                    <div style="font-size: 4rem; margin-bottom: 20px;">🎉</div>
-                    <h3 class="fw-bold mb-3" style="color: #0f172a;">${saludo}</h3>
-                    <p class="text-muted fs-6 mb-3">Hemos recibido tu información de manera segura.</p>
-                    <p class="text-dark fw-bold fs-6 mb-5" style="line-height: 1.6;">Nuestro equipo clínico revisará tu perfil detalladamente y te contactaremos por WhatsApp a la brevedad para saludarte y enviarte las opciones de especialistas que mejor se adaptan a lo que necesitas y a tus horarios.</p>
+                    <h3 class="fw-bold mb-4" style="color: #0f172a;">Ya tenemos una orientación para ti</h3>
+                    <p class="text-muted fs-6 mb-3">Gracias por contarnos un poco sobre tu situación.</p>
+                    <p class="text-muted fs-6 mb-4">Con lo que nos compartiste, revisamos cuál de las psicólogas de nuestro equipo puede acompañarte mejor según lo que estás viviendo, los temas que quieres trabajar y la forma de acompañamiento que buscas.</p>
                     
-                    <a href="https://wa.me/525513362585" target="_blank" class="btn fw-bold px-4 py-3 rounded-pill shadow mb-4 text-white w-100" style="background-color: #25D366; transition: transform 0.2s; font-size: 1.1rem;">
-                        💬 Escribir al WhatsApp de la clínica
+                    <div class="bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-4 p-4 mb-4 text-center shadow-sm">
+                        <span class="d-block fw-bold text-primary mb-2 text-uppercase small" style="letter-spacing: 1px;">Encontramos estas opciones para ti:</span>
+                        <p class="text-primary fw-bold fs-4 mb-0" style="line-height: 1.5;">${nombresMatch}</p>
+                    </div>
+                    
+                    <p class="text-dark fw-bold fs-6 mb-4">Puedes revisar sus horarios, conocer un poco más de cada una y elegir cuándo te gustaría dar el siguiente paso.</p>
+                    
+                    <a href="${linkReserva}" class="btn fw-bold px-4 py-3 rounded-pill shadow mb-4 text-white w-100 fs-5" style="background-color: #c04374; transition: transform 0.2s;">
+                        Conocer mis opciones
                     </a>
-                    <br>
-                    <button class="btn btn-outline-secondary rounded-pill px-4 py-2 mt-3" onclick="window.location.reload()">Volver al inicio</button>
+                    
+                    <p class="mt-2 text-muted fw-bold small lh-sm">
+                        Y si prefieres pensarlo un poco, está bien. Te enviaremos este mismo enlace por WhatsApp para que puedas retomarlo cuando quieras.
+                    </p>
                 </div>
             `;
 
@@ -677,4 +685,4 @@
     }
 </script>
 </body>
-</html>
+</html>s
