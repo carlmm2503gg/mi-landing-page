@@ -55,6 +55,27 @@
         
         @media (max-width: 768px) { .card-step { padding: 1.5rem; } .option-box { padding: 15px; } }
     </style>
+    <!-- BLOQUEO ANTIPARPADEO Y TRANSICIÓN SUAVE -->
+    <style>
+        /* 1. Oculta la página y le da un efecto de aparición suave */
+        body { opacity: 0; transition: opacity 0.25s ease-in-out; }
+        body.cargado { opacity: 1; }
+        
+        /* 2. Oculta la pantalla de login al instante si hay sesión */
+        html.sesion-activa #login-screen { display: none !important; }
+        html.sesion-activa #auth-wrapper { display: none !important; }
+    </style>
+    <script>
+        // Revisamos la sesión ANTES de que el navegador dibuje colores
+        if (localStorage.getItem('crm_user_id')) {
+            document.documentElement.classList.add('sesion-activa');
+        }
+        
+        // Cuando el archivo termina de estructurarse, mostramos la pantalla suavemente
+        document.addEventListener("DOMContentLoaded", () => {
+            document.body.classList.add('cargado');
+        });
+    </script>
 </head>
 <body>
 
@@ -127,7 +148,12 @@
             <label class="option-box"><input type="checkbox" value="Trauma"><span class="custom-check"></span> Trauma o experiencias difíciles del pasado</label>
             <label class="option-box"><input type="checkbox" value="Violencia"><span class="custom-check"></span> Violencia o relación desigual</label>
             <label class="option-box"><input type="checkbox" value="Duelo pérdida"><span class="custom-check"></span> Duelo por pérdida (persona, trabajo)</label>
-            <div class="mt-2"><input type="text" id="q_temas_otro" class="form-control" placeholder="Otro..."></div>
+            <div class="mt-2"><input type="text" id="q_temas_otro" class="form-control" placeholder="Otro..." maxlength="100"></div>
+        </div>
+        <!-- 📊 Motivo principal: se guarda en el expediente del proceso al agendar (Sección 4 de la especificación) -->
+        <div id="wrap-tema-principal" class="mb-3" style="display:none;">
+            <label class="form-label">De lo que marcaste, ¿qué es lo más importante para ti ahora?</label>
+            <select id="q_tema_principal" class="form-select"></select>
         </div>
 
         <label class="form-label">En dos o tres frases, ¿qué está pasando en tu vida que te trajo aquí? *</label>
@@ -287,6 +313,21 @@
         "Belen": ["Trauma", "Ansiedad", "Duelo", "Regulacion", "Violencia", "Pareja", "Autoestima", "Limites", "Dependencia"] 
     };
 
+    // 📊 Selector de motivo principal: aparece cuando se marcan 2 o más temas
+    function actualizarTemaPrincipal() {
+        const marcados = [...document.querySelectorAll('#temas-container input[type="checkbox"]:checked')];
+        const sel = document.getElementById('q_tema_principal'), previo = sel.value;
+        sel.innerHTML = '';
+        marcados.forEach(cb => {
+            const o = document.createElement('option');
+            o.value = cb.value; o.textContent = cb.parentElement.textContent.trim();
+            sel.appendChild(o);
+        });
+        if ([...sel.options].some(o => o.value === previo)) sel.value = previo;
+        document.getElementById('wrap-tema-principal').style.display = marcados.length >= 2 ? 'block' : 'none';
+    }
+    document.querySelectorAll('#temas-container input[type="checkbox"]').forEach(cb => cb.addEventListener('change', actualizarTemaPrincipal));
+
     // 🔥 LOGICA DE SELECCION VISUAL PARA LAS NUEVAS TARJETAS 🔥
     document.querySelectorAll('.option-box input').forEach(input => {
         input.addEventListener('change', function() {
@@ -395,8 +436,12 @@
         let temasSeleccionados = [];
         document.querySelectorAll('#temas-container input[type="checkbox"]:checked').forEach(cb => temasSeleccionados.push(cb.value));
         const temasOtro = document.getElementById('q_temas_otro').value;
+        // 📊 Códigos de motivo para el enlace de reserva (principal primero, máximo 4 contando "Otro")
+        const codigosTemas = [...temasSeleccionados];
+        const temaPrincipal = document.getElementById('q_tema_principal').value || codigosTemas[0] || '';
+        const temasParaEnlace = [temaPrincipal, ...codigosTemas.filter(t => t !== temaPrincipal)].filter(Boolean).slice(0, temasOtro ? 3 : 4);
         if(temasOtro) temasSeleccionados.push(`Otro: ${temasOtro}`);
-        
+
         const descripcion = document.getElementById('q_descripcion').value;
         const intensidadRadio = document.querySelector('input[name="q_intensidad"]:checked');
         const intensidad = intensidadRadio ? intensidadRadio.value : "3";
@@ -458,6 +503,7 @@
         let historiaCompletaPaciente = (temasSeleccionados.join(' ') + " " + descripcion + " " + diagnosticos.join(' ') + " " + riesgoValor + " " + document.getElementById('q_extra').value).toLowerCase();
 
         try {
+            // 🔥 CORRECCIÓN: Quitamos la petición de /patients/ para no romper la seguridad pública
             const [resPs, resAppts] = await Promise.all([
                 fetch(`${API}/psychologists/`),
                 fetch(`${API}/appointments/`)
@@ -539,16 +585,22 @@
                 if (misCitasTotales === 0) p.matchScore -= 10; 
                 else if (coincidenciasHorario === 0 && disponibilidadValores.length > 0) p.matchScore -= 5;
                 
-                // BALANCEADOR DE CARGA (LOAD BALANCING)
-                let misCitasOcupadas = allAppts.filter(a => 
+                // ⚖️ BALANCEADOR DE CARGA CORREGIDO: Basado en citas futuras en lugar de consultar la BD de pacientes protegida
+                let misCitasOcupadasFuturas = allAppts.filter(a => 
                     a.extendedProps.psychologist_id == p.id && 
                     a.extendedProps.patient_name !== "DISPONIBLE" && 
                     a.extendedProps.patient_name !== "BLOQUEO" && 
                     a.extendedProps.patient_name !== "REUNIÓN" &&
                     new Date(a.start) >= ahora
                 ).length;
-
-                p.matchScore -= (misCitasOcupadas * 0.6);
+                
+                if (misCitasOcupadasFuturas < 3) {
+                     p.matchScore += 8;
+                } else if (misCitasOcupadasFuturas >= 3 && misCitasOcupadasFuturas < 8) {
+                    p.matchScore -= (misCitasOcupadasFuturas * 0.5);
+                } else {
+                    p.matchScore -= (misCitasOcupadasFuturas * 1.5);
+                }
 
                 let bio = ((p.bio || "") + " " + (p.hook_phrase || "")).toLowerCase();
                 idealValores.forEach(rasgo => {
@@ -563,10 +615,43 @@
             });
 
             psicologas.sort((a, b) => b.matchScore - a.matchScore);
+
+            try {
+                const resOrden = await fetch(`${API}/api/asignacion/reordenar`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ candidatos: psicologas.map(p => ({ id: p.id, puntaje: p.matchScore })) })
+                });
+                if (resOrden.ok) {
+                    const orden = await resOrden.json();
+                    const puntos = Object.fromEntries(orden.map(o => [o.id, o.puntaje]));
+                    psicologas.forEach(p => { if (puntos[p.id] !== undefined) p.matchScore = puntos[p.id]; });
+                    psicologas.sort((a, b) => b.matchScore - a.matchScore);
+                }
+            } catch (e) { console.log("Orden por retención no disponible"); }
+
             let recomendadas = psicologas.slice(0, 4);
             let matchIds = recomendadas.map(p => p.id).join(',');
 
-            const linkReserva = `${window.location.origin}/reserva.html?id=all&matches=${matchIds}&type=${tipo_terapia}`;
+            let linkReserva = `${window.location.origin}/reserva.html?id=all&matches=${matchIds}&type=${tipo_terapia}`;
+            // 📊 Los motivos viajan en el enlace para que queden guardados al agendar
+            if (temasParaEnlace.length) linkReserva += `&temas=${encodeURIComponent(temasParaEnlace.join(','))}&principal=${encodeURIComponent(temaPrincipal)}`;
+            if (temasOtro) linkReserva += `&otro=${encodeURIComponent(temasOtro.slice(0, 100))}`;
+
+            // 🚀 REGISTRAR LEAD EN EL BACKEND PARA RECUPERACIÓN AUTOMÁTICA
+            try {
+                await fetch(`${API}/api/registrar-lead/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        correo: email,
+                        telefono: telefono,
+                        enlace_resultados: linkReserva
+                    })
+                });
+            } catch (errLead) {
+                console.log("Error al registrar lead:", errLead);
+            }
             
             // Reemplazo para que el diseño salga como: "Mikaela · Blanca · Sara · Tania"
             let nombresMatch = recomendadas.map(p => p.name.split(' ')[0]).join(' &middot; ');
@@ -685,4 +770,4 @@
     }
 </script>
 </body>
-</html>s
+</html>
