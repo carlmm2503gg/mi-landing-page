@@ -246,7 +246,7 @@
         }
 
         const btn = this;
-        btn.textContent = "Procesando registro...";
+        btn.textContent = "Abriendo pago...";
         btn.style.pointerEvents = "none";
 
         const formData = Object.fromEntries(new FormData(form));
@@ -254,16 +254,20 @@
         formData._template = "table";
         formData._captcha = "false";
 
-        fetch("https://formsubmit.co/ajax/isis.therapyhome@gmail.com", {
+        // Envía los datos en segundo plano y redirige en máximo 1.5 segundos
+        const envio = fetch("https://formsubmit.co/ajax/isis.therapyhome@gmail.com", {
             method: "POST",
+            keepalive: true,
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             },
             body: JSON.stringify(formData)
-        })
-        .catch(err => console.log("Error al enviar:", err))
-        .finally(() => {
+        }).catch(() => {});
+
+        const limite = new Promise(resolve => setTimeout(resolve, 1500));
+
+        Promise.race([envio, limite]).finally(() => {
             window.location.href = stripeUrl;
         });
     });
