@@ -202,7 +202,8 @@
         <h2 style="margin-top:0; font-size: 2.2rem; font-weight: 800;">Formulario de Inscripción</h2>
         <p style="color: #94a3b8; margin-bottom: 25px;">Completa tu registro oficial para habilitar el enlace directo a Stripe.</p>
         
-        <form class="purchase-form" id="registrationForm">
+        <form class="purchase-form" id="registrationForm" name="inscripcion-posgrado" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="inscripcion-posgrado" />
             <h4>Datos del Alumno</h4>
             <div class="input-group">
                 <label>Nombre Completo:</label>
@@ -226,8 +227,8 @@
             </div>
         </form>
 
-        <div class="price-anchor">\$1,500 MXN</div>
-        <div class="price">\$750 <span>MXN</span></div>
+        <div class="price-anchor">$1,500 MXN</div>
+        <div class="price">$750 <span>MXN</span></div>
         
         <ul class="features-list">
             <li>Temarios del Examen General de Conocimientos depurados</li>
@@ -244,15 +245,31 @@
 </section>
 
 <script>
-    // Este script valida que llenen los datos ANTES de mandarlos a Stripe
+    // Valida los datos, los guarda en Netlify y luego redirige a Stripe
     document.getElementById('submitButton').addEventListener('click', function(e) {
+        e.preventDefault();
         const form = document.getElementById('registrationForm');
+        const stripeUrl = this.href;
+
         if (!form.checkValidity()) {
-            e.preventDefault();
             form.reportValidity();
-        } else {
-            console.log("Datos de registro validados con éxito");
+            return;
         }
+
+        const btn = this;
+        btn.textContent = "Procesando registro...";
+        btn.style.pointerEvents = "none";
+
+        const formData = new FormData(form);
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        })
+        .catch(err => console.log("Error al guardar registro:", err))
+        .finally(() => {
+            window.location.href = stripeUrl;
+        });
     });
 </script>
 
